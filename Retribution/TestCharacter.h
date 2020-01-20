@@ -10,10 +10,18 @@ public:
 
 	sf::RectangleShape body;
 
-	int xDir = 0;
-	int yDir = 0;
+	int xDir;
+
+	float xSpeed;
+	float ySpeed;
+
+	bool onGround;
+
+	bool idle;
 
 	void Update(const float deltaTime);
+
+	void Jump();
 	
 };
 

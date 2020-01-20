@@ -16,5 +16,7 @@ public:
 	virtual void Render();
 
 	TestCharacter test;
+
+	sf::RectangleShape ground;
 };
 #endif // !GAMESCENE_H
