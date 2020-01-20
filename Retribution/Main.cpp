@@ -4,9 +4,14 @@
 #include "pch.h"
 #include <iostream>
 
-int main()
-{
-    std::cout << "Hello World!\n"; 
+int main(int argc, char* argv[]) {
+	if (!Engine::GetInstance()->OnCreate("GAME258_Engine")) {
+		return 0;
+	}
+
+	Engine::GetInstance()->Run();
+
+	return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
