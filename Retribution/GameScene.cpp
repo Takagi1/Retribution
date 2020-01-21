@@ -42,13 +42,7 @@ void GameScene::Input()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::J)){
 			//Direction detection
 			//TODO:Can this be improved?
-
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-				bool a = sf::Keyboard::isKeyPressed(sf::Keyboard::D);
-				bool b = sf::Keyboard::isKeyPressed(sf::Keyboard::S);
-				bool c = sf::Keyboard::isKeyPressed(sf::Keyboard::A);
-				bool d = sf::Keyboard::isKeyPressed(sf::Keyboard::W);
-			}
+			//TODO:Improve input detection as it is still very bad and unreliable
 			
 			//Up
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
@@ -87,7 +81,6 @@ void GameScene::Input()
 
 void GameScene::Update(const float deltaTime_)
 {
-
 	//Counter detection
 	if (counterbox) {
 		//if body still exists

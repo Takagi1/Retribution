@@ -3,13 +3,14 @@
 #include "GameScene.h"
 
 
-CounterBox::CounterBox(GameScene* scene_, int x_ , int y_) : life(2), delay(1), hangTime(false)
+CounterBox::CounterBox(GameScene* scene_, float x_ , float y_) : life(1), delay(0.5f), hangTime(false)
 {
 	scene = scene_;
 	test = scene->test;
 
-	body = new sf::RectangleShape(sf::Vector2f(10, 10));
-	body->setPosition(test->body.getPosition() + (test->body.getSize() / 4.0f) + sf::Vector2f(test->body.getSize().x * x_, test->body.getSize().y * y_));
+	body = new sf::RectangleShape(sf::Vector2f(20, 20));
+	
+	body->setPosition(test->body.getPosition() + sf::Vector2f(test->body.getSize().x * x_, test->body.getSize().y * y_));
 	body->setFillColor(sf::Color::Black);
 }
 
