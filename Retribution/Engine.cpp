@@ -98,7 +98,7 @@ void Engine::Input()
 			break;
 		}
 
-		if (gameInterface) {
+		if (gameInterface ) {
 			gameInterface->Input();
 		}
 	}

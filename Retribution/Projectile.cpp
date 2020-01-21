@@ -17,5 +17,5 @@ Projectile::~Projectile()
 
 void Projectile::Update(const float deltaTime)
 {
-	box.move(10 * dir * deltaTime, 0);
+	box.move(20 * dir * deltaTime, 0);
 }

@@ -4,10 +4,16 @@
 
 class GameScene;
 
+
+
+
 class CounterBox
 {
 public:
-	CounterBox(GameScene* scene_);
+
+	//Dir is is offset
+	// pos = right/down, neg = left/up
+	CounterBox(GameScene* scene_, int x_, int y_);
 	~CounterBox();
 
 	void Update(const float deltaTime);

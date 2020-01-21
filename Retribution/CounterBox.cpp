@@ -3,15 +3,16 @@
 #include "GameScene.h"
 
 
-CounterBox::CounterBox(GameScene* scene_) : life(2), delay(1), hangTime(false)
+CounterBox::CounterBox(GameScene* scene_, int x_ , int y_) : life(2), delay(1), hangTime(false)
 {
 	scene = scene_;
 	test = scene->test;
 
 	body = new sf::RectangleShape(sf::Vector2f(10, 10));
-	body->setPosition(test->body.getPosition() + sf::Vector2f(-5, 0));
-	body->setFillColor(sf::Color::Yellow);
+	body->setPosition(test->body.getPosition() + (test->body.getSize() / 4.0f) + sf::Vector2f(test->body.getSize().x * x_, test->body.getSize().y * y_));
+	body->setFillColor(sf::Color::Black);
 }
+
 
 
 CounterBox::~CounterBox()
@@ -23,7 +24,7 @@ void CounterBox::Update(const float deltaTime)
 	if (!hangTime) {
 		life -= deltaTime;
 		if (life <= 0) {
-			hangTime = false;
+			hangTime = true;
 			delete body;
 			body = nullptr;
 		}
@@ -32,7 +33,6 @@ void CounterBox::Update(const float deltaTime)
 		delay -= delay;
 		if (delay <= deltaTime) {
 			scene->ClearBox();
-			test->idle = false;
 		}
 	}
 }

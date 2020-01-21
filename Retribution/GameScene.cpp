@@ -9,11 +9,11 @@ GameScene::GameScene() : counterbox(nullptr)
 	ground.setSize(sf::Vector2f(2000.0f, 20.0f));
 	ground.setFillColor(sf::Color::Blue);
 	ground.setPosition(0, 400);
-	test = new TestCharacter();
-	test->body.setPosition(200, 300);
+	test = new TestCharacter(this);
+	test->body.setPosition(200, 350);
 	
 	Monster* mon = new Monster(this);
-	mon->body.setPosition(100, 300);
+	mon->body.setPosition(100, 350);
 	monsters.push_back(mon);
 
 	
@@ -35,10 +35,46 @@ void GameScene::Input()
 {
 	if (Engine::GetInstance()->input.key.code == sf::Keyboard::R) { exit(0); }
 
-	//Horizontal movement
-
-	if (!test->idle) 
+	if (test->idle)
 	{
+
+		//Parry 
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::J)){
+			//Direction detection
+			//TODO:Can this be improved?
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+				bool a = sf::Keyboard::isKeyPressed(sf::Keyboard::D);
+				bool b = sf::Keyboard::isKeyPressed(sf::Keyboard::S);
+				bool c = sf::Keyboard::isKeyPressed(sf::Keyboard::A);
+				bool d = sf::Keyboard::isKeyPressed(sf::Keyboard::W);
+			}
+			
+			//Up
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+				test->dy = -1;
+			}
+
+			//Right
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+				test->dx = 1;
+			}
+
+			//Down
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+				test->dy = 1;
+			}
+
+			//Left
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+				test->dx = -1;
+			}
+
+			return;
+		}
+
+
+		//Horizontal Movement
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { test->xDir = 1; }
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { test->xDir = -1; }
 		else { test->xDir = 0; }
@@ -46,11 +82,6 @@ void GameScene::Input()
 
 		//Jump movement
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { test->Jump(); }
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::J)) {
-			test->idle = true;
-			counterbox = std::make_unique<CounterBox>(this);
-		}
 	}
 }
 
@@ -67,16 +98,12 @@ void GameScene::Update(const float deltaTime_)
 					projectiles.erase(projectiles.begin() + count);
 					break;
 				}
-				else {
-					count += 1;
-				}
-				
 			}
+			count += 1;
 		}
 		counterbox->Update(deltaTime_);
 	}
 	
-
 	//Player Updates
 
 	if (test->body.getGlobalBounds().intersects(ground.getGlobalBounds())) { test->onGround = true; }
@@ -97,14 +124,11 @@ void GameScene::Update(const float deltaTime_)
 		int count = 0;
 		if (obj->box.getGlobalBounds().intersects(test->body.getGlobalBounds())) {
 			test->Damage(obj->power);
-			//projectiles.erase(projectiles.begin() + count);
-
-			//projectiles.shrink_to_fit();
-
+			projectiles.erase(projectiles.begin() + count);
+			break;
 		}
-
 		obj->Update(deltaTime_);
-		count+= 1;
+		count += 1;
 	}
 
 
@@ -129,5 +153,5 @@ void GameScene::Render()
 void GameScene::ClearBox()
 {
 	counterbox.reset();
-	test->idle = false;
+	test->idle = true;
 }

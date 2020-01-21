@@ -1,9 +1,10 @@
 #include "pch.h"
 #include "TestCharacter.h"
+#include "GameScene.h"
 
-
-TestCharacter::TestCharacter() : idle(false), energy(0)
+TestCharacter::TestCharacter(GameScene* scene_) : idle(true), energy(0)
 {
+	scene = scene_;
 	health = 5;
 
 	body.setFillColor(sf::Color::Red);
@@ -20,6 +21,13 @@ TestCharacter::~TestCharacter()
 void TestCharacter::Update(const float deltaTime)
 {
 	Character::Update(deltaTime);
+	if (dx != 0 || dy != 0) {
+		idle = false;
+		scene->counterbox = std::make_unique<CounterBox>(scene, dx, dy);
+		dx = 0;
+		dy = 0;
+	}
+	
 }
 
 void TestCharacter::Jump()

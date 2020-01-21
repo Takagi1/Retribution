@@ -13,6 +13,10 @@ Character::~Character()
 
 void Character::Update(const float deltaTime)
 {
+	if (health <= 0) {
+		//TODO: Cause character to die
+		//return;
+	}
 	int stop = 1;
 
 	if (jump && onGround) { ySpeed = -200; }
