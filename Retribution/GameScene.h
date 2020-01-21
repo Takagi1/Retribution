@@ -3,6 +3,11 @@
 
 #include "Engine.h"
 #include "TestCharacter.h"
+#include "Monster.h"
+#include "CounterBox.h"
+#include "Projectile.h"
+#include <forward_list>
+
 class GameScene : public Scene
 {
 public:
@@ -15,8 +20,21 @@ public:
 	virtual void Update(const float deltaTime_);
 	virtual void Render();
 
-	TestCharacter test;
+
+	//only for enemies
+	std::vector<Monster*> monsters;
+
+	//Projectiles
+	std::vector<Projectile*> projectiles;
+
+	CounterBox* counterbox;
+	
+	//player
+	TestCharacter* test;
 
 	sf::RectangleShape ground;
+
+	void ClearBox();
+
 };
 #endif // !GAMESCENE_H

@@ -1,21 +1,13 @@
-#pragma once
+#ifndef TESTCHARACTER_H
+#define TESTCHARACTER_H
+#include "Character.h"
 
-
-class TestCharacter
+class TestCharacter : public Character
 {
 
 public:
 	TestCharacter();
-	~TestCharacter();
-
-	sf::RectangleShape body;
-
-	int xDir;
-
-	float xSpeed;
-	float ySpeed;
-
-	bool onGround;
+	virtual ~TestCharacter();
 
 	bool idle;
 
@@ -23,5 +15,7 @@ public:
 
 	void Jump();
 	
+	int energy;
 };
+#endif // TESTCHARACTER_H
 

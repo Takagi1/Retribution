@@ -109,7 +109,6 @@ void Engine::Update(const float deltaTime_)
 	if (gameInterface) {
 		gameInterface->Update(deltaTime_);
 	}
-	
 }
 
 void Engine::Render()
