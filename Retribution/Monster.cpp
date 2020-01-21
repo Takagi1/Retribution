@@ -6,6 +6,8 @@
 
 Monster::Monster(GameScene* pro) : dir(1), delay(0)
 {
+	health = 5;
+
 	body.setFillColor(sf::Color::Green);
 	body.setSize(sf::Vector2f(20, 20));
 	proPtr = pro;
@@ -23,8 +25,8 @@ void Monster::Update(const float deltaTime)
 	delay -= deltaTime;
 	Character::Update(deltaTime);
 	if (delay <= 0) {
-		proPtr->projectiles.push_back(new Projectile(body.getPosition(), dir));
-		delay = 3;
+		proPtr->projectiles.push_back(std::make_unique<Projectile>(body.getPosition(), dir));
+		delay = 1;
 	}
 }
 

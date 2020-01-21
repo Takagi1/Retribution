@@ -2,7 +2,7 @@
 #include "Projectile.h"
 
 
-Projectile::Projectile(sf::Vector2f pos_, int dir_) : energy(10)
+Projectile::Projectile(sf::Vector2f pos_, int dir_) : power(10)
 {
 	box.setPosition(pos_);
 	dir = dir_;

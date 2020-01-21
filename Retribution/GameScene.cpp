@@ -2,6 +2,7 @@
 #include "GameScene.h"
 #include "Monster.h"
 #include "Hurtbox.h"
+#include <stack>
 
 GameScene::GameScene() : counterbox(nullptr)
 {
@@ -9,10 +10,10 @@ GameScene::GameScene() : counterbox(nullptr)
 	ground.setFillColor(sf::Color::Blue);
 	ground.setPosition(0, 400);
 	test = new TestCharacter();
-	test->body.setPosition(100, 300);
+	test->body.setPosition(200, 300);
 	
 	Monster* mon = new Monster(this);
-	mon->body.setPosition(150, 300);
+	mon->body.setPosition(100, 300);
 	monsters.push_back(mon);
 
 	
@@ -36,22 +37,26 @@ void GameScene::Input()
 
 	//Horizontal movement
 
+	if (!test->idle) 
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { test->xDir = 1; }
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { test->xDir = -1; }
+		else { test->xDir = 0; }
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { test->xDir = 1; }
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { test->xDir = -1; }
-	else { test->xDir = 0; }
 
-	//Jump movement
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { test->Jump(); }
+		//Jump movement
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { test->Jump(); }
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::J) && !test->idle) {
-		test->idle = true;
-		counterbox = new CounterBox(this);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::J)) {
+			test->idle = true;
+			counterbox = std::make_unique<CounterBox>(this);
+		}
 	}
 }
 
 void GameScene::Update(const float deltaTime_)
 {
+
 	//Counter detection
 	if (counterbox) {
 		//if body still exists
@@ -59,17 +64,18 @@ void GameScene::Update(const float deltaTime_)
 			int count = 0;
 			for (auto& box : projectiles) {
 				if (counterbox->body->getGlobalBounds().intersects(box->box.getGlobalBounds())) {
-					counterbox->Counter(box);
 					projectiles.erase(projectiles.begin() + count);
-					delete box;
-					box = nullptr;
-					projectiles.shrink_to_fit();
+					break;
 				}
-				count += 1;
+				else {
+					count += 1;
+				}
+				
 			}
 		}
 		counterbox->Update(deltaTime_);
 	}
+	
 
 	//Player Updates
 
@@ -78,7 +84,6 @@ void GameScene::Update(const float deltaTime_)
 
 	test->Update(deltaTime_);
 	
-
 	//Monster updates
 
 	for (auto& obj : monsters) {
@@ -87,11 +92,19 @@ void GameScene::Update(const float deltaTime_)
 
 		obj->Update(deltaTime_);
 	}
-	
-	//Projectile update
 
 	for (auto& obj : projectiles) {
+		int count = 0;
+		if (obj->box.getGlobalBounds().intersects(test->body.getGlobalBounds())) {
+			test->Damage(obj->power);
+			//projectiles.erase(projectiles.begin() + count);
+
+			//projectiles.shrink_to_fit();
+
+		}
+
 		obj->Update(deltaTime_);
+		count+= 1;
 	}
 
 
@@ -115,7 +128,6 @@ void GameScene::Render()
 
 void GameScene::ClearBox()
 {
-	delete counterbox;
-	counterbox = nullptr;
+	counterbox.reset();
 	test->idle = false;
 }

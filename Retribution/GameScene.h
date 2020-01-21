@@ -25,9 +25,9 @@ public:
 	std::vector<Monster*> monsters;
 
 	//Projectiles
-	std::vector<Projectile*> projectiles;
+	std::vector<std::unique_ptr<Projectile>> projectiles;
 
-	CounterBox* counterbox;
+	std::unique_ptr<CounterBox> counterbox;
 	
 	//player
 	TestCharacter* test;

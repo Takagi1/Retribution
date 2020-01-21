@@ -12,7 +12,7 @@ public:
 	Hurtbox box;
 
 	int dir;
-	int energy;
+	int power;
 	
 };
 

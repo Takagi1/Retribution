@@ -16,6 +16,8 @@ public:
 	void Jump();
 	
 	int energy;
+
+	void Damage(int val);
 };
 #endif // TESTCHARACTER_H
 

@@ -12,7 +12,7 @@ public:
 
 	void Update(const float deltaTime);
 
-	void Counter(Projectile* pro);
+	void Counter(int val);
 
 	float life;
 	float delay;

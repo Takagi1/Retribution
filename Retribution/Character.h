@@ -6,6 +6,12 @@ public:
 	Character();
 	virtual ~Character();
 
+	virtual void Update(const float deltaTime);
+	sf::RectangleShape body;
+
+	int health;
+
+// Movement
 	int xDir;
 
 	float xSpeed;
@@ -14,10 +20,10 @@ public:
 	bool onGround;
 	bool jump;
 
-	virtual void Update(const float deltaTime);
+	
 
 	virtual void Jump();
 
-	sf::RectangleShape body;
+
 };
 

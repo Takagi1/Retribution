@@ -37,8 +37,7 @@ void CounterBox::Update(const float deltaTime)
 	}
 }
 
-void CounterBox::Counter(Projectile* pro)
+void CounterBox::Counter(int val)
 {
-	test->energy += pro->energy;
-
+	test->energy += val;
 }
