@@ -4,6 +4,7 @@
 #include "Hurtbox.h"
 #include <stack>
 
+
 GameScene::GameScene() : counterbox(nullptr)
 {
 	ground.setSize(sf::Vector2f(2000.0f, 20.0f));
@@ -33,16 +34,47 @@ bool GameScene::OnCreate()
 
 void GameScene::Input()
 {
+	//Direction detection
+	//TODO:Can this be improved?
+	//TODO:Improve multiple input detection as it is still very bad and unreliable
+	switch (Engine::GetInstance()->input.type)
+	{
+	case sf::Event::KeyPressed:
+		if (Engine::GetInstance()->input.key.code == sf::Keyboard::D) { test->PresRight(); }
+		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::A) { test->PresLeft(); }
+
+		if (Engine::GetInstance()->input.key.code == sf::Keyboard::W) { test->PresUp(); }
+		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::S) { test->PresDown(); }
+
+		if (Engine::GetInstance()->input.key.code == sf::Keyboard::J) { test->PresParry(); }
+		
+		break;
+	case sf::Event::KeyReleased:
+
+		if (Engine::GetInstance()->input.key.code == sf::Keyboard::D) { test->RelRight(); }
+		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::A) { test->RelLeft(); }
+
+		if (Engine::GetInstance()->input.key.code == sf::Keyboard::W) { test->RelUp(); }
+		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::S) { test->RelDown(); }
+
+		if (Engine::GetInstance()->input.key.code == sf::Keyboard::J) { test->RelParry(); }
+		break;
+	default:
+		break;
+	}
+	
 	if (Engine::GetInstance()->input.key.code == sf::Keyboard::R) { exit(0); }
 
 	if (test->idle)
 	{
-		//Parry 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::J)){
+
+		//Counter
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::K)) {
+
 			//Direction detection
 			//TODO:Can this be improved?
 			//TODO:Improve input detection as it is still very bad and unreliable
-			
+
 			//Up
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { test->dy = -1; }
 
@@ -59,14 +91,8 @@ void GameScene::Input()
 		}
 
 
-		//Horizontal Movement
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { test->xDir = 1; }
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { test->xDir = -1; }
-		else { test->xDir = 0; }
-
-
 		//Jump movement
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { test->Jump(); }
+		//if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { test->Jump(); }
 	}
 }
 
@@ -88,6 +114,7 @@ void GameScene::Update(const float deltaTime_)
 			std::list<std::unique_ptr<Projectile>>::iterator iter = projectiles.begin();
 			for (auto& box : projectiles) {
 				if (counterbox->body->getGlobalBounds().intersects(box->box.getGlobalBounds())) {
+					counterbox->Trigger(box->power);
 					projectiles.erase(iter);
 					break;
 				}

@@ -16,9 +16,6 @@ public:
 
 	int dir;
 
-	//Projectiles
-	GameScene* proPtr;
-
 	float delay;
 };
 

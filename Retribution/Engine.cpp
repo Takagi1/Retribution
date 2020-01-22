@@ -44,7 +44,6 @@ bool Engine::OnCreate(std::string name_)
 
 	Debug::Info("Everything was created okay", "Engine.cpp", __LINE__);
 
-
 	return isRunning = true;
 }
 
@@ -89,6 +88,7 @@ void Engine::OnDestroy()
 
 void Engine::Input()
 {
+	
 	while (r_Window.pollEvent(input)) {
 		if (input.key.code == sf::Keyboard::Escape)
 		{
@@ -96,7 +96,7 @@ void Engine::Input()
 			break;
 		}
 
-		if (gameInterface ) {
+		if (gameInterface) {
 			gameInterface->Input();
 		}
 	}

@@ -9,6 +9,8 @@ Character::Character() : xDir(0), xSpeed(200), ySpeed(50), onGround(false), jump
 
 Character::~Character()
 {
+	delete scene;
+	scene = nullptr;
 }
 
 void Character::Update(const float deltaTime)
@@ -36,7 +38,9 @@ void Character::Update(const float deltaTime)
 	//Dont go through floor
 	if (onGround && ySpeed >= 0) { stop = 0; }
 
+
 	body.move(deltaTime * xSpeed * xDir, deltaTime * ySpeed * stop);
+	
 }
 
 void Character::Jump()

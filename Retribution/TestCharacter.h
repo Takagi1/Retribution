@@ -10,20 +10,52 @@ public:
 	TestCharacter(GameScene* scene);
 	virtual ~TestCharacter();
 
+	int energy;
+
 	bool idle;
 
 	void Update(const float deltaTime);
 
-	void Jump();
+
+//Input Handeling
+	void PresLeft();
 	
-	int energy;
+	void RelLeft();
+
+	void PresRight();
+
+	void RelRight();
+
+	void PresUp();
+
+	void RelUp();
+
+	void PresDown();
+
+	void RelDown();
+
+	void PresParry();
+
+	void RelParry();
+
+//Misc
 
 	void Damage(int val);
 
 	int dx = 0;
 	int dy = 0;
+
+private:
+
+	bool left;
+	bool right;
+	bool up;
+	bool down;
+
+	bool parry;
+	bool counter;
+
 	
-	GameScene* scene;
 };
 #endif // TESTCHARACTER_H
 

@@ -1,5 +1,7 @@
 #pragma once
 
+class GameScene;
+
 class Character
 {
 public:
@@ -18,7 +20,6 @@ public:
 	float ySpeed;
 
 	bool onGround;
-	bool jump;
 
 	bool isInv;
 	float invTime;
@@ -26,6 +27,11 @@ public:
 	virtual void Jump();
 
 	bool Collision(sf::FloatRect colid);
+
+protected:
+	GameScene* scene;
+
+	bool jump;
 
 };
 

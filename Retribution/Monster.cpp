@@ -10,14 +10,12 @@ Monster::Monster(GameScene* pro) : Character(), dir(1), delay(0)
 
 	body.setFillColor(sf::Color::Green);
 	body.setSize(sf::Vector2f(20, 20));
-	proPtr = pro;
+	scene = pro;
 }
 
 
 Monster::~Monster()
 {
-	delete proPtr;
-	proPtr = nullptr;
 }
 
 void Monster::Update(const float deltaTime)
@@ -25,7 +23,7 @@ void Monster::Update(const float deltaTime)
 	delay -= deltaTime;
 	Character::Update(deltaTime);
 	if (delay <= 0) {
-		proPtr->projectiles.push_front(std::make_unique<Projectile>(body.getPosition(), dir));
+		scene->projectiles.push_front(std::make_unique<Projectile>(body.getPosition(), dir));
 		delay = 1;
 	}
 }

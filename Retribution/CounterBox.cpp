@@ -3,7 +3,7 @@
 #include "GameScene.h"
 
 
-CounterBox::CounterBox(GameScene* scene_, float x_ , float y_) : life(1), delay(0.5f), hangTime(false)
+CounterBox::CounterBox(GameScene* scene_, float x_ , float y_, int type_) : life(1), delay(0.5f), hangTime(false), type(type_)
 {
 	scene = scene_;
 	test = scene->test;
@@ -12,6 +12,7 @@ CounterBox::CounterBox(GameScene* scene_, float x_ , float y_) : life(1), delay(
 	
 	body->setPosition(test->body.getPosition() + sf::Vector2f(test->body.getSize().x * x_, test->body.getSize().y * y_));
 	body->setFillColor(sf::Color::Black);
+
 }
 
 
@@ -38,7 +39,10 @@ void CounterBox::Update(const float deltaTime)
 	}
 }
 
-void CounterBox::Counter(int val)
+void CounterBox::Trigger(int val)
 {
-	test->energy += val;
+	if (type == 0) {
+		test->energy += val;
+		return;
+	}
 }

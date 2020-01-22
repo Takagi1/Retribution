@@ -1,9 +1,6 @@
 [INFO]: Creating Start Scene in file: StartScene.cpp on line: 16
 [INFO]: Everything was created okay in file: Engine.cpp on line: 45
-[INFO]: Creating Game Scene in file: GameScene.cpp on line: 30
-[INFO]: Projectile destroyed in file: Projectile.cpp on line: 15
-[INFO]: Projectile destroyed in file: Projectile.cpp on line: 15
-[INFO]: Projectile destroyed in file: Projectile.cpp on line: 15
+[INFO]: Creating Game Scene in file: GameScene.cpp on line: 31
 [INFO]: Projectile destroyed in file: Projectile.cpp on line: 15
 [INFO]: Projectile destroyed in file: Projectile.cpp on line: 15
 [INFO]: Projectile destroyed in file: Projectile.cpp on line: 15
