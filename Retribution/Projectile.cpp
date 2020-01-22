@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "Projectile.h"
 
-
 Projectile::Projectile(sf::Vector2f pos_, int dir_) : power(10)
 {
 	box.setPosition(pos_);
@@ -13,6 +12,7 @@ Projectile::Projectile(sf::Vector2f pos_, int dir_) : power(10)
 
 Projectile::~Projectile()
 {
+	Debug::Info("Projectile destroyed", "Projectile.cpp", __LINE__);
 }
 
 void Projectile::Update(const float deltaTime)

@@ -20,10 +20,12 @@ public:
 	bool onGround;
 	bool jump;
 
-	
+	bool isInv;
+	float invTime;
 
 	virtual void Jump();
 
+	bool Collision(sf::FloatRect colid);
 
 };
 

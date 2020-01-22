@@ -4,7 +4,7 @@
 #include "Projectile.h"
 
 
-Monster::Monster(GameScene* pro) : dir(1), delay(0)
+Monster::Monster(GameScene* pro) : Character(), dir(1), delay(0)
 {
 	health = 5;
 
@@ -25,7 +25,7 @@ void Monster::Update(const float deltaTime)
 	delay -= deltaTime;
 	Character::Update(deltaTime);
 	if (delay <= 0) {
-		proPtr->projectiles.push_back(std::make_unique<Projectile>(body.getPosition(), dir));
+		proPtr->projectiles.push_front(std::make_unique<Projectile>(body.getPosition(), dir));
 		delay = 1;
 	}
 }

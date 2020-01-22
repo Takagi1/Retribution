@@ -37,7 +37,6 @@ void GameScene::Input()
 
 	if (test->idle)
 	{
-
 		//Parry 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::J)){
 			//Direction detection
@@ -45,24 +44,16 @@ void GameScene::Input()
 			//TODO:Improve input detection as it is still very bad and unreliable
 			
 			//Up
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-				test->dy = -1;
-			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { test->dy = -1; }
 
 			//Right
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-				test->dx = 1;
-			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { test->dx = 1; }
 
 			//Down
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-				test->dy = 1;
-			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { test->dy = 1; }
 
 			//Left
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-				test->dx = -1;
-			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { test->dx = -1; }
 
 			return;
 		}
@@ -81,56 +72,65 @@ void GameScene::Input()
 
 void GameScene::Update(const float deltaTime_)
 {
-	//Counter detection
-	if (counterbox) {
-		//if body still exists
-		if(counterbox->body){
-			int count = 0;
-			for (auto& box : projectiles) {
-				if (counterbox->body->getGlobalBounds().intersects(box->box.getGlobalBounds())) {
-					projectiles.erase(projectiles.begin() + count);
-					break;
-				}
-			}
-			count += 1;
-		}
-		counterbox->Update(deltaTime_);
-	}
-	
+	//TODO: hit detection finds
+
 	//Player Updates
 
 	if (test->body.getGlobalBounds().intersects(ground.getGlobalBounds())) { test->onGround = true; }
 	else { test->onGround = false; }
 
 	test->Update(deltaTime_);
+
+	//Counter detection
+	if (counterbox) {
+		//if body still exists
+		if(counterbox->body) {
+			std::list<std::unique_ptr<Projectile>>::iterator iter = projectiles.begin();
+			for (auto& box : projectiles) {
+				if (counterbox->body->getGlobalBounds().intersects(box->box.getGlobalBounds())) {
+					projectiles.erase(iter);
+					break;
+				}
+				iter++;
+			}
+		}
+		counterbox->Update(deltaTime_);
+	}
 	
 	//Monster updates
 
 	for (auto& obj : monsters) {
-		if (obj->body.getGlobalBounds().intersects(ground.getGlobalBounds())) { obj->onGround = true; }
+		if (obj->Collision(ground.getGlobalBounds())) { obj->onGround = true; }
 		else { obj->onGround = false; }
 
 		obj->Update(deltaTime_);
 	}
 
+	//Projectile updates
+	for (auto& obj : projectiles) { obj->Update(deltaTime_); }
+
+
+	std::list<std::unique_ptr<Projectile>>::iterator iter = projectiles.begin();
+	//break fix's the issue however this is a temp solution because of collision with other objects
+
+	//Projectile collision
 	for (auto& obj : projectiles) {
-		int count = 0;
-		if (obj->box.getGlobalBounds().intersects(test->body.getGlobalBounds())) {
-			test->Damage(obj->power);
-			projectiles.erase(projectiles.begin() + count);
+		if (test->Collision(obj->box.getGlobalBounds())) {
+			test->Damage(iter->get()->power);
+			projectiles.erase(iter);
 			break;
 		}
-		obj->Update(deltaTime_);
-		count += 1;
+		iter++;
 	}
-
-
+	
 }
 
 void GameScene::Render()
 {
 	Engine::GetInstance()->GetWindow().draw(test->body);
+
 	Engine::GetInstance()->GetWindow().draw(ground);
+
 	for (auto& obj : monsters) {
 		Engine::GetInstance()->GetWindow().draw(obj->body);
 	}
@@ -138,6 +138,7 @@ void GameScene::Render()
 	for (auto& obj : projectiles) {
 		Engine::GetInstance()->GetWindow().draw(obj->box);
 	}
+
 	if (counterbox) {
 		if(counterbox->body) Engine::GetInstance()->GetWindow().draw(*counterbox->body);
 	}

@@ -11,5 +11,6 @@
 
 // TODO: add headers that you want to pre-compile here
 #include "Engine.h"
+#include "Debug.h"
 
 #endif //PCH_H

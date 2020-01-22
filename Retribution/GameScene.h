@@ -6,7 +6,7 @@
 #include "Monster.h"
 #include "CounterBox.h"
 #include "Projectile.h"
-#include <forward_list>
+#include <list>
 
 class GameScene : public Scene
 {
@@ -25,7 +25,7 @@ public:
 	std::vector<Monster*> monsters;
 
 	//Projectiles
-	std::vector<std::unique_ptr<Projectile>> projectiles;
+	std::list<std::unique_ptr<Projectile>> projectiles;
 
 	std::unique_ptr<CounterBox> counterbox;
 	

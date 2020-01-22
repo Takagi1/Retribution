@@ -13,6 +13,3 @@
 [INFO]: Projectile destroyed in file: Projectile.cpp on line: 15
 [INFO]: Projectile destroyed in file: Projectile.cpp on line: 15
 [INFO]: Projectile destroyed in file: Projectile.cpp on line: 15
-[INFO]: Projectile destroyed in file: Projectile.cpp on line: 15
-[INFO]: Projectile destroyed in file: Projectile.cpp on line: 15
-[INFO]: Projectile destroyed in file: Projectile.cpp on line: 15

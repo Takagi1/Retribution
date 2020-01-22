@@ -3,8 +3,13 @@
 
 #include "pch.h"
 #include <iostream>
+#include "SceneManager.h"
+
+
 
 int main(int argc, char* argv[]) {
+	Engine::GetInstance()->SetGameInterface(new SceneManager);
+
 	if (!Engine::GetInstance()->OnCreate("GAME258_Engine")) {
 		return 0;
 	}

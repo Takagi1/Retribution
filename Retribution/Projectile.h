@@ -7,7 +7,7 @@ public:
 	Projectile(sf::Vector2f pos_, int dir_);
 	~Projectile();
 
-	virtual void Update(const float deltaTime);
+	void Update(const float deltaTime);
 
 	Hurtbox box;
 

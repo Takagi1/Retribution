@@ -22,7 +22,7 @@ Engine::~Engine()
 
 bool Engine::OnCreate(std::string name_)
 {
-	Debug::DebugInit("hello");
+	Debug::DebugInit("Debug Log");
 	Debug::SetSeverity(MessageType::TYPE_INFO);
 
 	display = sf::Vector2u(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height);
@@ -34,8 +34,6 @@ bool Engine::OnCreate(std::string name_)
 
 	//Set FrameRate
 	r_Window.setFramerateLimit(fps);
-
-	gameInterface = new SceneManager();
 
 	if (gameInterface) {
 		if (!gameInterface->OnCreate()) {

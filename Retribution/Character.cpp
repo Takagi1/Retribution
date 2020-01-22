@@ -2,7 +2,7 @@
 #include "Character.h"
 
 
-Character::Character() : xDir(0), xSpeed(200), ySpeed(50), onGround(false), jump(false)
+Character::Character() : xDir(0), xSpeed(200), ySpeed(50), onGround(false), jump(false), isInv(false), invTime(0)
 {
 }
 
@@ -17,6 +17,14 @@ void Character::Update(const float deltaTime)
 		//TODO: Cause character to die
 		//return;
 	}
+
+	//Invinciblity frames
+	if (isInv) { 
+		if (invTime -= deltaTime <= 0) {
+			isInv = false;
+		}
+	}
+
 	int stop = 1;
 
 	if (jump && onGround) { ySpeed = -200; }
@@ -35,3 +43,12 @@ void Character::Jump()
 {
 	jump = true;
 }
+
+bool Character::Collision(sf::FloatRect colid)
+{
+	if (colid.intersects(body.getGlobalBounds()) && isInv == false) {
+		return true;
+	}
+	return false;
+}
+
