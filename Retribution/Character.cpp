@@ -1,8 +1,9 @@
 #include "pch.h"
 #include "Character.h"
+#include "GameScene.h"
 
 
-Character::Character() : xDir(0), xSpeed(200), ySpeed(50), onGround(false), jump(false), isInv(false), invTime(0)
+Character::Character() : xDir(0), xSpeed(200), ySpeed(0), onGround(false), isInv(false), invTime(0)
 {
 	isDead = false;
 }
@@ -23,19 +24,29 @@ void Character::Update(const float deltaTime)
 		}
 	}
 
-	int stop = 1;
-
-	if (jump && onGround) { ySpeed = -200; }
-	jump = false;
-
 	//gravity
-	if (ySpeed < 100) { ySpeed += 4; }
+	if (ySpeed < scene->gravity) { ySpeed += 4; }
 
-	//Dont go through floor
-	if (onGround && ySpeed >= 0) { stop = 0; }
+	//Individual checks to see if the player is moving into ground and from what direction
+	//TODO: improve the method of pushing the player out of the ground as this could cause some problems and is seems messy
 
+	//X move
+	body.move(deltaTime * xSpeed * xDir, 0);
 
-	body.move(deltaTime * xSpeed * xDir, deltaTime * ySpeed * stop);
+	if (body.getGlobalBounds().intersects(scene->ground.getGlobalBounds())) {
+		body.move(deltaTime * -xSpeed * xDir, 0);
+	}
+
+	//Y move
+	body.move(0, deltaTime * ySpeed);
+
+	if (body.getGlobalBounds().intersects(scene->ground.getGlobalBounds())) {
+		if (ySpeed > 0) {
+			onGround = true;
+		}
+		body.move(0, deltaTime * -ySpeed);
+	}
+	else { onGround = false; }
 	
 }
 

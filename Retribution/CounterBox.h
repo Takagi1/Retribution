@@ -16,7 +16,7 @@ public:
 
 	void Update(const float deltaTime);
 
-	void Trigger(Projectile* projectile);
+	void Trigger(std::unique_ptr<Projectile> projectile);
 
 	float life;
 	float delay;

@@ -2,7 +2,7 @@
 #include "PlayerCharacter.h"
 #include "GameScene.h"
 
-PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(), idle(true), energy(0), parry(false)
+PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(), idle(true), energy(0), parry(false), canDodge(true), dodgeLimit(1)
 {
 	scene = scene_;
 	health = 5;
@@ -12,7 +12,8 @@ PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(), idle(true), e
 
 	//Set all movment varibales to false
 	left, right, up, down, parry, counter = false;
-	
+	dodgeCount = 0;
+
 }
 
 
@@ -24,7 +25,21 @@ PlayerCharacter::~PlayerCharacter()
 void PlayerCharacter::Update(const float deltaTime)
 {
 	xDir = 0;
-	if (parry || counter) {
+	//Reset dodge
+	if (onGround) { canDodge = true; dodgeCount = 0; }
+
+	if (dodge) {
+		if (left || right || up || down) {
+			if (left) {
+			}
+			if (left) {
+			}
+			if (left) {
+			}
+
+		}
+	}
+	else if (parry || counter) {
 		int boxType = 0;
 		if (counter) { boxType = 1; }
 		if (left) { 
@@ -113,6 +128,16 @@ void PlayerCharacter::PresCounter()
 void PlayerCharacter::RelCounter()
 {
 	counter = false;
+}
+
+void PlayerCharacter::PresDodge()
+{
+	dodge = true;
+}
+
+void PlayerCharacter::RelDodge()
+{
+	dodge = false;
 }
 
 void PlayerCharacter::Damage(int val)

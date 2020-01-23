@@ -14,7 +14,7 @@ public:
 	int health;
 
 // Movement
-	int xDir;
+	
 
 	float xSpeed;
 	float ySpeed;
@@ -26,11 +26,13 @@ public:
 
 	bool Collision(sf::FloatRect colid);
 
+
+
 protected:
 	GameScene* scene;
 
-	bool jump;
 	bool isDead;
 
+	int xDir;
 };
 

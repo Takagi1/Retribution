@@ -36,5 +36,12 @@ public:
 
 	void ClearBox();
 
+
+	float gravity;
+
+private:
+
+
+
 };
 #endif // !GAMESCENE_H

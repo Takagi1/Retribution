@@ -20,7 +20,7 @@ CounterBox::CounterBox(GameScene* scene_, float x_ , float y_, int type_) : life
 
 CounterBox::~CounterBox()
 {
-
+	//Why does this break?
 	//if (body != nullptr) { delete body; body = nullptr; }
 }
 
@@ -42,18 +42,14 @@ void CounterBox::Update(const float deltaTime)
 	}
 }
 
-void CounterBox::Trigger(Projectile* projectile)
+void CounterBox::Trigger(std::unique_ptr<Projectile> projectile)
 {
 	if (type == 0) {
 		scene->player->energy += projectile->power;
-		delete projectile;
-		projectile = nullptr;
 		return;
 	}
 	if (type == 1) {
 		projectile->caster->health -= 10;
-		delete projectile;
-		projectile = nullptr;
 		return;
 	}
 }
