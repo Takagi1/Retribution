@@ -30,6 +30,7 @@ protected:
 	GameScene* scene;
 
 	bool jump;
+	bool isDead;
 
 };
 

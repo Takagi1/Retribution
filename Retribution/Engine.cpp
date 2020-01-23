@@ -124,7 +124,6 @@ void Engine::Render()
 
 sf::RenderWindow & Engine::GetWindow()
 {
-	// TODO: insert return statement here
 	return r_Window;
 }
 

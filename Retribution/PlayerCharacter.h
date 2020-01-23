@@ -39,6 +39,10 @@ public:
 
 	void RelParry();
 
+	void PresCounter();
+
+	void RelCounter();
+
 //Misc
 
 	void Damage(int val);

@@ -2,7 +2,6 @@
 #define COUNTERBOX_H
 
 #include "Projectile.h"
-#include "TestCharacter.h"
 
 class GameScene;
 
@@ -17,7 +16,7 @@ public:
 
 	void Update(const float deltaTime);
 
-	void Trigger(int val);
+	void Trigger(Projectile* projectile);
 
 	float life;
 	float delay;
@@ -25,7 +24,6 @@ public:
 	bool hangTime;
 
 	GameScene* scene;
-	TestCharacter* test;
 
 	sf::RectangleShape* body;
 

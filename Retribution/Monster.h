@@ -3,13 +3,13 @@
 #include "Character.h"
 
 class GameScene;
+class Projectile;
 
 class Monster :public Character
 {
 public:
 	Monster(GameScene* pro);
-	virtual ~Monster();
-
+	~Monster();
 
 	virtual void Update(const float deltaTime);
 
@@ -17,7 +17,12 @@ public:
 
 	float delay;
 
-	std::shared_ptr<Monster> projectCon;
+	std::vector<std::unique_ptr<Projectile>> proj;
+
+	bool IsDead();
+
+	
+
 };
 #endif // !MONSTER_H
 

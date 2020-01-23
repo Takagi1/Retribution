@@ -4,21 +4,17 @@
 
 Character::Character() : xDir(0), xSpeed(200), ySpeed(50), onGround(false), jump(false), isInv(false), invTime(0)
 {
+	isDead = false;
 }
 
 
 Character::~Character()
 {
-	delete scene;
-	scene = nullptr;
+
 }
 
 void Character::Update(const float deltaTime)
 {
-	if (health <= 0) {
-		//TODO: Cause character to die
-		//return;
-	}
 
 	//Invinciblity frames
 	if (isInv) { 

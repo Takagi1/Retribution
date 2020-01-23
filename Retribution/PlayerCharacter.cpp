@@ -105,6 +105,16 @@ void PlayerCharacter::RelParry()
 	parry = false;
 }
 
+void PlayerCharacter::PresCounter()
+{
+	counter = true;
+}
+
+void PlayerCharacter::RelCounter()
+{
+	counter = false;
+}
+
 void PlayerCharacter::Damage(int val)
 {
 	health -= val;

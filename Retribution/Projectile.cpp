@@ -19,5 +19,6 @@ Projectile::~Projectile()
 
 void Projectile::Update(const float deltaTime)
 {
+	if (caster == nullptr) { delete this; }
 	box.move(20 * dir * deltaTime, 0);
 }

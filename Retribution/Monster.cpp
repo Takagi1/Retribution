@@ -16,15 +16,27 @@ Monster::Monster(GameScene* pro) : Character(), dir(1), delay(0)
 
 Monster::~Monster()
 {
-
+	proj.clear();
 }
 
 void Monster::Update(const float deltaTime)
 {
-	delay -= deltaTime;
+	if (health <= 0) {
+		isDead = true;
+		return;
+	}
 	Character::Update(deltaTime);
+
+	delay -= deltaTime;
+	
 	if (delay <= 0) {
-		scene->projectiles.push_front(std::make_unique<Projectile>(body.getPosition(), dir, this));
+		
+		proj.push_back(std::make_unique<Projectile>(body.getPosition(), dir, this));
 		delay = 1;
 	}
+}
+
+bool Monster::IsDead()
+{
+	return isDead;
 }
