@@ -16,6 +16,7 @@ Monster::Monster(GameScene* pro) : Character(), dir(1), delay(0)
 
 Monster::~Monster()
 {
+
 }
 
 void Monster::Update(const float deltaTime)
@@ -23,12 +24,7 @@ void Monster::Update(const float deltaTime)
 	delay -= deltaTime;
 	Character::Update(deltaTime);
 	if (delay <= 0) {
-		scene->projectiles.push_front(std::make_unique<Projectile>(body.getPosition(), dir));
+		scene->projectiles.push_front(std::make_unique<Projectile>(body.getPosition(), dir, this));
 		delay = 1;
 	}
-}
-
-void Monster::Jump()
-{
-	Character::Jump();
 }

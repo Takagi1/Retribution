@@ -1,14 +1,15 @@
-#ifndef TESTCHARACTER_H
-#define TESTCHARACTER_H
+#ifndef PLAYERCHARACTER_H
+#define PLAYERCHARACTER_H
 #include "Character.h"
 
 class GameScene;
-class TestCharacter : public Character
+
+class PlayerCharacter : public Character
 {
 
 public:
-	TestCharacter(GameScene* scene);
-	virtual ~TestCharacter();
+	PlayerCharacter(GameScene* scene);
+	virtual ~PlayerCharacter();
 
 	int energy;
 
@@ -42,9 +43,6 @@ public:
 
 	void Damage(int val);
 
-	int dx = 0;
-	int dy = 0;
-
 private:
 
 	bool left;
@@ -57,5 +55,5 @@ private:
 
 	
 };
-#endif // TESTCHARACTER_H
+#endif // PLAYERCHARACTER_H
 

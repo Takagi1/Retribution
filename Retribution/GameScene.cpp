@@ -10,8 +10,8 @@ GameScene::GameScene() : counterbox(nullptr)
 	ground.setSize(sf::Vector2f(2000.0f, 20.0f));
 	ground.setFillColor(sf::Color::Blue);
 	ground.setPosition(0, 400);
-	test = new TestCharacter(this);
-	test->body.setPosition(200, 350);
+	player = std::make_unique<PlayerCharacter>(this);
+	player->body.setPosition(200, 350);
 	
 	Monster* mon = new Monster(this);
 	mon->body.setPosition(100, 350);
@@ -40,60 +40,31 @@ void GameScene::Input()
 	switch (Engine::GetInstance()->input.type)
 	{
 	case sf::Event::KeyPressed:
-		if (Engine::GetInstance()->input.key.code == sf::Keyboard::D) { test->PresRight(); }
-		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::A) { test->PresLeft(); }
+		if (Engine::GetInstance()->input.key.code == sf::Keyboard::D) { player->PresRight(); }
+		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::A) { player->PresLeft(); }
 
-		if (Engine::GetInstance()->input.key.code == sf::Keyboard::W) { test->PresUp(); }
-		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::S) { test->PresDown(); }
+		if (Engine::GetInstance()->input.key.code == sf::Keyboard::W) { player->PresUp(); }
+		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::S) { player->PresDown(); }
 
-		if (Engine::GetInstance()->input.key.code == sf::Keyboard::J) { test->PresParry(); }
+		if (Engine::GetInstance()->input.key.code == sf::Keyboard::J) { player->PresParry(); }
 		
 		break;
 	case sf::Event::KeyReleased:
 
-		if (Engine::GetInstance()->input.key.code == sf::Keyboard::D) { test->RelRight(); }
-		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::A) { test->RelLeft(); }
+		if (Engine::GetInstance()->input.key.code == sf::Keyboard::D) { player->RelRight(); }
+		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::A) { player->RelLeft(); }
 
-		if (Engine::GetInstance()->input.key.code == sf::Keyboard::W) { test->RelUp(); }
-		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::S) { test->RelDown(); }
+		if (Engine::GetInstance()->input.key.code == sf::Keyboard::W) { player->RelUp(); }
+		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::S) { player->RelDown(); }
 
-		if (Engine::GetInstance()->input.key.code == sf::Keyboard::J) { test->RelParry(); }
+		if (Engine::GetInstance()->input.key.code == sf::Keyboard::J) { player->RelParry(); }
 		break;
 	default:
 		break;
 	}
-	
-	if (Engine::GetInstance()->input.key.code == sf::Keyboard::R) { exit(0); }
 
-	if (test->idle)
-	{
-
-		//Counter
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::K)) {
-
-			//Direction detection
-			//TODO:Can this be improved?
-			//TODO:Improve input detection as it is still very bad and unreliable
-
-			//Up
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { test->dy = -1; }
-
-			//Right
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { test->dx = 1; }
-
-			//Down
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { test->dy = 1; }
-
-			//Left
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { test->dx = -1; }
-
-			return;
-		}
-
-
-		//Jump movement
-		//if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { test->Jump(); }
-	}
+	//Jump movement
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { test->Jump(); }
 }
 
 void GameScene::Update(const float deltaTime_)
@@ -102,10 +73,10 @@ void GameScene::Update(const float deltaTime_)
 
 	//Player Updates
 
-	if (test->body.getGlobalBounds().intersects(ground.getGlobalBounds())) { test->onGround = true; }
-	else { test->onGround = false; }
+	if (player->body.getGlobalBounds().intersects(ground.getGlobalBounds())) { player->onGround = true; }
+	else { player->onGround = false; }
 
-	test->Update(deltaTime_);
+	player->Update(deltaTime_);
 
 	//Counter detection
 	if (counterbox) {
@@ -142,8 +113,8 @@ void GameScene::Update(const float deltaTime_)
 
 	//Projectile collision
 	for (auto& obj : projectiles) {
-		if (test->Collision(obj->box.getGlobalBounds())) {
-			test->Damage(iter->get()->power);
+		if (player->Collision(obj->box.getGlobalBounds())) {
+			player->Damage(iter->get()->power);
 			projectiles.erase(iter);
 			break;
 		}
@@ -154,7 +125,7 @@ void GameScene::Update(const float deltaTime_)
 
 void GameScene::Render()
 {
-	Engine::GetInstance()->GetWindow().draw(test->body);
+	Engine::GetInstance()->GetWindow().draw(player->body);
 
 	Engine::GetInstance()->GetWindow().draw(ground);
 
@@ -174,5 +145,5 @@ void GameScene::Render()
 void GameScene::ClearBox()
 {
 	counterbox.reset();
-	test->idle = true;
+	player->idle = true;
 }

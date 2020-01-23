@@ -2,7 +2,7 @@
 #define GAMESCENE_H
 
 #include "Engine.h"
-#include "TestCharacter.h"
+#include "PlayerCharacter.h"
 #include "Monster.h"
 #include "CounterBox.h"
 #include "Projectile.h"
@@ -30,7 +30,7 @@ public:
 	std::unique_ptr<CounterBox> counterbox;
 	
 	//player
-	TestCharacter* test;
+	std::unique_ptr<PlayerCharacter> player;
 
 	sf::RectangleShape ground;
 

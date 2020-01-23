@@ -24,8 +24,6 @@ public:
 	bool isInv;
 	float invTime;
 
-	virtual void Jump();
-
 	bool Collision(sf::FloatRect colid);
 
 protected:

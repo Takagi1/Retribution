@@ -1,12 +1,14 @@
 #include "pch.h"
 #include "Projectile.h"
-
-Projectile::Projectile(sf::Vector2f pos_, int dir_) : power(10)
+#include "Monster.h"
+Projectile::Projectile(sf::Vector2f pos_, int dir_, Monster* monster) : power(10)
 {
 	box.setPosition(pos_);
 	dir = dir_;
 	box.setSize(sf::Vector2f(10,10));
 	box.setFillColor(sf::Color::Red);
+
+	caster = monster;
 }
 
 

@@ -43,11 +43,6 @@ void Character::Update(const float deltaTime)
 	
 }
 
-void Character::Jump()
-{
-	jump = true;
-}
-
 bool Character::Collision(sf::FloatRect colid)
 {
 	if (colid.intersects(body.getGlobalBounds()) && isInv == false) {

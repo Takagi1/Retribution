@@ -1,9 +1,10 @@
-#pragma once
+#ifndef MONSTER_H
+#define MONSTER_H
 #include "Character.h"
 
 class GameScene;
 
-class Monster : public Character
+class Monster :public Character
 {
 public:
 	Monster(GameScene* pro);
@@ -12,10 +13,11 @@ public:
 
 	virtual void Update(const float deltaTime);
 
-	virtual void Jump();
-
 	int dir;
 
 	float delay;
+
+	std::shared_ptr<Monster> projectCon;
 };
+#endif // !MONSTER_H
 
