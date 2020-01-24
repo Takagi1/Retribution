@@ -21,6 +21,9 @@ PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(), idle(true), e
 	animationController.character = &body;
 
 	animationController.animationList["Roll"] = new Roll();
+
+	inputDelay = 0.25f;
+	inputTime = 0;
 }
 
 
@@ -35,7 +38,6 @@ void PlayerCharacter::Update(const float deltaTime)
 
 	//Reset dodge
 	if (onGround && !isDodgeing) { canDodge = true; dodgeCount = 0; }
-
 
 	/* Dodging should call the dodge animation causing the player to move in that direction
 	when the animation is playing the player should be set to 
@@ -58,22 +60,38 @@ void PlayerCharacter::Update(const float deltaTime)
 		int boxType = 0;
 		if (counter) { boxType = 1; }
 		if (left) { 
-			idle = false;
-			if (up) { scene->counterbox = std::make_unique<CounterBox>(scene, -1, -1, boxType); }
-			else if (down) { scene->counterbox = std::make_unique<CounterBox>(scene, -1, 1, boxType); }
-			else { scene->counterbox = std::make_unique<CounterBox>(scene, -1, 0, boxType); }
+			inputTime += deltaTime;
+			if (inputTime >= inputDelay) {
+				idle = false;
+				if (up) { scene->counterbox = std::make_unique<CounterBox>(scene, -1, -1, boxType); }
+				else if (down) { scene->counterbox = std::make_unique<CounterBox>(scene, -1, 1, boxType); }
+				else { scene->counterbox = std::make_unique<CounterBox>(scene, -1, 0, boxType); }
+				inputTime = 0;
+			}
 		}
-		else if (right) { 
-			idle = false;
-			if (up) { scene->counterbox = std::make_unique<CounterBox>(scene, 1, -1, boxType); }
-			else if (down) { scene->counterbox = std::make_unique<CounterBox>(scene, 1, 1, boxType); }
-			else { scene->counterbox = std::make_unique<CounterBox>(scene, 1, 0, boxType); }
+		else if (right) {
+			inputTime += deltaTime;
+			if(inputTime >= inputDelay){
+				idle = false;
+				if (up) { scene->counterbox = std::make_unique<CounterBox>(scene, 1, -1, boxType); }
+				else if (down) { scene->counterbox = std::make_unique<CounterBox>(scene, 1, 1, boxType); }
+				else { scene->counterbox = std::make_unique<CounterBox>(scene, 1, 0, boxType); }
+				inputTime = 0;
+			}
 		}
-		else if (up) { idle = false; scene->counterbox = std::make_unique<CounterBox>(scene, 0, -1, boxType); }
-		else if (down) { idle = false; scene->counterbox = std::make_unique<CounterBox>(scene, 0, 1, boxType); }
-
-		
-
+		else if (up) {
+			inputTime += deltaTime;
+			if (inputTime >= inputDelay) {
+				idle = false; scene->counterbox = std::make_unique<CounterBox>(scene, 0, -1, boxType);
+				inputTime = 0;
+			}
+		}
+		else if (down) {
+			inputTime += deltaTime;
+			if (inputTime >= inputDelay) { 
+				idle = false; scene->counterbox = std::make_unique<CounterBox>(scene, 0, 1, boxType); }
+				inputTime = 0;
+		}
 	}
 	else 
 	{

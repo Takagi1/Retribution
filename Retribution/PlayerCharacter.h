@@ -61,7 +61,8 @@ private:
 
 	bool isDodgeing;
 
-	
+	float inputDelay;
+	float inputTime;
 };
 #endif // PLAYERCHARACTER_H
 
