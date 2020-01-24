@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "PlayerCharacter.h"
 #include "GameScene.h"
+#include "Roll.h"
+#include "Kick.h"
 
 PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(), idle(true), energy(0), parry(false), canDodge(true), dodgeLimit(1)
 {
@@ -14,6 +16,11 @@ PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(), idle(true), e
 	left, right, up, down, parry, counter = false;
 	dodgeCount = 0;
 
+	isDodgeing = false;
+
+	animationController.character = &body;
+
+	animationController.animationList["Roll"] = new Roll();
 }
 
 
@@ -25,18 +32,26 @@ PlayerCharacter::~PlayerCharacter()
 void PlayerCharacter::Update(const float deltaTime)
 {
 	xDir = 0;
-	//Reset dodge
-	if (onGround) { canDodge = true; dodgeCount = 0; }
 
+	//Reset dodge
+	if (onGround && !isDodgeing) { canDodge = true; dodgeCount = 0; }
+
+
+	/* Dodging should call the dodge animation causing the player to move in that direction
+	when the animation is playing the player should be set to 
+	*/
 	if (dodge) {
 		if (left || right || up || down) {
 			if (left) {
 			}
-			if (left) {
-			}
-			if (left) {
+			else if (right) {
 			}
 
+			if (up) {
+			}
+			else if (down) {
+
+			}
 		}
 	}
 	else if (parry || counter) {
@@ -57,15 +72,16 @@ void PlayerCharacter::Update(const float deltaTime)
 		else if (up) { idle = false; scene->counterbox = std::make_unique<CounterBox>(scene, 0, -1, boxType); }
 		else if (down) { idle = false; scene->counterbox = std::make_unique<CounterBox>(scene, 0, 1, boxType); }
 
+		
+
 	}
 	else 
 	{
 		if (idle) {
 			if (left) { xDir = -1; }
 			else if (right) { xDir = 1; }
-			else { xDir = 0; }
 		}
-		else { xDir = 0; }
+		//else { xDir = 0; }
 	}
 	Character::Update(deltaTime);
 }

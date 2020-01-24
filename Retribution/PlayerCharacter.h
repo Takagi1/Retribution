@@ -59,6 +59,8 @@ private:
 	int dodgeLimit;
 	int dodgeCount;
 
+	bool isDodgeing;
+
 	
 };
 #endif // PLAYERCHARACTER_H

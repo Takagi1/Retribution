@@ -1,0 +1,24 @@
+#pragma once
+#include "Animation.h"
+#include <map>
+
+class AnimationController
+{
+public:
+	AnimationController();
+	~AnimationController();
+
+	//Reference to characters body
+	sf::RectangleShape* character;
+
+	std::map<std::string, Animation*> animationList;
+
+	Animation * currentAnimation;
+
+	void Update(const float deltaTime_);
+
+	//Put in a name to play that animation
+	void Play(std::string name_);
+
+};
+

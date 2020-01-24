@@ -16,7 +16,7 @@ GameScene::GameScene() : counterbox(nullptr), gravity(100)
 
 GameScene::~GameScene()
 {
-	//TODO: access violation error occurs here when game ends
+	
 }
 
 bool GameScene::OnCreate()
@@ -45,6 +45,9 @@ void GameScene::Input()
 		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::K) { player->PresCounter(); }
 		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::L) { player->PresDodge(); }
 		
+		//Animation test
+		if (Engine::GetInstance()->input.key.code == sf::Keyboard::V) { player->animationController.Play("Roll"); }
+
 		//Manual spawn testing
 		if (Engine::GetInstance()->input.key.code == sf::Keyboard::T) {
 			Monster* mon = new Monster(this);

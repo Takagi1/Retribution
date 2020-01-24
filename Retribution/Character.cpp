@@ -16,7 +16,7 @@ Character::~Character()
 
 void Character::Update(const float deltaTime)
 {
-
+	animationController.Update(deltaTime);
 	//Invinciblity frames
 	if (isInv) { 
 		if (invTime -= deltaTime <= 0) {
@@ -47,7 +47,6 @@ void Character::Update(const float deltaTime)
 		body.move(0, deltaTime * -ySpeed);
 	}
 	else { onGround = false; }
-	
 }
 
 bool Character::Collision(sf::FloatRect colid)
