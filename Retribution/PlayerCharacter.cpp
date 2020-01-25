@@ -144,6 +144,11 @@ void PlayerCharacter::Update(const float deltaTime)
 	Character::Update(deltaTime);
 }
 
+int PlayerCharacter::GetEnergy()
+{
+	return energy;
+}
+
 void PlayerCharacter::AddEnergy(int value)
 {
 	energy += value;

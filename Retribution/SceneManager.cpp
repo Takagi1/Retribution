@@ -48,6 +48,11 @@ void SceneManager::Render()
 	currentScene->Render();
 }
 
+void SceneManager::RenderHUD()
+{
+	currentScene->RenderHUD();
+}
+
 void SceneManager::BuildScene()
 {
 	delete currentScene;

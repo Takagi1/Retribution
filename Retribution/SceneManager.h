@@ -15,6 +15,7 @@ public:
 	virtual void Input();
 	virtual void Update(const float deltaTime_) override;
 	virtual void Render() override;
+	virtual void RenderHUD() override;
 
 private:
 	Scene* currentScene;

@@ -28,6 +28,8 @@ public:
 
 	sf::RenderWindow& GetWindow();
 
+	void SetView(sf::Vector2f pos_);
+
 	sf::Event input;
 
 	void Exit();
@@ -50,6 +52,7 @@ private:
 	sf::Vector2u display;
 
 	sf::RenderWindow r_Window;
+	sf::View view;
 
 
 	bool isRunning;

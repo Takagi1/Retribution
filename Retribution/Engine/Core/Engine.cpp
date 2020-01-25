@@ -34,6 +34,8 @@ bool Engine::OnCreate(std::string name_)
 	//Set FrameRate
 	r_Window.setFramerateLimit(fps);
 
+	view.setSize(RES_1920X1080);
+
 	if (gameInterface) {
 		if (!gameInterface->OnCreate()) {
 			Debug::Error("Game Interface was not created", "Engine.cpp", __LINE__);
@@ -113,17 +115,37 @@ void Engine::Render()
 	//Clear window
 	r_Window.clear(sf::Color::White);
 
+	//Render Scene
 	if (gameInterface) {
 		gameInterface->Render();
 	}
 
+	//Might be able to get rid of this
+	//Display window
+	//r_Window.display();
+
+	//Reset view
+	r_Window.setView(r_Window.getDefaultView());
+
+	//Render HUD
+	if (gameInterface) {
+		gameInterface->RenderHUD();
+	}
+
 	//Display window
 	r_Window.display();
+	
 }
 
 sf::RenderWindow & Engine::GetWindow()
 {
 	return r_Window;
+}
+
+void Engine::SetView(sf::Vector2f pos_)
+{
+	view.setCenter(pos_);
+	r_Window.setView(view);
 }
 
 void Engine::SetGameInterface(GameInterface * gameInterface_)

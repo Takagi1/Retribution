@@ -11,6 +11,16 @@ GameScene::GameScene() : counterbox(nullptr), gravity(100)
 	ground.setPosition(0,700);
 	player = std::make_unique<PlayerCharacter>(this);
 	player->body.setPosition(200, 500);	
+
+	//Setup HUD
+	healthDisplay.setFont(font);
+	healthDisplay.setPosition(sf::Vector2f(0, 200));
+	healthDisplay.setFillColor(sf::Color::Black);
+
+	energyDisplay.setFont(font);
+	energyDisplay.setPosition(sf::Vector2f(0, 300));
+	energyDisplay.setFillColor(sf::Color::Black);
+
 }
 
 
@@ -127,6 +137,10 @@ void GameScene::Update(const float deltaTime_)
 
 void GameScene::Render()
 {
+	//Set window view and make it the player position
+	Engine::GetInstance()->SetView(player->body.getPosition());
+
+	//Draw Game objects
 	Engine::GetInstance()->GetWindow().draw(player->body);
 
 	Engine::GetInstance()->GetWindow().draw(ground);
@@ -138,10 +152,21 @@ void GameScene::Render()
 			Engine::GetInstance()->GetWindow().draw(proj->box);
 		}
 	}
-
+	
 	if (counterbox) {
 		if(counterbox->body) Engine::GetInstance()->GetWindow().draw(*counterbox->body);
 	}
+}
+
+void GameScene::RenderHUD()
+{
+	//Update HUD in seperate area? mabye threads but i dont know?
+	healthDisplay.setString("Health: " + std::to_string(player->health));
+	Engine::GetInstance()->GetWindow().draw(healthDisplay);
+
+	energyDisplay.setString("Energy: " + std::to_string(player->GetEnergy()));
+	Engine::GetInstance()->GetWindow().draw(energyDisplay);
+
 }
 
 void GameScene::ClearBox()

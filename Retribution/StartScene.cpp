@@ -31,3 +31,7 @@ void StartScene::Render()
 {
 
 }
+
+void StartScene::RenderHUD()
+{
+}

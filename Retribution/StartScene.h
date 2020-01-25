@@ -14,5 +14,6 @@ public:
 	virtual void Input();
 	virtual void Update(const float deltaTime_);
 	virtual void Render();
+	virtual void RenderHUD();
 };
 #endif // ! STARTSCENE_H

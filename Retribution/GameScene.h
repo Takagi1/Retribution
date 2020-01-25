@@ -19,29 +19,28 @@ public:
 	virtual void Input();
 	virtual void Update(const float deltaTime_);
 	virtual void Render();
+	virtual void RenderHUD();
 
-
-	//only for enemies
+	//Enemies
 	std::vector<Monster*> monsters;
 
-	//Projectiles
-	//std::list<std::unique_ptr<Projectile>> projectiles;
-
+	//Does the counterbox exist
 	std::unique_ptr<CounterBox> counterbox;
 	
-	//player
+	//Player
 	std::unique_ptr<PlayerCharacter> player;
 
 	sf::RectangleShape ground;
 
 	void ClearBox();
 
-
 	float gravity;
 
 private:
 
-
+	//HUD
+	sf::Text healthDisplay;
+	sf::Text energyDisplay;
 
 };
 #endif // !GAMESCENE_H

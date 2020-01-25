@@ -4,9 +4,11 @@
 
 Animation::Animation() : totalTime(0)
 {
+
 }
 
 
 Animation::~Animation()
 {
+
 }

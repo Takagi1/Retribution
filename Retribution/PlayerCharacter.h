@@ -15,6 +15,7 @@ public:
 
 	void Update(const float deltaTime);
 
+	int GetEnergy();
 	void AddEnergy(int value);
 
 //Input Handeling
