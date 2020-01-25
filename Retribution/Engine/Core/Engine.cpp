@@ -120,10 +120,6 @@ void Engine::Render()
 		gameInterface->Render();
 	}
 
-	//Might be able to get rid of this
-	//Display window
-	//r_Window.display();
-
 	//Reset view
 	r_Window.setView(r_Window.getDefaultView());
 
