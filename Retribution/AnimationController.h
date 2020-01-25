@@ -1,4 +1,6 @@
-#pragma once
+#ifndef ANIMATIONCONTROLLER_H
+#define ANIMATIONCONTROLLER_H
+
 #include "Animation.h"
 #include <map>
 
@@ -22,3 +24,4 @@ public:
 
 };
 
+#endif // !ANIMATIONCONTROLLER_H

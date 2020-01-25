@@ -1,4 +1,6 @@
-#pragma once
+#ifndef HURTBOX_H
+#define HURTBOX_H
+
 class Hurtbox : public sf::RectangleShape
 {
 public:
@@ -6,3 +8,4 @@ public:
 	~Hurtbox();
 };
 
+#endif // !HURTBOX_H

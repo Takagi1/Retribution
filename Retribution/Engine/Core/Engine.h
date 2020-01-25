@@ -1,5 +1,6 @@
 #ifndef ENGINE_H
 #define ENGINE_H
+
 #include "SFML/Graphics.hpp"
 #include <memory>
 #include "GameInterface.h"
@@ -61,4 +62,4 @@ private:
 	int currentSceneNum;
 };
 
-#endif // ! ENGINE_H
+#endif // !ENGINE_H

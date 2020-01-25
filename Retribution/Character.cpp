@@ -3,7 +3,7 @@
 #include "GameScene.h"
 
 
-Character::Character() : xDir(0), xSpeed(200), ySpeed(0), onGround(false), isInv(false), invTime(0)
+Character::Character() : xSpeed(0), ySpeed(0), onGround(false), isInv(false), invTime(0)
 {
 	isDead = false;
 }
@@ -31,10 +31,10 @@ void Character::Update(const float deltaTime)
 	//TODO: improve the method of pushing the player out of the ground as this could cause some problems and is seems messy
 
 	//X move
-	body.move(deltaTime * xSpeed * xDir, 0);
+	body.move(deltaTime * xSpeed, 0);
 
 	if (body.getGlobalBounds().intersects(scene->ground.getGlobalBounds())) {
-		body.move(deltaTime * -xSpeed * xDir, 0);
+		body.move(deltaTime * -xSpeed, 0);
 	}
 
 	//Y move

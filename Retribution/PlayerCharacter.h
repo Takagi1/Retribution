@@ -1,7 +1,7 @@
 #ifndef PLAYERCHARACTER_H
 #define PLAYERCHARACTER_H
-#include "Character.h"
 
+#include "Character.h"
 class GameScene;
 
 class PlayerCharacter : public Character
@@ -11,12 +11,11 @@ public:
 	PlayerCharacter(GameScene* scene);
 	virtual ~PlayerCharacter();
 
-	int energy;
-
 	bool idle;
 
 	void Update(const float deltaTime);
 
+	void AddEnergy(int value);
 
 //Input Handeling
 	void PresLeft();
@@ -45,6 +44,9 @@ public:
 	void Damage(int val);
 
 private:
+
+	int energy;
+	int energyMax;
 
 	bool left;
 	bool right;

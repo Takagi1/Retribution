@@ -27,10 +27,6 @@ bool GameScene::OnCreate()
 
 void GameScene::Input()
 {
-	
-	//TODO:Can this be improved?
-	//TODO:Improve multiple input detection as it is still very bad and unreliable
-
 	//Direction detection
 	switch (Engine::GetInstance()->input.type)
 	{

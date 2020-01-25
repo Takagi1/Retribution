@@ -38,4 +38,5 @@ private:
 	static MessageType currentSev;
 	static std::string outputName;
 };
-#endif DEBUG_H
+
+#endif // !DEBUG_H

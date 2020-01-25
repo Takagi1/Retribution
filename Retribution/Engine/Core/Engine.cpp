@@ -1,12 +1,11 @@
-#include "pch.h"
+#include "../../pch.h"
 #include "Engine.h"
-#include "SceneManager.h"
-
-//#include "Scene.h"
+#include "../../SceneManager.h"
 
 //DEFINES
 
 //Resolutions
+#define RES_1280X720 1280, 720 
 #define RES_1920X1080 1920, 1080
 
 std::unique_ptr<Engine> Engine::engineInstance = nullptr;

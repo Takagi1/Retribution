@@ -14,4 +14,5 @@ public:
 	virtual void Render() = 0;
 
 };
+
 #endif // !GAMEINTERFACE_H

@@ -35,8 +35,6 @@ protected:
 	GameScene* scene;
 
 	bool isDead;
-
-	int xDir;
 };
 #endif // !CHARACTER_H
 

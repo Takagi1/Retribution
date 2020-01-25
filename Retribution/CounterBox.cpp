@@ -45,7 +45,7 @@ void CounterBox::Update(const float deltaTime)
 void CounterBox::Trigger(std::unique_ptr<Projectile> projectile)
 {
 	if (type == 0) {
-		scene->player->energy += projectile->power;
+		scene->player->AddEnergy(projectile->power);
 		return;
 	}
 	if (type == 1) {

@@ -5,7 +5,8 @@
 #include <iostream>
 #include "SceneManager.h"
 
-
+//TODO: Finish animation and animation controller to a satesfactory degree
+//TODO: Create UI
 
 int main(int argc, char* argv[]) {
 	Engine::GetInstance()->SetGameInterface(new SceneManager);
