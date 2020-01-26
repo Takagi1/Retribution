@@ -6,6 +6,7 @@
 
 Monster::Monster(GameScene* pro) : Character(), dir(1), delay(0)
 {
+	goldValue = 5;
 	health = 5;
 
 	body.setFillColor(sf::Color::Green);
@@ -39,4 +40,9 @@ void Monster::Update(const float deltaTime)
 bool Monster::IsDead()
 {
 	return isDead;
+}
+
+int Monster::GetGold()
+{
+	return goldValue;
 }

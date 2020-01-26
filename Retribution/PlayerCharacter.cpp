@@ -4,6 +4,9 @@
 #include "Roll.h"
 #include "Kick.h"
 
+int PlayerCharacter::gold = 0;
+
+
 PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(), idle(true), energy(0), parry(false), canDodge(true), dodgeLimit(1)
 {
 	energyMax = 10;
@@ -24,7 +27,7 @@ PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(), idle(true), e
 
 	animationController.animationList["Roll"] = new Roll();
 
-	inputDelay = 0.25f;
+	inputDelay = 0.15f;
 	inputTime = 0;
 }
 

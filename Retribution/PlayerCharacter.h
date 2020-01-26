@@ -12,6 +12,7 @@ public:
 	virtual ~PlayerCharacter();
 
 	bool idle;
+	static int gold;
 
 	void Update(const float deltaTime);
 

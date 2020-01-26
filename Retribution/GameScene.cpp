@@ -21,6 +21,10 @@ GameScene::GameScene() : counterbox(nullptr), gravity(100)
 	energyDisplay.setPosition(sf::Vector2f(0, 300));
 	energyDisplay.setFillColor(sf::Color::Black);
 
+	goldDisplay.setFont(font);
+	goldDisplay.setPosition(sf::Vector2f(0, 400));
+	goldDisplay.setFillColor(sf::Color::Black);
+
 }
 
 
@@ -56,9 +60,9 @@ void GameScene::Input()
 
 		//Manual spawn testing
 		if (Engine::GetInstance()->input.key.code == sf::Keyboard::T) {
-			Monster* mon = new Monster(this);
+			std::unique_ptr<Monster> mon = std::make_unique<Monster>(this);
 			mon->body.setPosition(100, 500);
-			monsters.push_back(mon);
+			monsters.push_back(std::move(mon));
 		}
 		break;
 	case sf::Event::KeyReleased:
@@ -91,7 +95,11 @@ void GameScene::Update(const float deltaTime_)
 
 		//Kill Monster
 		if (monsters[j]->IsDead()) {
-			delete monsters[j];
+
+			player->gold += monsters[j]->GetGold();
+			//Safety? 
+			monsters[j].reset();
+
 			monsters.erase(monsters.begin() + j);
 			monsters.shrink_to_fit();
 
@@ -167,6 +175,8 @@ void GameScene::RenderHUD()
 	energyDisplay.setString("Energy: " + std::to_string(player->GetEnergy()));
 	Engine::GetInstance()->GetWindow().draw(energyDisplay);
 
+	goldDisplay.setString("Gold: " + std::to_string(player->gold));
+	Engine::GetInstance()->GetWindow().draw(goldDisplay);
 }
 
 void GameScene::ClearBox()

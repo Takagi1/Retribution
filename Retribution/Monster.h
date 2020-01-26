@@ -21,7 +21,11 @@ public:
 
 	bool IsDead();
 
-	
+	int GetGold();
+
+private:
+
+	int goldValue;
 
 };
 #endif // !MONSTER_H

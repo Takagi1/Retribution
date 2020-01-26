@@ -31,6 +31,7 @@ bool SceneManager::OnCreate()
 
 void SceneManager::Input()
 {
+
 	currentScene->Input();
 }
 
@@ -40,7 +41,6 @@ void SceneManager::Update(const float deltaTime_)
 		BuildScene();
 	}
 	currentScene->Update(deltaTime_);
-
 }
 
 void SceneManager::Render()

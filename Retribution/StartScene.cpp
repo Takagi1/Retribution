@@ -14,12 +14,21 @@ StartScene::~StartScene()
 bool StartScene::OnCreate()
 {
 	Debug::Info("Creating Start Scene", "StartScene.cpp", __LINE__);
-	Engine::GetInstance()->SetCurrentScene(1);
+	
 	return true;
 }
 
 void StartScene::Input()
 {
+	switch (Engine::GetInstance()->input.type)
+	{
+	case sf::Event::KeyPressed:
+		if (Engine::GetInstance()->input.key.code == sf::Keyboard::Z) {
+			Engine::GetInstance()->SetCurrentScene(1);
+		}
+	default:
+		break;
+	}
 }
 
 void StartScene::Update(const float deltaTime_)

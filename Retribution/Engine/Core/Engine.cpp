@@ -89,13 +89,22 @@ void Engine::OnDestroy()
 
 void Engine::Input()
 {
-	
 	while (r_Window.pollEvent(input)) {
 		if (input.key.code == sf::Keyboard::Escape)
 		{
 			isRunning = false;
 			break;
 		}
+		switch (input.type)
+		{
+		case sf::Event::KeyPressed:
+			if (input.key.code == sf::Keyboard::X) {
+				SetCurrentScene(0);
+			}
+		default:
+			break;
+		}
+
 
 		if (gameInterface) {
 			gameInterface->Input();

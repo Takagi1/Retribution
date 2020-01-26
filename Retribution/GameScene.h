@@ -22,7 +22,7 @@ public:
 	virtual void RenderHUD();
 
 	//Enemies
-	std::vector<Monster*> monsters;
+	std::vector<std::unique_ptr<Monster> > monsters;
 
 	//Does the counterbox exist
 	std::unique_ptr<CounterBox> counterbox;
@@ -41,6 +41,7 @@ private:
 	//HUD
 	sf::Text healthDisplay;
 	sf::Text energyDisplay;
+	sf::Text goldDisplay;
 
 };
 #endif // !GAMESCENE_H
