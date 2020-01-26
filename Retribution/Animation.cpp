@@ -11,3 +11,8 @@ Animation::~Animation()
 {
 
 }
+
+void Animation::RestartAnimation()
+{
+	totalTime = 0;
+}

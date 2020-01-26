@@ -14,7 +14,3 @@ Kick::~Kick()
 void Kick::Update(const float deltaTime_, sf::RectangleShape* body)
 {
 }
-
-void Kick::EndAnimation(Character* character_)
-{
-}

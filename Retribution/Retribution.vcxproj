@@ -172,6 +172,7 @@
     <ClInclude Include="Monster.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PlayerAnimController.h" />
+    <ClInclude Include="PlayerIdle.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Roll.h" />
     <ClInclude Include="SceneManager.h" />
@@ -204,6 +205,7 @@
     </ClCompile>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PlayerAnimController.cpp" />
+    <ClCompile Include="PlayerIdle.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Roll.cpp" />
     <ClCompile Include="SceneManager.cpp" />

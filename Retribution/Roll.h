@@ -12,8 +12,6 @@ public:
 
 	void Update(const float deltaTime_, Character* body);
 
-	void EndAnimation(Character* body);
-
 
 };
 

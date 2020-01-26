@@ -75,6 +75,9 @@
     <ClInclude Include="PlayerAnimController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerIdle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -132,6 +135,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PlayerAnimController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerIdle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

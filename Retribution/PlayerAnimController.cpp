@@ -1,29 +1,42 @@
 #include "pch.h"
 #include "PlayerAnimController.h"
+#include "Character.h"
+#include "PlayerIdle.h"
 
-
-PlayerAnimController::PlayerAnimController()
+PlayerAnimController::PlayerAnimController(Character* character_) : AnimationController()
 {
-	
+	character = character_;
+	animationList["Idle"] = new PlayerIdle();
+	currentAnimation = animationList["Idle"];
 }
 
 PlayerAnimController::~PlayerAnimController()
 {
+
 }
 
 void PlayerAnimController::Update(const float deltaTime)
 {
+	//Animation paths
 	if (currentAnimation) {
-		//Changes first
-		if (currentAnimation->totalTime >= currentAnimation->maxTime) {
-			//TODO: Catch if player performs input moment that endAnimation is called
-			currentAnimation->EndAnimation(character);
-			delete currentAnimation;
-			currentAnimation = nullptr;
+		if (currentAnimation == animationList["Idle"]) {
+			if (character->animationState["IsDodgeing"]) {
+				character->animationState["Idle"] = false;
+				Play("Roll");
+			}
+			else if (currentAnimation->totalTime >= currentAnimation->maxTime) {
+
+				currentAnimation->RestartAnimation();
+
+			}
 		}
+		else if (currentAnimation == animationList["Roll"]) {
+			if (currentAnimation->totalTime >= currentAnimation->maxTime) {
+				character->animationState["Idle"] = true;
+				character->animationState["IsDodgeing"] = false;
+				Play("Idle");
+			}
+		}
+		currentAnimation->Update(deltaTime, character);
 	}
-
-
-	//Then call update
-	AnimationController::Update(deltaTime);
 }

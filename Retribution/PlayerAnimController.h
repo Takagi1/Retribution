@@ -7,7 +7,8 @@ class PlayerAnimController :
 	public AnimationController
 {
 public:
-	PlayerAnimController();
+	//Must put in idle animation
+	PlayerAnimController(Character* character_);
 	virtual ~PlayerAnimController();
 
 	virtual void Update(const float deltaTime) override;

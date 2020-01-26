@@ -10,8 +10,9 @@ public:
 	~Animation();
 
 	virtual void Update(const float deltaTime_, Character* body) = 0;
-	
-	virtual void EndAnimation(Character* character) = 0;
+
+	void RestartAnimation();
+
 	float totalTime;
 	float maxTime;
 

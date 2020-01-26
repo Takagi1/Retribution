@@ -1,9 +1,10 @@
 #include "pch.h"
 #include "PlayerCharacter.h"
 #include "GameScene.h"
+#include "PlayerAnimController.h"
 #include "Roll.h"
 #include "Kick.h"
-#include "PlayerAnimController.h"
+
 
 int PlayerCharacter::gold = 0;
 
@@ -24,13 +25,12 @@ PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(),  energy(0), p
 	canDodge = true;
 	dodgeCount = 0;
 
-	animationController = std::make_unique<PlayerAnimController>();
+	animationState["Idle"] = true;
 
-	animationController->character = this;
+	animationController = std::make_unique<PlayerAnimController>(this);
 
 	animationController->animationList["Roll"] = new Roll();
 
-	animationState["Idle"] = true;
 	animationState["IsDodgeing"] = false;
 
 	inputDelay = 0.05f;
@@ -45,8 +45,6 @@ PlayerCharacter::~PlayerCharacter()
 
 void PlayerCharacter::Update(const float deltaTime)
 {
-	//TODO: Find out why dodge is not working after one press
-
 	if (!animationState["IsDodgeing"]) { xSpeed = 0; }
 
 	//Reset dodge
@@ -62,6 +60,7 @@ void PlayerCharacter::Update(const float deltaTime)
 				if (left) {
 					dodgeCount += 1;
 					if (dodgeCount == dodgeLimit) { canDodge = false; }
+					animationState["IsDodgeing"] = true;
 
 					xSpeed = -250;
 
@@ -76,8 +75,6 @@ void PlayerCharacter::Update(const float deltaTime)
 						ySpeed = 0;						
 					}
 					inputTime = 0;
-
-					animationController->Play("Roll");
 				}
 			}
 		}
@@ -86,6 +83,8 @@ void PlayerCharacter::Update(const float deltaTime)
 			if (inputTime >= inputDelay) {
 				dodgeCount += 1;
 				if (dodgeCount == dodgeLimit) { canDodge = false; }
+				animationState["IsDodgeing"] = true;
+
 				xSpeed = 250;
 				if (up) {
 					ySpeed = -250;
@@ -99,7 +98,6 @@ void PlayerCharacter::Update(const float deltaTime)
 					ySpeed = 0;
 				}
 				inputTime = 0;
-				animationController->Play("Roll");
 			}
 		}
 		else if (up) {
@@ -107,9 +105,11 @@ void PlayerCharacter::Update(const float deltaTime)
 			if (inputTime >= inputDelay) {
 				dodgeCount += 1;
 				if (dodgeCount == dodgeLimit) { canDodge = false; }
+				animationState["IsDodgeing"] = true;
+
 				ySpeed = -250;
 				inputTime = 0;
-				animationController->Play("Roll");
+				
 			}
 		}
 		else if (down) {
@@ -117,9 +117,11 @@ void PlayerCharacter::Update(const float deltaTime)
 			if (inputTime >= inputDelay) {
 				dodgeCount += 1;
 				if (dodgeCount == dodgeLimit) { canDodge = false; }
+				animationState["IsDodgeing"] = true;
+
 				ySpeed = 250;
 				inputTime = 0;
-				animationController->Play("Roll");
+				
 			}
 		}
 	}
