@@ -18,8 +18,8 @@ public:
 
 	virtual void Input();
 	virtual void Update(const float deltaTime_);
-	virtual void Render();
-	virtual void RenderHUD();
+	virtual void Render(sf::RenderWindow* r_Window);
+	virtual void RenderHUD(sf::RenderWindow* r_Window);
 
 	//Enemies
 	std::vector<std::unique_ptr<Monster> > monsters;

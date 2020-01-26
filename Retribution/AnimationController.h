@@ -11,7 +11,7 @@ public:
 	~AnimationController();
 
 	//Reference to characters body
-	sf::RectangleShape* character;
+	Character* character;
 
 	std::map<std::string, Animation*> animationList;
 

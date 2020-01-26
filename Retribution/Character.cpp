@@ -16,7 +16,7 @@ Character::~Character()
 
 void Character::Update(const float deltaTime)
 {
-	animationController.Update(deltaTime);
+	//animationController->Update(deltaTime);
 	//Invinciblity frames
 	if (isInv) { 
 		if (invTime -= deltaTime <= 0) {

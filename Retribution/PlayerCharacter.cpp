@@ -3,11 +3,12 @@
 #include "GameScene.h"
 #include "Roll.h"
 #include "Kick.h"
+#include "PlayerAnimController.h"
 
 int PlayerCharacter::gold = 0;
 
 
-PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(), idle(true), energy(0), parry(false), canDodge(true), dodgeLimit(1)
+PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(),  energy(0), parry(false), canDodge(true), dodgeLimit(1)
 {
 	energyMax = 10;
 
@@ -23,9 +24,13 @@ PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(), idle(true), e
 
 	isDodgeing = false;
 
-	animationController.character = &body;
+	animationController = std::make_unique<PlayerAnimController>();
 
-	animationController.animationList["Roll"] = new Roll();
+	animationController->character = this;
+
+	animationController->animationList["Roll"] = new Roll();
+
+	animationState["Idle"] = true;
 
 	inputDelay = 0.05f;
 	inputTime = 0;
@@ -47,11 +52,13 @@ void PlayerCharacter::Update(const float deltaTime)
 	/* Dodging should call the dodge animation causing the player to move in that direction
 	when the animation is playing isDodging should be true
 	*/
-	if (dodge) {
+	if (dodge && canDodge) {
 		if (left) {
 			inputTime += deltaTime;
 			if (inputTime >= inputDelay) {
 				if (left) {
+					dodgeCount += 1;
+					if (dodgeCount == dodgeLimit) { canDodge = false; }
 					xSpeed = -250;
 					if (up) {
 						ySpeed = -250;
@@ -61,7 +68,7 @@ void PlayerCharacter::Update(const float deltaTime)
 						ySpeed = 250;
 					}
 					else {
-						ySpeed = 0;
+						ySpeed = 0;						
 					}
 					inputTime = 0;
 				}
@@ -70,6 +77,8 @@ void PlayerCharacter::Update(const float deltaTime)
 		else if (right) {
 			inputTime += deltaTime;
 			if (inputTime >= inputDelay) {
+				dodgeCount += 1;
+				if (dodgeCount == dodgeLimit) { canDodge = false; }
 				xSpeed = 250;
 				if (up) {
 					ySpeed = -250;
@@ -88,6 +97,8 @@ void PlayerCharacter::Update(const float deltaTime)
 		else if (up) {
 			inputTime += deltaTime;
 			if (inputTime >= inputDelay) {
+				dodgeCount += 1;
+				if (dodgeCount == dodgeLimit) { canDodge = false; }
 				ySpeed = -250;
 				inputTime = 0;
 			}
@@ -95,6 +106,8 @@ void PlayerCharacter::Update(const float deltaTime)
 		else if (down) {
 			inputTime += deltaTime;
 			if (inputTime >= inputDelay) {
+				dodgeCount += 1;
+				if (dodgeCount == dodgeLimit) { canDodge = false; }
 				ySpeed = 250;
 				inputTime = 0;
 			}
@@ -106,7 +119,6 @@ void PlayerCharacter::Update(const float deltaTime)
 		if (left) {  
 			inputTime += deltaTime;
 			if (inputTime >= inputDelay) {
-				idle = false;
 				if (up) { scene->counterbox = std::make_unique<CounterBox>(scene, -1, -1, boxType); }
 				else if (down) { scene->counterbox = std::make_unique<CounterBox>(scene, -1, 1, boxType); }
 				else { scene->counterbox = std::make_unique<CounterBox>(scene, -1, 0, boxType); }
@@ -116,7 +128,6 @@ void PlayerCharacter::Update(const float deltaTime)
 		else if (right) {
 			inputTime += deltaTime;
 			if(inputTime >= inputDelay){
-				idle = false;
 				if (up) { scene->counterbox = std::make_unique<CounterBox>(scene, 1, -1, boxType); }
 				else if (down) { scene->counterbox = std::make_unique<CounterBox>(scene, 1, 1, boxType); }
 				else { scene->counterbox = std::make_unique<CounterBox>(scene, 1, 0, boxType); }
@@ -126,20 +137,20 @@ void PlayerCharacter::Update(const float deltaTime)
 		else if (up) {
 			inputTime += deltaTime;
 			if (inputTime >= inputDelay) {
-				idle = false; scene->counterbox = std::make_unique<CounterBox>(scene, 0, -1, boxType);
+				scene->counterbox = std::make_unique<CounterBox>(scene, 0, -1, boxType);
 				inputTime = 0;
 			}
 		}
 		else if (down) {
 			inputTime += deltaTime;
 			if (inputTime >= inputDelay) { 
-				idle = false; scene->counterbox = std::make_unique<CounterBox>(scene, 0, 1, boxType); }
+				scene->counterbox = std::make_unique<CounterBox>(scene, 0, 1, boxType); }
 				inputTime = 0;
 		}
 	}
-	else 
+	else
 	{
-		if (idle) {
+		if (animationState["Idle"]) {
 			if (left) { xSpeed = -200; }
 			else if (right) { xSpeed = 200; }
 		}

@@ -1,26 +1,37 @@
 #include "pch.h"
 #include "Roll.h"
+#include "Character.h"
+#include "PlayerCharacter.h"
 
 
 Roll::Roll() : Animation()
 {
-	maxTime = 3;
+	maxTime = 2;
 }
 
 
 Roll::~Roll()
 {
+
 }
 
-void Roll::Update(const float deltaTime_, sf::RectangleShape * body)
+void Roll::Update(const float deltaTime_, Character * character_)
 {
-	totalTime += deltaTime_;
-	if (totalTime > 1 && totalTime < 2) {
-		body->setFillColor(sf::Color::Yellow);
+	
+	
+	//Start animation
+	if (totalTime == 0) {
+		character_->animationState["Idle"] = false;
 	}
-	else { body->setFillColor(sf::Color::Green); }
 
+	totalTime += deltaTime_;
+	if (totalTime >= 1) {
+			character_->body.setFillColor(sf::Color::Yellow);
+	}
+	else { character_->body.setFillColor(sf::Color::Green); }
+
+	//End animation
 	if (totalTime >= maxTime) {
-		totalTime = 0;
+		character_->animationState["Idle"] = true;
 	}
 }

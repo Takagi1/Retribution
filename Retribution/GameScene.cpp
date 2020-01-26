@@ -56,7 +56,7 @@ void GameScene::Input()
 		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::L) { player->PresDodge(); }
 		
 		//Animation test
-		if (Engine::GetInstance()->input.key.code == sf::Keyboard::V) { player->animationController.Play("Roll"); }
+		if (Engine::GetInstance()->input.key.code == sf::Keyboard::V) { player->animationController->Play("Roll"); }
 
 		//Manual spawn testing
 		if (Engine::GetInstance()->input.key.code == sf::Keyboard::T) {
@@ -97,6 +97,7 @@ void GameScene::Update(const float deltaTime_)
 		if (monsters[j]->IsDead()) {
 
 			player->gold += monsters[j]->GetGold();
+
 			//Safety? 
 			monsters[j].reset();
 
@@ -143,44 +144,44 @@ void GameScene::Update(const float deltaTime_)
 	}
 }
 
-void GameScene::Render()
+void GameScene::Render(sf::RenderWindow* r_Window)
 {
 	//Set window view and make it the player position
 	Engine::GetInstance()->SetView(player->body.getPosition());
 
 	//Draw Game objects
-	Engine::GetInstance()->GetWindow().draw(player->body);
+	r_Window->draw(player->body);
 
-	Engine::GetInstance()->GetWindow().draw(ground);
+	r_Window->draw(ground);
 
 	for (auto& obj : monsters) {
-		Engine::GetInstance()->GetWindow().draw(obj->body);
+		r_Window->draw(obj->body);
 
 		for (auto& proj : obj->proj) {
-			Engine::GetInstance()->GetWindow().draw(proj->box);
+			r_Window->draw(proj->box);
 		}
 	}
 	
 	if (counterbox) {
-		if(counterbox->body) Engine::GetInstance()->GetWindow().draw(*counterbox->body);
+		if(counterbox->body) r_Window->draw(*counterbox->body);
 	}
 }
 
-void GameScene::RenderHUD()
+void GameScene::RenderHUD(sf::RenderWindow* r_Window)
 {
 	//Update HUD in seperate area? mabye threads but i dont know?
 	healthDisplay.setString("Health: " + std::to_string(player->health));
-	Engine::GetInstance()->GetWindow().draw(healthDisplay);
+	r_Window->draw(healthDisplay);
 
 	energyDisplay.setString("Energy: " + std::to_string(player->GetEnergy()));
-	Engine::GetInstance()->GetWindow().draw(energyDisplay);
+	r_Window->draw(energyDisplay);
 
 	goldDisplay.setString("Gold: " + std::to_string(player->gold));
-	Engine::GetInstance()->GetWindow().draw(goldDisplay);
+	r_Window->draw(goldDisplay);
 }
 
 void GameScene::ClearBox()
 {
 	counterbox.reset();
-	player->idle = true;
+	player->animationState["Idle"] = true;
 }

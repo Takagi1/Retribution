@@ -36,11 +36,11 @@ void StartScene::Update(const float deltaTime_)
 
 }
 
-void StartScene::Render()
+void StartScene::Render(sf::RenderWindow* r_Window)
 {
 
 }
 
-void StartScene::RenderHUD()
+void StartScene::RenderHUD(sf::RenderWindow* r_Window)
 {
 }

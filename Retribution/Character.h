@@ -14,10 +14,14 @@ public:
 
 	virtual void Update(const float deltaTime);
 
-	AnimationController animationController;
+	std::unique_ptr<AnimationController> animationController;
 	sf::RectangleShape body;
+	std::map<std::string, bool> animationState;
+
 
 	int health;
+
+	
 
 // Movement
 	

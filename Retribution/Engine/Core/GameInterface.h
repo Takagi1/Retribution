@@ -11,8 +11,8 @@ public:
 
 	virtual void Input() = 0 ;
 	virtual void Update(const float deltaTime_) = 0;
-	virtual void Render() = 0;
-	virtual void RenderHUD() = 0;
+	virtual void Render(sf::RenderWindow* r_Window) = 0;
+	virtual void RenderHUD(sf::RenderWindow* r_Window) = 0;
 
 };
 

@@ -171,6 +171,7 @@
     <ClInclude Include="Kick.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="PlayerAnimController.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Roll.h" />
     <ClInclude Include="SceneManager.h" />
@@ -202,6 +203,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PlayerAnimController.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Roll.cpp" />
     <ClCompile Include="SceneManager.cpp" />

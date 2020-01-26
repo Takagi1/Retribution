@@ -126,7 +126,7 @@ void Engine::Render()
 
 	//Render Scene
 	if (gameInterface) {
-		gameInterface->Render();
+		gameInterface->Render(&r_Window);
 	}
 
 	//Reset view
@@ -134,7 +134,7 @@ void Engine::Render()
 
 	//Render HUD
 	if (gameInterface) {
-		gameInterface->RenderHUD();
+		gameInterface->RenderHUD(&r_Window);
 	}
 
 	//Display window
@@ -142,10 +142,10 @@ void Engine::Render()
 	
 }
 
-sf::RenderWindow & Engine::GetWindow()
+/*sf::RenderWindow & Engine::GetWindow()
 {
 	return r_Window;
-}
+}*/
 
 void Engine::SetView(sf::Vector2f pos_)
 {

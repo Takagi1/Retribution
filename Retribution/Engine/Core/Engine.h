@@ -26,7 +26,7 @@ public:
 	int GetCurrentScene();
 	void SetCurrentScene(int sceneNum_);
 
-	sf::RenderWindow& GetWindow();
+	//sf::RenderWindow& GetWindow();
 
 	void SetView(sf::Vector2f pos_);
 

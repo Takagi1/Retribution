@@ -43,14 +43,14 @@ void SceneManager::Update(const float deltaTime_)
 	currentScene->Update(deltaTime_);
 }
 
-void SceneManager::Render()
+void SceneManager::Render(sf::RenderWindow* r_Window)
 {
-	currentScene->Render();
+	currentScene->Render(r_Window);
 }
 
-void SceneManager::RenderHUD()
+void SceneManager::RenderHUD(sf::RenderWindow* r_Window)
 {
-	currentScene->RenderHUD();
+	currentScene->RenderHUD(r_Window);
 }
 
 void SceneManager::BuildScene()

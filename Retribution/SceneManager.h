@@ -14,8 +14,8 @@ public:
 
 	virtual void Input();
 	virtual void Update(const float deltaTime_) override;
-	virtual void Render() override;
-	virtual void RenderHUD() override;
+	virtual void Render(sf::RenderWindow* r_Window) override;
+	virtual void RenderHUD(sf::RenderWindow* r_Window) override;
 
 private:
 	Scene* currentScene;

@@ -11,7 +11,6 @@ public:
 	PlayerCharacter(GameScene* scene);
 	virtual ~PlayerCharacter();
 
-	bool idle;
 	static int gold;
 
 	void Update(const float deltaTime);
