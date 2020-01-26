@@ -27,7 +27,7 @@ PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(), idle(true), e
 
 	animationController.animationList["Roll"] = new Roll();
 
-	inputDelay = 0.15f;
+	inputDelay = 0.05f;
 	inputTime = 0;
 }
 
