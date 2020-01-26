@@ -9,5 +9,7 @@ public:
 	virtual ~Kick();
 
 	virtual void Update(const float deltaTime_, sf::RectangleShape* body);
+
+	virtual void EndAnimation(Character* body);
 };
 

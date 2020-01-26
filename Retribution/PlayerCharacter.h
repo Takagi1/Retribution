@@ -62,8 +62,6 @@ private:
 	int dodgeLimit;
 	int dodgeCount;
 
-	bool isDodgeing;
-
 	float inputDelay;
 	float inputTime;
 };

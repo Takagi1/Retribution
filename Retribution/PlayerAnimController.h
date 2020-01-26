@@ -10,6 +10,6 @@ public:
 	PlayerAnimController();
 	virtual ~PlayerAnimController();
 
-	virtual void Update(const float deltaTime);
+	virtual void Update(const float deltaTime) override;
 };
 

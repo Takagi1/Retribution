@@ -11,6 +11,7 @@ public:
 
 	virtual void Update(const float deltaTime_, Character* body) = 0;
 	
+	virtual void EndAnimation(Character* character) = 0;
 	float totalTime;
 	float maxTime;
 

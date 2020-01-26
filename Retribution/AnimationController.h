@@ -17,7 +17,7 @@ public:
 
 	Animation * currentAnimation;
 
-	void Update(const float deltaTime_);
+	virtual void Update(const float deltaTime_);
 
 	//Put in a name to play that animation
 	void Play(std::string name_);
