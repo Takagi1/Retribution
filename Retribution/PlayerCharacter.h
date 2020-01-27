@@ -17,6 +17,7 @@ public:
 
 	int GetEnergy();
 	void AddEnergy(int value);
+	int UseEnergy();
 
 //Input Handeling
 	void PresLeft();

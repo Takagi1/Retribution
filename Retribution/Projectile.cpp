@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Projectile.h"
 #include "Monster.h"
-Projectile::Projectile(sf::Vector2f pos_, int dir_, Monster* monster) : power(10)
+Projectile::Projectile(sf::Vector2f pos_, int dir_, Monster* monster) : power(10), isBlocked(false)
 {
 	box.setPosition(pos_);
 	dir = dir_;

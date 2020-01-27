@@ -17,6 +17,7 @@ public:
 
 	int dir;
 	int power;
+	bool isBlocked;
 	
 };
 

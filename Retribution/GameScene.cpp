@@ -122,9 +122,13 @@ void GameScene::Update(const float deltaTime_)
 			if (counterbox) {
 				if (counterbox->body) {
 					if (counterbox->body->getGlobalBounds().intersects(monsters[j]->proj[i]->box.getGlobalBounds())) {
+
 						counterbox->Trigger(std::move(monsters[j]->proj[i]));
-						monsters[j]->proj.erase(monsters[j]->proj.begin() + i);
-						monsters[j]->proj.shrink_to_fit();
+						//if not reduced blocked
+						if (counterbox->GetType() != 2 && !counterbox->hangTime) {
+							monsters[j]->proj.erase(monsters[j]->proj.begin() + i);
+							monsters[j]->proj.shrink_to_fit();
+						}
 						continue;
 					}
 				}

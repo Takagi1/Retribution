@@ -183,6 +183,13 @@ void PlayerCharacter::AddEnergy(int value)
 	}
 }
 
+int PlayerCharacter::UseEnergy()
+{
+	int val = energy;
+	energy = 0;
+	return val;
+}
+
 void PlayerCharacter::PresLeft()
 {
 	left = true;

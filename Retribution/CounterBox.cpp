@@ -29,9 +29,12 @@ void CounterBox::Update(const float deltaTime)
 	if (!hangTime) {
 		life -= deltaTime;
 		if (life <= 0) {
+			
 			hangTime = true;
-			delete body;
-			body = nullptr;
+			if (type != 2) {
+				delete body;
+				body = nullptr;
+			}
 		}
 	}
 	else {
@@ -44,12 +47,57 @@ void CounterBox::Update(const float deltaTime)
 
 void CounterBox::Trigger(std::unique_ptr<Projectile> projectile)
 {
-	if (type == 0) {
+	switch (type)
+	{
+	//Standered Parry
+	case 0:
 		scene->player->AddEnergy(projectile->power);
-		return;
+		break;
+
+	//Standered Counter (IE. Retribution)
+	case 1:
+		if (scene->player->UseEnergy() == 0) {
+			projectile->caster->health -= projectile->power;
+		}
+		else {
+			projectile->caster->health -= scene->player->UseEnergy() * projectile->power;
+		}
+		break;
+
+	//Block
+	case 2:
+		
+		//Block succseded
+		if (!hangTime) {
+
+		}
+		//Hit defended area
+		else {
+			//Reduce power of projectile
+			if (!projectile->isBlocked) {
+				projectile->power = std::floor(projectile->power / 2);
+			}
+		}
+
+		break;
+
+	//AOE Counter (IE. Wrath)
+	case 3:
+		break;
+
+	//Cross Counter (IE. Judgement)
+	case 4:
+		break;
+
+	default:
+		Debug::Error("Counterbox type invalid", "CounterBox.cpp", __LINE__);
+		break;
 	}
-	if (type == 1) {
-		projectile->caster->health -= 10;
-		return;
-	}
+	
+	
+}
+
+const int CounterBox::GetType()
+{
+	return type;
 }
