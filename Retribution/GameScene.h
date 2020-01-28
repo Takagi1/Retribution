@@ -6,7 +6,6 @@
 #include "Monster.h"
 #include "CounterBox.h"
 #include "Projectile.h"
-#include <list>
 
 class GameScene : public Scene
 {
@@ -14,12 +13,12 @@ public:
 	GameScene();
 	virtual ~GameScene();
 
-	virtual bool OnCreate();
+	virtual bool OnCreate() = 0;
 
-	virtual void Input();
-	virtual void Update(const float deltaTime_);
-	virtual void Render(sf::RenderWindow* r_Window);
-	virtual void RenderHUD(sf::RenderWindow* r_Window);
+	void Input();
+	void Update(const float deltaTime_);
+	void Render(sf::RenderWindow* r_Window);
+	void RenderHUD(sf::RenderWindow* r_Window);
 
 	//Enemies
 	std::vector<std::unique_ptr<Monster> > monsters;

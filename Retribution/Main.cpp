@@ -10,6 +10,7 @@
 //TODO: Finish basic monster and create basic ai for it
 //TODO: Make basic start screen and loss screen with the option of restarting
 //TODO: Make GameScene into a virtual so that all GameScenes inherit the basic input, update, render functions
+//TODO: Create other abilites
 
 int main(int argc, char* argv[]) {
 	Engine::GetInstance()->SetGameInterface(new SceneManager);

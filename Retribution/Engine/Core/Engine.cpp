@@ -142,11 +142,6 @@ void Engine::Render()
 	
 }
 
-/*sf::RenderWindow & Engine::GetWindow()
-{
-	return r_Window;
-}*/
-
 void Engine::SetView(sf::Vector2f pos_)
 {
 	view.setCenter(pos_);

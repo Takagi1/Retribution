@@ -4,14 +4,8 @@
 #include <stack>
 
 
-GameScene::GameScene() : counterbox(nullptr), gravity(100)
+GameScene::GameScene() : counterbox(nullptr), gravity(0)
 {
-	ground.setSize(sf::Vector2f(2000.0f, 20.0f));
-	ground.setFillColor(sf::Color::Blue);
-	ground.setPosition(0,700);
-	player = std::make_unique<PlayerCharacter>(this);
-	player->body.setPosition(200, 500);	
-
 	//Setup HUD
 	healthDisplay.setFont(font);
 	healthDisplay.setPosition(sf::Vector2f(0, 200));
@@ -24,19 +18,12 @@ GameScene::GameScene() : counterbox(nullptr), gravity(100)
 	goldDisplay.setFont(font);
 	goldDisplay.setPosition(sf::Vector2f(0, 400));
 	goldDisplay.setFillColor(sf::Color::Black);
-
 }
 
 
 GameScene::~GameScene()
 {
 	
-}
-
-bool GameScene::OnCreate()
-{
-	Debug::Info("Creating Game Scene", "GameScene.cpp", __LINE__);
-	return true;
 }
 
 void GameScene::Input()
@@ -54,9 +41,6 @@ void GameScene::Input()
 		if (Engine::GetInstance()->input.key.code == sf::Keyboard::J) { player->PresParry(); }
 		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::K) { player->PresCounter(); }
 		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::L) { player->PresDodge(); }
-		
-		//Animation test
-		if (Engine::GetInstance()->input.key.code == sf::Keyboard::V) { player->animationController->Play("Roll"); }
 
 		//Manual spawn testing
 		if (Engine::GetInstance()->input.key.code == sf::Keyboard::T) {

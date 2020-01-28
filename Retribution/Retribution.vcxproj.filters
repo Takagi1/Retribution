@@ -13,6 +13,30 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Animation">
+      <UniqueIdentifier>{ae056542-9dc1-42d6-b690-465db8df9a27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Animation">
+      <UniqueIdentifier>{90dc3b61-5f29-47e2-a977-b3dcffc149ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Animation\Character">
+      <UniqueIdentifier>{690c1fca-688f-4196-9e9e-70e1304c87f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Animation\Character\Player">
+      <UniqueIdentifier>{7e8f5264-01b5-4b76-bd3e-fe45d04b8ffe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Animation\Character\Monster">
+      <UniqueIdentifier>{f6842aea-47ad-4604-97e9-c6755558368d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Animation\Character">
+      <UniqueIdentifier>{702f94e9-90b7-4bfa-a134-b990b7861b87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Animation\Character\Player">
+      <UniqueIdentifier>{5898a52a-f628-4824-a840-edcb23e4948e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Animation\Character\Monster">
+      <UniqueIdentifier>{4c2dcbdb-aafd-443b-a5db-060eebf6263f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -48,18 +72,6 @@
     <ClInclude Include="PlayerCharacter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Roll.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Kick.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Core\Debug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -72,10 +84,28 @@
     <ClInclude Include="Engine\Core\Scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerAnimController.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationController.h">
+      <Filter>Header Files\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Roll.h">
+      <Filter>Header Files\Animation\Character\Player</Filter>
     </ClInclude>
     <ClInclude Include="PlayerIdle.h">
+      <Filter>Header Files\Animation\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAnimController.h">
+      <Filter>Header Files\Animation\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterAnimController.h">
+      <Filter>Header Files\Animation\Character\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterIdle.h">
+      <Filter>Header Files\Animation\Character\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -116,28 +146,34 @@
     <ClCompile Include="PlayerCharacter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Roll.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Kick.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimationController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Core\Debug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Core\Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationController.cpp">
+      <Filter>Source Files\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterAnimController.cpp">
+      <Filter>Source Files\Animation\Character\Monster</Filter>
+    </ClCompile>
     <ClCompile Include="PlayerAnimController.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Animation\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Roll.cpp">
+      <Filter>Source Files\Animation\Character\Player</Filter>
     </ClCompile>
     <ClCompile Include="PlayerIdle.cpp">
+      <Filter>Source Files\Animation\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterIdle.cpp">
+      <Filter>Source Files\Animation\Character\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

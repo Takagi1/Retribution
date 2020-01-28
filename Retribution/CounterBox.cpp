@@ -69,7 +69,7 @@ void CounterBox::Trigger(std::unique_ptr<Projectile> projectile)
 		
 		//Block succseded
 		if (!hangTime) {
-
+			scene->player->AddEnergy(0.8f * projectile->power);
 		}
 		//Hit defended area
 		else {

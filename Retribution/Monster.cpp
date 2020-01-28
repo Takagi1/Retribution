@@ -2,6 +2,8 @@
 #include "Monster.h"
 #include "GameScene.h"
 #include "Projectile.h"
+#include "MonsterAnimController.h"
+#include "MonsterIdle.h"
 
 
 Monster::Monster(GameScene* pro) : Character(), dir(1), delay(0)
@@ -12,6 +14,11 @@ Monster::Monster(GameScene* pro) : Character(), dir(1), delay(0)
 	body.setFillColor(sf::Color::Green);
 	body.setSize(sf::Vector2f(20, 20));
 	scene = pro;
+	animationState["Idle"] = true;
+	animationController = std::make_unique<MonsterAnimController>(this);
+
+	animationController->animationList["Idle"] = new MonsterIdle();
+	animationController->currentAnimation = animationController->animationList["Idle"];
 }
 
 

@@ -2,11 +2,14 @@
 #include "PlayerAnimController.h"
 #include "Character.h"
 #include "PlayerIdle.h"
+#include "Roll.h"
 
 PlayerAnimController::PlayerAnimController(Character* character_) : AnimationController()
 {
 	character = character_;
 	animationList["Idle"] = new PlayerIdle();
+	animationList["Roll"] = new Roll();
+
 	currentAnimation = animationList["Idle"];
 }
 

@@ -168,8 +168,9 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="Hurtbox.h" />
-    <ClInclude Include="Kick.h" />
     <ClInclude Include="Monster.h" />
+    <ClInclude Include="MonsterAnimController.h" />
+    <ClInclude Include="MonsterIdle.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PlayerAnimController.h" />
     <ClInclude Include="PlayerIdle.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="StartScene.h" />
     <ClInclude Include="PlayerCharacter.h" />
+    <ClInclude Include="TestScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
@@ -195,8 +197,9 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="Hurtbox.cpp" />
-    <ClCompile Include="Kick.cpp" />
     <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="MonsterAnimController.cpp" />
+    <ClCompile Include="MonsterIdle.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -211,6 +214,7 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="StartScene.cpp" />
     <ClCompile Include="PlayerCharacter.cpp" />
+    <ClCompile Include="TestScene.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

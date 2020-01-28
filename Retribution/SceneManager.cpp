@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "SceneManager.h"
+#include "StartScene.h"
+#include "TestScene.h"
 
 
 
@@ -61,7 +63,7 @@ void SceneManager::BuildScene()
 	switch (Engine::GetInstance()->GetCurrentScene()) {
 
 	case 1:
-		currentScene = new GameScene();
+		currentScene = new TestScene();
 		break;
 	default:
 		currentScene = new StartScene();

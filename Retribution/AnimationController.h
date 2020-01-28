@@ -2,7 +2,7 @@
 #define ANIMATIONCONTROLLER_H
 
 #include "Animation.h"
-#include <map>
+#include <unordered_map>
 
 class AnimationController
 {
@@ -13,7 +13,7 @@ public:
 	//Reference to characters body
 	Character* character;
 
-	std::map<std::string, Animation*> animationList;
+	std::unordered_map<std::string, Animation*> animationList;
 
 	Animation * currentAnimation;
 

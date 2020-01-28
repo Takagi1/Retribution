@@ -2,8 +2,6 @@
 #include "PlayerCharacter.h"
 #include "GameScene.h"
 #include "PlayerAnimController.h"
-#include "Roll.h"
-#include "Kick.h"
 
 
 int PlayerCharacter::gold = 0;
@@ -25,12 +23,9 @@ PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(),  energy(0), p
 	canDodge = true;
 	dodgeCount = 0;
 
-	animationState["Idle"] = true;
-
 	animationController = std::make_unique<PlayerAnimController>(this);
 
-	animationController->animationList["Roll"] = new Roll();
-
+	animationState["Idle"] = true;
 	animationState["IsDodgeing"] = false;
 
 	inputDelay = 0.05f;
@@ -58,22 +53,17 @@ void PlayerCharacter::Update(const float deltaTime)
 			inputTime += deltaTime;
 			if (inputTime >= inputDelay) {
 				if (left) {
+
 					dodgeCount += 1;
 					if (dodgeCount == dodgeLimit) { canDodge = false; }
 					animationState["IsDodgeing"] = true;
 
 					xSpeed = -250;
 
-					if (up) {
-						ySpeed = -250;
-					}
+					if (up) { ySpeed = -250; }
+					else if (down) { ySpeed = 250; }
+					else { ySpeed = 0; }
 
-					else if (down) {
-						ySpeed = 250;
-					}
-					else {
-						ySpeed = 0;						
-					}
 					inputTime = 0;
 				}
 			}
@@ -81,22 +71,17 @@ void PlayerCharacter::Update(const float deltaTime)
 		else if (right) {
 			inputTime += deltaTime;
 			if (inputTime >= inputDelay) {
+
 				dodgeCount += 1;
 				if (dodgeCount == dodgeLimit) { canDodge = false; }
 				animationState["IsDodgeing"] = true;
 
 				xSpeed = 250;
-				if (up) {
-					ySpeed = -250;
-				}
 
-				else if (down) {
-					ySpeed = 250;
-				}
+				if (up) { ySpeed = -250; }
+				else if (down) { ySpeed = 250; }
+				else { ySpeed = 0; }
 
-				else {
-					ySpeed = 0;
-				}
 				inputTime = 0;
 			}
 		}
@@ -190,76 +175,6 @@ int PlayerCharacter::UseEnergy()
 	return val;
 }
 
-void PlayerCharacter::PresLeft()
-{
-	left = true;
-}
-
-void PlayerCharacter::RelLeft()
-{
-	left = false;
-}
-
-void PlayerCharacter::PresRight()
-{
-	right = true;
-}
-
-void PlayerCharacter::RelRight()
-{
-	right = false;
-}
-
-void PlayerCharacter::PresUp()
-{
-	up = true;
-}
-
-void PlayerCharacter::RelUp()
-{
-	up = false;
-}
-
-void PlayerCharacter::PresDown()
-{
-	down = true;
-}
-
-void PlayerCharacter::RelDown()
-{
-	down = false;
-}
-
-void PlayerCharacter::PresParry()
-{
-	parry = true;
-}
-
-void PlayerCharacter::RelParry()
-{
-	parry = false;
-}
-
-void PlayerCharacter::PresCounter()
-{
-	counter = true;
-}
-
-void PlayerCharacter::RelCounter()
-{
-	counter = false;
-}
-
-void PlayerCharacter::PresDodge()
-{
-	dodge = true;
-}
-
-void PlayerCharacter::RelDodge()
-{
-	dodge = false;
-}
-
 void PlayerCharacter::Damage(int val)
 {
 	health -= val;
@@ -268,3 +183,23 @@ void PlayerCharacter::Damage(int val)
 	invTime = 1.5f;
 }
 
+void PlayerCharacter::PresLeft() { left = true; }
+void PlayerCharacter::RelLeft() { left = false; }
+
+void PlayerCharacter::PresRight() { right = true; }
+void PlayerCharacter::RelRight() { right = false; }
+
+void PlayerCharacter::PresUp() { up = true; }
+void PlayerCharacter::RelUp() { up = false; }
+
+void PlayerCharacter::PresDown() { down = true; }
+void PlayerCharacter::RelDown() { down = false; }
+
+void PlayerCharacter::PresParry() { parry = true; }
+void PlayerCharacter::RelParry() { parry = false; }
+
+void PlayerCharacter::PresCounter() { counter = true; }
+void PlayerCharacter::RelCounter() { counter = false; }
+
+void PlayerCharacter::PresDodge() { dodge = true; }
+void PlayerCharacter::RelDodge() { dodge = false; }
