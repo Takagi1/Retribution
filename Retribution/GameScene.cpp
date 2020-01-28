@@ -4,7 +4,7 @@
 #include <stack>
 
 
-GameScene::GameScene() : counterbox(nullptr), gravity(0)
+GameScene::GameScene() : counterbox(nullptr), gravity(0), isPaused(false)
 {
 	//Setup HUD
 	healthDisplay.setFont(font);
@@ -42,6 +42,8 @@ void GameScene::Input()
 		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::K) { player->PresCounter(); }
 		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::L) { player->PresDodge(); }
 
+		if (Engine::GetInstance()->input.key.code == sf::Keyboard::P) { Pause(); }
+
 		//Manual spawn testing
 		if (Engine::GetInstance()->input.key.code == sf::Keyboard::T) {
 			std::unique_ptr<Monster> mon = std::make_unique<Monster>(this);
@@ -69,66 +71,68 @@ void GameScene::Input()
 
 void GameScene::Update(const float deltaTime_)
 {
-	player->Update(deltaTime_);
+	if (!isPaused) {
+		player->Update(deltaTime_);
 
-	if (counterbox) { counterbox->Update(deltaTime_); }
-	
-	//Monster updates
+		if (counterbox) { counterbox->Update(deltaTime_); }
 
-	for (int j = 0; j < monsters.size();) {
+		//Monster updates
 
-		//Kill Monster
-		if (monsters[j]->IsDead()) {
+		for (int j = 0; j < monsters.size();) {
 
-			player->gold += monsters[j]->GetGold();
+			//Kill Monster
+			if (monsters[j]->IsDead()) {
 
-			//Safety? 
-			monsters[j].reset();
+				player->gold += monsters[j]->GetGold();
 
-			monsters.erase(monsters.begin() + j);
-			monsters.shrink_to_fit();
+				//Safety? 
+				monsters[j].reset();
 
-			//Break if no monsters left
-			if (monsters.size() == 0) { return; }
+				monsters.erase(monsters.begin() + j);
+				monsters.shrink_to_fit();
 
-			//else continue on without it
-			continue;
-		}
+				//Break if no monsters left
+				if (monsters.size() == 0) { return; }
 
-		monsters[j]->Update(deltaTime_);
+				//else continue on without it
+				continue;
+			}
 
-		//Update projectiles and collision
-		for (int i = 0; i < monsters[j]->proj.size();) {
+			monsters[j]->Update(deltaTime_);
 
-			monsters[j]->proj[i]->Update(deltaTime_);
+			//Update projectiles and collision
+			for (int i = 0; i < monsters[j]->proj.size();) {
 
-			//Counter/Parry detection
-			if (counterbox) {
-				if (counterbox->body) {
-					if (counterbox->body->getGlobalBounds().intersects(monsters[j]->proj[i]->box.getGlobalBounds())) {
+				monsters[j]->proj[i]->Update(deltaTime_);
 
-						counterbox->Trigger(std::move(monsters[j]->proj[i]));
-						//if not reduced blocked
-						if (counterbox->GetType() != 2 && !counterbox->hangTime) {
-							monsters[j]->proj.erase(monsters[j]->proj.begin() + i);
-							monsters[j]->proj.shrink_to_fit();
+				//Counter/Parry detection
+				if (counterbox) {
+					if (counterbox->body) {
+						if (counterbox->body->getGlobalBounds().intersects(monsters[j]->proj[i]->box.getGlobalBounds())) {
+
+							counterbox->Trigger(std::move(monsters[j]->proj[i]));
+							//if not reduced blocked
+							if (counterbox->GetType() != 2 && !counterbox->hangTime) {
+								monsters[j]->proj.erase(monsters[j]->proj.begin() + i);
+								monsters[j]->proj.shrink_to_fit();
+							}
+							continue;
 						}
-						continue;
 					}
 				}
+
+				//Get hit by projectiles
+				if (player->Collision(monsters[j]->proj[i]->box.getGlobalBounds())) {
+					player->Damage(monsters[j]->proj[i]->power);
+					monsters[j]->proj.erase(monsters[j]->proj.begin() + i);
+					monsters[j]->proj.shrink_to_fit();
+				}
+				else {
+					i++;
+				}
 			}
-			
-			//Get hit by projectiles
-			if (player->Collision(monsters[j]->proj[i]->box.getGlobalBounds())) {
-				player->Damage(monsters[j]->proj[i]->power);
-				monsters[j]->proj.erase(monsters[j]->proj.begin() + i);
-				monsters[j]->proj.shrink_to_fit();
-			}
-			else {
-				i++;
-			}
+			j++;
 		}
-		j++;
 	}
 }
 
@@ -172,4 +176,13 @@ void GameScene::ClearBox()
 {
 	counterbox.reset();
 	player->animationState["Idle"] = true;
+}
+
+void GameScene::Pause() { 
+	if (isPaused) {
+		isPaused = false;
+	}
+	else {
+		isPaused = true;
+	}
 }

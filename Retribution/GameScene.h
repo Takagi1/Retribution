@@ -20,22 +20,25 @@ public:
 	void Render(sf::RenderWindow* r_Window);
 	void RenderHUD(sf::RenderWindow* r_Window);
 
+	float gravity;
+
 	//Enemies
 	std::vector<std::unique_ptr<Monster> > monsters;
-
-	//Does the counterbox exist
-	std::unique_ptr<CounterBox> counterbox;
 	
 	//Player
 	std::unique_ptr<PlayerCharacter> player;
+
+	//Does the counterbox exist
+	std::unique_ptr<CounterBox> counterbox;
 
 	sf::RectangleShape ground;
 
 	void ClearBox();
 
-	float gravity;
-
+	void Pause();
 private:
+
+	bool isPaused;
 
 	//HUD
 	sf::Text healthDisplay;
