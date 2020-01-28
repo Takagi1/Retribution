@@ -35,6 +35,7 @@ bool Engine::OnCreate(std::string name_)
 	r_Window.setFramerateLimit(fps);
 
 	view.setSize(RES_1920X1080);
+	resolution = view.getSize();
 
 	if (gameInterface) {
 		if (!gameInterface->OnCreate()) {

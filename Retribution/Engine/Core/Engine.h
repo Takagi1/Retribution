@@ -31,6 +31,13 @@ public:
 	sf::Event input;
 
 	void Exit();
+
+
+//DISPLAY SETTINGS
+
+	//Resolution
+	sf::Vector2f resolution;
+
 private:
 	Engine();
 	~Engine();
@@ -44,14 +51,13 @@ private:
 	void Update(const float deltaTime_);
 	void Render();
 
-//DISPLAY SETTINGS
-
-	//Computer display 
-	sf::Vector2u display;
-
 	sf::RenderWindow r_Window;
 	sf::View view;
 
+//DISPLAY SETTINGS
+
+	//Computer display
+	sf::Vector2u display;
 
 	bool isRunning;
 

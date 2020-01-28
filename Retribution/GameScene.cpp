@@ -6,9 +6,13 @@
 
 GameScene::GameScene() : counterbox(nullptr), gravity(0), isPaused(false)
 {
+	//Hold resolution here to not have to keep accessing it 
+	float x = Engine::GetInstance()->resolution.x;
+	float y = Engine::GetInstance()->resolution.y;
+
 	//Setup HUD
 	healthDisplay.setFont(font);
-	healthDisplay.setPosition(sf::Vector2f(0, 200));
+	healthDisplay.setPosition(sf::Vector2f(0, 200 * ( y / 1080)));
 	healthDisplay.setFillColor(sf::Color::Black);
 
 	energyDisplay.setFont(font);
@@ -18,6 +22,11 @@ GameScene::GameScene() : counterbox(nullptr), gravity(0), isPaused(false)
 	goldDisplay.setFont(font);
 	goldDisplay.setPosition(sf::Vector2f(0, 400));
 	goldDisplay.setFillColor(sf::Color::Black);
+
+	pauseWindow.setSize(sf::Vector2f(x / 2, y / 2));
+	pauseWindow.setPosition(960 * (x / 1920), 540 * (y / 1080));
+	pauseWindow.move(-pauseWindow.getSize().x / 2, -pauseWindow.getSize().y / 2);
+	pauseWindow.setFillColor(sf::Color::Black);
 }
 
 
@@ -161,7 +170,6 @@ void GameScene::Render(sf::RenderWindow* r_Window)
 
 void GameScene::RenderHUD(sf::RenderWindow* r_Window)
 {
-	//Update HUD in seperate area? mabye threads but i dont know?
 	healthDisplay.setString("Health: " + std::to_string(player->health));
 	r_Window->draw(healthDisplay);
 
@@ -170,6 +178,8 @@ void GameScene::RenderHUD(sf::RenderWindow* r_Window)
 
 	goldDisplay.setString("Gold: " + std::to_string(player->gold));
 	r_Window->draw(goldDisplay);
+
+	if (isPaused) { r_Window->draw(pauseWindow); }
 }
 
 void GameScene::ClearBox()
