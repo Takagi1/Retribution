@@ -4,11 +4,6 @@
 class Scene
 {
 public:
-	Scene() {
-		font.loadFromFile("OpenSans-Light.ttf");
-	};
-
-	sf::Font font;
 
 	virtual bool OnCreate() = 0;
 

@@ -6,28 +6,8 @@
 
 GameScene::GameScene() : counterbox(nullptr), gravity(0), isPaused(false)
 {
-	//Hold resolution here to not have to keep accessing it 
-	float x = Engine::GetInstance()->resolution.x;
-	float y = Engine::GetInstance()->resolution.y;
 
-	//Setup HUD
-	healthDisplay.setFont(font);
-	healthDisplay.setPosition(sf::Vector2f(0, 200 * ( y / 1080)));
-	healthDisplay.setFillColor(sf::Color::Black);
-
-	energyDisplay.setFont(font);
-	energyDisplay.setPosition(sf::Vector2f(0, 300));
-	energyDisplay.setFillColor(sf::Color::Black);
-
-	goldDisplay.setFont(font);
-	goldDisplay.setPosition(sf::Vector2f(0, 400));
-	goldDisplay.setFillColor(sf::Color::Black);
-
-	pauseWindow.setSize(sf::Vector2f(x / 2, y / 2));
-	pauseWindow.setPosition(960 * (x / 1920), 540 * (y / 1080));
-	pauseWindow.move(-pauseWindow.getSize().x / 2, -pauseWindow.getSize().y / 2);
-	pauseWindow.setFillColor(sf::Color::Black);
-}
+} 
 
 
 GameScene::~GameScene()
@@ -170,16 +150,20 @@ void GameScene::Render(sf::RenderWindow* r_Window)
 
 void GameScene::RenderHUD(sf::RenderWindow* r_Window)
 {
-	healthDisplay.setString("Health: " + std::to_string(player->health));
-	r_Window->draw(healthDisplay);
+	UI::healthDisplay.setString("Health: " + std::to_string(player->health));
+	r_Window->draw(UI::healthDisplay);
 
-	energyDisplay.setString("Energy: " + std::to_string(player->GetEnergy()));
-	r_Window->draw(energyDisplay);
+	UI::energyDisplay.setString("Energy: " + std::to_string(player->GetEnergy()));
+	r_Window->draw(UI::energyDisplay);
 
-	goldDisplay.setString("Gold: " + std::to_string(player->gold));
-	r_Window->draw(goldDisplay);
+	UI::goldDisplay.setString("Gold: " + std::to_string(player->gold));
+	r_Window->draw(UI::goldDisplay);
 
-	if (isPaused) { r_Window->draw(pauseWindow); }
+	if (isPaused) { 
+		r_Window->draw(UI::pauseWindow);
+		r_Window->draw(UI::optionBox.GetText());
+		r_Window->draw(UI::exitBox.GetText());
+	}
 }
 
 void GameScene::ClearBox()

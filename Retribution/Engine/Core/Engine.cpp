@@ -44,6 +44,9 @@ bool Engine::OnCreate(std::string name_)
 		}
 	}
 
+	//TODO: Debug check heere
+	ui.OnCreate();
+
 	Debug::Info("Everything was created okay", "Engine.cpp", __LINE__);
 
 	return isRunning = true;

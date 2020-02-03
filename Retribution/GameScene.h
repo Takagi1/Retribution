@@ -39,13 +39,5 @@ public:
 private:
 
 	bool isPaused;
-
-	//HUD
-	sf::Text healthDisplay;
-	sf::Text energyDisplay;
-	sf::Text goldDisplay;
-
-	sf::RectangleShape pauseWindow;
-
 };
 #endif // !GAMESCENE_H
