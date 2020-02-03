@@ -1,9 +1,18 @@
 #include "pch.h"
 #include "UI.h"
 
+
+sf::Font UI::font = sf::Font();
 sf::Text UI::healthDisplay = sf::Text();
 sf::Text UI::energyDisplay = sf::Text();
 sf::Text UI::goldDisplay = sf::Text();
+sf::RectangleShape UI::pauseWindow = sf::RectangleShape();
+UI::TextBox UI::optionBox = UI::TextBox();
+UI::TextBox UI::exitBox = UI::TextBox();
+
+UI::UI()
+{
+}
 
 UI::~UI()
 {
@@ -11,7 +20,7 @@ UI::~UI()
 
 void UI::OnCreate()
 {
-
+	font.loadFromFile("OpenSans-Light.ttf");
 	//Hold resolution here to not have to keep accessing it 
 	float x = Engine::GetInstance()->resolution.x / 1920;
 	float y = Engine::GetInstance()->resolution.y / 1080;

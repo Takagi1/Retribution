@@ -161,8 +161,8 @@ void GameScene::RenderHUD(sf::RenderWindow* r_Window)
 
 	if (isPaused) { 
 		r_Window->draw(UI::pauseWindow);
-		r_Window->draw(UI::optionBox.GetText());
-		r_Window->draw(UI::exitBox.GetText());
+		UI::optionBox.Draw(r_Window);
+		UI::exitBox.Draw(r_Window);
 	}
 }
 

@@ -2,9 +2,7 @@
 class UI
 {
 public:
-	UI() {
-		font.loadFromFile("OpenSans-Light.ttf");
-	}
+	UI();
 	~UI();
 
 	void OnCreate();
@@ -18,7 +16,6 @@ public:
 
 	//Pause Menu
 	static sf::RectangleShape pauseWindow;
-
 
 	//TODO::Finish text box to satesfaction
 	struct TextBox {
@@ -37,15 +34,15 @@ public:
 			text.setPosition(box.getPosition().x + size / 2, box.getPosition().y + box.getLocalBounds().height / 2);
 		}
 
-		sf::Text GetText() {
-			return text;
+		void Draw(sf::RenderWindow* r_Window) {
+			r_Window->draw(box);
+			r_Window->draw(text);
 		}
 	private:
 		sf::RectangleShape box;
 		sf::Text text;
 	};
 
-	
 	static TextBox optionBox;
 	static TextBox exitBox;
 
