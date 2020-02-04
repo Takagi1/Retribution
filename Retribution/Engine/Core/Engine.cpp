@@ -1,6 +1,7 @@
 #include "../../pch.h"
 #include "Engine.h"
 #include "../../SceneManager.h"
+#include "../../UI.h"
 
 //DEFINES
 
@@ -44,8 +45,7 @@ bool Engine::OnCreate(std::string name_)
 		}
 	}
 
-	//TODO: Debug check heere
-	ui.OnCreate();
+	UI::Init();
 
 	Debug::Info("Everything was created okay", "Engine.cpp", __LINE__);
 

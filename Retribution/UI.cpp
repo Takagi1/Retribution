@@ -18,7 +18,7 @@ UI::~UI()
 {
 }
 
-void UI::OnCreate()
+void UI::Init()
 {
 	font.loadFromFile("OpenSans-Light.ttf");
 	//Hold resolution here to not have to keep accessing it 

@@ -2,6 +2,7 @@
 #include "GameScene.h"
 #include "Hurtbox.h"
 #include <stack>
+#include "UI.h"
 
 
 GameScene::GameScene() : counterbox(nullptr), gravity(0), isPaused(false)

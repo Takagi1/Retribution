@@ -5,7 +5,7 @@ public:
 	UI();
 	~UI();
 
-	void OnCreate();
+	static void Init();
 
 	static sf::Font font;
 

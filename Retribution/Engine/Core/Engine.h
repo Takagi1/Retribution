@@ -5,7 +5,6 @@
 #include <memory>
 #include "GameInterface.h"
 #include "Scene.h"
-#include "../../UI.h"
 #include "Debug.h"
 
 
@@ -55,9 +54,6 @@ private:
 
 	sf::RenderWindow r_Window;
 	sf::View view;
-
-
-	UI ui;
 
 //DISPLAY SETTINGS
 
