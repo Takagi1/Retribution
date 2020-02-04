@@ -22,6 +22,7 @@ public:
 	public:
 		bool OnCreate(sf::Vector2f size, sf::Vector2f position) {
 			box.setSize(size);
+			box.setPosition(position);
 			text.setFont(font);
 			text.setFillColor(sf::Color::Black);
 
@@ -31,7 +32,11 @@ public:
 		void SetText(std::string text_) {
 			text.setString(text_);
 			unsigned int size = text.getCharacterSize();
-			text.setPosition(box.getPosition().x + size / 2, box.getPosition().y + box.getLocalBounds().height / 2);
+			text.setPosition(box.getPosition().x + (box.getLocalBounds().width / 2) - size / 2, box.getPosition().y + box.getLocalBounds().height / 2);
+		}
+
+		sf::Vector2f GetSize() {
+			return box.getSize();
 		}
 
 		void Draw(sf::RenderWindow* r_Window) {

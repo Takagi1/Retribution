@@ -21,6 +21,7 @@ UI::~UI()
 void UI::Init()
 {
 	font.loadFromFile("OpenSans-Light.ttf");
+
 	//Hold resolution here to not have to keep accessing it 
 	float x = Engine::GetInstance()->resolution.x / 1920;
 	float y = Engine::GetInstance()->resolution.y / 1080;
@@ -38,7 +39,6 @@ void UI::Init()
 	goldDisplay.setPosition(sf::Vector2f(0, 400 * y));
 	goldDisplay.setFillColor(sf::Color::Black);
 
-
 	pauseWindow.setSize(sf::Vector2f((x * 1920) / 2, (y * 1080) / 2));
 	pauseWindow.setPosition(960 * x, 540 * y);
 	pauseWindow.move(-pauseWindow.getSize().x / 2, -pauseWindow.getSize().y / 2);
@@ -46,15 +46,15 @@ void UI::Init()
 
 
 	//TODO:: Centre Text
-	optionBox.OnCreate(sf::Vector2f(200, 200),
-		sf::Vector2f(pauseWindow.getPosition().x + (pauseWindow.getSize().x / 2),
-			pauseWindow.getPosition().y + (pauseWindow.getSize().y / 2)));
+	optionBox.OnCreate(sf::Vector2f(200, 100),
+		sf::Vector2f(pauseWindow.getPosition().x + (pauseWindow.getGlobalBounds().width / 2) - 100,
+			pauseWindow.getPosition().y + 50));
 
 	optionBox.SetText("Options");
 
-	exitBox.OnCreate(sf::Vector2f(200, 200),
-		sf::Vector2f(pauseWindow.getPosition().x + (pauseWindow.getSize().x / 2),
-			pauseWindow.getPosition().y + (pauseWindow.getSize().y / 2) + 100));
+	exitBox.OnCreate(sf::Vector2f(200, 100),
+		sf::Vector2f(pauseWindow.getPosition().x + (pauseWindow.getGlobalBounds().width / 2) - 100,
+			pauseWindow.getPosition().y + 200));
 
 	exitBox.SetText("Exit");
 }

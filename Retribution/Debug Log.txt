@@ -1,3 +1,4 @@
 [INFO]: Creating Start Scene in file: StartScene.cpp on line: 16
 [INFO]: Everything was created okay in file: Engine.cpp on line: 50
-[INFO]: Creating Test Scene in file: TestScene.cpp on line: 26
+[INFO]: Creating Test Scene in file: TestScene.cpp on line: 19
+[INFO]: Test Scene Completed in file: TestScene.cpp on line: 27
