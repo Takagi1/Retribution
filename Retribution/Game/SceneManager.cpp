@@ -1,7 +1,7 @@
-#include "pch.h"
+#include "../pch.h"
 #include "SceneManager.h"
-#include "StartScene.h"
-#include "TestScene.h"
+#include "Scenes/StartScene.h"
+#include "Scenes/TestScene.h"
 
 
 

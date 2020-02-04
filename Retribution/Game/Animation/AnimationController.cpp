@@ -1,6 +1,6 @@
-#include "pch.h"
+#include "../../pch.h"
 #include "AnimationController.h"
-#include "Character.h"
+#include "../../Character.h"
 
 
 AnimationController::AnimationController() : currentAnimation(nullptr)

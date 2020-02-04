@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "Monster.h"
-#include "GameScene.h"
+#include "Game/Scenes/GameScene.h"
 #include "Projectile.h"
-#include "MonsterAnimController.h"
-#include "MonsterIdle.h"
+#include "Game/Animation/Monster/MonsterAnimController.h"
+#include "Game/Animation/Monster/MonsterIdle.h"
 
 
 Monster::Monster(GameScene* pro) : Character(), dir(1), delay(0)

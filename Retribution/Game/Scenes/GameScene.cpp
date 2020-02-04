@@ -1,13 +1,13 @@
-#include "pch.h"
+#include "../../pch.h"
 #include "GameScene.h"
-#include "Hurtbox.h"
+#include "../../Hurtbox.h"
 #include <stack>
-#include "UI.h"
+#include "../UI/UI.h"
 
 
 GameScene::GameScene() : counterbox(nullptr), gravity(0), isPaused(false)
 {
-
+	curser = 0;
 } 
 
 
@@ -22,7 +22,9 @@ void GameScene::Input()
 	switch (Engine::GetInstance()->input.type)
 	{
 	case sf::Event::KeyPressed:
-		if (Engine::GetInstance()->input.key.code == sf::Keyboard::D) { player->PresRight(); }
+		if (Engine::GetInstance()->input.key.code == sf::Keyboard::D) { if (!isPaused) { player->PresRight(); }
+		else { MoveCurser(1); }
+		}
 		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::A) { player->PresLeft(); }
 
 		if (Engine::GetInstance()->input.key.code == sf::Keyboard::W) { player->PresUp(); }
@@ -180,4 +182,9 @@ void GameScene::Pause() {
 	else {
 		isPaused = true;
 	}
+}
+
+void GameScene::MoveCurser(int dir_)
+{
+	curser += dir_;
 }

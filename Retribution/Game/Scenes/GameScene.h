@@ -1,11 +1,11 @@
 #ifndef GAMESCENE_H
 #define GAMESCENE_H
 
-#include "Engine/Core/Engine.h"
-#include "PlayerCharacter.h"
-#include "Monster.h"
-#include "CounterBox.h"
-#include "Projectile.h"
+#include "../../Engine/Core/Engine.h"
+#include "../../PlayerCharacter.h"
+#include "../../Monster.h"
+#include "../../CounterBox.h"
+#include "../../Projectile.h"
 
 class GameScene : public Scene
 {
@@ -35,9 +35,14 @@ public:
 
 	void ClearBox();
 
-	void Pause();
-private:
+	//PAUSE MENU 
 
+	void Pause();
+	int curser;
+
+	void MoveCurser(int dir_);
+
+private:
 	bool isPaused;
 };
 #endif // !GAMESCENE_H

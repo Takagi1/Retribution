@@ -2,7 +2,7 @@
 
 #include "pch.h"
 #include <iostream>
-#include "SceneManager.h"
+#include "Game/SceneManager.h"
 
 //TODO: Finish animation and animation controller to a satesfactory degree
 //TODO: Improve UI
@@ -11,6 +11,8 @@
 //TODO: Make basic start screen and loss screen with the option of restarting
 //TODO: Make GameScene into a virtual so that all GameScenes inherit the basic input, update, render functions
 //TODO: Create other abilites
+//TODO: Create Display Category in UI
+
 
 int main(int argc, char* argv[]) {
 	Engine::GetInstance()->SetGameInterface(new SceneManager);

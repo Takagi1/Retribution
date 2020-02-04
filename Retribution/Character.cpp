@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Character.h"
-#include "GameScene.h"
+#include "Game/Scenes/GameScene.h"
 
 
 Character::Character() : xSpeed(0), ySpeed(0), onGround(false), isInv(false), invTime(0)

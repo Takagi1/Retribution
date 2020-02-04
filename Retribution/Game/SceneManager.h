@@ -1,6 +1,6 @@
 #ifndef SCENEMANAGER_H
 #define SCENEMANAGER_H
-#include "Engine/Core/Engine.h"
+#include "../Engine/Core/Engine.h"
 
 
 class SceneManager : public GameInterface

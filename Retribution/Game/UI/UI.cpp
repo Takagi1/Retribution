@@ -1,4 +1,4 @@
-#include "pch.h"
+#include "../../pch.h"
 #include "UI.h"
 
 
@@ -43,7 +43,6 @@ void UI::Init()
 	pauseWindow.setPosition(960 * x, 540 * y);
 	pauseWindow.move(-pauseWindow.getSize().x / 2, -pauseWindow.getSize().y / 2);
 	pauseWindow.setFillColor(sf::Color::Red);
-
 
 	//TODO:: Centre Text
 	optionBox.OnCreate(sf::Vector2f(200, 100),

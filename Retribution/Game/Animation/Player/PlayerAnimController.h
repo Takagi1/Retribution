@@ -1,5 +1,5 @@
 #pragma once
-#include "AnimationController.h"
+#include "../AnimationController.h"
 
 class PlayerCharacter;
 

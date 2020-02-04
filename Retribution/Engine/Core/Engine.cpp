@@ -1,7 +1,7 @@
 #include "../../pch.h"
 #include "Engine.h"
-#include "../../SceneManager.h"
-#include "../../UI.h"
+#include "../../Game/SceneManager.h"
+#include "../../Game/UI/UI.h"
 
 //DEFINES
 

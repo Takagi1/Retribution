@@ -1,7 +1,7 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
-#include "AnimationController.h"
+#include "Game/Animation/AnimationController.h"
 
 class GameScene;
 

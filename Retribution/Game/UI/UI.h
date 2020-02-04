@@ -23,6 +23,8 @@ public:
 		bool OnCreate(sf::Vector2f size, sf::Vector2f position) {
 			box.setSize(size);
 			box.setPosition(position);
+			box.setOutlineColor(sf::Color::Black);
+			box.setOutlineThickness(3);
 			text.setFont(font);
 			text.setFillColor(sf::Color::Black);
 
@@ -47,6 +49,8 @@ public:
 		sf::RectangleShape box;
 		sf::Text text;
 	};
+
+
 
 	static TextBox optionBox;
 	static TextBox exitBox;

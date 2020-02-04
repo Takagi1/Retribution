@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CounterBox.h"
-#include "GameScene.h"
+#include "Game/Scenes/GameScene.h"
 #include "PlayerCharacter.h"
 #include "Projectile.h"
 

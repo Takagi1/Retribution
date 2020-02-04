@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "PlayerCharacter.h"
-#include "GameScene.h"
-#include "PlayerAnimController.h"
+#include "Game/Scenes/GameScene.h"
+#include "Game/Animation/Player/PlayerAnimController.h"
 
 
 int PlayerCharacter::gold = 0;

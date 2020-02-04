@@ -1,6 +1,6 @@
-#include "pch.h"
+#include "../../../pch.h"
 #include "PlayerIdle.h"
-#include "Character.h"
+#include "../../../Character.h"
 
 
 PlayerIdle::PlayerIdle()
