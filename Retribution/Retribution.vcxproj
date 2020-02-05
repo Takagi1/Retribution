@@ -168,9 +168,11 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Game\Scenes\GameScene.h" />
     <ClInclude Include="Hurtbox.h" />
+    <ClInclude Include="Game\InteractiveMenu.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Game\Animation\Monster\MonsterAnimController.h" />
     <ClInclude Include="Game\Animation\Monster\MonsterIdle.h" />
+    <ClInclude Include="Game\UI\Menu\PauseMenu.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Game\Animation\Player\PlayerAnimController.h" />
     <ClInclude Include="Game\Animation\Player\PlayerIdle.h" />
@@ -181,6 +183,7 @@
     <ClInclude Include="PlayerCharacter.h" />
     <ClInclude Include="Game\Scenes\TestScene.h" />
     <ClInclude Include="Game\UI\UI.h" />
+    <ClInclude Include="Game\UI\TextBox.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\Animation\Animation.cpp">
@@ -207,12 +210,20 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="Hurtbox.cpp" />
+    <ClCompile Include="Game\InteractiveMenu.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../pch.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Game\Animation\Monster\MonsterAnimController.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="Game\Animation\Monster\MonsterIdle.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Game\UI\Menu\PauseMenu.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -250,6 +261,10 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="Game\UI\UI.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Game\UI\TextBox.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../pch.h</PrecompiledHeaderFile>
     </ClCompile>

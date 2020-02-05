@@ -7,7 +7,6 @@
 
 GameScene::GameScene() : counterbox(nullptr), gravity(0), isPaused(false)
 {
-	curser = 0;
 } 
 
 
@@ -22,10 +21,15 @@ void GameScene::Input()
 	switch (Engine::GetInstance()->input.type)
 	{
 	case sf::Event::KeyPressed:
-		if (Engine::GetInstance()->input.key.code == sf::Keyboard::D) { if (!isPaused) { player->PresRight(); }
-		else { MoveCurser(1); }
+		if (Engine::GetInstance()->input.key.code == sf::Keyboard::D) {
+			if (!isPaused) { player->PresRight(); }
+			else { UI::Scroll(1); }
 		}
-		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::A) { player->PresLeft(); }
+
+		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::A) {
+			if (!isPaused) { player->PresLeft(); }
+			else { UI::Scroll(-1); }
+		}
 
 		if (Engine::GetInstance()->input.key.code == sf::Keyboard::W) { player->PresUp(); }
 		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::S) { player->PresDown(); }
@@ -33,6 +37,11 @@ void GameScene::Input()
 		if (Engine::GetInstance()->input.key.code == sf::Keyboard::J) { player->PresParry(); }
 		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::K) { player->PresCounter(); }
 		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::L) { player->PresDodge(); }
+
+		if(Engine::GetInstance()->input.key.code == sf::Keyboard::X){	if(!isPaused) { // Interact code here
+		}
+		else { UI::CallFunction(); }
+		}
 
 		if (Engine::GetInstance()->input.key.code == sf::Keyboard::P) { Pause(); }
 
@@ -164,8 +173,7 @@ void GameScene::RenderHUD(sf::RenderWindow* r_Window)
 
 	if (isPaused) { 
 		r_Window->draw(UI::pauseWindow);
-		UI::optionBox.Draw(r_Window);
-		UI::exitBox.Draw(r_Window);
+		UI::Draw(r_Window);
 	}
 }
 
@@ -182,9 +190,4 @@ void GameScene::Pause() {
 	else {
 		isPaused = true;
 	}
-}
-
-void GameScene::MoveCurser(int dir_)
-{
-	curser += dir_;
 }

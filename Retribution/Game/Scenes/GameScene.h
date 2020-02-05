@@ -38,9 +38,6 @@ public:
 	//PAUSE MENU 
 
 	void Pause();
-	int curser;
-
-	void MoveCurser(int dir_);
 
 private:
 	bool isPaused;

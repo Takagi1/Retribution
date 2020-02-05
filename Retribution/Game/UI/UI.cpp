@@ -1,5 +1,6 @@
 #include "../../pch.h"
 #include "UI.h"
+#include "Menu/PauseMenu.h"
 
 
 sf::Font UI::font = sf::Font();
@@ -7,11 +8,12 @@ sf::Text UI::healthDisplay = sf::Text();
 sf::Text UI::energyDisplay = sf::Text();
 sf::Text UI::goldDisplay = sf::Text();
 sf::RectangleShape UI::pauseWindow = sf::RectangleShape();
-UI::TextBox UI::optionBox = UI::TextBox();
-UI::TextBox UI::exitBox = UI::TextBox();
+std::unique_ptr<InteractiveMenu> UI::pauseMenu = std::unique_ptr<InteractiveMenu>();
+UI::Menu UI::menu = Menu();
 
 UI::UI()
 {
+	
 }
 
 UI::~UI()
@@ -25,6 +27,8 @@ void UI::Init()
 	//Hold resolution here to not have to keep accessing it 
 	float x = Engine::GetInstance()->resolution.x / 1920;
 	float y = Engine::GetInstance()->resolution.y / 1080;
+
+	menu = PAUSEMENU;
 
 	//Setup HUD
 	healthDisplay.setFont(font);
@@ -44,16 +48,43 @@ void UI::Init()
 	pauseWindow.move(-pauseWindow.getSize().x / 2, -pauseWindow.getSize().y / 2);
 	pauseWindow.setFillColor(sf::Color::Red);
 
-	//TODO:: Centre Text
-	optionBox.OnCreate(sf::Vector2f(200, 100),
-		sf::Vector2f(pauseWindow.getPosition().x + (pauseWindow.getGlobalBounds().width / 2) - 100,
-			pauseWindow.getPosition().y + 50));
+	pauseMenu = std::make_unique<PauseMenu>();
+}
 
-	optionBox.SetText("Options");
+void UI::Scroll(int val_)
+{
+	switch (menu)
+	{
 
-	exitBox.OnCreate(sf::Vector2f(200, 100),
-		sf::Vector2f(pauseWindow.getPosition().x + (pauseWindow.getGlobalBounds().width / 2) - 100,
-			pauseWindow.getPosition().y + 200));
+	case UI::PAUSEMENU:
+		pauseMenu->MoveMenu(val_);
+		break;
+	default:
+		break;
+	}
+}
 
-	exitBox.SetText("Exit");
+void UI::CallFunction()
+{
+	switch (menu)
+	{
+
+	case UI::PAUSEMENU:
+		pauseMenu->CallFunction();
+		break;
+	default:
+		break;
+	}
+}
+
+void UI::Draw(sf::RenderWindow * r_Window)
+{
+	switch (menu)
+	{
+	case UI::PAUSEMENU:
+		pauseMenu->Draw(r_Window);
+		break;
+	default:
+		break;
+	}
 }
