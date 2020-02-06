@@ -77,8 +77,6 @@ void GameScene::Update(const float deltaTime_)
 	if (!isPaused) {
 		player->Update(deltaTime_);
 
-		
-
 		//Monster updates
 
 		for (int j = 0; j < monsters.size();) {

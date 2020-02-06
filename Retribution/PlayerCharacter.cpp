@@ -40,7 +40,6 @@ PlayerCharacter::~PlayerCharacter()
 
 void PlayerCharacter::Update(const float deltaTime_)
 {
-	if (counterbox) { counterbox->Update(deltaTime_); }
 	if (!animationState["IsDodgeing"]) { xSpeed = 0; }
 
 	//Reset dodge
@@ -158,6 +157,7 @@ void PlayerCharacter::Update(const float deltaTime_)
 		}
 	}
 	Character::Update(deltaTime_);
+	if (counterbox) { counterbox->Update(deltaTime_); }
 }
 
 int PlayerCharacter::GetEnergy() const 
