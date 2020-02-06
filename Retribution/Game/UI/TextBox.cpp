@@ -27,8 +27,9 @@ bool TextBox::OnCreate(sf::Vector2f size, sf::Vector2f position)
 
 void TextBox::SetText(std::string text_) {
 	text.setString(text_);
-	unsigned int size = text.getCharacterSize();
-	text.setPosition(box.getPosition().x + (box.getLocalBounds().width / 2) - size / 2, box.getPosition().y + box.getLocalBounds().height / 2);
+	unsigned int sizeW = text.getGlobalBounds().width  / 2;
+	unsigned int sizeH = text.getGlobalBounds().height / 2;
+	text.setPosition(box.getGlobalBounds().left + (box.getGlobalBounds().width / 2) - sizeW, box.getGlobalBounds().top + (box.getGlobalBounds().height / 2) - sizeH);
 }
 
 sf::Vector2f TextBox::GetSize() const

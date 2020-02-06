@@ -9,7 +9,7 @@ public:
 	InteractiveMenu();
 	~InteractiveMenu();
 
-	unsigned int counter;
+	short int counter;
 
 	std::vector<TextBox> textBoxs;
 

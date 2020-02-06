@@ -5,12 +5,12 @@
 
 
 int PlayerCharacter::gold = 0;
+int PlayerCharacter::energy = 0;
+int PlayerCharacter::energyMax = 25;
 
 
-PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(),  energy(0), parry(false), canDodge(true), dodgeLimit(1)
+PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(), parry(false), canDodge(true), dodgeLimit(1)
 {
-	energyMax = 10;
-
 	scene = scene_;
 	health = 5;
 
@@ -155,7 +155,7 @@ void PlayerCharacter::Update(const float deltaTime)
 	Character::Update(deltaTime);
 }
 
-int PlayerCharacter::GetEnergy()
+int PlayerCharacter::GetEnergy() const 
 {
 	return energy;
 }

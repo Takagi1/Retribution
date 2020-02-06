@@ -47,6 +47,8 @@ void UI::Init()
 	pauseWindow.setPosition(960 * x, 540 * y);
 	pauseWindow.move(-pauseWindow.getSize().x / 2, -pauseWindow.getSize().y / 2);
 	pauseWindow.setFillColor(sf::Color::Red);
+	pauseWindow.setOutlineColor(sf::Color::Black);
+	pauseWindow.setOutlineThickness(3);
 
 	pauseMenu = std::make_unique<PauseMenu>();
 }

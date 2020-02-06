@@ -15,7 +15,7 @@ public:
 
 	void Update(const float deltaTime);
 
-	int GetEnergy();
+	int GetEnergy() const ;
 	void AddEnergy(int value);
 	int UseEnergy();
 
@@ -47,8 +47,8 @@ public:
 
 private:
 
-	int energy;
-	int energyMax;
+	static int energy;
+	static int energyMax;
 
 	bool left;
 	bool right;

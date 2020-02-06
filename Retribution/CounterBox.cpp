@@ -56,7 +56,7 @@ void CounterBox::Trigger(std::unique_ptr<Projectile> projectile)
 
 	//Standered Counter (IE. Retribution)
 	case 1:
-		if (scene->player->UseEnergy() == 0) {
+		if (scene->player->GetEnergy() == 0) {
 			projectile->caster->health -= projectile->power;
 		}
 		else {
@@ -76,6 +76,7 @@ void CounterBox::Trigger(std::unique_ptr<Projectile> projectile)
 			//Reduce power of projectile
 			if (!projectile->isBlocked) {
 				projectile->power = std::floor(projectile->power / 2);
+				projectile->isBlocked = true;
 			}
 		}
 
