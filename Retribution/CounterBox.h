@@ -20,6 +20,8 @@ public:
 
 	float life;
 	float delay;
+	float dirx;
+	float diry;
 
 	bool hangTime;
 
@@ -27,7 +29,7 @@ public:
 
 	sf::RectangleShape* body;
 
-	const int GetType();
+	int GetType() const;
 
 private:
 	const int type;

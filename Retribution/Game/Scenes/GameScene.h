@@ -4,7 +4,6 @@
 #include "../../Engine/Core/Engine.h"
 #include "../../PlayerCharacter.h"
 #include "../../Monster.h"
-#include "../../CounterBox.h"
 #include "../../Projectile.h"
 
 class GameScene : public Scene
@@ -28,19 +27,11 @@ public:
 	//Player
 	std::unique_ptr<PlayerCharacter> player;
 
-	//Does the counterbox exist
-	std::unique_ptr<CounterBox> counterbox;
-
 	sf::RectangleShape ground;
-
-	void ClearBox();
 
 	//PAUSE MENU 
 
 	void Pause();
-	int curser;
-
-	void MoveCurser(int dir_);
 
 private:
 	bool isPaused;

@@ -2,6 +2,7 @@
 #define PLAYERCHARACTER_H
 
 #include "Character.h"
+#include "CounterBox.h"
 class GameScene;
 
 class PlayerCharacter : public Character
@@ -15,7 +16,7 @@ public:
 
 	void Update(const float deltaTime);
 
-	int GetEnergy();
+	int GetEnergy() const ;
 	void AddEnergy(int value);
 	int UseEnergy();
 
@@ -45,10 +46,15 @@ public:
 
 	void Damage(int val);
 
+	//Does the counterbox exist
+	std::unique_ptr<CounterBox> counterbox;
+
+	void ClearBox();
+
 private:
 
-	int energy;
-	int energyMax;
+	static int energy;
+	static int energyMax;
 
 	bool left;
 	bool right;
