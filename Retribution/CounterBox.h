@@ -27,7 +27,7 @@ public:
 
 	sf::RectangleShape* body;
 
-	const int GetType();
+	int GetType() const;
 
 private:
 	const int type;

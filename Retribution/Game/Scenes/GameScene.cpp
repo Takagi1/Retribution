@@ -21,26 +21,28 @@ void GameScene::Input()
 	switch (Engine::GetInstance()->input.type)
 	{
 	case sf::Event::KeyPressed:
-		if (Engine::GetInstance()->input.key.code == sf::Keyboard::D) {
-			if (!isPaused) { player->PresRight(); }
+		if (Engine::GetInstance()->input.key.code == sf::Keyboard::D) { player->PresRight(); }
+		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::A) { player->PresLeft(); }
+
+		if (Engine::GetInstance()->input.key.code == sf::Keyboard::W) {
+			if (!isPaused) { player->PresUp(); }
 			else { UI::Scroll(1); }
 		}
-
-		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::A) {
-			if (!isPaused) { player->PresLeft(); }
+		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::S) {
+			if (!isPaused) { player->PresDown(); }
 			else { UI::Scroll(-1); }
 		}
 
-		if (Engine::GetInstance()->input.key.code == sf::Keyboard::W) { player->PresUp(); }
-		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::S) { player->PresDown(); }
 
 		if (Engine::GetInstance()->input.key.code == sf::Keyboard::J) { player->PresParry(); }
 		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::K) { player->PresCounter(); }
 		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::L) { player->PresDodge(); }
 
-		if(Engine::GetInstance()->input.key.code == sf::Keyboard::X){	if(!isPaused) { // Interact code here
-		}
-		else { UI::CallFunction(); }
+		if(Engine::GetInstance()->input.key.code == sf::Keyboard::X){	
+			if(!isPaused) { 
+			// Interact code here
+			}
+			else { UI::CallFunction(); }
 		}
 
 		if (Engine::GetInstance()->input.key.code == sf::Keyboard::P) { Pause(); }

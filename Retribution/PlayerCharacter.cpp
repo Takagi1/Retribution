@@ -110,12 +110,13 @@ void PlayerCharacter::Update(const float deltaTime)
 			}
 		}
 	}
-	else if (parry || counter) {
+	else if (parry && animationState["Idle"] || counter && animationState["Idle"]) {
 		int boxType = 0;
 		if (counter) { boxType = 1; }
 		if (left) {  
 			inputTime += deltaTime;
 			if (inputTime >= inputDelay) {
+				animationState["Idle"] = false;
 				if (up) { scene->counterbox = std::make_unique<CounterBox>(scene, -1, -1, boxType); }
 				else if (down) { scene->counterbox = std::make_unique<CounterBox>(scene, -1, 1, boxType); }
 				else { scene->counterbox = std::make_unique<CounterBox>(scene, -1, 0, boxType); }
@@ -125,6 +126,7 @@ void PlayerCharacter::Update(const float deltaTime)
 		else if (right) {
 			inputTime += deltaTime;
 			if(inputTime >= inputDelay){
+				animationState["Idle"] = false;
 				if (up) { scene->counterbox = std::make_unique<CounterBox>(scene, 1, -1, boxType); }
 				else if (down) { scene->counterbox = std::make_unique<CounterBox>(scene, 1, 1, boxType); }
 				else { scene->counterbox = std::make_unique<CounterBox>(scene, 1, 0, boxType); }
@@ -134,6 +136,7 @@ void PlayerCharacter::Update(const float deltaTime)
 		else if (up) {
 			inputTime += deltaTime;
 			if (inputTime >= inputDelay) {
+				animationState["Idle"] = false;
 				scene->counterbox = std::make_unique<CounterBox>(scene, 0, -1, boxType);
 				inputTime = 0;
 			}
@@ -141,6 +144,7 @@ void PlayerCharacter::Update(const float deltaTime)
 		else if (down) {
 			inputTime += deltaTime;
 			if (inputTime >= inputDelay) { 
+				animationState["Idle"] = false;
 				scene->counterbox = std::make_unique<CounterBox>(scene, 0, 1, boxType); }
 				inputTime = 0;
 		}

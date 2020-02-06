@@ -11,6 +11,5 @@ public:
 
 	virtual void Update(const float deltaTime_, Character* character_);
 
-	virtual void EndAnimation(Character* character_);
 };
 

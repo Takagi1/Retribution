@@ -5,7 +5,7 @@
 #include "Projectile.h"
 
 
-CounterBox::CounterBox(GameScene* scene_, float x_ , float y_, int type_) : life(1), delay(0.5f), hangTime(false), type(type_)
+CounterBox::CounterBox(GameScene* scene_, float x_ , float y_, int type_) : life(1.0f), delay(1.0f), hangTime(false), type(type_)
 {
 	scene = scene_;
 
@@ -38,8 +38,8 @@ void CounterBox::Update(const float deltaTime)
 		}
 	}
 	else {
-		delay -= delay;
-		if (delay <= deltaTime) {
+		delay -= deltaTime;
+		if (delay <= 0) {
 			scene->ClearBox();
 		}
 	}
@@ -98,7 +98,7 @@ void CounterBox::Trigger(std::unique_ptr<Projectile> projectile)
 	
 }
 
-const int CounterBox::GetType()
+int CounterBox::GetType() const 
 {
 	return type;
 }
