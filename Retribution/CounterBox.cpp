@@ -5,10 +5,13 @@
 #include "Projectile.h"
 
 
-CounterBox::CounterBox(GameScene* scene_, float x_ , float y_, int type_) : life(1.0f), delay(1.0f), hangTime(false), type(type_)
+CounterBox::CounterBox(GameScene* scene_, float x_ , float y_, int type_) : life(1.0f), delay(1.0f), hangTime(false), type(type_), dirx(0), diry(0)
 {
 	scene = scene_;
 
+
+	dirx = x_;
+	diry = y_;
 	body = new sf::RectangleShape(sf::Vector2f(20, 20));
 	
 	body->setPosition(scene->player->body.getPosition() + sf::Vector2f(scene->player->body.getSize().x * x_, scene->player->body.getSize().y * y_));
@@ -26,6 +29,9 @@ CounterBox::~CounterBox()
 
 void CounterBox::Update(const float deltaTime)
 {
+	if(body) {
+		body->setPosition(scene->player->body.getPosition() + sf::Vector2f(scene->player->body.getSize().x * dirx, scene->player->body.getSize().y * diry));
+	}
 	if (!hangTime) {
 		life -= deltaTime;
 		if (life <= 0) {
@@ -40,7 +46,7 @@ void CounterBox::Update(const float deltaTime)
 	else {
 		delay -= deltaTime;
 		if (delay <= 0) {
-			scene->ClearBox();
+			scene->player->ClearBox();
 		}
 	}
 }

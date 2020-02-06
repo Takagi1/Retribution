@@ -20,6 +20,8 @@ public:
 
 	float life;
 	float delay;
+	float dirx;
+	float diry;
 
 	bool hangTime;
 

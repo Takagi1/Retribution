@@ -9,7 +9,7 @@ int PlayerCharacter::energy = 0;
 int PlayerCharacter::energyMax = 25;
 
 
-PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(), parry(false), canDodge(true), dodgeLimit(1)
+PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(), counterbox(std::unique_ptr<CounterBox>()), parry(false), canDodge(true), dodgeLimit(1)
 {
 	scene = scene_;
 	health = 5;
@@ -38,8 +38,9 @@ PlayerCharacter::~PlayerCharacter()
 
 }
 
-void PlayerCharacter::Update(const float deltaTime)
+void PlayerCharacter::Update(const float deltaTime_)
 {
+	if (counterbox) { counterbox->Update(deltaTime_); }
 	if (!animationState["IsDodgeing"]) { xSpeed = 0; }
 
 	//Reset dodge
@@ -50,7 +51,7 @@ void PlayerCharacter::Update(const float deltaTime)
 	*/
 	if (dodge && canDodge) {
 		if (left) {
-			inputTime += deltaTime;
+			inputTime += deltaTime_;
 			if (inputTime >= inputDelay) {
 				if (left) {
 
@@ -69,7 +70,7 @@ void PlayerCharacter::Update(const float deltaTime)
 			}
 		}
 		else if (right) {
-			inputTime += deltaTime;
+			inputTime += deltaTime_;
 			if (inputTime >= inputDelay) {
 
 				dodgeCount += 1;
@@ -86,7 +87,7 @@ void PlayerCharacter::Update(const float deltaTime)
 			}
 		}
 		else if (up) {
-			inputTime += deltaTime;
+			inputTime += deltaTime_;
 			if (inputTime >= inputDelay) {
 				dodgeCount += 1;
 				if (dodgeCount == dodgeLimit) { canDodge = false; }
@@ -98,7 +99,7 @@ void PlayerCharacter::Update(const float deltaTime)
 			}
 		}
 		else if (down) {
-			inputTime += deltaTime;
+			inputTime += deltaTime_;
 			if (inputTime >= inputDelay) {
 				dodgeCount += 1;
 				if (dodgeCount == dodgeLimit) { canDodge = false; }
@@ -114,38 +115,38 @@ void PlayerCharacter::Update(const float deltaTime)
 		int boxType = 0;
 		if (counter) { boxType = 1; }
 		if (left) {  
-			inputTime += deltaTime;
+			inputTime += deltaTime_;
 			if (inputTime >= inputDelay) {
 				animationState["Idle"] = false;
-				if (up) { scene->counterbox = std::make_unique<CounterBox>(scene, -1, -1, boxType); }
-				else if (down) { scene->counterbox = std::make_unique<CounterBox>(scene, -1, 1, boxType); }
-				else { scene->counterbox = std::make_unique<CounterBox>(scene, -1, 0, boxType); }
+				if (up) { counterbox = std::make_unique<CounterBox>(scene, -1, -1, boxType); }
+				else if (down) { counterbox = std::make_unique<CounterBox>(scene, -1, 1, boxType); }
+				else { counterbox = std::make_unique<CounterBox>(scene, -1, 0, boxType); }
 				inputTime = 0;
 			}
 		}
 		else if (right) {
-			inputTime += deltaTime;
+			inputTime += deltaTime_;
 			if(inputTime >= inputDelay){
 				animationState["Idle"] = false;
-				if (up) { scene->counterbox = std::make_unique<CounterBox>(scene, 1, -1, boxType); }
-				else if (down) { scene->counterbox = std::make_unique<CounterBox>(scene, 1, 1, boxType); }
-				else { scene->counterbox = std::make_unique<CounterBox>(scene, 1, 0, boxType); }
+				if (up) { counterbox = std::make_unique<CounterBox>(scene, 1, -1, boxType); }
+				else if (down) { counterbox = std::make_unique<CounterBox>(scene, 1, 1, boxType); }
+				else { counterbox = std::make_unique<CounterBox>(scene, 1, 0, boxType); }
 				inputTime = 0;
 			}
 		}
 		else if (up) {
-			inputTime += deltaTime;
+			inputTime += deltaTime_;
 			if (inputTime >= inputDelay) {
 				animationState["Idle"] = false;
-				scene->counterbox = std::make_unique<CounterBox>(scene, 0, -1, boxType);
+				counterbox = std::make_unique<CounterBox>(scene, 0, -1, boxType);
 				inputTime = 0;
 			}
 		}
 		else if (down) {
-			inputTime += deltaTime;
+			inputTime += deltaTime_;
 			if (inputTime >= inputDelay) { 
 				animationState["Idle"] = false;
-				scene->counterbox = std::make_unique<CounterBox>(scene, 0, 1, boxType); }
+				counterbox = std::make_unique<CounterBox>(scene, 0, 1, boxType); }
 				inputTime = 0;
 		}
 	}
@@ -156,7 +157,7 @@ void PlayerCharacter::Update(const float deltaTime)
 			else if (right) { xSpeed = 200; }
 		}
 	}
-	Character::Update(deltaTime);
+	Character::Update(deltaTime_);
 }
 
 int PlayerCharacter::GetEnergy() const 
@@ -185,6 +186,12 @@ void PlayerCharacter::Damage(int val)
 	energy = 0;
 	isInv = true;
 	invTime = 1.5f;
+}
+
+void PlayerCharacter::ClearBox()
+{
+	counterbox.reset();
+	animationState["Idle"] = true;
 }
 
 void PlayerCharacter::PresLeft() { left = true; }

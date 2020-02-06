@@ -14,9 +14,6 @@ public:
 	void Select();
 	void Deselect();
 
-	//Template?
-	void Function();
-
 	void Draw(sf::RenderWindow* r_Window);
 private:
 	sf::RectangleShape box;

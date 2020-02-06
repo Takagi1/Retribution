@@ -2,6 +2,7 @@
 #define PLAYERCHARACTER_H
 
 #include "Character.h"
+#include "CounterBox.h"
 class GameScene;
 
 class PlayerCharacter : public Character
@@ -44,6 +45,11 @@ public:
 //Misc
 
 	void Damage(int val);
+
+	//Does the counterbox exist
+	std::unique_ptr<CounterBox> counterbox;
+
+	void ClearBox();
 
 private:
 

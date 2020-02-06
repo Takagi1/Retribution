@@ -5,7 +5,7 @@
 #include "../UI/UI.h"
 
 
-GameScene::GameScene() : counterbox(nullptr), gravity(0), isPaused(false)
+GameScene::GameScene() : gravity(0), isPaused(false)
 {
 } 
 
@@ -26,11 +26,11 @@ void GameScene::Input()
 
 		if (Engine::GetInstance()->input.key.code == sf::Keyboard::W) {
 			if (!isPaused) { player->PresUp(); }
-			else { UI::Scroll(1); }
+			else { UI::Scroll(-1); }
 		}
 		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::S) {
 			if (!isPaused) { player->PresDown(); }
-			else { UI::Scroll(-1); }
+			else { UI::Scroll(1); }
 		}
 
 
@@ -77,7 +77,7 @@ void GameScene::Update(const float deltaTime_)
 	if (!isPaused) {
 		player->Update(deltaTime_);
 
-		if (counterbox) { counterbox->Update(deltaTime_); }
+		
 
 		//Monster updates
 
@@ -109,13 +109,13 @@ void GameScene::Update(const float deltaTime_)
 				monsters[j]->proj[i]->Update(deltaTime_);
 
 				//Counter/Parry detection
-				if (counterbox) {
-					if (counterbox->body) {
-						if (counterbox->body->getGlobalBounds().intersects(monsters[j]->proj[i]->box.getGlobalBounds())) {
+				if (player->counterbox) {
+					if (player->counterbox->body) {
+						if (player->counterbox->body->getGlobalBounds().intersects(monsters[j]->proj[i]->box.getGlobalBounds())) {
 
-							counterbox->Trigger(std::move(monsters[j]->proj[i]));
+							player->counterbox->Trigger(std::move(monsters[j]->proj[i]));
 							//if not reduced blocked
-							if (counterbox->GetType() != 2 && !counterbox->hangTime) {
+							if (player->counterbox->GetType() != 2 && !player->counterbox->hangTime) {
 								monsters[j]->proj.erase(monsters[j]->proj.begin() + i);
 								monsters[j]->proj.shrink_to_fit();
 							}
@@ -157,8 +157,8 @@ void GameScene::Render(sf::RenderWindow* r_Window)
 		}
 	}
 	
-	if (counterbox) {
-		if(counterbox->body) r_Window->draw(*counterbox->body);
+	if (player->counterbox) {
+		if(player->counterbox->body) r_Window->draw(*player->counterbox->body);
 	}
 }
 
@@ -177,12 +177,6 @@ void GameScene::RenderHUD(sf::RenderWindow* r_Window)
 		r_Window->draw(UI::pauseWindow);
 		UI::Draw(r_Window);
 	}
-}
-
-void GameScene::ClearBox()
-{
-	counterbox.reset();
-	player->animationState["Idle"] = true;
 }
 
 void GameScene::Pause() { 

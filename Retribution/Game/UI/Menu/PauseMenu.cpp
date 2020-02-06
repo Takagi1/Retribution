@@ -10,7 +10,6 @@ PauseMenu::PauseMenu()
 		sf::Vector2f(UI::pauseWindow.getPosition().x + (UI::pauseWindow.getGlobalBounds().width / 2) - 100,
 			UI::pauseWindow.getPosition().y + 50));
 
-
 	textbox.Select();
 	textbox.SetText("Options");
 
