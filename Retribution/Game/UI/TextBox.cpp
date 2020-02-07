@@ -19,21 +19,24 @@ bool TextBox::OnCreate(sf::Vector2f size, sf::Vector2f position)
 	box.setPosition(position);
 	box.setOutlineColor(sf::Color::Black);
 	box.setOutlineThickness(3);
+
 	text.setFont(UI::font);
 	text.setFillColor(sf::Color::Black);
+	text.setCharacterSize(20);
 
 	return true;
 }
 
 void TextBox::SetText(std::string text_) {
 	text.setString(text_);
-	unsigned int sizeW = text.getGlobalBounds().width  / 2;
-	unsigned int sizeH = text.getGlobalBounds().height / 2;
+	float sizeW = text.getGlobalBounds().width / 2;
+	float sizeH = text.getGlobalBounds().height / 2;
 	text.setPosition(box.getGlobalBounds().left + (box.getGlobalBounds().width / 2) - sizeW, box.getGlobalBounds().top + (box.getGlobalBounds().height / 2) - sizeH);
 }
 
 sf::Vector2f TextBox::GetSize() const
 {
+	float a = text.getGlobalBounds().width;
 	return box.getSize();
 }
 

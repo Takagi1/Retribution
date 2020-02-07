@@ -53,6 +53,10 @@ void UI::Init()
 	pauseMenu = std::make_unique<PauseMenu>();
 }
 
+void UI::Update(const float deltaTime_)
+{
+}
+
 void UI::Scroll(int val_)
 {
 	switch (menu)

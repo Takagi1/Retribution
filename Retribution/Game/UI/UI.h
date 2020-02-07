@@ -10,9 +10,6 @@ public:
 		PAUSEMENU
 	};
 
-	UI();
-	~UI();
-
 	static void Init();
 
 	static sf::Font font;
@@ -25,6 +22,8 @@ public:
 	//Pause Menu
 	static sf::RectangleShape pauseWindow;
 
+	static void Update(const float deltaTime_);
+
 	//TODO::Finish text box to satesfaction
 
 	static void Scroll(int val_);
@@ -34,6 +33,8 @@ public:
 	static void Draw(sf::RenderWindow * r_Window);
 
 private:
+	UI();
+	~UI();
 	static Menu menu;
 
 	static std::unique_ptr<InteractiveMenu> pauseMenu;

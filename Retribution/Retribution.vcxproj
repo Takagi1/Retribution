@@ -184,6 +184,7 @@
     <ClInclude Include="Game\Scenes\TestScene.h" />
     <ClInclude Include="Game\UI\UI.h" />
     <ClInclude Include="Game\UI\TextBox.h" />
+    <ClInclude Include="Game\UI\Menu\StartMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\Animation\Animation.cpp">
@@ -267,6 +268,10 @@
     <ClCompile Include="Game\UI\TextBox.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Game\UI\Menu\StartMenu.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../pch.h</PrecompiledHeaderFile>
     </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

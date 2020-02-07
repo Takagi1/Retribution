@@ -13,6 +13,7 @@ public:
 
 	std::vector<TextBox> textBoxs;
 
+
 	virtual void Draw(sf::RenderWindow * r_Window);
 
 	void MoveMenu(int val);

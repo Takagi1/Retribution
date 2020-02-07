@@ -1,4 +1,6 @@
 #pragma once
+
+//TODO: Scale text to the box
 class TextBox
 {
 public:
@@ -18,6 +20,9 @@ public:
 private:
 	sf::RectangleShape box;
 	sf::Text text;
+
+	float scaleX;
+	float scaleY;
 
 };
 

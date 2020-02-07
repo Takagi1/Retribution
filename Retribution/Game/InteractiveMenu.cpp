@@ -4,7 +4,6 @@
 
 InteractiveMenu::InteractiveMenu() : counter(0)
 {
-	//TODO:: Centre Text
 
 }
 
