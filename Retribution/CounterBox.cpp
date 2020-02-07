@@ -24,7 +24,7 @@ CounterBox::CounterBox(GameScene* scene_, float x_ , float y_, int type_) : life
 CounterBox::~CounterBox()
 {
 	//Why does this break?
-	//if (body != nullptr) { delete body; body = nullptr; }
+	if (body != nullptr) { delete body; body = nullptr; }
 }
 
 void CounterBox::Update(const float deltaTime)
@@ -58,15 +58,18 @@ void CounterBox::Trigger(std::unique_ptr<Projectile> projectile)
 	//Standered Parry
 	case 0:
 		scene->player->AddEnergy(projectile->power);
+		scene->player->ClearBox();
 		break;
 
 	//Standered Counter (IE. Retribution)
 	case 1:
 		if (scene->player->GetEnergy() == 0) {
 			projectile->caster->health -= projectile->power;
+			scene->player->ClearBox();
 		}
 		else {
 			projectile->caster->health -= scene->player->UseEnergy() * projectile->power;
+			scene->player->ClearBox();
 		}
 		break;
 
@@ -76,6 +79,7 @@ void CounterBox::Trigger(std::unique_ptr<Projectile> projectile)
 		//Block succseded
 		if (!hangTime) {
 			scene->player->AddEnergy(0.8f * projectile->power);
+			scene->player->ClearBox();
 		}
 		//Hit defended area
 		else {

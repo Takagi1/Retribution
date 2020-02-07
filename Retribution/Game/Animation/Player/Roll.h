@@ -12,6 +12,7 @@ public:
 
 	void Update(const float deltaTime_, Character* body);
 
+	const float iTime;
 
 };
 

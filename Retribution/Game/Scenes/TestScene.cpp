@@ -22,7 +22,7 @@ bool TestScene::OnCreate()
 	ground.setPosition(0, 700);
 
 	player = std::make_unique<PlayerCharacter>(this);
-	player->body.setPosition(200, 500);
+	player->body.setPosition(200, 650);
 
 	Debug::Info("Test Scene Completed", "TestScene.cpp", __LINE__);
 	return true;

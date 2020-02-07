@@ -2,3 +2,4 @@
 [INFO]: Everything was created okay in file: Engine.cpp on line: 50
 [INFO]: Creating Test Scene in file: TestScene.cpp on line: 19
 [INFO]: Test Scene Completed in file: TestScene.cpp on line: 27
+[INFO]: Projectile destroyed in file: Projectile.cpp on line: 17

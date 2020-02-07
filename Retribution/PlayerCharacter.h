@@ -71,6 +71,9 @@ private:
 
 	float inputDelay;
 	float inputTime;
+
+	float walkSpeed;
+	float dodgeSpeed;
 };
 #endif // PLAYERCHARACTER_H
 

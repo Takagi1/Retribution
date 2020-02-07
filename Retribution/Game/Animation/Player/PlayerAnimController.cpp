@@ -28,9 +28,7 @@ void PlayerAnimController::Update(const float deltaTime)
 				Play("Roll");
 			}
 			else if (currentAnimation->totalTime >= currentAnimation->maxTime) {
-
 				currentAnimation->RestartAnimation();
-
 			}
 		}
 		else if (currentAnimation == animationList["Roll"]) {

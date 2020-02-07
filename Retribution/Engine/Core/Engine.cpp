@@ -57,6 +57,11 @@ void Engine::Run()
 	while (isRunning) {
 		
 		sf::Time dt = timer.restart();
+
+		//Debug prevent time breaking things
+		if (dt > sf::seconds(0.25)) {
+			dt = timer.restart();
+		}
 		Input();
 
 		Update(dt.asSeconds());

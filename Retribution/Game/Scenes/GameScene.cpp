@@ -33,7 +33,6 @@ void GameScene::Input()
 			else { UI::Scroll(1); }
 		}
 
-
 		if (Engine::GetInstance()->input.key.code == sf::Keyboard::J) { player->PresParry(); }
 		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::K) { player->PresCounter(); }
 		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::L) { player->PresDodge(); }
@@ -50,7 +49,7 @@ void GameScene::Input()
 		//Manual spawn testing
 		if (Engine::GetInstance()->input.key.code == sf::Keyboard::T) {
 			std::unique_ptr<Monster> mon = std::make_unique<Monster>(this);
-			mon->body.setPosition(100, 500);
+			mon->body.setPosition(100, 650);
 			monsters.push_back(std::move(mon));
 		}
 		break;
@@ -111,11 +110,15 @@ void GameScene::Update(const float deltaTime_)
 					if (player->counterbox->body) {
 						if (player->counterbox->body->getGlobalBounds().intersects(monsters[j]->proj[i]->box.getGlobalBounds())) {
 
-							player->counterbox->Trigger(std::move(monsters[j]->proj[i]));
 							//if not reduced blocked
 							if (player->counterbox->GetType() != 2 && !player->counterbox->hangTime) {
+								player->counterbox->Trigger(std::move(monsters[j]->proj[i]));
+								//Destroy projectile
 								monsters[j]->proj.erase(monsters[j]->proj.begin() + i);
 								monsters[j]->proj.shrink_to_fit();
+							}
+							else {
+								player->counterbox->Trigger(std::move(monsters[j]->proj[i]));
 							}
 							continue;
 						}

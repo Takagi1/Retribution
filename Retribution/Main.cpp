@@ -5,13 +5,11 @@
 #include "Game/SceneManager.h"
 
 //TODO: Finish animation and animation controller to a satesfactory degree
-//TODO: Improve UI
+//TODO: Improve and finish UI
 //TODO: Finish dodge and make a sample animation for it
 //TODO: Finish basic monster and create basic ai for it
 //TODO: Make basic start screen and loss screen with the option of restarting
-//TODO: Make GameScene into a virtual so that all GameScenes inherit the basic input, update, render functions
 //TODO: Create other abilites
-//TODO: Create Display Category in UI
 
 
 int main(int argc, char* argv[]) {

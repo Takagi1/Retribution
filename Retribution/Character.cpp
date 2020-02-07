@@ -17,9 +17,11 @@ Character::~Character()
 void Character::Update(const float deltaTime)
 {
 	animationController->Update(deltaTime);
+
 	//Invinciblity frames
 	if (isInv) { 
-		if (invTime -= deltaTime <= 0) {
+		invTime -= deltaTime;
+		if (invTime <= 0) {
 			isInv = false;
 		}
 	}
@@ -51,7 +53,10 @@ void Character::Update(const float deltaTime)
 
 bool Character::Collision(sf::FloatRect colid)
 {
-	if (colid.intersects(body.getGlobalBounds()) && isInv == false) {
+	if (isInv == true) {
+		return false;
+	}
+	if (colid.intersects(body.getGlobalBounds())) {
 		return true;
 	}
 	return false;

@@ -9,10 +9,11 @@ int PlayerCharacter::energy = 0;
 int PlayerCharacter::energyMax = 25;
 
 
-PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(), counterbox(std::unique_ptr<CounterBox>()), parry(false), canDodge(true), dodgeLimit(1)
+PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(), counterbox(std::unique_ptr<CounterBox>()), parry(false), canDodge(true), dodgeLimit(1),
+walkSpeed(200), dodgeSpeed(250)
 {
 	scene = scene_;
-	health = 5;
+	health = 250;
 
 	body.setFillColor(sf::Color::Red);
 	body.setSize(sf::Vector2f(20, 20));
@@ -58,10 +59,10 @@ void PlayerCharacter::Update(const float deltaTime_)
 					if (dodgeCount == dodgeLimit) { canDodge = false; }
 					animationState["IsDodgeing"] = true;
 
-					xSpeed = -250;
+					xSpeed = -dodgeSpeed;
 
-					if (up) { ySpeed = -250; }
-					else if (down) { ySpeed = 250; }
+					if (up) { ySpeed = -dodgeSpeed; }
+					else if (down) { ySpeed = dodgeSpeed; }
 					else { ySpeed = 0; }
 
 					inputTime = 0;
@@ -76,10 +77,10 @@ void PlayerCharacter::Update(const float deltaTime_)
 				if (dodgeCount == dodgeLimit) { canDodge = false; }
 				animationState["IsDodgeing"] = true;
 
-				xSpeed = 250;
+				xSpeed = dodgeSpeed;
 
-				if (up) { ySpeed = -250; }
-				else if (down) { ySpeed = 250; }
+				if (up) { ySpeed = -dodgeSpeed; }
+				else if (down) { ySpeed = dodgeSpeed; }
 				else { ySpeed = 0; }
 
 				inputTime = 0;
@@ -92,7 +93,7 @@ void PlayerCharacter::Update(const float deltaTime_)
 				if (dodgeCount == dodgeLimit) { canDodge = false; }
 				animationState["IsDodgeing"] = true;
 
-				ySpeed = -250;
+				ySpeed = -dodgeSpeed;
 				inputTime = 0;
 				
 			}
@@ -104,7 +105,7 @@ void PlayerCharacter::Update(const float deltaTime_)
 				if (dodgeCount == dodgeLimit) { canDodge = false; }
 				animationState["IsDodgeing"] = true;
 
-				ySpeed = 250;
+				ySpeed = dodgeSpeed;
 				inputTime = 0;
 				
 			}
@@ -152,8 +153,8 @@ void PlayerCharacter::Update(const float deltaTime_)
 	else
 	{
 		if (animationState["Idle"]) {
-			if (left) { xSpeed = -200; }
-			else if (right) { xSpeed = 200; }
+			if (left) { xSpeed = -walkSpeed; }
+			else if (right) { xSpeed = walkSpeed; }
 		}
 	}
 	Character::Update(deltaTime_);
@@ -185,7 +186,7 @@ void PlayerCharacter::Damage(int val)
 	health -= val;
 	energy = 0;
 	isInv = true;
-	invTime = 1.5f;
+	invTime = 10.5f;
 }
 
 void PlayerCharacter::ClearBox()
