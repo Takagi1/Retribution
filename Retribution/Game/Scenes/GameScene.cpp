@@ -48,7 +48,7 @@ void GameScene::Input()
 
 		//Manual spawn testing
 		if (Engine::GetInstance()->input.key.code == sf::Keyboard::T) {
-			std::unique_ptr<Monster> mon = std::make_unique<Monster>(this);
+			std::unique_ptr<Monster> mon = std::make_unique<MonsterTest>(this);
 			mon->body.setPosition(100, 650);
 			monsters.push_back(std::move(mon));
 		}

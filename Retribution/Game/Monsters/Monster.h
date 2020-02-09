@@ -1,6 +1,6 @@
 #ifndef MONSTER_H
 #define MONSTER_H
-#include "Character.h"
+#include "../../Character.h"
 
 class GameScene;
 class Projectile;
@@ -26,6 +26,8 @@ public:
 private:
 
 	int goldValue;
+
+	virtual void AI(const float deltaTime) = 0;
 
 };
 #endif // !MONSTER_H

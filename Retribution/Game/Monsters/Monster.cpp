@@ -1,9 +1,9 @@
-#include "pch.h"
+#include "../../pch.h"
 #include "Monster.h"
-#include "Game/Scenes/GameScene.h"
-#include "Projectile.h"
-#include "Game/Animation/Monster/MonsterAnimController.h"
-#include "Game/Animation/Monster/MonsterIdle.h"
+#include "../Scenes/GameScene.h"
+#include "../../Projectile.h"
+#include "../Animation/Monster/MonsterAnimController.h"
+#include "../Animation/Monster/MonsterIdle.h"
 
 
 Monster::Monster(GameScene* pro) : Character(), dir(1), delay(0)
@@ -29,19 +29,8 @@ Monster::~Monster()
 
 void Monster::Update(const float deltaTime)
 {
-	if (health <= 0) {
-		isDead = true;
-		return;
-	}
+	AI(deltaTime);
 	Character::Update(deltaTime);
-
-	delay -= deltaTime;
-	
-	if (delay <= 0) {
-		
-		proj.push_back(std::make_unique<Projectile>(body.getPosition(), dir, this));
-		delay = 1;
-	}
 }
 
 bool Monster::IsDead()
@@ -53,3 +42,5 @@ int Monster::GetGold()
 {
 	return goldValue;
 }
+
+
