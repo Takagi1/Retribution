@@ -15,17 +15,23 @@ public:
 
 	int dir;
 
-	float delay;
-
 	std::vector<std::unique_ptr<Projectile>> proj;
 
 	bool IsDead();
 
 	int GetGold();
 
+
+protected: 
+	int goldValue;
+
+	float maxDelay;
+	float delay;
+
+	float detectionRange;
+
 private:
 
-	int goldValue;
 
 	virtual void AI(const float deltaTime) = 0;
 

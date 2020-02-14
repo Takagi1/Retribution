@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Monster.h"
+
 class MonsterTest :
 	public Monster
 {
@@ -12,6 +13,16 @@ public:
 
 private:
 
-	void AI(const float deltaTime);
+	float speed;
+
+	float minDistance;
+
+	float maxDistance;
+
+	virtual void AI(const float deltaTime);
+
+	void Shoot();
+
+	void Move(float loc);
 };
 

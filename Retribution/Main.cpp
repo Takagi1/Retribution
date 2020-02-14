@@ -12,6 +12,12 @@
 //TODO: Create other abilites
 
 
+/* BUG LIST
+
+if frame rate is unlocked cannot dodge up.
+
+*/
+
 int main(int argc, char* argv[]) {
 	Engine::GetInstance()->SetGameInterface(new SceneManager);
 

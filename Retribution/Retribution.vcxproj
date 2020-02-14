@@ -167,7 +167,6 @@
     <ClInclude Include="Engine\Core\Scene.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Game\Scenes\GameScene.h" />
-    <ClInclude Include="Hurtbox.h" />
     <ClInclude Include="Game\InteractiveMenu.h" />
     <ClInclude Include="Game\Monsters\Monster.h" />
     <ClInclude Include="Game\Animation\Monster\MonsterAnimController.h" />
@@ -211,7 +210,6 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../pch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="Hurtbox.cpp" />
     <ClCompile Include="Game\InteractiveMenu.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../pch.h</PrecompiledHeaderFile>

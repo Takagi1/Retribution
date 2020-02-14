@@ -49,6 +49,11 @@ bool Engine::OnCreate(std::string name_)
 
 	Debug::Info("Everything was created okay", "Engine.cpp", __LINE__);
 
+	fpsCounter.setFont(UI::font);
+	fpsCounter.setFillColor(sf::Color::Black);
+	fpsCounter.setPosition(50, 0);
+	fpsCounter.setString("FPS: 0");
+
 	return isRunning = true;
 }
 
@@ -62,6 +67,14 @@ void Engine::Run()
 		if (dt > sf::seconds(0.25)) {
 			dt = timer.restart();
 		}
+		totalTime += dt;
+		currentCount += 1;
+		if (totalTime >= sf::seconds(1)) {
+			totalTime = rest;
+			fpsCounter.setString("FPS: " + std::to_string(currentCount));
+			currentCount = 0;
+		}
+
 		Input();
 
 		Update(dt.asSeconds());
@@ -100,8 +113,6 @@ void Engine::Input()
 {
 	while (r_Window.pollEvent(input)) {
 
-
-
 		if (gameInterface) {
 			gameInterface->Input();
 		}
@@ -133,6 +144,7 @@ void Engine::Render()
 		gameInterface->RenderHUD(&r_Window);
 	}
 
+	r_Window.draw(fpsCounter);
 	//Display window
 	r_Window.display();
 	

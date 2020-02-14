@@ -1,6 +1,5 @@
 #include "../../pch.h"
 #include "GameScene.h"
-#include "../../Hurtbox.h"
 #include <stack>
 #include "../UI/UI.h"
 
@@ -102,8 +101,16 @@ void GameScene::Update(const float deltaTime_)
 
 			//Update projectiles and collision
 			for (int i = 0; i < monsters[j]->proj.size();) {
-
+			
 				monsters[j]->proj[i]->Update(deltaTime_);
+
+				//Will be loop in the future
+				if (monsters[j]->proj[i]->Collision(ground.getGlobalBounds())) {
+					//Destroy projectile
+					monsters[j]->proj.erase(monsters[j]->proj.begin() + i);
+
+					continue;
+				}
 
 				//Counter/Parry detection
 				if (player->counterbox) {
@@ -115,7 +122,7 @@ void GameScene::Update(const float deltaTime_)
 								player->counterbox->Trigger(std::move(monsters[j]->proj[i]));
 								//Destroy projectile
 								monsters[j]->proj.erase(monsters[j]->proj.begin() + i);
-								monsters[j]->proj.shrink_to_fit();
+								//monsters[j]->proj.shrink_to_fit();
 							}
 							else {
 								player->counterbox->Trigger(std::move(monsters[j]->proj[i]));
@@ -129,7 +136,7 @@ void GameScene::Update(const float deltaTime_)
 				if (player->Collision(monsters[j]->proj[i]->box.getGlobalBounds())) {
 					player->Damage(monsters[j]->proj[i]->power);
 					monsters[j]->proj.erase(monsters[j]->proj.begin() + i);
-					monsters[j]->proj.shrink_to_fit();
+					//monsters[j]->proj.shrink_to_fit();
 				}
 				else {
 					i++;

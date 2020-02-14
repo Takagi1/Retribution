@@ -58,6 +58,10 @@ private:
 
 	//Computer display
 	sf::Vector2u display;
+	sf::Text fpsCounter;
+	int currentCount;
+	sf::Time totalTime;
+	sf::Time rest;
 
 	bool isRunning;
 

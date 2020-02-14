@@ -158,6 +158,7 @@ void PlayerCharacter::Update(const float deltaTime_)
 		}
 	}
 	Character::Update(deltaTime_);
+
 	if (counterbox) { counterbox->Update(deltaTime_); }
 }
 

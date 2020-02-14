@@ -6,10 +6,8 @@
 #include "../Animation/Monster/MonsterIdle.h"
 
 
-Monster::Monster(GameScene* pro) : Character(), dir(1), delay(0)
+Monster::Monster(GameScene* pro) : Character(), dir(1)
 {
-	goldValue = 5;
-	health = 5;
 
 	body.setFillColor(sf::Color::Green);
 	body.setSize(sf::Vector2f(20, 20));
@@ -19,6 +17,8 @@ Monster::Monster(GameScene* pro) : Character(), dir(1), delay(0)
 
 	animationController->animationList["Idle"] = new MonsterIdle();
 	animationController->currentAnimation = animationController->animationList["Idle"];
+
+	proj.reserve(15);
 }
 
 
