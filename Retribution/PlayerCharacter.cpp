@@ -10,13 +10,13 @@ int PlayerCharacter::energyMax = 25;
 
 
 PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(), counterbox(std::unique_ptr<CounterBox>()), parry(false), canDodge(true), dodgeLimit(1),
-walkSpeed(200), dodgeSpeed(250)
+walkSpeed(200), dodgeSpeed(250), isBlocking(false)
 {
 	scene = scene_;
 	health = 250;
 
-	body.setFillColor(sf::Color::Red);
-	body.setSize(sf::Vector2f(20, 20));
+	hurtBox.SetFillColour(sf::Color::Red);
+	hurtBox.SetSize(20, 20);
 
 	//Set all movment varibales to false
 	left, right, up, down, parry, counter = false;
@@ -41,6 +41,7 @@ PlayerCharacter::~PlayerCharacter()
 
 void PlayerCharacter::Update(const float deltaTime_)
 {
+	
 	if (!animationState["IsDodgeing"]) { xSpeed = 0; }
 
 	//Reset dodge
@@ -184,16 +185,24 @@ int PlayerCharacter::UseEnergy()
 
 void PlayerCharacter::Damage(int val)
 {
+	if (isBlocking) { std::floor(val / 2); }
 	health -= val;
+
 	energy = 0;
-	isInv = true;
+	SetInv(true);
 	invTime = 10.5f;
 }
 
 void PlayerCharacter::ClearBox()
 {
 	counterbox.reset();
+	SetBlock(false);
 	animationState["Idle"] = true;
+}
+
+void PlayerCharacter::SetBlock(bool blocking)
+{
+	isBlocking = blocking;
 }
 
 void PlayerCharacter::PresLeft() { left = true; }

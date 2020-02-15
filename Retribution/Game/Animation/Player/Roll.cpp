@@ -18,21 +18,21 @@ Roll::~Roll()
 void Roll::Update(const float deltaTime_, Character * character_)
 {
 	if (totalTime == 0) {
-		if (character_->isInv == true) {
+		if (character_->GetInv()) {
 			if (character_->invTime <= iTime - deltaTime_) {
 				character_->invTime = iTime - deltaTime_;
 			}
 		}
 		else {
-			character_->isInv = true;
+			character_->SetInv(true);
 			character_->invTime = iTime - deltaTime_;
 		}
 	}
 	totalTime += deltaTime_;
 
 	if (totalTime <= iTime) {
-			character_->body.setFillColor(sf::Color::Yellow);
+			character_->hurtBox.SetFillColour(sf::Color::Yellow);
 	}
-	else { character_->body.setFillColor(sf::Color::Green); 
+	else { character_->hurtBox.SetFillColour(sf::Color::Green); 
 	}
 }

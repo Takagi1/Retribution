@@ -27,7 +27,9 @@ public:
 	//Player
 	std::unique_ptr<PlayerCharacter> player;
 
-	sf::RectangleShape ground;
+	std::vector<sf::RectangleShape> ground;
+
+	std::vector<std::shared_ptr<Projectile>> proj;
 
 	//PAUSE MENU 
 

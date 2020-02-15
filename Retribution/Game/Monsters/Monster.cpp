@@ -9,8 +9,8 @@
 Monster::Monster(GameScene* pro) : Character(), dir(1)
 {
 
-	body.setFillColor(sf::Color::Green);
-	body.setSize(sf::Vector2f(20, 20));
+	hurtBox.SetFillColour(sf::Color::Green);
+	hurtBox.SetSize(sf::Vector2f(20, 20));
 	scene = pro;
 	animationState["Idle"] = true;
 	animationController = std::make_unique<MonsterAnimController>(this);
@@ -29,7 +29,10 @@ Monster::~Monster()
 
 void Monster::Update(const float deltaTime)
 {
+	if (proj.size() > 0) { UpdateProj(deltaTime); }
+
 	AI(deltaTime);
+
 	Character::Update(deltaTime);
 }
 
@@ -41,6 +44,30 @@ bool Monster::IsDead()
 int Monster::GetGold()
 {
 	return goldValue;
+}
+
+void Monster::UpdateProj(const float deltaTime)
+{
+	for (int i = 0; i < proj.size();) {
+		proj[i]->Update(deltaTime);
+
+		if (proj[i]->Collision(&scene->player->hurtBox)) {
+			scene->player->Damage(proj[i]->GetPower());
+			proj.erase(proj.begin() + i);
+			continue;
+		}
+
+		bool kick = false;
+		for (auto& gro : scene->ground) {
+			if (proj[i]->Collision(gro.getGlobalBounds())) {
+				proj.erase(proj.begin() + i);
+				kick = true;
+				break;
+			}
+		}
+
+		if (!kick) { i++; }
+	}
 }
 
 

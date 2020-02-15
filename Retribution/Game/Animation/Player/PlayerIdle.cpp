@@ -14,6 +14,6 @@ PlayerIdle::~PlayerIdle()
 
 void PlayerIdle::Update(const float deltaTime_, Character* character)
 {
-	character->body.setFillColor(sf::Color::Green);
+	character->hurtBox.SetFillColour(sf::Color::Green);
 }
 

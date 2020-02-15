@@ -26,12 +26,12 @@ void MonsterTest::Update(const float deltaTime)
 
 void MonsterTest::AI(const float deltaTime)
 {
-	float loc = scene->player->body.getPosition().x - body.getPosition().x;
+	float loc = scene->player->hurtBox.GetPosition().x - hurtBox.GetPosition().x;
 	Move(loc);
 
 	delay -= deltaTime;
 
-	if (delay <= 0) {
+	if (delay <= 0 && proj.size() < proj.capacity()) {
 		Shoot();
 		delay = maxDelay;
 	}
@@ -40,14 +40,17 @@ void MonsterTest::AI(const float deltaTime)
 
 void MonsterTest::Shoot()
 {
-	float y = scene->player->body.getPosition().y - body.getPosition().y;
-	float x = scene->player->body.getPosition().x - body.getPosition().x;
+	float y = scene->player->hurtBox.GetPosition().y - hurtBox.GetPosition().y;
+	float x = scene->player->hurtBox.GetPosition().x - hurtBox.GetPosition().x;
 	float angle = x + y;
 	angle = sqrtf(angle);
 
 	sf::Vector2f lim = sf::Vector2f(x / angle, y / angle);
 
-	proj.push_back(std::make_unique<Projectile>(body.getPosition(), lim, this));
+	std::shared_ptr<Projectile>temp = std::make_shared<Projectile>(hurtBox.GetPosition(), lim, this);
+
+	proj.push_back(temp);
+	scene->proj.push_back(temp);
 }
 
 

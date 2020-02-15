@@ -13,16 +13,21 @@ TestScene::~TestScene()
 {
 
 }
-
+//Remember to reserve the exact amount of ground
 bool TestScene::OnCreate()
 {
 	Debug::Info("Creating Test Scene", "TestScene.cpp", __LINE__);
-	ground.setSize(sf::Vector2f(2000.0f, 20.0f));
-	ground.setFillColor(sf::Color::Blue);
-	ground.setPosition(0, 700);
+
+	ground.reserve(1);
+
+	sf::RectangleShape piece;
+	piece.setSize(sf::Vector2f(2000.0f, 20.0f));
+	piece.setFillColor(sf::Color::Blue);
+	piece.setPosition(0, 700);
+	ground.push_back(piece);
 
 	player = std::make_unique<PlayerCharacter>(this);
-	player->body.setPosition(200, 650);
+	player->hurtBox.SetPosition(200, 650);
 
 	Debug::Info("Test Scene Completed", "TestScene.cpp", __LINE__);
 	return true;

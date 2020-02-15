@@ -14,9 +14,11 @@ CounterBox::CounterBox(GameScene* scene_, float x_ , float y_, int type_) : life
 	diry = y_;
 	body = new sf::RectangleShape(sf::Vector2f(20, 20));
 	
-	body->setPosition(scene->player->body.getPosition() + sf::Vector2f(scene->player->body.getSize().x * x_, scene->player->body.getSize().y * y_));
+	body->setPosition(scene->player->hurtBox.GetPosition() + sf::Vector2f(scene->player->hurtBox.GetSize().x * x_, scene->player->hurtBox.GetSize().y * y_));
 	body->setFillColor(sf::Color::Black);
-
+	if (type == 2) {
+		scene->player->SetBlock(true);
+	}
 }
 
 
@@ -30,8 +32,11 @@ CounterBox::~CounterBox()
 void CounterBox::Update(const float deltaTime)
 {
 	if(body) {
-		body->setPosition(scene->player->body.getPosition() + sf::Vector2f(scene->player->body.getSize().x * dirx, scene->player->body.getSize().y * diry));
+		body->setPosition(scene->player->hurtBox.GetPosition() + sf::Vector2f(scene->player->hurtBox.GetSize().x * dirx, scene->player->hurtBox.GetSize().y * diry));
+		if (Collision()) { return; }
 	}
+
+
 	if (!hangTime) {
 		life -= deltaTime;
 		if (life <= 0) {
@@ -46,49 +51,34 @@ void CounterBox::Update(const float deltaTime)
 	else {
 		delay -= deltaTime;
 		if (delay <= 0) {
+			scene->player->SetBlock(false);
 			scene->player->ClearBox();
 		}
 	}
 }
 
-void CounterBox::Trigger(std::unique_ptr<Projectile> projectile)
+void CounterBox::Trigger(std::shared_ptr<Projectile> projectile)
 {
 	switch (type)
 	{
 	//Standered Parry
 	case 0:
-		scene->player->AddEnergy(projectile->power);
-		scene->player->ClearBox();
+		scene->player->AddEnergy(projectile->GetPower());
 		break;
 
 	//Standered Counter (IE. Retribution)
 	case 1:
 		if (scene->player->GetEnergy() == 0) {
-			projectile->caster->health -= projectile->power;
-			scene->player->ClearBox();
+			projectile->caster->health -= projectile->GetPower();
 		}
 		else {
-			projectile->caster->health -= scene->player->UseEnergy() * projectile->power;
-			scene->player->ClearBox();
+			projectile->caster->health -= scene->player->UseEnergy() * projectile->GetPower();
 		}
 		break;
 
 	//Block
 	case 2:
-		
-		//Block succseded
-		if (!hangTime) {
-			scene->player->AddEnergy(0.8f * projectile->power);
-			scene->player->ClearBox();
-		}
-		//Hit defended area
-		else {
-			//Reduce power of projectile
-			if (!projectile->isBlocked) {
-				projectile->power = std::floor(projectile->power / 2);
-				projectile->isBlocked = true;
-			}
-		}
+		scene->player->AddEnergy(0.8f * projectile->GetPower());
 
 		break;
 
@@ -104,8 +94,27 @@ void CounterBox::Trigger(std::unique_ptr<Projectile> projectile)
 		Debug::Error("Counterbox type invalid", "CounterBox.cpp", __LINE__);
 		break;
 	}
-	
-	
+}
+
+bool CounterBox::Collision()
+{
+	//bool kick = false;
+	for (auto& mon : scene->monsters) {
+		//int val = 0;
+		for (auto& proj : mon->proj) {
+			if (body->getGlobalBounds().intersects(proj->hurtBox.GetCollider())) {
+				Trigger(proj);
+				proj.reset();
+				//Destroy projectile
+				//mon->proj.erase(mon->proj.begin() + val++);
+				//monsters[j]->proj.shrink_to_fit
+				scene->player->ClearBox();
+
+				return true;
+			}
+			//val++;
+		}
+	}
 }
 
 int CounterBox::GetType() const 

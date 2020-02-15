@@ -15,11 +15,13 @@ public:
 
 	int dir;
 
-	std::vector<std::unique_ptr<Projectile>> proj;
+	std::vector<std::shared_ptr<Projectile>> proj;
 
 	bool IsDead();
 
 	int GetGold();
+
+	void UpdateProj(const float deltaTime);
 
 
 protected: 

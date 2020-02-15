@@ -173,6 +173,7 @@
     <ClInclude Include="Game\Animation\Monster\MonsterIdle.h" />
     <ClInclude Include="Game\UI\Menu\PauseMenu.h" />
     <ClInclude Include="Game\Monsters\MonsterTest.h" />
+    <ClInclude Include="HurtBox.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Game\Animation\Player\PlayerAnimController.h" />
     <ClInclude Include="Game\Animation\Player\PlayerIdle.h" />
@@ -185,6 +186,7 @@
     <ClInclude Include="Game\UI\UI.h" />
     <ClInclude Include="Game\UI\TextBox.h" />
     <ClInclude Include="Game\UI\Menu\StartMenu.h" />
+    <ClInclude Include="SpacialPartition.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\Animation\Animation.cpp">
@@ -234,6 +236,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../pch.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="HurtBox.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -279,6 +282,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../pch.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="SpacialPartition.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,7 +3,7 @@
 #include "Game/Scenes/GameScene.h"
 
 
-Character::Character() : xSpeed(0), ySpeed(0), onGround(false), isInv(false), invTime(0)
+Character::Character() : xSpeed(0), ySpeed(0), onGround(false), inv(false), invTime(0)
 {
 	isDead = false;
 }
@@ -24,10 +24,10 @@ void Character::Update(const float deltaTime)
 	animationController->Update(deltaTime);
 
 	//Invinciblity frames
-	if (isInv) { 
+	if (inv) { 
 		invTime -= deltaTime;
 		if (invTime <= 0) {
-			isInv = false;
+			SetInv(false);
 		}
 	}
 
@@ -37,32 +37,42 @@ void Character::Update(const float deltaTime)
 	//Individual checks to see if the player is moving into ground and from what direction
 
 	//X move
-	body.move(deltaTime * xSpeed, 0);
+	hurtBox.Move(deltaTime * xSpeed, 0);
 
-	if (body.getGlobalBounds().intersects(scene->ground.getGlobalBounds())) {
-		body.move(deltaTime * -xSpeed, 0);
+	if (hurtBox.Collision(scene->ground[0].getGlobalBounds())) {
+		hurtBox.Move(deltaTime * -xSpeed, 0);
 	}
 
 	//Y move
-	body.move(0, deltaTime * ySpeed);
+	hurtBox.Move(0, deltaTime * ySpeed);
 
-	if (body.getGlobalBounds().intersects(scene->ground.getGlobalBounds())) {
+	if (hurtBox.Collision(scene->ground[0].getGlobalBounds())) {
 		if (ySpeed > 0) {
 			onGround = true;
 		}
-		body.move(0, deltaTime * -ySpeed);
+		hurtBox.Move(0, deltaTime * -ySpeed);
 	}
 	else { onGround = false; }
 }
 
-bool Character::Collision(sf::FloatRect colid)
+void Character::SetInv(bool stat_)
+{
+	inv = stat_;
+}
+
+bool Character::GetInv()
+{
+	return inv;
+}
+
+/*bool Character::Collision(sf::FloatRect colid)
 {
 	if (isInv == true) {
 		return false;
 	}
-	if (colid.intersects(body.getGlobalBounds())) {
+	if (hurtBox.Collision(colid)) {
 		return true;
 	}
 	return false;
-}
+}*/
 

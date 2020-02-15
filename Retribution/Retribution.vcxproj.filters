@@ -123,6 +123,12 @@
     <ClInclude Include="Game\Animation\AnimationController.h">
       <Filter>Header Files\Animation</Filter>
     </ClInclude>
+    <ClInclude Include="HurtBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpacialPartition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -205,6 +211,12 @@
     </ClCompile>
     <ClCompile Include="Game\Animation\AnimationController.cpp">
       <Filter>Source Files\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="HurtBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpacialPartition.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

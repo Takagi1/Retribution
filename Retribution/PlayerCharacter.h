@@ -51,10 +51,14 @@ public:
 
 	void ClearBox();
 
+	void SetBlock(bool blocking);
+
 private:
 
 	static int energy;
 	static int energyMax;
+
+	bool isBlocking;
 
 	bool left;
 	bool right;

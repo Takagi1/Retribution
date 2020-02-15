@@ -1,11 +1,18 @@
 #pragma once
+
+#include "HurtBox.h"
+
 class GameObject
 {
 public:
 	GameObject();
 	~GameObject();
 
-	virtual void Update(const float deltaTime) = 0;
+	HurtBox hurtBox;
+
+	bool Collision(HurtBox* b);
+	bool Collision(sf::FloatRect b);
+	
 
 };
 
