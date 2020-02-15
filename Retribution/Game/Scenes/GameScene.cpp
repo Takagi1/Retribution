@@ -48,7 +48,7 @@ void GameScene::Input()
 		//Manual spawn testing
 		if (Engine::GetInstance()->input.key.code == sf::Keyboard::T) {
 			std::unique_ptr<Monster> mon = std::make_unique<MonsterTest>(this);
-			mon->hurtBox.SetPosition(400, 650);
+			mon->hurtBox.SetPosition(100, 650);
 			monsters.push_back(std::move(mon));
 		}
 		break;
@@ -77,7 +77,7 @@ void GameScene::Update(const float deltaTime_)
 
 		//Monster updates
 
-		for (int j = 0; j < monsters.size();) {
+		for (unsigned int j = 0; j < monsters.size();) {
 
 			//Kill Monster
 			if (monsters[j]->GetDead()) {
@@ -101,6 +101,9 @@ void GameScene::Update(const float deltaTime_)
 
 			j++;
 		}
+	}
+	else {
+		int a = 0;
 	}
 }
 

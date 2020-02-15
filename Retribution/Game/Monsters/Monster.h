@@ -19,7 +19,7 @@ public:
 
 	std::vector<std::shared_ptr<Projectile>> proj;
 
-	int GetGold();
+	int GetGold() const;
 
 	void UpdateProj(const float deltaTime);
 

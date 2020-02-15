@@ -110,6 +110,7 @@ bool CounterBox::Collision()
 			val++;
 		}
 	}
+	return false;
 }
 
 int CounterBox::GetType() const 

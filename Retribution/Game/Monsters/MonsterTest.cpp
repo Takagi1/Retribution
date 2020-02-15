@@ -1,8 +1,10 @@
 #include "../../pch.h"
 #include "MonsterTest.h"
 #include "../../Projectile.h"
-#include <math.h>
 #include "../Scenes/GameScene.h"
+
+#include <math.h>
+#include <complex>
 
 MonsterTest::MonsterTest(GameScene * game_) : Monster(game_), speed(10), minDistance(3), maxDistance(15)
 {
@@ -48,8 +50,11 @@ void MonsterTest::Shoot()
 {
 	float y = scene->player->hurtBox.GetPosition().y - hurtBox.GetPosition().y;
 	float x = scene->player->hurtBox.GetPosition().x - hurtBox.GetPosition().x;
-	float angle = x + y;
-	angle = sqrtf(angle);
+	std::complex<float> div = x + y;
+	div = std::sqrt(std::complex<double>(div));
+	float angle;
+	if (div.real() > 0) { angle = div.real(); }
+	else { angle = div.imag(); }
 
 	sf::Vector2f lim = sf::Vector2f(x / angle, y / angle);
 

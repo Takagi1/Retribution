@@ -36,14 +36,14 @@ void Monster::Update(const float deltaTime)
 	Character::Update(deltaTime);
 }
 
-int Monster::GetGold()
+int Monster::GetGold() const
 {
 	return goldValue;
 }
 
 void Monster::UpdateProj(const float deltaTime)
 {
-	for (int i = 0; i < proj.size();) {
+	for (unsigned int i = 0; i < proj.size();) {
 		proj[i]->Update(deltaTime);
 
 		if (!scene->player->GetInv()) {

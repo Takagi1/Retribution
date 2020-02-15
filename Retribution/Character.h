@@ -27,6 +27,8 @@ public:
 
 	bool onGround;
 
+	float invTime;
+
 	int GetHealth() const;
 	void SetHealth(int val);
 
@@ -41,8 +43,6 @@ public:
 
 
 protected:
-	float invTime;
-
 	GameScene* scene;
 
 private:
