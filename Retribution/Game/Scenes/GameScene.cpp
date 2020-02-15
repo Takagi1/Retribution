@@ -48,7 +48,7 @@ void GameScene::Input()
 		//Manual spawn testing
 		if (Engine::GetInstance()->input.key.code == sf::Keyboard::T) {
 			std::unique_ptr<Monster> mon = std::make_unique<MonsterTest>(this);
-			mon->hurtBox.SetPosition(100, 650);
+			mon->hurtBox.SetPosition(400, 650);
 			monsters.push_back(std::move(mon));
 		}
 		break;
@@ -80,7 +80,7 @@ void GameScene::Update(const float deltaTime_)
 		for (int j = 0; j < monsters.size();) {
 
 			//Kill Monster
-			if (monsters[j]->IsDead()) {
+			if (monsters[j]->GetDead()) {
 
 				player->gold += monsters[j]->GetGold();
 
@@ -132,7 +132,7 @@ void GameScene::Render(sf::RenderWindow* r_Window)
 
 void GameScene::RenderHUD(sf::RenderWindow* r_Window)
 {
-	UI::healthDisplay.setString("Health: " + std::to_string(player->health));
+	UI::healthDisplay.setString("Health: " + std::to_string(player->GetHealth()));
 	r_Window->draw(UI::healthDisplay);
 
 	UI::energyDisplay.setString("Energy: " + std::to_string(player->GetEnergy()));

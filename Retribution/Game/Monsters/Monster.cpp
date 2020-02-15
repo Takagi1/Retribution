@@ -36,11 +36,6 @@ void Monster::Update(const float deltaTime)
 	Character::Update(deltaTime);
 }
 
-bool Monster::IsDead()
-{
-	return isDead;
-}
-
 int Monster::GetGold()
 {
 	return goldValue;
@@ -51,10 +46,12 @@ void Monster::UpdateProj(const float deltaTime)
 	for (int i = 0; i < proj.size();) {
 		proj[i]->Update(deltaTime);
 
-		if (proj[i]->Collision(&scene->player->hurtBox)) {
-			scene->player->Damage(proj[i]->GetPower());
-			proj.erase(proj.begin() + i);
-			continue;
+		if (!scene->player->GetInv()) {
+			if (proj[i]->Collision(&scene->player->hurtBox)) {
+				scene->player->TakeDamage(proj[i]->GetPower());
+				proj.erase(proj.begin() + i);
+				continue;
+			}
 		}
 
 		bool kick = false;

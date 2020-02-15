@@ -11,6 +11,8 @@ public:
 
 	virtual void Update(const float deltaTime);
 
+	virtual void TakeDamage(int val);
+
 private:
 
 	float speed;

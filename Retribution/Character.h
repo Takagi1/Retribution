@@ -15,10 +15,10 @@ public:
 
 	virtual void Update(const float deltaTime);
 
+	virtual void TakeDamage(int val) = 0;
+
 	std::unique_ptr<AnimationController> animationController;
 	std::unordered_map<std::string, bool> animationState;
-
-	int health;
 
 // Movement
 	
@@ -27,17 +27,29 @@ public:
 
 	bool onGround;
 
-	float invTime;
+	int GetHealth() const;
+	void SetHealth(int val);
 
+	int GetMaxHealth() const;
+	void SetMaxHealth(int val);
+
+	bool GetInv() const;
 	void SetInv(bool stat_);
-	bool GetInv();
 
-	bool Collision(sf::FloatRect colid);
+	bool GetDead() const;
+	void SetDead(bool death);
+
 
 protected:
-	bool inv;
+	float invTime;
+
 	GameScene* scene;
 
+private:
+	int health;
+	int maxHealth;
+
+	bool inv;
 	bool isDead;
 };
 #endif // !CHARACTER_H

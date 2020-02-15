@@ -13,11 +13,11 @@ public:
 
 	virtual void Update(const float deltaTime);
 
+	virtual void TakeDamage(int val) = 0;
+
 	int dir;
 
 	std::vector<std::shared_ptr<Projectile>> proj;
-
-	bool IsDead();
 
 	int GetGold();
 

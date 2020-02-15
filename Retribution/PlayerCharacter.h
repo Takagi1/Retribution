@@ -44,7 +44,7 @@ public:
 
 //Misc
 
-	void Damage(int val);
+	void TakeDamage(int val);
 
 	//Does the counterbox exist
 	std::unique_ptr<CounterBox> counterbox;

@@ -14,17 +14,12 @@ public:
 
 	Monster* caster;
 
-	sf::Vector2f angle;
-
 	void SetPower(int power_);
 	int GetPower();
 
-	void SetBlock(bool state_);
-	bool GetBlock();
-
 private:
+	sf::Vector2f angle;
 	int power;
-	bool isBlocked;
 	
 };
 

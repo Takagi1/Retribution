@@ -13,7 +13,9 @@ PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(), counterbox(st
 walkSpeed(200), dodgeSpeed(250), isBlocking(false)
 {
 	scene = scene_;
-	health = 250;
+
+	SetMaxHealth(250);
+	SetHealth(GetMaxHealth());
 
 	hurtBox.SetFillColour(sf::Color::Red);
 	hurtBox.SetSize(20, 20);
@@ -183,10 +185,10 @@ int PlayerCharacter::UseEnergy()
 	return val;
 }
 
-void PlayerCharacter::Damage(int val)
+void PlayerCharacter::TakeDamage(int val)
 {
 	if (isBlocking) { std::floor(val / 2); }
-	health -= val;
+	SetHealth(GetHealth() - val);
 
 	energy = 0;
 	SetInv(true);

@@ -55,14 +55,44 @@ void Character::Update(const float deltaTime)
 	else { onGround = false; }
 }
 
+int Character::GetHealth() const
+{
+	return health;
+}
+
+void Character::SetHealth(int val)
+{
+	health = val;
+}
+
+int Character::GetMaxHealth() const
+{
+	return maxHealth;
+}
+
+void Character::SetMaxHealth(int val)
+{
+	maxHealth = val;
+}
+
 void Character::SetInv(bool stat_)
 {
 	inv = stat_;
 }
 
-bool Character::GetInv()
+bool Character::GetInv() const
 {
 	return inv;
+}
+
+void Character::SetDead(bool death)
+{
+	isDead = death;
+}
+
+bool Character::GetDead() const
+{
+	return isDead;
 }
 
 /*bool Character::Collision(sf::FloatRect colid)

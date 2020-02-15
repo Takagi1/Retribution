@@ -40,12 +40,9 @@ void CounterBox::Update(const float deltaTime)
 	if (!hangTime) {
 		life -= deltaTime;
 		if (life <= 0) {
-			
 			hangTime = true;
-			if (type != 2) {
-				delete body;
-				body = nullptr;
-			}
+			delete body;
+			body = nullptr;
 		}
 	}
 	else {
@@ -69,10 +66,10 @@ void CounterBox::Trigger(std::shared_ptr<Projectile> projectile)
 	//Standered Counter (IE. Retribution)
 	case 1:
 		if (scene->player->GetEnergy() == 0) {
-			projectile->caster->health -= projectile->GetPower();
+			projectile->caster->TakeDamage(-projectile->GetPower());
 		}
 		else {
-			projectile->caster->health -= scene->player->UseEnergy() * projectile->GetPower();
+			projectile->caster->TakeDamage(scene->player->UseEnergy() * projectile->GetPower());
 		}
 		break;
 
@@ -98,21 +95,19 @@ void CounterBox::Trigger(std::shared_ptr<Projectile> projectile)
 
 bool CounterBox::Collision()
 {
-	//bool kick = false;
 	for (auto& mon : scene->monsters) {
-		//int val = 0;
+		int val = 0;
 		for (auto& proj : mon->proj) {
 			if (body->getGlobalBounds().intersects(proj->hurtBox.GetCollider())) {
 				Trigger(proj);
 				proj.reset();
 				//Destroy projectile
-				//mon->proj.erase(mon->proj.begin() + val++);
+				mon->proj.erase(mon->proj.begin() + val++);
 				//monsters[j]->proj.shrink_to_fit
 				scene->player->ClearBox();
-
 				return true;
 			}
-			//val++;
+			val++;
 		}
 	}
 }

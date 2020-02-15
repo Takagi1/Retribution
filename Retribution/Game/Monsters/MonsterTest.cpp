@@ -7,7 +7,8 @@
 MonsterTest::MonsterTest(GameScene * game_) : Monster(game_), speed(10), minDistance(3), maxDistance(15)
 {
 	goldValue = 5;
-	health = 5;
+	SetMaxHealth(5);
+	SetHealth(GetMaxHealth());
 
 	delay = 0;
 	maxDelay = 1.0f;
@@ -22,6 +23,11 @@ MonsterTest::~MonsterTest()
 void MonsterTest::Update(const float deltaTime)
 {
 	Monster::Update(deltaTime);
+}
+
+void MonsterTest::TakeDamage(int val)
+{
+	SetHealth(GetHealth() - val);
 }
 
 void MonsterTest::AI(const float deltaTime)
