@@ -1,6 +1,7 @@
-#pragma once
+#ifndef SPACIAL_PARTITION_H
+#define SPACIAL_PARTITION_H
 
-#include "SFML/Graphics.hpp"
+#include "SFML/Graphics/Rect.hpp"
 
 class Monster;
 class Projectile;
@@ -93,3 +94,4 @@ public:
 
 };
 
+#endif // !SPACIAL_PARTITION_H
