@@ -31,7 +31,7 @@ walkSpeed(200), dodgeSpeed(250), isBlocking(false)
 	animationState["Idle"] = true;
 	animationState["IsDodgeing"] = false;
 
-	inputDelay = 0.05f;
+	inputDelay = 0.025f;
 	inputTime = 0;
 }
 
@@ -44,125 +44,58 @@ PlayerCharacter::~PlayerCharacter()
 void PlayerCharacter::Update(const float deltaTime_)
 {
 	
-	if (!animationState["IsDodgeing"]) { xSpeed = 0; }
+	if (!animationState["IsDodgeing"]) { 
+		xSpeed = 0; 
 
-	//Reset dodge
-	if (onGround && !animationState["IsDodgeing"]) { canDodge = true; dodgeCount = 0; }
+		//Reset dodge
+		if (onGround) { canDodge = true; dodgeCount = 0; }
+	}
 
 	/* Dodging should call the dodge animation causing the player to move in that direction
 	when the animation is playing isDodging should be true
 	*/
-	if (dodge && canDodge) {
-		if (left) {
+	if (left || right || up || down) {
+		if (dodge && canDodge) {
 			inputTime += deltaTime_;
 			if (inputTime >= inputDelay) {
-				if (left) {
+				int x = 0;
+				int y = 0;
 
-					dodgeCount += 1;
-					if (dodgeCount == dodgeLimit) { canDodge = false; }
-					animationState["IsDodgeing"] = true;
+				if (right) { x = 1; }
+				else if (left) { x = -1; }
 
-					xSpeed = -dodgeSpeed;
+				if (up) { y = -1; }
+				else if (down) { y = 1; }
 
-					if (up) { ySpeed = -dodgeSpeed; }
-					else if (down) { ySpeed = dodgeSpeed; }
-					else { ySpeed = 0; }
+				Dodge(x, y);
 
-					inputTime = 0;
-				}
 			}
 		}
-		else if (right) {
+		else if (parry && animationState["Idle"] || counter && animationState["Idle"]) {
+			int boxType = 0;
+			if (counter) { boxType = 1; }
 			inputTime += deltaTime_;
 			if (inputTime >= inputDelay) {
+				int x = 0;
+				int y = 0;
+				if (right) { x = 1; }
+				else if (left) { x = -1; }
 
-				dodgeCount += 1;
-				if (dodgeCount == dodgeLimit) { canDodge = false; }
-				animationState["IsDodgeing"] = true;
-
-				xSpeed = dodgeSpeed;
-
-				if (up) { ySpeed = -dodgeSpeed; }
-				else if (down) { ySpeed = dodgeSpeed; }
-				else { ySpeed = 0; }
-
-				inputTime = 0;
+				if (up) { y = -1; }
+				else if (down) { y = 1; }
+				Action(x, y, boxType);
 			}
 		}
-		else if (up) {
-			inputTime += deltaTime_;
-			if (inputTime >= inputDelay) {
-				dodgeCount += 1;
-				if (dodgeCount == dodgeLimit) { canDodge = false; }
-				animationState["IsDodgeing"] = true;
-
-				ySpeed = -dodgeSpeed;
-				inputTime = 0;
-				
-			}
-		}
-		else if (down) {
-			inputTime += deltaTime_;
-			if (inputTime >= inputDelay) {
-				dodgeCount += 1;
-				if (dodgeCount == dodgeLimit) { canDodge = false; }
-				animationState["IsDodgeing"] = true;
-
-				ySpeed = dodgeSpeed;
-				inputTime = 0;
-				
+		else
+		{
+			if (animationState["Idle"]) {
+				if (left) { xSpeed = -walkSpeed; }
+				else if (right) { xSpeed = walkSpeed; }
 			}
 		}
 	}
-	else if (parry && animationState["Idle"] || counter && animationState["Idle"]) {
-		int boxType = 0;
-		if (counter) { boxType = 1; }
-		if (left) {  
-			inputTime += deltaTime_;
-			if (inputTime >= inputDelay) {
-				animationState["Idle"] = false;
-				if (up) { counterbox = std::make_unique<CounterBox>(scene, -1, -1, boxType); }
-				else if (down) { counterbox = std::make_unique<CounterBox>(scene, -1, 1, boxType); }
-				else { counterbox = std::make_unique<CounterBox>(scene, -1, 0, boxType); }
-				inputTime = 0;
-			}
-		}
-		else if (right) {
-			inputTime += deltaTime_;
-			if(inputTime >= inputDelay){
-				animationState["Idle"] = false;
-				if (up) { counterbox = std::make_unique<CounterBox>(scene, 1, -1, boxType); }
-				else if (down) { counterbox = std::make_unique<CounterBox>(scene, 1, 1, boxType); }
-				else { counterbox = std::make_unique<CounterBox>(scene, 1, 0, boxType); }
-				inputTime = 0;
-			}
-		}
-		else if (up) {
-			inputTime += deltaTime_;
-			if (inputTime >= inputDelay) {
-				animationState["Idle"] = false;
-				counterbox = std::make_unique<CounterBox>(scene, 0, -1, boxType);
-				inputTime = 0;
-			}
-		}
-		else if (down) {
-			inputTime += deltaTime_;
-			if (inputTime >= inputDelay) { 
-				animationState["Idle"] = false;
-				counterbox = std::make_unique<CounterBox>(scene, 0, 1, boxType); }
-				inputTime = 0;
-		}
-	}
-	else
-	{
-		if (animationState["Idle"]) {
-			if (left) { xSpeed = -walkSpeed; }
-			else if (right) { xSpeed = walkSpeed; }
-		}
-	}
+
 	Character::Update(deltaTime_);
-
-	if (counterbox) { counterbox->Update(deltaTime_); }
 }
 
 int PlayerCharacter::GetEnergy() const 
@@ -192,7 +125,7 @@ void PlayerCharacter::TakeDamage(int val)
 
 	energy = 0;
 	SetInv(true);
-	invTime = 10.5f;
+	invTime = 1.5f;
 }
 
 void PlayerCharacter::ClearBox()
@@ -227,3 +160,22 @@ void PlayerCharacter::RelCounter() { counter = false; }
 
 void PlayerCharacter::PresDodge() { dodge = true; }
 void PlayerCharacter::RelDodge() { dodge = false; }
+
+void PlayerCharacter::Dodge(int x_, int y_)
+{
+	dodgeCount += 1;
+	if (dodgeCount == dodgeLimit) { canDodge = false; }
+	animationState["IsDodgeing"] = true;
+
+	xSpeed = x_ * dodgeSpeed;
+	ySpeed = y_ * dodgeSpeed;
+
+	inputTime = 0;
+}
+
+void PlayerCharacter::Action(int x_, int y_, int type_)
+{
+	animationState["Idle"] = false;
+	counterbox = std::make_unique<CounterBox>(scene, x_, y_, type_);
+	inputTime = 0;
+}

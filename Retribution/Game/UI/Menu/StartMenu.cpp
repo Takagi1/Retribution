@@ -5,8 +5,8 @@
 
 StartMenu::StartMenu()
 {
-	float x = Engine::GetInstance()->resolution.x / 1920;
-	float y = Engine::GetInstance()->resolution.y / 1080;
+	float x = Options::display.resolution.x / 1920;
+	float y = Options::display.resolution.y / 1080;
 
 	TextBox textbox;
 	textbox.OnCreate(sf::Vector2f(200, 100), sf::Vector2f(880 * x, 320 * y));

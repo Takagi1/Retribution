@@ -6,7 +6,7 @@
 #include "../Animation/Monster/MonsterIdle.h"
 
 
-Monster::Monster(GameScene* pro) : Character(), dir(1)
+Monster::Monster(GameScene* pro) : Character(), dir(1), delay(0)
 {
 
 	hurtBox.SetFillColour(sf::Color::Green);
@@ -29,42 +29,19 @@ Monster::~Monster()
 
 void Monster::Update(const float deltaTime)
 {
-	if (proj.size() > 0) { UpdateProj(deltaTime); }
-
-	AI(deltaTime);
+	Behavior(deltaTime);
 
 	Character::Update(deltaTime);
+}
+
+void Monster::TakeDamage(int val)
+{
+	SetHealth(GetHealth() - val);
 }
 
 int Monster::GetGold() const
 {
 	return goldValue;
-}
-
-void Monster::UpdateProj(const float deltaTime)
-{
-	for (unsigned int i = 0; i < proj.size();) {
-		proj[i]->Update(deltaTime);
-
-		if (!scene->player->GetInv()) {
-			if (proj[i]->Collision(&scene->player->hurtBox)) {
-				scene->player->TakeDamage(proj[i]->GetPower());
-				proj.erase(proj.begin() + i);
-				continue;
-			}
-		}
-
-		bool kick = false;
-		for (auto& gro : scene->ground) {
-			if (proj[i]->Collision(gro.getGlobalBounds())) {
-				proj.erase(proj.begin() + i);
-				kick = true;
-				break;
-			}
-		}
-
-		if (!kick) { i++; }
-	}
 }
 
 

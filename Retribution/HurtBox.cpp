@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "HurtBox.h"
-#include "GameObject.h"
+#include "Engine/GameObject.h"
 
 HurtBox::HurtBox()
 {
@@ -16,7 +16,7 @@ void HurtBox::SetObject(GameObject* obj_)
 	obj = obj_;
 }
 
-GameObject* HurtBox::GetGameObject() const
+GameObject* HurtBox::GetGameObject()
 {
 	return obj;
 }

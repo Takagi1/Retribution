@@ -11,6 +11,8 @@
 class Engine
 {
 public:
+	sf::Event input;
+
 	Engine(const Engine&) = delete;
 	Engine(Engine&&) = delete;
 	Engine& operator =(const Engine&) = delete;
@@ -27,16 +29,9 @@ public:
 	int GetCurrentScene();
 	void SetCurrentScene(int sceneNum_);
 
-	void SetView(sf::Vector2f pos_);
-
-	sf::Event input;
+	void SetViewPos(sf::Vector2f pos_);
 
 	void Exit();
-
-//DISPLAY SETTINGS
-
-	//Resolution
-	sf::Vector2f resolution;
 
 private:
 	Engine();
@@ -57,7 +52,6 @@ private:
 //DISPLAY SETTINGS
 
 	//Computer display
-	sf::Vector2u display;
 	sf::Text fpsCounter;
 	int currentCount;
 	sf::Time totalTime;

@@ -17,8 +17,8 @@ Character::~Character()
 void Character::Update(const float deltaTime)
 {
 	if (health <= 0) {
-		//isDead = true;
-		//return;
+		isDead = true;
+		return;
 	}
 
 	animationController->Update(deltaTime);
@@ -94,15 +94,4 @@ bool Character::GetDead() const
 {
 	return isDead;
 }
-
-/*bool Character::Collision(sf::FloatRect colid)
-{
-	if (isInv == true) {
-		return false;
-	}
-	if (hurtBox.Collision(colid)) {
-		return true;
-	}
-	return false;
-}*/
 

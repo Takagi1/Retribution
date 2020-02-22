@@ -1,8 +1,9 @@
 #pragma once
 
-#include "GameObject.h"
+#include "Engine/GameObject.h"
 
 class Monster;
+class Character;
 
 class Projectile : public GameObject
 {
@@ -12,12 +13,17 @@ public:
 
 	void Update(const float deltaTime);
 
+	float curTime;
+
 	Monster* caster;
 
 	void SetPower(int power_);
 	int GetPower();
 
+	bool Collision(Character* player);
+
 private:
+	float time;
 	sf::Vector2f angle;
 	int power;
 	

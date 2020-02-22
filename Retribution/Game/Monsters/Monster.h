@@ -13,16 +13,13 @@ public:
 
 	virtual void Update(const float deltaTime);
 
-	virtual void TakeDamage(int val) = 0;
+	virtual void TakeDamage(int val);
 
 	int dir;
 
-	std::vector<std::shared_ptr<Projectile>> proj;
+	std::vector<std::weak_ptr<Projectile>> proj;
 
 	int GetGold() const;
-
-	void UpdateProj(const float deltaTime);
-
 
 protected: 
 	int goldValue;
@@ -34,8 +31,7 @@ protected:
 
 private:
 
-
-	virtual void AI(const float deltaTime) = 0;
+	virtual void Behavior(const float deltaTime) = 0;
 
 };
 #endif // !MONSTER_H

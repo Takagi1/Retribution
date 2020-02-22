@@ -6,16 +6,15 @@
 #include <math.h>
 #include <complex>
 
-MonsterTest::MonsterTest(GameScene * game_) : Monster(game_), speed(10), minDistance(3), maxDistance(15)
+MonsterTest::MonsterTest(GameScene * game_) : Monster(game_), speed(15), minDistance(15), maxDistance(75)
 {
 	goldValue = 5;
 	SetMaxHealth(5);
 	SetHealth(GetMaxHealth());
 
-	delay = 0;
 	maxDelay = 1.0f;
 
-	detectionRange = 25.0f;
+	detectionRange = 250.0f;
 }
 
 MonsterTest::~MonsterTest()
@@ -27,12 +26,7 @@ void MonsterTest::Update(const float deltaTime)
 	Monster::Update(deltaTime);
 }
 
-void MonsterTest::TakeDamage(int val)
-{
-	SetHealth(GetHealth() - val);
-}
-
-void MonsterTest::AI(const float deltaTime)
+void MonsterTest::Behavior(const float deltaTime)
 {
 	float loc = scene->player->hurtBox.GetPosition().x - hurtBox.GetPosition().x;
 	Move(loc);
@@ -61,7 +55,7 @@ void MonsterTest::Shoot()
 	std::shared_ptr<Projectile>temp = std::make_shared<Projectile>(hurtBox.GetPosition(), lim, this);
 
 	proj.push_back(temp);
-	scene->proj.push_back(temp);
+	scene->projectiles.push_back(temp);
 }
 
 

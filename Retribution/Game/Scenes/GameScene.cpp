@@ -2,7 +2,7 @@
 #include "GameScene.h"
 #include <stack>
 #include "../UI/UI.h"
-
+#include "../../SpacialPartition.h"
 
 GameScene::GameScene() : gravity(0), isPaused(false)
 {
@@ -43,11 +43,13 @@ void GameScene::Input()
 			else { UI::CallFunction(); }
 		}
 
+		if (Engine::GetInstance()->input.key.code == sf::Keyboard::G) {  }
+
 		if (Engine::GetInstance()->input.key.code == sf::Keyboard::P) { Pause(); }
 
 		//Manual spawn testing
 		if (Engine::GetInstance()->input.key.code == sf::Keyboard::T) {
-			std::unique_ptr<Monster> mon = std::make_unique<MonsterTest>(this);
+			std::shared_ptr<Monster> mon = std::make_shared<MonsterTest>(this);
 			mon->hurtBox.SetPosition(100, 650);
 			monsters.push_back(std::move(mon));
 		}
@@ -74,9 +76,31 @@ void GameScene::Update(const float deltaTime_)
 {
 	if (!isPaused) {
 		player->Update(deltaTime_);
+		sf::Vector2f display = Options::display.resolution;
+		display.x = display.x / 2;
+		display.y = display.y / 2;
 
-		//Monster updates
+		//ScreenPartition
+		SpacialPartition::GetInstance()->Init(player->hurtBox.GetPosition());
 
+		//Insert Monster
+		for (auto& mon : monsters) {
+			SpacialPartition::GetInstance()->Insert(display, mon);
+		}
+
+		//Insert Projectiles
+		for (auto& proj : projectiles) {
+			if (proj != nullptr) {
+				SpacialPartition::GetInstance()->Insert(display, proj);
+			}
+		}
+
+		//Insert ground
+		for (auto& gro : ground) {
+			SpacialPartition::GetInstance()->Insert(display, gro);
+		}
+
+		//Update all Monsters (for now but make it so that only monsters on screen get the full thing
 		for (unsigned int j = 0; j < monsters.size();) {
 
 			//Kill Monster
@@ -101,16 +125,32 @@ void GameScene::Update(const float deltaTime_)
 
 			j++;
 		}
+
+		//Projectiles on screen collsion detection
+		for (int ptr = 0; ptr < SpacialPartition::GetInstance()->GetProjectiles().size();) {
+			if (!SpacialPartition::GetInstance()->GetProjectiles()[ptr].expired()) {
+				SpacialPartition::GetInstance()->GetProjectiles()[ptr].lock()->Update(deltaTime_);
+				if (SpacialPartition::GetInstance()->GetProjectiles()[ptr].lock()->Collision(player.get())) {
+					DestroyProjectiles(SpacialPartition::GetInstance()->GetProjectiles()[ptr].lock());
+					continue;
+				}
+			}
+			ptr++;
+		}
+
+		//Erase projectiles off screen here
+		//
+
 	}
 	else {
-		int a = 0;
+		
 	}
 }
 
 void GameScene::Render(sf::RenderWindow* r_Window)
 {
 	//Set window view and make it the player position
-	Engine::GetInstance()->SetView(player->hurtBox.GetPosition());
+	Engine::GetInstance()->SetViewPos(player->hurtBox.GetPosition());
 
 	//Draw Game objects
 	r_Window->draw(player->hurtBox.Draw());
@@ -123,11 +163,15 @@ void GameScene::Render(sf::RenderWindow* r_Window)
 	for (auto& obj : monsters) {
 		r_Window->draw(obj->hurtBox.Draw());
 
-		for (auto& proj : obj->proj) {
-			r_Window->draw(proj->hurtBox.Draw());
-		}
+
 	}
 	
+	for (auto& obj : SpacialPartition::GetInstance()->GetProjectiles()) {
+		if (!obj.expired()) {
+			r_Window->draw(obj.lock()->hurtBox.Draw());
+		}
+	}
+
 	if (player->counterbox) {
 		if(player->counterbox->body) r_Window->draw(*player->counterbox->body);
 	}
@@ -156,5 +200,14 @@ void GameScene::Pause() {
 	}
 	else {
 		isPaused = true;
+	}
+}
+
+void GameScene::DestroyProjectiles(std::shared_ptr<Projectile> pro)
+{
+	for (auto& lok : projectiles) {
+		if (lok == pro) {
+			lok.reset();
+		}
 	}
 }

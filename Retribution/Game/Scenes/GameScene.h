@@ -22,18 +22,20 @@ public:
 	float gravity;
 
 	//Enemies
-	std::vector<std::unique_ptr<Monster> > monsters;
+	std::vector<std::shared_ptr<Monster> > monsters;
 	
 	//Player
 	std::unique_ptr<PlayerCharacter> player;
 
 	std::vector<sf::RectangleShape> ground;
 
-	std::vector<std::shared_ptr<Projectile>> proj;
+	std::vector<std::shared_ptr<Projectile>> projectiles;
 
 	//PAUSE MENU 
 
 	void Pause();
+
+	void DestroyProjectiles(std::shared_ptr<Projectile> pro);
 
 private:
 	bool isPaused;

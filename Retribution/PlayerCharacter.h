@@ -41,7 +41,6 @@ public:
 
 	void PresDodge();
 	void RelDodge();
-
 //Misc
 
 	void TakeDamage(int val);
@@ -78,6 +77,10 @@ private:
 
 	float walkSpeed;
 	float dodgeSpeed;
+
+	void Dodge(int x_, int y_);
+
+	void Action(int x_, int y_, int type_);
 };
 #endif // PLAYERCHARACTER_H
 

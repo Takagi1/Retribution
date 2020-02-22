@@ -3,6 +3,7 @@
 #include "Game/Scenes/GameScene.h"
 #include "PlayerCharacter.h"
 #include "Projectile.h"
+#include "SpacialPartition.h"
 
 
 CounterBox::CounterBox(GameScene* scene_, float x_ , float y_, int type_) : life(1.0f), delay(1.0f), hangTime(false), type(type_), dirx(0), diry(0)
@@ -66,7 +67,7 @@ void CounterBox::Trigger(std::shared_ptr<Projectile> projectile)
 	//Standered Counter (IE. Retribution)
 	case 1:
 		if (scene->player->GetEnergy() == 0) {
-			projectile->caster->TakeDamage(-projectile->GetPower());
+			projectile->caster->TakeDamage(projectile->GetPower());
 		}
 		else {
 			projectile->caster->TakeDamage(scene->player->UseEnergy() * projectile->GetPower());
@@ -95,19 +96,17 @@ void CounterBox::Trigger(std::shared_ptr<Projectile> projectile)
 
 bool CounterBox::Collision()
 {
-	for (auto& mon : scene->monsters) {
-		int val = 0;
-		for (auto& proj : mon->proj) {
-			if (body->getGlobalBounds().intersects(proj->hurtBox.GetCollider())) {
-				Trigger(proj);
-				proj.reset();
+	for (auto& proj : SpacialPartition::GetInstance()->GetProjectiles()) {
+		if (!proj.expired()) {
+			if (body->getGlobalBounds().intersects(proj.lock()->hurtBox.GetCollider())) {
+				Trigger(proj.lock());
+				
 				//Destroy projectile
-				mon->proj.erase(mon->proj.begin() + val++);
+				scene->DestroyProjectiles(proj.lock());
 				//monsters[j]->proj.shrink_to_fit
 				scene->player->ClearBox();
 				return true;
 			}
-			val++;
 		}
 	}
 	return false;

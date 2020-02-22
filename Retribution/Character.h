@@ -2,7 +2,7 @@
 #define CHARACTER_H
 
 #include "Game/Animation/AnimationController.h"
-#include "GameObject.h"
+#include "Engine/GameObject.h"
 
 class GameScene;
 

@@ -1,4 +1,4 @@
-#include "pch.h"
+#include "../pch.h"
 #include "GameObject.h"
 
 
@@ -12,13 +12,12 @@ GameObject::~GameObject()
 {
 }
 
-bool GameObject::Collision(HurtBox* b)
+bool GameObject::CollisionDetection(HurtBox* b)
 {
-
 	return hurtBox.Collision(b->GetCollider());
 }
 
-bool GameObject::Collision(sf::FloatRect b)
+bool GameObject::CollisionDetection(sf::FloatRect b)
 {
 	return hurtBox.Collision(b);
 }

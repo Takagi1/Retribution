@@ -1,6 +1,67 @@
 #pragma once
+
+#include "SFML/Graphics.hpp"
+
+class Monster;
+class Projectile;
+
+
+//For culling things from draw and collision
 class SpacialPartition
 {
+
+private:
+	SpacialPartition();
+	~SpacialPartition();
+
+	static std::unique_ptr<SpacialPartition> partitionInstance;
+	friend std::default_delete<SpacialPartition>;
+	 
+	struct Node
+	{
+		std::vector<std::weak_ptr<Projectile>> projectileVector;
+		std::vector<std::weak_ptr<Monster>> monsterVector;
+		std::vector<sf::FloatRect> groundVector;
+
+		int a;
+	};
+
+	struct Root
+	{
+		~Root() {
+			delete left;
+			left = nullptr;
+			delete right;
+			right = nullptr;
+		};
+		sf::Vector2f key;
+		
+		struct Node *left, *right;
+	};
+
+
+	struct Root *NewRoot(sf::Vector2f loc) {
+		struct Root *temp = new Root();
+		temp->key = loc;
+		temp->left = NewNode();
+		temp->right = NewNode();
+		return temp;
+	}
+
+
+	//Create new Node
+	struct Node *NewNode()
+	{
+		struct Node *temp = new Node();
+		temp->monsterVector = std::vector<std::weak_ptr<Monster>>();
+		temp->projectileVector = std::vector<std::weak_ptr<Projectile>>();
+		temp->groundVector = std::vector<sf::FloatRect>();
+		return temp;
+	}
+	bool Check(sf::Vector2f loc, sf::Vector2f range, sf::Vector2f pos, sf::Vector2f para);
+
+
+
 public:
 	SpacialPartition(const SpacialPartition&) = delete;
 	SpacialPartition(SpacialPartition&&) = delete;
@@ -9,11 +70,26 @@ public:
 
 	static SpacialPartition* GetInstance();
 
-private:
-	SpacialPartition();
-	~SpacialPartition();
+	void Init(sf::Vector2f loc);
 
-	static std::unique_ptr<SpacialPartition> partitionInstance;
-	friend std::default_delete<SpacialPartition>;
+	void Insert(sf::Vector2f range, std::weak_ptr<Projectile> proj);
+	void Insert(sf::Vector2f range, std::weak_ptr<Monster> mon);
+	void Insert(sf::Vector2f range, sf::RectangleShape rec);
+
+	std::vector<std::weak_ptr<Projectile>> GetProjectiles() {
+		return tree->right->projectileVector;
+	}
+	std::vector<std::weak_ptr<Projectile>> GetProjectilesOff() {
+		return tree->left->projectileVector;
+	}
+	std::vector<std::weak_ptr<Monster>> GetMonsters() {
+		return tree->right->monsterVector;
+	}
+	std::vector<sf::FloatRect> GetGround() {
+		return tree->right->groundVector;
+	}
+
+	Root* tree;
+
 };
 

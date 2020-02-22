@@ -11,8 +11,6 @@ public:
 
 	virtual void Update(const float deltaTime);
 
-	virtual void TakeDamage(int val);
-
 private:
 
 	float speed;
@@ -21,7 +19,7 @@ private:
 
 	float maxDistance;
 
-	virtual void AI(const float deltaTime);
+	virtual void Behavior(const float deltaTime);
 
 	void Shoot();
 

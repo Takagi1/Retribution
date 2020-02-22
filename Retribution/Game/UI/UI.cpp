@@ -25,8 +25,8 @@ void UI::Init()
 	font.loadFromFile("OpenSans-Light.ttf");
 
 	//Hold resolution here to not have to keep accessing it 
-	float x = Engine::GetInstance()->resolution.x / 1920;
-	float y = Engine::GetInstance()->resolution.y / 1080;
+	float x = Options::display.resolution.x / 1920;
+	float y = Options::display.resolution.y / 1080;
 
 	menu = PAUSEMENU;
 

@@ -9,7 +9,7 @@ public:
 	~HurtBox();
 
 	void SetObject(GameObject* obj_);
-	GameObject* GetGameObject() const;
+	GameObject* GetGameObject();
 
 	void SetPosition(sf::Vector2f pos_);
 	void SetPosition(float x_, float y_);

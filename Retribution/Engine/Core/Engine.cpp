@@ -25,7 +25,7 @@ bool Engine::OnCreate(std::string name_)
 	Debug::DebugInit("Debug Log");
 	Debug::SetSeverity(MessageType::TYPE_INFO);
 
-	display = sf::Vector2u(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height);
+	Options::display.SetDisplay(sf::Vector2u(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height));
 
 	//RenderWindow window
 	r_Window.create(sf::VideoMode(RES_1920X1080),
@@ -36,7 +36,7 @@ bool Engine::OnCreate(std::string name_)
 	r_Window.setFramerateLimit(fps);
 
 	view.setSize(RES_1920X1080);
-	resolution = view.getSize();
+	Options::display.resolution = view.getSize();
 
 	if (gameInterface) {
 		if (!gameInterface->OnCreate()) {
@@ -150,7 +150,7 @@ void Engine::Render()
 	
 }
 
-void Engine::SetView(sf::Vector2f pos_)
+void Engine::SetViewPos(sf::Vector2f pos_)
 {
 	view.setCenter(pos_);
 	r_Window.setView(view);
