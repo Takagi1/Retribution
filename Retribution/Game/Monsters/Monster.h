@@ -9,17 +9,17 @@ class Monster :public Character
 {
 public:
 	Monster(GameScene* pro);
-	~Monster();
+	virtual ~Monster();
 
 	virtual void Update(const float deltaTime);
 
 	virtual void TakeDamage(int val);
-
+	
 	int dir;
 
 	std::vector<std::weak_ptr<Projectile>> proj;
 
-	int GetGold() const;
+	void OnDestroy();
 
 protected: 
 	int goldValue;

@@ -107,8 +107,6 @@ void GameScene::Update(const float deltaTime_)
 			//Kill Monster
 			if (monsters[j]->GetDead()) {
 
-				player->gold += monsters[j]->GetGold();
-
 				//Safety? 
 				monsters[j].reset();
 
@@ -138,14 +136,6 @@ void GameScene::Update(const float deltaTime_)
 			}
 			ptr++;
 		}
-
-		//Erase projectiles off screen here
-		/*
-		auto it = SpacialPartition::GetInstance()->GetProjectiles().begin();
-		while (it != SpacialPartition::GetInstance()->GetProjectiles().end()) {
-			DestroyProjectiles(*--it);
-		}
-		*/
 	}
 }
 

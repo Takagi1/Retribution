@@ -18,13 +18,13 @@ Monster::Monster(GameScene* pro) : Character(), dir(1), delay(0)
 	animationController->animationList["Idle"] = new MonsterIdle();
 	animationController->currentAnimation = animationController->animationList["Idle"];
 
-	proj.reserve(15);
+	proj.reserve(4);
 }
 
 
 Monster::~Monster()
 {
-	proj.clear();
+	OnDestroy();
 }
 
 void Monster::Update(const float deltaTime)
@@ -39,9 +39,15 @@ void Monster::TakeDamage(int val)
 	SetHealth(GetHealth() - val);
 }
 
-int Monster::GetGold() const
+void Monster::OnDestroy()
 {
-	return goldValue;
-}
+	PlayerCharacter::gold += goldValue;
 
+	for (auto& trace : proj) {
+		if (!trace.expired()) {
+			scene->DestroyProjectiles(trace);
+		}
+	}
+	proj.clear();
+}
 

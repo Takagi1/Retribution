@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PROJECTILE_H
+#define PROJECTILE_H
 
 #include "Engine/GameObject.h"
 
@@ -29,3 +30,4 @@ private:
 	
 };
 
+#endif // !PROJECTILE_H

@@ -33,7 +33,7 @@ void MonsterTest::Behavior(const float deltaTime)
 
 	delay -= deltaTime;
 
-	if (delay <= 0 && proj.size() < proj.capacity()) {
+	if (delay <= 0) {
 		Shoot();
 		delay = maxDelay;
 	}

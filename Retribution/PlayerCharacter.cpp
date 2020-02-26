@@ -106,10 +106,12 @@ void PlayerCharacter::Update(const float deltaTime_)
 
 	if (counterbox) { 
 		counterbox->Update(deltaTime_); 
-		if (counterbox->GetLife() <= 0) {
-			Vulnerable();
-			SetBlock(false);
-			ClearBox();
+		if (counterbox) {
+			if (counterbox->GetLife() <= 0) {
+				Vulnerable();
+				SetBlock(false);
+				ClearBox();
+			}
 		}
 	}
 }
