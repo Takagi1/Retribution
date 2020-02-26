@@ -1,6 +1,6 @@
-#include "../../pch.h"
+#include "../../../pch.h"
 #include "TextBox.h"
-#include "UI.h"
+#include "../UI.h"
 
 
 TextBox::TextBox()

@@ -41,7 +41,6 @@ public:
 	bool GetDead() const;
 	void SetDead(bool death);
 
-
 protected:
 	GameScene* scene;
 

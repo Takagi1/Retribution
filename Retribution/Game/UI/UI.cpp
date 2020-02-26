@@ -10,6 +10,7 @@ sf::Text UI::goldDisplay = sf::Text();
 sf::RectangleShape UI::pauseWindow = sf::RectangleShape();
 std::unique_ptr<InteractiveMenu> UI::pauseMenu = std::unique_ptr<InteractiveMenu>();
 UI::Menu UI::menu = Menu();
+sf::Text UI::fpsCounter = sf::Text();
 
 UI::UI()
 {
@@ -51,6 +52,11 @@ void UI::Init()
 	pauseWindow.setOutlineThickness(3);
 
 	pauseMenu = std::make_unique<PauseMenu>();
+
+	fpsCounter.setFont(UI::font);
+	fpsCounter.setFillColor(sf::Color::Black);
+	fpsCounter.setPosition(50, 0);
+	fpsCounter.setString("FPS: 0");
 }
 
 void UI::Update(const float deltaTime_)

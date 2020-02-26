@@ -1,6 +1,7 @@
-#pragma once
+#ifndef UI_H
+#define UI_H
 
-#include "../InteractiveMenu.h"
+#include "Menu/InteractiveMenu.h"
 #include <unordered_map>
 
 class UI
@@ -19,12 +20,12 @@ public:
 	static sf::Text energyDisplay;
 	static sf::Text goldDisplay;
 
+	static sf::Text fpsCounter;
+
 	//Pause Menu
 	static sf::RectangleShape pauseWindow;
 
 	static void Update(const float deltaTime_);
-
-	//TODO::Finish text box to satesfaction
 
 	static void Scroll(int val_);
 
@@ -38,6 +39,6 @@ private:
 	static Menu menu;
 
 	static std::unique_ptr<InteractiveMenu> pauseMenu;
-
 };
 
+#endif // !UI_H

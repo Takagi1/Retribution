@@ -6,6 +6,7 @@
 
 GameScene::GameScene() : gravity(0), isPaused(false)
 {
+	projectiles.reserve(15);
 } 
 
 
@@ -139,11 +140,12 @@ void GameScene::Update(const float deltaTime_)
 		}
 
 		//Erase projectiles off screen here
-		//
-
-	}
-	else {
-		
+		/*
+		auto it = SpacialPartition::GetInstance()->GetProjectiles().begin();
+		while (it != SpacialPartition::GetInstance()->GetProjectiles().end()) {
+			DestroyProjectiles(*--it);
+		}
+		*/
 	}
 }
 
@@ -159,11 +161,8 @@ void GameScene::Render(sf::RenderWindow* r_Window)
 		r_Window->draw(gro);
 	}
 	
-
 	for (auto& obj : monsters) {
 		r_Window->draw(obj->hurtBox.Draw());
-
-
 	}
 	
 	for (auto& obj : SpacialPartition::GetInstance()->GetProjectiles()) {
@@ -203,11 +202,14 @@ void GameScene::Pause() {
 	}
 }
 
-void GameScene::DestroyProjectiles(std::shared_ptr<Projectile> pro)
+void GameScene::DestroyProjectiles(std::weak_ptr<Projectile> pro)
 {
-	for (auto& lok : projectiles) {
-		if (lok == pro) {
-			lok.reset();
+	std::vector<std::shared_ptr<Projectile>>::iterator lok = projectiles.begin();
+	while (lok != projectiles.end()) {
+		if (*lok == pro.lock()) {
+			lok->reset();
+			projectiles.erase(lok);
+			break;
 		}
 	}
 }

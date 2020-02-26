@@ -1,5 +1,7 @@
-#pragma once
-#include "../../InteractiveMenu.h"
+#ifndef STARTMENU_H
+#define STARTMENU_H
+
+#include "InteractiveMenu.h"
 class StartMenu :
 	public InteractiveMenu
 {
@@ -16,3 +18,4 @@ private:
 	void Exit();
 };
 
+#endif // !STARTMENU_H

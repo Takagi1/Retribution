@@ -15,12 +15,8 @@ public:
 	~CounterBox();
 
 	void Update(const float deltaTime);
-
-	void Trigger(std::shared_ptr<Projectile> projectile);
-
 	bool Collision();
-
-	bool hangTime;
+	void Trigger(std::shared_ptr<Projectile> projectile);
 
 	GameScene* scene;
 
@@ -28,11 +24,12 @@ public:
 
 	int GetType() const;
 
+	float GetLife() const;
+
 private:
 	const int type;
 
 	float life;
-	float delay;
 	float dirx;
 	float diry;
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "UI/TextBox.h"
+#include "../MenuObjects/TextBox.h"
 #include <vector>
 
 class InteractiveMenu
@@ -12,7 +12,6 @@ public:
 	short int counter;
 
 	std::vector<TextBox> textBoxs;
-
 
 	virtual void Draw(sf::RenderWindow * r_Window);
 

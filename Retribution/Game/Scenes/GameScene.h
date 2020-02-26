@@ -35,7 +35,7 @@ public:
 
 	void Pause();
 
-	void DestroyProjectiles(std::shared_ptr<Projectile> pro);
+	void DestroyProjectiles(std::weak_ptr<Projectile> pro);
 
 private:
 	bool isPaused;

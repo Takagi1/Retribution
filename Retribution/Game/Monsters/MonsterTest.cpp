@@ -58,8 +58,6 @@ void MonsterTest::Shoot()
 	scene->projectiles.push_back(temp);
 }
 
-
-//Health Error? noted from a test 
 void MonsterTest::Move(float loc)
 { 
 	//If to the left

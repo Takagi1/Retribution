@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TEXTBOX_H
+#define TEXTBOX_H
 
 //TODO: Scale text to the box
 class TextBox
@@ -26,3 +27,4 @@ private:
 
 };
 
+#endif // !TEXTBOX_H

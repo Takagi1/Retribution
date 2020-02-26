@@ -2,6 +2,7 @@
 #include "Engine.h"
 #include "../../Game/SceneManager.h"
 #include "../../Game/UI/UI.h"
+#include "Timer.h"
 
 //DEFINES
 
@@ -11,7 +12,7 @@
 
 std::unique_ptr<Engine> Engine::engineInstance = nullptr;
 
-Engine::Engine() : isRunning(false), fps(120), gameInterface(nullptr), currentSceneNum(0) {
+Engine::Engine() : isRunning(false), fps(60), gameInterface(nullptr), currentSceneNum(0) {
 
 }
 
@@ -35,6 +36,7 @@ bool Engine::OnCreate(std::string name_)
 	//Set FrameRate
 	r_Window.setFramerateLimit(fps);
 
+	//Set screen size
 	view.setSize(RES_1920X1080);
 	Options::display.resolution = view.getSize();
 
@@ -49,11 +51,6 @@ bool Engine::OnCreate(std::string name_)
 
 	Debug::Info("Everything was created okay", "Engine.cpp", __LINE__);
 
-	fpsCounter.setFont(UI::font);
-	fpsCounter.setFillColor(sf::Color::Black);
-	fpsCounter.setPosition(50, 0);
-	fpsCounter.setString("FPS: 0");
-
 	return isRunning = true;
 }
 
@@ -64,14 +61,16 @@ void Engine::Run()
 		sf::Time dt = timer.restart();
 
 		//Debug prevent time breaking things
-		if (dt > sf::seconds(0.25)) {
+		if (dt > sf::seconds(1.0f)) {
 			dt = timer.restart();
 		}
+
 		totalTime += dt;
 		currentCount += 1;
+
 		if (totalTime >= sf::seconds(1)) {
-			totalTime = rest;
-			fpsCounter.setString("FPS: " + std::to_string(currentCount));
+			totalTime = sf::seconds(0);
+			UI::fpsCounter.setString("FPS: " + std::to_string(currentCount));
 			currentCount = 0;
 		}
 
@@ -144,7 +143,7 @@ void Engine::Render()
 		gameInterface->RenderHUD(&r_Window);
 	}
 
-	r_Window.draw(fpsCounter);
+	r_Window.draw(UI::fpsCounter);
 	//Display window
 	r_Window.display();
 	

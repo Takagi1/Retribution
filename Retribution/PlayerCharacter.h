@@ -52,10 +52,17 @@ public:
 
 	void SetBlock(bool blocking);
 
+	void Vulnerable();
+
+	void SetCross(bool value);
+
 private:
+	static int maxHealthP;
 
 	static int energy;
 	static int energyMax;
+
+	static int dodgeLimit;
 
 	bool isBlocking;
 
@@ -69,7 +76,6 @@ private:
 	bool dodge;
 
 	bool canDodge;
-	int dodgeLimit;
 	int dodgeCount;
 
 	float inputDelay;
@@ -81,6 +87,11 @@ private:
 	void Dodge(int x_, int y_);
 
 	void Action(int x_, int y_, int type_);
+
+	bool isVulnerable;
+	float vulnerableTime;
+
+	bool cross;
 };
 #endif // PLAYERCHARACTER_H
 

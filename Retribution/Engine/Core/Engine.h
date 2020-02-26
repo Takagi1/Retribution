@@ -49,18 +49,13 @@ private:
 	sf::RenderWindow r_Window;
 	sf::View view;
 
-//DISPLAY SETTINGS
-
 	//Computer display
-	sf::Text fpsCounter;
 	int currentCount;
 	sf::Time totalTime;
-	sf::Time rest;
-
-	bool isRunning;
-
 	sf::Clock timer;
 	unsigned int fps;
+
+	bool isRunning;
 
 	GameInterface* gameInterface;
 
