@@ -15,11 +15,6 @@ public:
 
 	static sf::Font font;
 
-	//HUD
-	static sf::Text healthDisplay;
-	static sf::Text energyDisplay;
-	static sf::Text goldDisplay;
-
 	static sf::Text fpsCounter;
 
 	//Pause Menu
@@ -39,6 +34,10 @@ private:
 	static Menu menu;
 
 	static std::unique_ptr<InteractiveMenu> pauseMenu;
+
+	//HUD
+	static sf::Text healthDisplay;
+	static sf::Text energyDisplay;
 };
 
 #endif // !UI_H

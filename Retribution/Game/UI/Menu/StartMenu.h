@@ -13,6 +13,8 @@ public:
 
 	void UpdateTxt();
 
+	void Draw(sf::RenderWindow* r_Window);
+
 private:
 	void Start();
 	void Exit();

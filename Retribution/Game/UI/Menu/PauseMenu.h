@@ -11,7 +11,11 @@ public:
 
 	virtual void CallFunction();
 
+	void Draw(sf::RenderWindow* r_Window);
+
 private:
 	void Exit();
+
+	sf::Text goldDisplay;
 };
 #endif // !INTERACTIVEMENU_H

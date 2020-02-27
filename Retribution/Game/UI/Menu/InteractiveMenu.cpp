@@ -13,13 +13,6 @@ InteractiveMenu::~InteractiveMenu()
 
 }
 
-void InteractiveMenu::Draw(sf::RenderWindow * r_Window)
-{
-	for (auto& all : textBoxs) {
-		all.Draw(r_Window);
-	}
-}
-
 void InteractiveMenu::MoveMenu(int val)
 {
 

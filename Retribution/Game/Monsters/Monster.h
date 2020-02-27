@@ -14,6 +14,12 @@ public:
 	virtual void Update(const float deltaTime);
 
 	virtual void TakeDamage(int val);
+
+	int GetHealth() const;
+	int GetMaxHealth() const;
+
+	void SetHealth(int val);
+	void SetMaxHealth(int val);
 	
 	int dir;
 
@@ -22,6 +28,7 @@ public:
 	void OnDestroy();
 
 protected: 
+
 	int goldValue;
 
 	float maxDelay;
@@ -30,6 +37,9 @@ protected:
 	float detectionRange;
 
 private:
+
+	int health;
+	int maxHealth;
 
 	virtual void Behavior(const float deltaTime) = 0;
 

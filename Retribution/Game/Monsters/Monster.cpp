@@ -29,6 +29,11 @@ Monster::~Monster()
 
 void Monster::Update(const float deltaTime)
 {
+	if (health <= 0) {
+		SetDead(true);
+		return;
+	}
+
 	Behavior(deltaTime);
 
 	Character::Update(deltaTime);
@@ -39,10 +44,29 @@ void Monster::TakeDamage(int val)
 	SetHealth(GetHealth() - val);
 }
 
+int Monster::GetHealth() const
+{
+	return health;
+}
+
+int Monster::GetMaxHealth() const
+{
+	return maxHealth;
+}
+
+void Monster::SetHealth(int val)
+{
+	health = val;
+}
+
+void Monster::SetMaxHealth(int val)
+{
+	maxHealth = val;
+}
+
 void Monster::OnDestroy()
 {
-	PlayerCharacter::gold += goldValue;
-
+	scene->player->AddGold(goldValue);
 	for (auto& trace : proj) {
 		if (!trace.expired()) {
 			scene->DestroyProjectiles(trace);

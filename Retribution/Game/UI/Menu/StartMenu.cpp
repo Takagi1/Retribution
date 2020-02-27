@@ -45,6 +45,13 @@ void StartMenu::UpdateTxt()
 	textBoxs[1].SetText("Exit");
 }
 
+void StartMenu::Draw(sf::RenderWindow* r_Window)
+{
+	for (auto& all : textBoxs) {
+		all.Draw(r_Window);
+	}
+}
+
 void StartMenu::Start()
 {
 	Engine::GetInstance()->SetCurrentScene(1);

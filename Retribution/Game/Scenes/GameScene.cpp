@@ -106,7 +106,6 @@ void GameScene::Update(const float deltaTime_)
 
 			//Kill Monster
 			if (monsters[j]->GetDead()) {
-
 				//Safety? 
 				monsters[j].reset();
 
@@ -137,6 +136,8 @@ void GameScene::Update(const float deltaTime_)
 			ptr++;
 		}
 	}
+
+	UI::Update(deltaTime_);
 }
 
 void GameScene::Render(sf::RenderWindow* r_Window)
@@ -168,19 +169,7 @@ void GameScene::Render(sf::RenderWindow* r_Window)
 
 void GameScene::RenderHUD(sf::RenderWindow* r_Window)
 {
-	UI::healthDisplay.setString("Health: " + std::to_string(player->GetHealth()));
-	r_Window->draw(UI::healthDisplay);
-
-	UI::energyDisplay.setString("Energy: " + std::to_string(player->GetEnergy()));
-	r_Window->draw(UI::energyDisplay);
-
-	UI::goldDisplay.setString("Gold: " + std::to_string(player->gold));
-	r_Window->draw(UI::goldDisplay);
-
-	if (isPaused) { 
-		r_Window->draw(UI::pauseWindow);
-		UI::Draw(r_Window);
-	}
+	UI::Draw(r_Window);
 }
 
 void GameScene::Pause() { 

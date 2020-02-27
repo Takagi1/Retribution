@@ -16,11 +16,6 @@ Character::~Character()
 
 void Character::Update(const float deltaTime)
 {
-	if (health <= 0) {
-		isDead = true;
-		return;
-	}
-
 	animationController->Update(deltaTime);
 
 	//Invinciblity frames
@@ -53,26 +48,6 @@ void Character::Update(const float deltaTime)
 		hurtBox.Move(0, deltaTime * -ySpeed);
 	}
 	else { onGround = false; }
-}
-
-int Character::GetHealth() const
-{
-	return health;
-}
-
-void Character::SetHealth(int val)
-{
-	health = val;
-}
-
-int Character::GetMaxHealth() const
-{
-	return maxHealth;
-}
-
-void Character::SetMaxHealth(int val)
-{
-	maxHealth = val;
 }
 
 void Character::SetInv(bool stat_)

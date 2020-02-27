@@ -4,11 +4,14 @@
 #include "Game/Animation/Player/PlayerAnimController.h"
 
 
+
+int PlayerCharacter::health = 0;
+int PlayerCharacter::maxHealth = 250;
 int PlayerCharacter::gold = 0;
 int PlayerCharacter::energy = 1;
 int PlayerCharacter::energyMax = 25;
 int PlayerCharacter::dodgeLimit = 1;
-int PlayerCharacter::maxHealthP = 250;
+
 
 
 PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(), counterbox(std::unique_ptr<CounterBox>()), isBlocking(false),
@@ -16,8 +19,7 @@ inputDelay(0.025f), inputTime(0), walkSpeed(200), dodgeSpeed(250), vulnerableTim
 {
 	scene = scene_;
 
-	SetMaxHealth(maxHealthP);
-	SetHealth(GetMaxHealth());
+	SetHealth(maxHealth);
 
 	hurtBox.SetFillColour(sf::Color::Red);
 	hurtBox.SetSize(20, 20);
@@ -116,11 +118,6 @@ void PlayerCharacter::Update(const float deltaTime_)
 	}
 }
 
-int PlayerCharacter::GetEnergy() const 
-{
-	return energy;
-}
-
 void PlayerCharacter::AddEnergy(int value)
 {
 	energy += value;
@@ -134,6 +131,16 @@ int PlayerCharacter::UseEnergy()
 	int val = energy;
 	energy = 1;
 	return val;
+}
+
+void PlayerCharacter::SetMaxHealth(int val)
+{
+	maxHealth = val;
+}
+
+void PlayerCharacter::SetHealth(int value)
+{
+	health = value;
 }
 
 void PlayerCharacter::TakeDamage(int val)
@@ -167,6 +174,37 @@ void PlayerCharacter::Vulnerable()
 void PlayerCharacter::SetCross(bool value)
 {
 	cross = value;
+}
+
+int PlayerCharacter::GetHealth()
+{
+	return health;
+}
+
+int PlayerCharacter::GetEnergy()
+{
+	return energy;
+}
+
+int PlayerCharacter::GetGold()
+{
+	return gold;
+}
+
+void PlayerCharacter::AddGold(int value)
+{
+	gold += value;
+}
+
+bool PlayerCharacter::RemoveGold(int value)
+{
+	if (gold - value < 0) {
+		return false;
+	}
+	else {
+		gold -= value;
+		return true;
+	}
 }
 
 void PlayerCharacter::PresLeft() { left = true; }

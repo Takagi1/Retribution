@@ -29,23 +29,15 @@ public:
 
 	float invTime;
 
-	int GetHealth() const;
-	void SetHealth(int val);
-
-	int GetMaxHealth() const;
-	void SetMaxHealth(int val);
-
 	bool GetInv() const;
-	void SetInv(bool stat_);
-
 	bool GetDead() const;
+
+	void SetInv(bool stat_);
 	void SetDead(bool death);
 
 protected:
 	GameScene* scene;
-
 private:
-	int health;
 	int maxHealth;
 
 	bool inv;

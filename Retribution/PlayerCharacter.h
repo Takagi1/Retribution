@@ -3,6 +3,7 @@
 
 #include "Character.h"
 #include "CounterBox.h"
+
 class GameScene;
 
 class PlayerCharacter : public Character
@@ -12,13 +13,7 @@ public:
 	PlayerCharacter(GameScene* scene);
 	virtual ~PlayerCharacter();
 
-	static int gold;
-
 	void Update(const float deltaTime);
-
-	int GetEnergy() const ;
-	void AddEnergy(int value);
-	int UseEnergy();
 
 //Input Handeling
 	void PresLeft();
@@ -41,26 +36,44 @@ public:
 
 	void PresDodge();
 	void RelDodge();
-//Misc
 
-	void TakeDamage(int val);
+//COUNTER BOX 
 
-	//Does the counterbox exist
 	std::unique_ptr<CounterBox> counterbox;
 
 	void ClearBox();
-
 	void SetBlock(bool blocking);
-
 	void Vulnerable();
-
 	void SetCross(bool value);
 
+//Misc
+
+	void SetMaxHealth(int val);
+
+	void SetHealth(int val);
+	void TakeDamage(int val);
+
+	void AddEnergy(int value);
+	int UseEnergy();
+
+	void AddGold(int value);
+	bool RemoveGold(int value);
+
+//Static value Returns
+
+	static int GetHealth();
+	static int GetEnergy();
+	static int GetGold();
+
 private:
-	static int maxHealthP;
+
+	static int health;
+	static int maxHealth;
 
 	static int energy;
 	static int energyMax;
+
+	static int gold;
 
 	static int dodgeLimit;
 
