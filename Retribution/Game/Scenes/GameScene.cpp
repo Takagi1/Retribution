@@ -6,6 +6,8 @@
 
 GameScene::GameScene() : gravity(0), isPaused(false)
 {
+	view = new sf::View();
+
 	projectiles.reserve(15);
 } 
 
@@ -21,32 +23,57 @@ void GameScene::Input()
 	switch (Engine::GetInstance()->input.type)
 	{
 	case sf::Event::KeyPressed:
-		if (Engine::GetInstance()->input.key.code == sf::Keyboard::D) { player->PresRight(); }
-		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::A) { player->PresLeft(); }
 
-		if (Engine::GetInstance()->input.key.code == sf::Keyboard::W) {
+		switch (Engine::GetInstance()->input.key.code)
+		{
+		case sf::Keyboard::D:
+			player->PresRight();
+			break;
+
+		case sf::Keyboard::A:
+			player->PresLeft();
+			break;
+
+		case sf::Keyboard::W:
 			if (!isPaused) { player->PresUp(); }
 			else { UI::Scroll(-1); }
-		}
-		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::S) {
+			break;
+
+		case sf::Keyboard::S:
 			if (!isPaused) { player->PresDown(); }
 			else { UI::Scroll(1); }
-		}
+			break;
 
-		if (Engine::GetInstance()->input.key.code == sf::Keyboard::J) { player->PresParry(); }
-		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::K) { player->PresCounter(); }
-		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::L) { player->PresDodge(); }
+		case sf::Keyboard::J:
+			player->PresParry();
+			break;
 
-		if(Engine::GetInstance()->input.key.code == sf::Keyboard::X){	
-			if(!isPaused) { 
-			// Interact code here
+		case sf::Keyboard::K:
+			player->PresCounter();
+			break;
+
+		case sf::Keyboard::L:
+			player->PresDodge();
+			break;
+
+		case sf::Keyboard::LShift:
+			player->PresAlt();
+			break;
+
+		case sf::Keyboard::X:
+			if (!isPaused) {
+				// Interact code here
 			}
 			else { UI::CallFunction(); }
+			break;
+
+		case sf::Keyboard::P:
+			Pause();
+			break;
+
+		default:
+			break;
 		}
-
-		if (Engine::GetInstance()->input.key.code == sf::Keyboard::G) {  }
-
-		if (Engine::GetInstance()->input.key.code == sf::Keyboard::P) { Pause(); }
 
 		//Manual spawn testing
 		if (Engine::GetInstance()->input.key.code == sf::Keyboard::T) {
@@ -55,19 +82,49 @@ void GameScene::Input()
 			monsters.push_back(std::move(mon));
 		}
 		break;
+
 	case sf::Event::KeyReleased:
 
-		if (Engine::GetInstance()->input.key.code == sf::Keyboard::D) { player->RelRight(); }
-		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::A) { player->RelLeft(); }
+		switch (Engine::GetInstance()->input.key.code)
+		{
+		case sf::Keyboard::D:
+			player->RelRight();
+			break;
 
-		if (Engine::GetInstance()->input.key.code == sf::Keyboard::W) { player->RelUp(); }
-		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::S) { player->RelDown(); }
+		case sf::Keyboard::A:
+			player->RelLeft();
+			break;
 
-		if (Engine::GetInstance()->input.key.code == sf::Keyboard::J) { player->RelParry(); }
-		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::K) { player->RelCounter(); }
-		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::L) { player->RelDodge(); }
+		case sf::Keyboard::W:
+			player->RelUp();
+			break;
+
+		case sf::Keyboard::S:
+			player->RelDown();
+			break;
+
+		case sf::Keyboard::J:
+			player->RelParry();
+			break;
+
+		case sf::Keyboard::K:
+			player->RelCounter();
+			break;
+
+		case sf::Keyboard::L:
+			player->RelDodge();
+			break;
+
+		case sf::Keyboard::LShift:
+			player->RelAlt();
+			break;
+
+		default:
+			break;
+		}
 
 		break;
+
 	default:
 		break;
 	}
@@ -77,7 +134,7 @@ void GameScene::Update(const float deltaTime_)
 {
 	if (!isPaused) {
 		player->Update(deltaTime_);
-		sf::Vector2f display = Options::display.resolution;
+		sf::Vector2f display = Options::GetResolution();
 		display.x = display.x / 2;
 		display.y = display.y / 2;
 
@@ -140,36 +197,46 @@ void GameScene::Update(const float deltaTime_)
 	UI::Update(deltaTime_);
 }
 
-void GameScene::Render(sf::RenderWindow* r_Window)
+void GameScene::Render(Window* window)
 {
+	window->Clear();
+
 	//Set window view and make it the player position
-	Engine::GetInstance()->SetViewPos(player->hurtBox.GetPosition());
+	view->setCenter(player->hurtBox.GetPosition());
+
+	window->SetView(view);
 
 	//Draw Game objects
-	r_Window->draw(player->hurtBox.Draw());
+	window->GetWindow()->draw(player->hurtBox.Draw());
 
 	for (auto& gro : ground) {
-		r_Window->draw(gro);
+		window->GetWindow()->draw(gro);
 	}
 	
 	for (auto& obj : monsters) {
-		r_Window->draw(obj->hurtBox.Draw());
+		window->GetWindow()->draw(obj->hurtBox.Draw());
 	}
 	
 	for (auto& obj : SpacialPartition::GetInstance()->GetProjectiles()) {
 		if (!obj.expired()) {
-			r_Window->draw(obj.lock()->hurtBox.Draw());
+			window->GetWindow()->draw(obj.lock()->hurtBox.Draw());
 		}
 	}
 
 	if (player->counterbox) {
-		if(player->counterbox->body) r_Window->draw(*player->counterbox->body);
+		if(player->counterbox->body) window->GetWindow()->draw(*player->counterbox->body);
 	}
-}
 
-void GameScene::RenderHUD(sf::RenderWindow* r_Window)
-{
-	UI::Draw(r_Window);
+	window->ResetView();
+
+//Render HUD
+
+	UI::Draw(window);
+
+	window->GetWindow()->draw(UI::fpsCounter);
+
+	//Display window
+	window->Display();
 }
 
 void GameScene::Pause() { 
@@ -179,6 +246,8 @@ void GameScene::Pause() {
 	else {
 		isPaused = true;
 	}
+
+	UI::Pause();
 }
 
 void GameScene::DestroyProjectiles(std::weak_ptr<Projectile> pro)

@@ -16,8 +16,7 @@ public:
 
 	void Input();
 	void Update(const float deltaTime_);
-	void Render(sf::RenderWindow* r_Window);
-	void RenderHUD(sf::RenderWindow* r_Window);
+	void Render(Window* window);
 
 	float gravity;
 

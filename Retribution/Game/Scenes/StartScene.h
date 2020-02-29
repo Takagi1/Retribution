@@ -14,8 +14,7 @@ public:
 
 	virtual void Input();
 	virtual void Update(const float deltaTime_);
-	virtual void Render(sf::RenderWindow* r_Window);
-	virtual void RenderHUD(sf::RenderWindow* r_Window);
+	virtual void Render(Window* window);
 
 	StartMenu startMenu;
 

@@ -26,7 +26,7 @@ PauseMenu::PauseMenu()
 	textBoxs.push_back(textbox);
 
 	goldDisplay.setFont(UI::font);
-	goldDisplay.setPosition(sf::Vector2f(UI::pauseWindow.getGlobalBounds().left + 300 * Options::display.resolution.x / 1920, 1000 * Options::display.resolution.y / 1080));
+	goldDisplay.setPosition(sf::Vector2f(UI::pauseWindow.getGlobalBounds().left + 300 * Options::GetResolution().x / 1920, 1000 * Options::GetResolution().y / 1080));
 	goldDisplay.setFillColor(sf::Color::Black);
 }
 
@@ -45,13 +45,13 @@ void PauseMenu::CallFunction()
 	}
 }
 
-void PauseMenu::Draw(sf::RenderWindow * r_Window)
+void PauseMenu::Draw(Window * window)
 {
 	for (auto& all : textBoxs) {
-		all.Draw(r_Window);
+		all.Draw(window);
 	}
 	goldDisplay.setString("Gold: " + std::to_string(PlayerCharacter::GetGold()));
-	r_Window->draw(goldDisplay);
+	window->GetWindow()->draw(goldDisplay);
 }
 
 void PauseMenu::Exit()

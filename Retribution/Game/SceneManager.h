@@ -1,6 +1,7 @@
 #ifndef SCENEMANAGER_H
 #define SCENEMANAGER_H
 #include "../Engine/Core/Engine.h"
+#include "UI/UI.h"
 
 
 class SceneManager : public GameInterface
@@ -12,8 +13,7 @@ public:
 
 	virtual void Input();
 	virtual void Update(const float deltaTime_) override;
-	virtual void Render(sf::RenderWindow* r_Window) override;
-	virtual void RenderHUD(sf::RenderWindow* r_Window) override;
+	virtual void Render(Window* window) override;
 
 private:
 	Scene* currentScene;

@@ -19,6 +19,7 @@ SceneManager::~SceneManager()
 
 bool SceneManager::OnCreate()
 {
+
 	if (Engine::GetInstance()->GetCurrentScene() == 0) {
 		currentScene = new StartScene();
 		if (!currentScene->OnCreate()) {
@@ -45,14 +46,9 @@ void SceneManager::Update(const float deltaTime_)
 	currentScene->Update(deltaTime_);
 }
 
-void SceneManager::Render(sf::RenderWindow* r_Window)
+void SceneManager::Render(Window* r_Window)
 {
-	currentScene->Render(r_Window);
-}
-
-void SceneManager::RenderHUD(sf::RenderWindow* r_Window)
-{
-	currentScene->RenderHUD(r_Window);
+	currentScene->Render(r_Window);	
 }
 
 void SceneManager::BuildScene()

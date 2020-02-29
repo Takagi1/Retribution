@@ -17,7 +17,7 @@ public:
 	void Select();
 	void Deselect();
 
-	void Draw(sf::RenderWindow* r_Window);
+	void Draw(Window* window);
 private:
 	sf::RectangleShape box;
 	sf::Text text;

@@ -15,7 +15,7 @@ int PlayerCharacter::dodgeLimit = 1;
 
 
 PlayerCharacter::PlayerCharacter(GameScene* scene_) : Character(), counterbox(std::unique_ptr<CounterBox>()), isBlocking(false),
-inputDelay(0.025f), inputTime(0), walkSpeed(200), dodgeSpeed(250), vulnerableTime(0), isVulnerable(false), cross(false)
+inputDelay(0.025f), inputTime(0), walkSpeed(200), dodgeSpeed(250), vulnerableTime(0), isVulnerable(false), cross(false), alt(false)
 {
 	scene = scene_;
 
@@ -74,8 +74,6 @@ void PlayerCharacter::Update(const float deltaTime_)
 				}
 			}
 			else if (parry && animationState["Idle"] || counter && animationState["Idle"]) {
-				int boxType = 0;
-				if (counter) { boxType = 1; }
 				inputTime += deltaTime_;
 				if (inputTime >= inputDelay) {
 					int x = 0;
@@ -85,11 +83,12 @@ void PlayerCharacter::Update(const float deltaTime_)
 
 					if (up) { y = -1; }
 					else if (down) { y = 1; }
-					Action(x, y, boxType);
+					Action(x, y);
 				}
 			}
 			else
 			{
+				inputTime = 0;
 				if (animationState["Idle"]) {
 					if (left) { xSpeed = -walkSpeed; }
 					else if (right) { xSpeed = walkSpeed; }
@@ -228,6 +227,16 @@ void PlayerCharacter::RelCounter() { counter = false; }
 void PlayerCharacter::PresDodge() { dodge = true; }
 void PlayerCharacter::RelDodge() { dodge = false; }
 
+void PlayerCharacter::PresAlt()
+{
+	alt = true;
+}
+
+void PlayerCharacter::RelAlt()
+{
+	alt = false;
+}
+
 void PlayerCharacter::Dodge(int x_, int y_)
 {
 	dodgeCount += 1;
@@ -240,9 +249,12 @@ void PlayerCharacter::Dodge(int x_, int y_)
 	inputTime = 0;
 }
 
-void PlayerCharacter::Action(int x_, int y_, int type_)
+void PlayerCharacter::Action(int x_, int y_)
 {
-	animationState["Idle"] = false;
-	counterbox = std::make_unique<CounterBox>(scene, x_, y_, type_);
+	int type = 0;
+	if (counter) { type += 1; }
+	if (alt) { type += 2; }
+
+	counterbox = std::make_unique<CounterBox>(scene, x_, y_, type);
 	inputTime = 0;
 }

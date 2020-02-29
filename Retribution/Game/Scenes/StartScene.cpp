@@ -16,6 +16,8 @@ StartScene::~StartScene()
 bool StartScene::OnCreate()
 {
 	Debug::Info("Creating Start Scene", "StartScene.cpp", __LINE__);
+	
+	view = new sf::View(sf::FloatRect(sf::Vector2f(0, 0), Options::GetResolution()));
 
 	title.setString("Retribution");
 	title.setFont(UI::font);
@@ -52,12 +54,12 @@ void StartScene::Update(const float deltaTime_)
 	startMenu.UpdateTxt();
 }
 
-void StartScene::Render(sf::RenderWindow* r_Window)
+void StartScene::Render(Window* window)
 {
-}
+	window->Clear();
 
-void StartScene::RenderHUD(sf::RenderWindow* r_Window)
-{
-	startMenu.Draw(r_Window);
-	r_Window->draw(title);
+	startMenu.Draw(window);
+	window->GetWindow()->draw(title);
+
+	window->Display();
 }

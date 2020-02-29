@@ -50,7 +50,7 @@ void TextBox::Deselect()
 	box.setFillColor(sf::Color::White);
 }
 
-void TextBox::Draw(sf::RenderWindow * r_Window) {
-	r_Window->draw(box);
-	r_Window->draw(text);
+void TextBox::Draw(Window * window) {
+	window->GetWindow()->draw(box);
+	window->GetWindow()->draw(text);
 }

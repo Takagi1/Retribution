@@ -7,10 +7,6 @@
 class UI
 {
 public:
-	enum Menu {
-		PAUSEMENU
-	};
-
 	static void Init();
 
 	static sf::Font font;
@@ -26,11 +22,18 @@ public:
 
 	static void CallFunction();
 
-	static void Draw(sf::RenderWindow * r_Window);
+	static void Draw(Window * window);
 
+	static void Pause();
 private:
+
 	UI();
 	~UI();
+	enum Menu {
+		DEFAULT,
+		PAUSEMENU
+	};
+
 	static Menu menu;
 
 	static std::unique_ptr<InteractiveMenu> pauseMenu;

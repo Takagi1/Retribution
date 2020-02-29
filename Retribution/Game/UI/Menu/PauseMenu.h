@@ -11,7 +11,7 @@ public:
 
 	virtual void CallFunction();
 
-	void Draw(sf::RenderWindow* r_Window);
+	void Draw(Window* window);
 
 private:
 	void Exit();

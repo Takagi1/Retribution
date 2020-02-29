@@ -26,10 +26,10 @@ void UI::Init()
 	font.loadFromFile("OpenSans-Light.ttf");
 
 	//Hold resolution here to not have to keep accessing it 
-	float x = Options::display.resolution.x / 1920;
-	float y = Options::display.resolution.y / 1080;
+	float x = Options::GetResolution().x / 1920;
+	float y = Options::GetResolution().y / 1080;
 
-	menu = PAUSEMENU;
+	menu = DEFAULT;
 
 	//Setup HUD
 	healthDisplay.setFont(font);
@@ -79,7 +79,6 @@ void UI::CallFunction()
 {
 	switch (menu)
 	{
-
 	case UI::PAUSEMENU:
 		pauseMenu->CallFunction();
 		break;
@@ -88,18 +87,28 @@ void UI::CallFunction()
 	}
 }
 
-void UI::Draw(sf::RenderWindow * r_Window)
+void UI::Draw(Window * window)
 {
-	r_Window->draw(healthDisplay);
-	r_Window->draw(energyDisplay);
+	window->GetWindow()->draw(healthDisplay);
+	window->GetWindow()->draw(energyDisplay);
 
 	switch (menu)
 	{
 	case UI::PAUSEMENU:
-		r_Window->draw(pauseWindow);
-		pauseMenu->Draw(r_Window);
+		window->GetWindow()->draw(pauseWindow);
+		pauseMenu->Draw(window);
 		break;
 	default:
 		break;
+	}
+}
+
+void UI::Pause()
+{
+	if (menu != PAUSEMENU) {
+		menu = PAUSEMENU;
+	}
+	else {
+		menu = DEFAULT;
 	}
 }

@@ -37,6 +37,9 @@ public:
 	void PresDodge();
 	void RelDodge();
 
+	void PresAlt();
+	void RelAlt();
+
 //COUNTER BOX 
 
 	std::unique_ptr<CounterBox> counterbox;
@@ -87,6 +90,7 @@ private:
 	bool parry;
 	bool counter;
 	bool dodge;
+	bool alt;
 
 	bool canDodge;
 	int dodgeCount;
@@ -99,7 +103,7 @@ private:
 
 	void Dodge(int x_, int y_);
 
-	void Action(int x_, int y_, int type_);
+	void Action(int x_, int y_);
 
 	bool isVulnerable;
 	float vulnerableTime;

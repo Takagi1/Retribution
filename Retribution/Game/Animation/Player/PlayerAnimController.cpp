@@ -23,15 +23,18 @@ void PlayerAnimController::Update(const float deltaTime)
 	//Animation paths
 	if (currentAnimation) {
 		if (currentAnimation == animationList["Idle"]) {
+			//Trans to example
 			if (character->animationState["IsDodgeing"]) {
 				character->animationState["Idle"] = false;
 				Play("Roll");
 			}
+			//Restart
 			else if (currentAnimation->totalTime >= currentAnimation->maxTime) {
 				currentAnimation->RestartAnimation();
 			}
 		}
 		else if (currentAnimation == animationList["Roll"]) {
+			//Return example
 			if (currentAnimation->totalTime >= currentAnimation->maxTime) {
 				character->animationState["Idle"] = true;
 				character->animationState["IsDodgeing"] = false;

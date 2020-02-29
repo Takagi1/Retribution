@@ -6,6 +6,8 @@
 #include "GameInterface.h"
 #include "Scene.h"
 #include "Debug.h"
+#include "Timer.h"
+#include "Window.h"
 
 
 class Engine
@@ -18,7 +20,7 @@ public:
 	Engine& operator =(const Engine&) = delete;
 	Engine& operator =(Engine&&) = delete;
 
-	bool OnCreate(std::string name_);
+	bool OnCreate(std::string name_, int width_, int height_);
 	void Run();
 	bool GetIsRunning() const;
 
@@ -29,7 +31,8 @@ public:
 	int GetCurrentScene();
 	void SetCurrentScene(int sceneNum_);
 
-	void SetViewPos(sf::Vector2f pos_);
+	//Use to update window from options menu?
+	void UpdateWindow();
 
 	void Exit();
 
@@ -46,14 +49,11 @@ private:
 	void Update(const float deltaTime_);
 	void Render();
 
-	sf::RenderWindow r_Window;
-	sf::View view;
+	Window* window;
+
+	Timer timer;
 
 	//Computer display
-	int currentCount;
-	sf::Time totalTime;
-	sf::Clock timer;
-	unsigned int fps;
 
 	bool isRunning;
 

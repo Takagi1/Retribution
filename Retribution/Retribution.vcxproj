@@ -159,6 +159,7 @@
   <ItemGroup>
     <ClInclude Include="Engine\Core\Options.h" />
     <ClInclude Include="Engine\Core\Timer.h" />
+    <ClInclude Include="Engine\Core\Window.h" />
     <ClInclude Include="Game\Animation\Animation.h" />
     <ClInclude Include="Game\Animation\AnimationController.h" />
     <ClInclude Include="Character.h" />
@@ -191,6 +192,10 @@
     <ClInclude Include="SpacialPartition.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\Core\Window.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../pch.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="Game\Animation\Animation.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../pch.h</PrecompiledHeaderFile>

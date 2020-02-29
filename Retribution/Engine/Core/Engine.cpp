@@ -6,13 +6,10 @@
 
 //DEFINES
 
-//Resolutions
-#define RES_1280X720 1280, 720 
-#define RES_1920X1080 1920, 1080
 
 std::unique_ptr<Engine> Engine::engineInstance = nullptr;
 
-Engine::Engine() : isRunning(false), fps(60), gameInterface(nullptr), currentSceneNum(0) {
+Engine::Engine() : isRunning(false), gameInterface(nullptr), currentSceneNum(0) {
 
 }
 
@@ -21,24 +18,21 @@ Engine::~Engine()
 	OnDestroy();
 }
 
-bool Engine::OnCreate(std::string name_)
+bool Engine::OnCreate(std::string name_, int width_, int height_)
 {
 	Debug::DebugInit("Debug Log");
 	Debug::SetSeverity(MessageType::TYPE_INFO);
 
-	Options::display.SetDisplay(sf::Vector2u(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height));
+	//Options::display.SetDisplay(sf::Vector2u(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height));
 
-	//RenderWindow window
-	r_Window.create(sf::VideoMode(RES_1920X1080),
-		"Retribution",
-		sf::Style::Default);
+	
+	window = new Window();
+	if (!window->OnCreate(name_, width_, height_)) {
+		Debug::FatalError("Window failed to initialize", "CoreEngine", __LINE__);
+		return isRunning = false;
+	}
 
-	//Set FrameRate
-	r_Window.setFramerateLimit(fps);
-
-	//Set screen size
-	view.setSize(RES_1920X1080);
-	Options::display.resolution = view.getSize();
+	Options::SetResolution(sf::Vector2f(window->GetWidth(), window->GetHeight()));
 
 	if (gameInterface) {
 		if (!gameInterface->OnCreate()) {
@@ -110,8 +104,7 @@ void Engine::OnDestroy()
 
 void Engine::Input()
 {
-	while (r_Window.pollEvent(input)) {
-
+	while (window->GetWindow()->pollEvent(input)) {
 		if (gameInterface) {
 			gameInterface->Input();
 		}
@@ -127,32 +120,11 @@ void Engine::Update(const float deltaTime_)
 
 void Engine::Render()
 {
-	//Clear window
-	r_Window.clear(sf::Color::White);
-
 	//Render Scene
 	if (gameInterface) {
-		gameInterface->Render(&r_Window);
+		gameInterface->Render(window);
 	}
 
-	//Reset view
-	r_Window.setView(r_Window.getDefaultView());
-
-	//Render HUD
-	if (gameInterface) {
-		gameInterface->RenderHUD(&r_Window);
-	}
-
-	r_Window.draw(UI::fpsCounter);
-	//Display window
-	r_Window.display();
-	
-}
-
-void Engine::SetViewPos(sf::Vector2f pos_)
-{
-	view.setCenter(pos_);
-	r_Window.setView(view);
 }
 
 void Engine::SetGameInterface(GameInterface * gameInterface_)

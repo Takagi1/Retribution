@@ -1,6 +1,8 @@
 #ifndef GAMEINTERFACE_H
 #define GAMEINTERFACE_H
 
+class Window;
+
 class GameInterface {
 public:
 
@@ -11,8 +13,10 @@ public:
 
 	virtual void Input() = 0 ;
 	virtual void Update(const float deltaTime_) = 0;
-	virtual void Render(sf::RenderWindow* r_Window) = 0;
-	virtual void RenderHUD(sf::RenderWindow* r_Window) = 0;
+	virtual void Render(Window* window) = 0;
+
+private:
+	sf::Vector2f camera_size;
 
 };
 

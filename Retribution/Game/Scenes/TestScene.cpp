@@ -18,6 +18,8 @@ bool TestScene::OnCreate()
 {
 	Debug::Info("Creating Test Scene", "TestScene.cpp", __LINE__);
 
+	view = new sf::View(sf::FloatRect(sf::Vector2f(0, 0), Options::GetResolution()));
+
 	ground.reserve(1);
 
 	sf::RectangleShape piece;

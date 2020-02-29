@@ -3,22 +3,14 @@
 #include "SFML/Graphics.hpp"
 
 //DISPLAY SETTINGS
-struct Display {
-public:
-	sf::Vector2f resolution;
-
-	sf::Vector2u GetDisplay() {
-		return display;
-	}
-	void SetDisplay(sf::Vector2u display_) {
-		display = display_;
-	}
-
-private:
-	sf::Vector2u display;
-};
-
 class Options {
+	struct Display {
+		friend class Options;
+	private:
+		sf::Vector2f resolution;
+	};
+
+
 public:
 	Options(const Options&) = delete;
 	Options(Options&&) = delete;
@@ -27,5 +19,14 @@ public:
 
 	Options() = delete;
 
+	static sf::Vector2f GetResolution();
+	static void SetResolution(sf::Vector2f res_);
+
+	static void SetDisplayFPS(bool val);
+	static bool GetDisplayFPS();
+
+private:
 	static Display display;
+
+	static bool fpsDisplay;
 };

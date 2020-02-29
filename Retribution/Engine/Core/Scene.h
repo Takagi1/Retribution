@@ -9,8 +9,10 @@ public:
 
 	virtual void Input() = 0;
 	virtual void Update(const float deltaTime_) = 0;
-	virtual void Render(sf::RenderWindow* r_Window) = 0;
-	virtual void RenderHUD(sf::RenderWindow* r_Window) = 0;
+	virtual void Render(Window* window) = 0;
+
+	//Camera
+	sf::View* view;
 
 };
 #endif // !SCENE_H

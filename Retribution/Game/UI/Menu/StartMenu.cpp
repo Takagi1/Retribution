@@ -5,8 +5,8 @@
 
 StartMenu::StartMenu()
 {
-	float x = Options::display.resolution.x / 1920;
-	float y = Options::display.resolution.y / 1080;
+	float x = Options::GetResolution().x / 1920;
+	float y = Options::GetResolution().y / 1080;
 
 	TextBox textbox;
 	textbox.OnCreate(sf::Vector2f(200, 100), sf::Vector2f(880 * x, 320 * y));
@@ -45,10 +45,10 @@ void StartMenu::UpdateTxt()
 	textBoxs[1].SetText("Exit");
 }
 
-void StartMenu::Draw(sf::RenderWindow* r_Window)
+void StartMenu::Draw(Window* window)
 {
 	for (auto& all : textBoxs) {
-		all.Draw(r_Window);
+		all.Draw(window);
 	}
 }
 
