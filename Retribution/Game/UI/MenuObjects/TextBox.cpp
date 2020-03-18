@@ -36,7 +36,7 @@ void TextBox::SetText(std::string text_) {
 
 sf::Vector2f TextBox::GetSize() const
 {
-	float a = text.getGlobalBounds().width;
+	//float a = text.getGlobalBounds().width;
 	return box.getSize();
 }
 

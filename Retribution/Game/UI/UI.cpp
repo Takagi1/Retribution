@@ -60,6 +60,7 @@ void UI::Update(const float deltaTime_)
 	healthDisplay.setString("Health: " + std::to_string(PlayerCharacter::GetHealth()));
 
 	energyDisplay.setString("Energy: " + std::to_string(PlayerCharacter::GetEnergy()));
+
 }
 
 void UI::Scroll(int val_)
@@ -91,6 +92,10 @@ void UI::Draw(Window * window)
 {
 	window->GetWindow()->draw(healthDisplay);
 	window->GetWindow()->draw(energyDisplay);
+
+	if (Options::GetDisplayFPS()) {
+		window->GetWindow()->draw(fpsCounter);
+	}
 
 	switch (menu)
 	{

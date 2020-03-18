@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../HurtBox.h"
+#include "../../../HurtBox.h"
 
 class GameObject
 {

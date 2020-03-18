@@ -19,8 +19,16 @@ public:
 
 	virtual void Update(const float deltaTime_) = 0;
 
+	void SwitchAnimation(int val);
+
+	int GetCurrentAnimationState();
+
+protected:
 	//Put in a name to play that animation
 	void Play(std::string name_);
+
+	int animationState;
+	int currentAnimationState;
 
 };
 

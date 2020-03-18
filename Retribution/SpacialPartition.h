@@ -22,9 +22,7 @@ private:
 	{
 		std::vector<std::weak_ptr<Projectile>> projectileVector;
 		std::vector<std::weak_ptr<Monster>> monsterVector;
-		std::vector<sf::FloatRect> groundVector;
-
-		int a;
+		std::vector<sf::FloatRect> terrainVector;
 	};
 
 	struct Root
@@ -56,7 +54,7 @@ private:
 		struct Node *temp = new Node();
 		temp->monsterVector = std::vector<std::weak_ptr<Monster>>();
 		temp->projectileVector = std::vector<std::weak_ptr<Projectile>>();
-		temp->groundVector = std::vector<sf::FloatRect>();
+		temp->terrainVector = std::vector<sf::FloatRect>();
 		return temp;
 	}
 	bool Check(sf::Vector2f loc, sf::Vector2f range, sf::Vector2f pos, sf::Vector2f para);
@@ -86,8 +84,8 @@ public:
 	std::vector<std::weak_ptr<Monster>> GetMonsters() {
 		return tree->right->monsterVector;
 	}
-	std::vector<sf::FloatRect> GetGround() {
-		return tree->right->groundVector;
+	std::vector<sf::FloatRect> GetTerrain() {
+		return tree->right->terrainVector;
 	}
 
 	Root* tree;

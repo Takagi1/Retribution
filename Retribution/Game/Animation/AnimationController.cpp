@@ -3,7 +3,7 @@
 #include "../../Character.h"
 
 
-AnimationController::AnimationController() : currentAnimation(nullptr)
+AnimationController::AnimationController() : currentAnimation(nullptr), animationState(0), currentAnimationState(0)
 {
 	
 }
@@ -12,6 +12,16 @@ AnimationController::AnimationController() : currentAnimation(nullptr)
 AnimationController::~AnimationController()
 {
 
+}
+
+void AnimationController::SwitchAnimation(int val)
+{
+	animationState = val;
+}
+
+int AnimationController::GetCurrentAnimationState()
+{
+	return currentAnimationState;
 }
 
 void AnimationController::Play(std::string name_)

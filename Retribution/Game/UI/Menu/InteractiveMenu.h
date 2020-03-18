@@ -1,4 +1,5 @@
-#pragma once
+#ifndef INTERACTIVEMENU_H
+#define INTERACTIVEMENU_H
 
 #include "../MenuObjects/TextBox.h"
 #include <vector>
@@ -24,3 +25,4 @@ private:
 
 };
 
+#endif // !INTERACTIVEMENU_H

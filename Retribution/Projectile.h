@@ -1,7 +1,7 @@
 #ifndef PROJECTILE_H
 #define PROJECTILE_H
 
-#include "Engine/GameObject.h"
+#include "Engine/Rendering/2D/GameObject.h"
 
 class Monster;
 class Character;

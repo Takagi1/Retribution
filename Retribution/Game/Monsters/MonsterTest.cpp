@@ -28,8 +28,7 @@ void MonsterTest::Update(const float deltaTime)
 
 void MonsterTest::Behavior(const float deltaTime)
 {
-	float loc = scene->player->hurtBox.GetPosition().x - hurtBox.GetPosition().x;
-	Move(loc);
+	Move(scene->player->hurtBox.GetPosition().x - hurtBox.GetPosition().x);
 
 	delay -= deltaTime;
 

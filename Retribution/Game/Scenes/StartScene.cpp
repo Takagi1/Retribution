@@ -25,22 +25,44 @@ bool StartScene::OnCreate()
 	title.setFillColor(sf::Color::Black);
 	title.setCharacterSize(60);
 
+	//TODO: Add Scale variable?
+	float x = Options::GetResolution().x / 1920;
+	float y = Options::GetResolution().y / 1080;
+
+
+	//TODO: fix offset because resolution in not right on create
+	TextBox textbox;
+
+	textbox.OnCreate(sf::Vector2f(200, 100), sf::Vector2f(880 * x, 320 * y));
+
+	textbox.Select();
+	textbox.SetText("New Game");
+
+	textBoxs[0] = textbox;
+
+	textbox.OnCreate(sf::Vector2f(200, 100), sf::Vector2f(880 * x, 500 * y));
+
+	textbox.Deselect();
+	textbox.SetText("Exit");
+
+	textBoxs[1] = textbox;
+
 	return true;
 }
 
-void StartScene::Input()
+void StartScene::Input(sf::Event input)
 {
-	switch (Engine::GetInstance()->input.type)
+	switch (input.type)
 	{
 	case sf::Event::KeyPressed:
-		if (Engine::GetInstance()->input.key.code == sf::Keyboard::W) {
-			startMenu.MoveMenu(-1);
+		if (input.key.code == sf::Keyboard::W) {
+			MoveMenu(-1);
 		}
-		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::S) {
-			startMenu.MoveMenu(1);
+		else if (input.key.code == sf::Keyboard::S) {
+			MoveMenu(1);
 		}
-		else if (Engine::GetInstance()->input.key.code == sf::Keyboard::X) {
-			startMenu.CallFunction();
+		else if (input.key.code == sf::Keyboard::X) {
+			CallFunction();
 		}
 		break;
 	default:
@@ -48,18 +70,39 @@ void StartScene::Input()
 	}
 }
 
-//TODO: Find a better way to do this (not the most important thing though)
 void StartScene::Update(const float deltaTime_)
 {
-	startMenu.UpdateTxt();
 }
 
 void StartScene::Render(Window* window)
 {
 	window->Clear();
 
-	startMenu.Draw(window);
 	window->GetWindow()->draw(title);
 
+	for (auto& all : textBoxs) {
+		all.Draw(window);
+	}
+
 	window->Display();
+}
+
+void StartScene::MoveMenu(int val)
+{
+	if (counter + val < 0 || counter + val == 3) { return; }
+
+	textBoxs[counter].Deselect();
+	counter += val;
+
+	textBoxs[counter].Select();
+}
+
+void StartScene::CallFunction()
+{
+	if (counter == 0) {
+		Engine::GetInstance()->SetCurrentScene(1);
+	}
+	else if (counter == 1) {
+		Engine::GetInstance()->Exit();
+	}
 }

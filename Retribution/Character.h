@@ -2,7 +2,7 @@
 #define CHARACTER_H
 
 #include "Game/Animation/AnimationController.h"
-#include "Engine/GameObject.h"
+#include "Engine/Rendering/2D/GameObject.h"
 
 class GameScene;
 
@@ -18,14 +18,11 @@ public:
 	virtual void TakeDamage(int val) = 0;
 
 	std::unique_ptr<AnimationController> animationController;
-	std::unordered_map<std::string, bool> animationState;
 
 // Movement
 	
 	float xSpeed;
 	float ySpeed;
-
-	bool onGround;
 
 	float invTime;
 
@@ -37,9 +34,10 @@ public:
 
 protected:
 	GameScene* scene;
-private:
-	int maxHealth;
 
+	bool onGround;
+
+private:
 	bool inv;
 	bool isDead;
 };

@@ -17,14 +17,14 @@ GameScene::~GameScene()
 	
 }
 
-void GameScene::Input()
+void GameScene::Input(sf::Event input)
 {
 	//Direction detection
-	switch (Engine::GetInstance()->input.type)
+	switch (input.type)
 	{
 	case sf::Event::KeyPressed:
 
-		switch (Engine::GetInstance()->input.key.code)
+		switch (input.key.code)
 		{
 		case sf::Keyboard::D:
 			player->PresRight();
@@ -76,7 +76,7 @@ void GameScene::Input()
 		}
 
 		//Manual spawn testing
-		if (Engine::GetInstance()->input.key.code == sf::Keyboard::T) {
+		if (input.key.code == sf::Keyboard::T) {
 			std::shared_ptr<Monster> mon = std::make_shared<MonsterTest>(this);
 			mon->hurtBox.SetPosition(100, 650);
 			monsters.push_back(std::move(mon));
@@ -85,7 +85,7 @@ void GameScene::Input()
 
 	case sf::Event::KeyReleased:
 
-		switch (Engine::GetInstance()->input.key.code)
+		switch (input.key.code)
 		{
 		case sf::Keyboard::D:
 			player->RelRight();
@@ -111,10 +111,6 @@ void GameScene::Input()
 			player->RelCounter();
 			break;
 
-		case sf::Keyboard::L:
-			player->RelDodge();
-			break;
-
 		case sf::Keyboard::LShift:
 			player->RelAlt();
 			break;
@@ -133,7 +129,12 @@ void GameScene::Input()
 void GameScene::Update(const float deltaTime_)
 {
 	if (!isPaused) {
+
+		//Update Player
 		player->Update(deltaTime_);
+
+		//TODO: remove this from the update (if its a good idea)
+		//Get sceen display
 		sf::Vector2f display = Options::GetResolution();
 		display.x = display.x / 2;
 		display.y = display.y / 2;
@@ -146,27 +147,21 @@ void GameScene::Update(const float deltaTime_)
 			SpacialPartition::GetInstance()->Insert(display, mon);
 		}
 
-		//Insert Projectiles
-		for (auto& proj : projectiles) {
-			if (proj != nullptr) {
-				SpacialPartition::GetInstance()->Insert(display, proj);
-			}
-		}
-
 		//Insert ground
-		for (auto& gro : ground) {
+		for (auto& gro : terrain) {
 			SpacialPartition::GetInstance()->Insert(display, gro);
 		}
 
-		//Update all Monsters (for now but make it so that only monsters on screen get the full thing
-		for (unsigned int j = 0; j < monsters.size();) {
+		//Update all Monsters (for now but intent is to make it so that only monsters on screen get the full thing
+		for (unsigned int i = 0; i < monsters.size();) {
 
 			//Kill Monster
-			if (monsters[j]->GetDead()) {
-				//Safety? 
-				monsters[j].reset();
+			if (monsters[i]->GetDead()) {
 
-				monsters.erase(monsters.begin() + j);
+				//Safety? 
+				monsters[i].reset();
+
+				monsters.erase(monsters.begin() + i);
 				monsters.shrink_to_fit();
 
 				//Break if no monsters left
@@ -176,9 +171,17 @@ void GameScene::Update(const float deltaTime_)
 				continue;
 			}
 
-			monsters[j]->Update(deltaTime_);
+			monsters[i]->Update(deltaTime_);
 
-			j++;
+			i++;
+		}
+
+		//Insert Projectiles
+		//Is here so that any projectiles that are destroyed because of monster death do not get added to the partition saving time
+		for (auto& proj : projectiles) {
+			if (proj != nullptr) {
+				SpacialPartition::GetInstance()->Insert(display, proj);
+			}
 		}
 
 		//Projectiles on screen collsion detection
@@ -209,7 +212,7 @@ void GameScene::Render(Window* window)
 	//Draw Game objects
 	window->GetWindow()->draw(player->hurtBox.Draw());
 
-	for (auto& gro : ground) {
+	for (auto& gro : terrain) {
 		window->GetWindow()->draw(gro);
 	}
 	
@@ -227,13 +230,11 @@ void GameScene::Render(Window* window)
 		if(player->counterbox->body) window->GetWindow()->draw(*player->counterbox->body);
 	}
 
-	window->ResetView();
-
 //Render HUD
 
-	UI::Draw(window);
+	window->ResetView();
 
-	window->GetWindow()->draw(UI::fpsCounter);
+	UI::Draw(window);
 
 	//Display window
 	window->Display();
@@ -260,4 +261,14 @@ void GameScene::DestroyProjectiles(std::weak_ptr<Projectile> pro)
 			break;
 		}
 	}
+}
+
+void GameScene::SetGravity(float val)
+{
+	gravity = val;
+}
+
+float GameScene::GetGravity()
+{
+	return gravity;
 }

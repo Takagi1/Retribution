@@ -1,6 +1,8 @@
 #ifndef TEXTBOX_H
 #define TEXTBOX_H
 
+#include "../../../Engine/Core/Window.h"
+
 //TODO: Scale text to the box
 class TextBox
 {

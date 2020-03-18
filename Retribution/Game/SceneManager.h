@@ -7,11 +7,12 @@
 class SceneManager : public GameInterface
 {
 public:
+
 	SceneManager();
 	virtual ~SceneManager();
 	virtual bool OnCreate() override;
 
-	virtual void Input();
+	virtual void Input(sf::Event inp);
 	virtual void Update(const float deltaTime_) override;
 	virtual void Render(Window* window) override;
 

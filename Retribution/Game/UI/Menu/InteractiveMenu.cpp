@@ -15,15 +15,8 @@ InteractiveMenu::~InteractiveMenu()
 
 void InteractiveMenu::MoveMenu(int val)
 {
+	if (counter + val < 0 || counter + val == textBoxs.size()) { return; }
 
-	if (counter + val < 0) {
-		counter = 0;
-		return;
-	}
-	else if (counter + val == textBoxs.size()) {
-		counter = textBoxs.size() - 1;
-		return;
-	}
 	textBoxs[counter].Deselect();
 	counter += val;
 

@@ -67,11 +67,10 @@ void SpacialPartition::Insert(sf::Vector2f range, sf::RectangleShape rec)
 {
 	sf::FloatRect rect = rec.getGlobalBounds();
 
-	tree->right->a = 1;
 	if (Check(tree->key, range, rec.getPosition(), rec.getSize())) {
-		tree->right->groundVector.push_back(rect);
+		tree->right->terrainVector.push_back(rect);
 	}
 	else {
-		tree->left->groundVector.push_back(rect);
+		tree->left->terrainVector.push_back(rect);
 	}
 }

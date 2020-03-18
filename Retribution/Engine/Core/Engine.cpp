@@ -9,7 +9,7 @@
 
 std::unique_ptr<Engine> Engine::engineInstance = nullptr;
 
-Engine::Engine() : isRunning(false), gameInterface(nullptr), currentSceneNum(0) {
+Engine::Engine() : isRunning(false), gameInterface(nullptr), currentSceneNum(0), fps(60) {
 
 }
 
@@ -22,8 +22,6 @@ bool Engine::OnCreate(std::string name_, int width_, int height_)
 {
 	Debug::DebugInit("Debug Log");
 	Debug::SetSeverity(MessageType::TYPE_INFO);
-
-	//Options::display.SetDisplay(sf::Vector2u(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height));
 
 	
 	window = new Window();
@@ -43,6 +41,11 @@ bool Engine::OnCreate(std::string name_, int width_, int height_)
 
 	UI::Init();
 
+	//Display fps
+	Options::SetDisplayFPS(true);
+
+	timer.Start();
+
 	Debug::Info("Everything was created okay", "Engine.cpp", __LINE__);
 
 	return isRunning = true;
@@ -52,28 +55,15 @@ void Engine::Run()
 {
 	while (isRunning) {
 		
-		sf::Time dt = timer.restart();
-
-		//Debug prevent time breaking things
-		if (dt > sf::seconds(1.0f)) {
-			dt = timer.restart();
-		}
-
-		totalTime += dt;
-		currentCount += 1;
-
-		if (totalTime >= sf::seconds(1)) {
-			totalTime = sf::seconds(0);
-			UI::fpsCounter.setString("FPS: " + std::to_string(currentCount));
-			currentCount = 0;
-		}
+		timer.UpdateFrameTicks();
 
 		Input();
 
-		Update(dt.asSeconds());
+		Update(timer.GetDeltaTime());
 
 		Render();
 
+		SDL_Delay(timer.GetSleepTime(fps));
 	}
 
 	if (!isRunning) {
@@ -104,9 +94,10 @@ void Engine::OnDestroy()
 
 void Engine::Input()
 {
+	sf::Event input;
 	while (window->GetWindow()->pollEvent(input)) {
 		if (gameInterface) {
-			gameInterface->Input();
+			gameInterface->Input(input);
 		}
 	}
 }
@@ -124,7 +115,6 @@ void Engine::Render()
 	if (gameInterface) {
 		gameInterface->Render(window);
 	}
-
 }
 
 void Engine::SetGameInterface(GameInterface * gameInterface_)

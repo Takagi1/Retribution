@@ -32,10 +32,10 @@ bool SceneManager::OnCreate()
 	return false;
 }
 
-void SceneManager::Input()
+void SceneManager::Input(sf::Event inp)
 {
 
-	currentScene->Input();
+	currentScene->Input(inp);
 }
 
 void SceneManager::Update(const float deltaTime_)

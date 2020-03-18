@@ -10,6 +10,7 @@
 #define PCH_H
 
 // TODO: add headers that you want to pre-compile here
+#include "Engine/Core/Engine.h"
 #include "Engine/Core/Debug.h"
 #include "Engine/Core/Options.h"
 

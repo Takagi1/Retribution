@@ -7,8 +7,12 @@ public:
 
 	virtual bool OnCreate() = 0;
 
-	virtual void Input() = 0;
+
+	/*Input for scene type*/
+	virtual void Input(sf::Event inp) = 0;
+
 	virtual void Update(const float deltaTime_) = 0;
+
 	virtual void Render(Window* window) = 0;
 
 	//Camera

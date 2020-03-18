@@ -14,11 +14,9 @@ public:
 
 	virtual bool OnCreate() = 0;
 
-	void Input();
+	void Input(sf::Event inp);
 	void Update(const float deltaTime_);
 	void Render(Window* window);
-
-	float gravity;
 
 	//Enemies
 	std::vector<std::shared_ptr<Monster> > monsters;
@@ -26,17 +24,18 @@ public:
 	//Player
 	std::unique_ptr<PlayerCharacter> player;
 
-	std::vector<sf::RectangleShape> ground;
+	std::vector<sf::RectangleShape> terrain;
 
 	std::vector<std::shared_ptr<Projectile>> projectiles;
 
-	//PAUSE MENU 
-
 	void Pause();
-
 	void DestroyProjectiles(std::weak_ptr<Projectile> pro);
+
+	void SetGravity(float val);
+	float GetGravity();
 
 private:
 	bool isPaused;
+	float gravity;
 };
 #endif // !GAMESCENE_H

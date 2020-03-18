@@ -30,6 +30,7 @@ bool Window::OnCreate(std::string name_, int width_, int height_)
 		Debug::FatalError("Window failed to create", "Window.cpp", __LINE__);
 		return false;
 	}
+
 	//Set FrameRate
 	window->setFramerateLimit(60);
 

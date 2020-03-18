@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "HurtBox.h"
-#include "Engine/GameObject.h"
+#include "Engine/Rendering/2D/GameObject.h"
 
 HurtBox::HurtBox()
 {

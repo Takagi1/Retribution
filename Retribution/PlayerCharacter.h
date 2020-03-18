@@ -44,9 +44,8 @@ public:
 
 	std::unique_ptr<CounterBox> counterbox;
 
-	void ClearBox();
 	void SetBlock(bool blocking);
-	void Vulnerable();
+	void Vulnerable(float time_);
 	void SetCross(bool value);
 
 //Misc
@@ -61,6 +60,9 @@ public:
 
 	void AddGold(int value);
 	bool RemoveGold(int value);
+
+	//Reset Character to normal state
+	void Neutral();
 
 //Static value Returns
 

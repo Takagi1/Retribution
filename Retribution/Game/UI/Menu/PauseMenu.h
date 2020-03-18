@@ -1,5 +1,5 @@
-#ifndef INTERACTIVEMENU_H
-#define INTERACTIVEMENU_H
+#ifndef PAUSEMENU_H
+#define PAUSEMENU_H
 
 #include "InteractiveMenu.h"
 class PauseMenu :
@@ -18,4 +18,4 @@ private:
 
 	sf::Text goldDisplay;
 };
-#endif // !INTERACTIVEMENU_H
+#endif // !PAUSEMENU_H

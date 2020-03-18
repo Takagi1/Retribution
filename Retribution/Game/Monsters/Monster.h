@@ -21,7 +21,7 @@ public:
 	void SetHealth(int val);
 	void SetMaxHealth(int val);
 	
-	int dir;
+	bool isLeft;
 
 	std::vector<std::weak_ptr<Projectile>> proj;
 

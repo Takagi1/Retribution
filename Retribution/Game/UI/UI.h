@@ -25,6 +25,7 @@ public:
 	static void Draw(Window * window);
 
 	static void Pause();
+
 private:
 
 	UI();

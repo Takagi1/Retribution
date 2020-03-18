@@ -1,6 +1,8 @@
 #ifndef TIMER_H
 #define TIMER_H
 
+#include <SDL.h>
+
 class Timer {
 
 public:
@@ -13,11 +15,14 @@ public:
 	~Timer();
 
 	void Start();
+	void UpdateFrameTicks();
+	float GetDeltaTime() const;
+	unsigned int GetSleepTime(unsigned int fps_) const;
+	float GetCurrentTicks();
 
 private:
-	int currentCount;
-	sf::Time totalTime;
-	sf::Clock timer;
+	unsigned int prevTicks, currentTicks, currentCount;
+	float totalTime;
 
 };
 

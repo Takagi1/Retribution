@@ -2,7 +2,8 @@
 #define STARTSCENE_H
 
 #include "../../Engine/Core/Engine.h"
-#include "../UI/Menu/StartMenu.h"
+#include "../UI/MenuObjects/TextBox.h"
+#include <array>
 
 class StartScene : public Scene
 {
@@ -12,13 +13,21 @@ public:
 
 	virtual bool OnCreate();
 
-	virtual void Input();
+	virtual void Input(sf::Event inp);
 	virtual void Update(const float deltaTime_);
 	virtual void Render(Window* window);
 
-	StartMenu startMenu;
+	//StartMenu startMenu;
 
+private:
 	sf::Text title;
+
+	std::array<TextBox, 2> textBoxs;
+
+	void MoveMenu(int val);
+	void CallFunction();
+	int counter;
+
 
 };
 #endif // ! STARTSCENE_H

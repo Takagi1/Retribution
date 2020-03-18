@@ -50,7 +50,7 @@ bool Projectile::Collision(Character* player)
 			return true;
 		}
 	}
-	for (auto& gro : SpacialPartition::GetInstance()->GetGround()) {
+	for (auto& gro : SpacialPartition::GetInstance()->GetTerrain()) {
 		if (CollisionDetection(gro)) {
 			return true;
 		}

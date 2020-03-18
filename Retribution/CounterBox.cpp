@@ -52,9 +52,7 @@ bool CounterBox::Collision()
 				//Destroy projectile
 				scene->DestroyProjectiles(proj.lock());
 
-				scene->player->SetBlock(false);
-				scene->player->SetCross(false);
-				scene->player->ClearBox();
+				scene->player->Neutral();
 				return true;
 			}
 		}

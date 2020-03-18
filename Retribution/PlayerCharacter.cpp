@@ -9,8 +9,8 @@ int PlayerCharacter::health = 0;
 int PlayerCharacter::maxHealth = 250;
 int PlayerCharacter::gold = 0;
 int PlayerCharacter::energy = 1;
-int PlayerCharacter::energyMax = 25;
-int PlayerCharacter::dodgeLimit = 1;
+int PlayerCharacter::energyMax = 10;
+int PlayerCharacter::dodgeLimit = 2;
 
 
 
@@ -31,9 +31,6 @@ inputDelay(0.025f), inputTime(0), walkSpeed(200), dodgeSpeed(250), vulnerableTim
 	dodgeCount = 0;
 
 	animationController = std::make_unique<PlayerAnimController>(this);
-
-	animationState["Idle"] = true;
-	animationState["IsDodgeing"] = false;
 }
 
 
@@ -42,9 +39,10 @@ PlayerCharacter::~PlayerCharacter()
 
 }
 
+//TODO: add space between actions(like dodge) so that multiple actions do not occur.
 void PlayerCharacter::Update(const float deltaTime_)
 {
-	if (!animationState["IsDodgeing"]) { 
+	if (animationController->GetCurrentAnimationState() == 0) { 
 		xSpeed = 0; 
 
 		//Reset dodge
@@ -57,7 +55,7 @@ void PlayerCharacter::Update(const float deltaTime_)
 
 	if (!isVulnerable) {
 		if (left || right || up || down) {
-			if (dodge && canDodge) {
+			if (dodge) {
 				inputTime += deltaTime_;
 				if (inputTime >= inputDelay) {
 					int x = 0;
@@ -73,7 +71,7 @@ void PlayerCharacter::Update(const float deltaTime_)
 
 				}
 			}
-			else if (parry && animationState["Idle"] || counter && animationState["Idle"]) {
+			else if (parry || counter) {
 				inputTime += deltaTime_;
 				if (inputTime >= inputDelay) {
 					int x = 0;
@@ -89,10 +87,8 @@ void PlayerCharacter::Update(const float deltaTime_)
 			else
 			{
 				inputTime = 0;
-				if (animationState["Idle"]) {
-					if (left) { xSpeed = -walkSpeed; }
-					else if (right) { xSpeed = walkSpeed; }
-				}
+				if (left) { xSpeed = -walkSpeed; }
+				else if (right) { xSpeed = walkSpeed; }
 			}
 		}
 	}
@@ -109,9 +105,7 @@ void PlayerCharacter::Update(const float deltaTime_)
 		counterbox->Update(deltaTime_); 
 		if (counterbox) {
 			if (counterbox->GetLife() <= 0) {
-				Vulnerable();
-				SetBlock(false);
-				ClearBox();
+				counterbox.reset();
 			}
 		}
 	}
@@ -153,10 +147,12 @@ void PlayerCharacter::TakeDamage(int val)
 	invTime = 0.3f;
 }
 
-void PlayerCharacter::ClearBox()
+void PlayerCharacter::Neutral()
 {
+	SetBlock(false);
+	SetCross(false);
 	counterbox.reset();
-	animationState["Idle"] = true;
+	//animationController->SwitchAnimation(0);
 }
 
 void PlayerCharacter::SetBlock(bool blocking)
@@ -164,10 +160,10 @@ void PlayerCharacter::SetBlock(bool blocking)
 	isBlocking = blocking;
 }
 
-void PlayerCharacter::Vulnerable()
+void PlayerCharacter::Vulnerable(float time_)
 {
 	isVulnerable = true;
-	vulnerableTime = 0.5f;
+	vulnerableTime = time_;
 }
 
 void PlayerCharacter::SetCross(bool value)
@@ -224,14 +220,21 @@ void PlayerCharacter::RelParry() { parry = false; }
 void PlayerCharacter::PresCounter() { counter = true; }
 void PlayerCharacter::RelCounter() { counter = false; }
 
-void PlayerCharacter::PresDodge() { dodge = true; }
-void PlayerCharacter::RelDodge() { dodge = false; }
+void PlayerCharacter::PresDodge() { 
+	if (canDodge) {
+		dodge = true;
+	}
+}
+
+void PlayerCharacter::RelDodge()
+{
+	dodge = false;
+}
 
 void PlayerCharacter::PresAlt()
 {
 	alt = true;
 }
-
 void PlayerCharacter::RelAlt()
 {
 	alt = false;
@@ -240,8 +243,11 @@ void PlayerCharacter::RelAlt()
 void PlayerCharacter::Dodge(int x_, int y_)
 {
 	dodgeCount += 1;
-	if (dodgeCount == dodgeLimit) { canDodge = false; }
-	animationState["IsDodgeing"] = true;
+	if (dodgeCount == dodgeLimit) { 
+		canDodge = false; }
+	animationController->SwitchAnimation(1);
+
+	Vulnerable(0.2f);
 
 	xSpeed = x_ * dodgeSpeed;
 	ySpeed = y_ * dodgeSpeed;
@@ -256,5 +262,6 @@ void PlayerCharacter::Action(int x_, int y_)
 	if (alt) { type += 2; }
 
 	counterbox = std::make_unique<CounterBox>(scene, x_, y_, type);
+	Vulnerable(0.8f);
 	inputTime = 0;
 }

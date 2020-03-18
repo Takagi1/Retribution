@@ -27,7 +27,7 @@ void Character::Update(const float deltaTime)
 	}
 
 	//gravity
-	if (ySpeed < scene->gravity) { ySpeed += 4; }
+	if (ySpeed < scene->GetGravity()) { ySpeed += 4; }
 
 	//Individual checks to see if the player is moving into ground and from what direction
 

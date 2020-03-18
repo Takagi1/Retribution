@@ -13,8 +13,6 @@
 class Engine
 {
 public:
-	sf::Event input;
-
 	Engine(const Engine&) = delete;
 	Engine(Engine&&) = delete;
 	Engine& operator =(const Engine&) = delete;
@@ -26,7 +24,7 @@ public:
 
 	static Engine* GetInstance();
 
-	void SetGameInterface(GameInterface* gameInterface);
+	void SetGameInterface(GameInterface * gameInterface_);
 
 	int GetCurrentScene();
 	void SetCurrentScene(int sceneNum_);
@@ -35,6 +33,7 @@ public:
 	void UpdateWindow();
 
 	void Exit();
+
 
 private:
 	Engine();
@@ -52,6 +51,7 @@ private:
 	Window* window;
 
 	Timer timer;
+	unsigned int fps;
 
 	//Computer display
 
