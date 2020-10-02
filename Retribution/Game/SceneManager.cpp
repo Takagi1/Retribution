@@ -1,9 +1,5 @@
 #include "../pch.h"
 #include "SceneManager.h"
-#include "Scenes/StartScene.h"
-#include "Scenes/TestScene.h"
-
-
 
 SceneManager::SceneManager() : GameInterface(), currentScene(nullptr), currentSceneNum(0)
 {
@@ -19,8 +15,7 @@ SceneManager::~SceneManager()
 
 bool SceneManager::OnCreate()
 {
-
-	if (Engine::GetInstance()->GetCurrentScene() == 0) {
+	if (CoreEngine::GetInstance()->GetCurrentScene() == 0) {
 		currentScene = new StartScene();
 		if (!currentScene->OnCreate()) {
 			Debug::FatalError("Scene has failed on create", "Game1", __LINE__);
@@ -32,23 +27,17 @@ bool SceneManager::OnCreate()
 	return false;
 }
 
-void SceneManager::Input(sf::Event inp)
-{
-
-	currentScene->Input(inp);
-}
-
 void SceneManager::Update(const float deltaTime_)
 {
-	if (currentSceneNum != Engine::GetInstance()->GetCurrentScene()) {
+	if (currentSceneNum != CoreEngine::GetInstance()->GetCurrentScene()) {
 		BuildScene();
 	}
 	currentScene->Update(deltaTime_);
 }
 
-void SceneManager::Render(Window* r_Window)
+void SceneManager::Draw()
 {
-	currentScene->Render(r_Window);	
+	currentScene->Draw();
 }
 
 void SceneManager::BuildScene()
@@ -56,10 +45,10 @@ void SceneManager::BuildScene()
 	delete currentScene;
 	currentScene = nullptr;
 
-	switch (Engine::GetInstance()->GetCurrentScene()) {
+	switch (CoreEngine::GetInstance()->GetCurrentScene()) {
 
 	case 1:
-		currentScene = new TestScene();
+		currentScene = new GameScene();
 		break;
 	default:
 		currentScene = new StartScene();
@@ -67,8 +56,8 @@ void SceneManager::BuildScene()
 	}
 
 	if (!currentScene->OnCreate()) {
-		Debug::FatalError("Scene has failed on create", "SceneManager", __LINE__);
-		Engine::GetInstance()->Exit();
+		Debug::FatalError("Scene has failed on create", "Game1", __LINE__);
+		CoreEngine::GetInstance()->Exit();
 	}
-	currentSceneNum = Engine::GetInstance()->GetCurrentScene();
+	currentSceneNum = CoreEngine::GetInstance()->GetCurrentScene();
 }

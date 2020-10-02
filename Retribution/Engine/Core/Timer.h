@@ -3,8 +3,11 @@
 
 #include <SDL.h>
 
-class Timer {
 
+#include <SDL.h>
+
+class Timer
+{
 public:
 	Timer(const Timer&) = delete;
 	Timer(Timer&&) = delete;
@@ -21,8 +24,9 @@ public:
 	float GetCurrentTicks();
 
 private:
-	unsigned int prevTicks, currentTicks, currentCount;
-	float totalTime;
+	unsigned int prevTicks, currentTicks;
+
+
 
 };
 

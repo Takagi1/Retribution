@@ -23,32 +23,32 @@
     <ProjectGuid>{41D696C8-E5A6-4F67-9FE1-9F89EC13287B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Retribution</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -84,20 +84,20 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>D:\SFML\include;C:\GameDev\OpenGL\include;C:\GameDev\SDL\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\GameDev\OpenGL\include;C:\GameDev\SDL\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\SFML\lib;C:\GameDev\OpenGL\lib;C:\GameDev\SDL\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;SDL2main.lib;SDL2test.lib;glew32.lib;glew32s.lib;opengl32.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\GameDev\OpenGL\lib;C:\GameDev\SDL\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;SDL2main.lib;SDL2test.lib;glew32.lib;glew32s.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -157,40 +157,38 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Engine\Core\Options.h" />
+    <ClInclude Include="Engine\Camera\Camera.h" />
     <ClInclude Include="Engine\Core\Timer.h" />
     <ClInclude Include="Engine\Core\Window.h" />
-    <ClInclude Include="Game\Animation\Animation.h" />
-    <ClInclude Include="Game\Animation\AnimationController.h" />
-    <ClInclude Include="Character.h" />
-    <ClInclude Include="CounterBox.h" />
+    <ClInclude Include="Engine\Events\EventListener.h" />
+    <ClInclude Include="Engine\Events\KeyEventListener.h" />
+    <ClInclude Include="Engine\Events\MouseEventListener.h" />
+    <ClInclude Include="Engine\Graphics\ShaderHandler.h" />
+    <ClInclude Include="Engine\Graphics\TextureHandler.h" />
+    <ClInclude Include="Engine\Math\BoundingBox.h" />
+    <ClInclude Include="Engine\Math\CollisionDetection.h" />
+    <ClInclude Include="Engine\Math\CollisionHandler.h" />
+    <ClInclude Include="Engine\Math\Physics2D.h" />
+    <ClInclude Include="Engine\Rendering\Component.h" />
+    <ClInclude Include="Engine\Rendering\GameObject.h" />
+    <ClInclude Include="Engine\Rendering\GUI\GUIComponent.h" />
+    <ClInclude Include="Engine\Rendering\GUI\GUIObject.h" />
+    <ClInclude Include="Engine\Rendering\Types\Image.h" />
+    <ClInclude Include="Engine\Rendering\SceneGraph.h" />
+    <ClInclude Include="Engine\Rendering\SpriteSurface.h" />
     <ClInclude Include="Engine\Core\Debug.h" />
-    <ClInclude Include="Engine\Core\Engine.h" />
+    <ClInclude Include="Engine\Core\CoreEngine.h" />
     <ClInclude Include="Engine\Core\GameInterface.h" />
     <ClInclude Include="Engine\Core\Scene.h" />
     <ClInclude Include="Engine\Rendering\2D\GameObject.h" />
+    <ClInclude Include="Game\GameObjects\PlayerCharacter.h" />
     <ClInclude Include="Game\Scenes\GameScene.h" />
-    <ClInclude Include="Game\UI\MenuObjects\TextBox.h" />
-    <ClInclude Include="Game\UI\Menu\InteractiveMenu.h" />
-    <ClInclude Include="Game\Monsters\Monster.h" />
-    <ClInclude Include="Game\Animation\Monster\MonsterAnimController.h" />
-    <ClInclude Include="Game\Animation\Monster\MonsterIdle.h" />
-    <ClInclude Include="Game\UI\Menu\PauseMenu.h" />
-    <ClInclude Include="Game\Monsters\MonsterTest.h" />
-    <ClInclude Include="HurtBox.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Game\Animation\Player\PlayerAnimController.h" />
-    <ClInclude Include="Game\Animation\Player\PlayerIdle.h" />
-    <ClInclude Include="Projectile.h" />
-    <ClInclude Include="Game\Animation\Player\Roll.h" />
     <ClInclude Include="Game\SceneManager.h" />
     <ClInclude Include="Game\Scenes\StartScene.h" />
-    <ClInclude Include="PlayerCharacter.h" />
-    <ClInclude Include="Game\Scenes\TestScene.h" />
-    <ClInclude Include="Game\UI\UI.h" />
-    <ClInclude Include="SpacialPartition.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\Camera\Camera.cpp" />
     <ClCompile Include="Engine\Core\Timer.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../pch.h</PrecompiledHeaderFile>
@@ -199,21 +197,24 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../pch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="Game\Animation\Animation.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../pch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="Game\Animation\AnimationController.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../pch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="Character.cpp" />
-    <ClCompile Include="CounterBox.cpp" />
+    <ClCompile Include="Engine\Events\EventListener.cpp" />
+    <ClCompile Include="Engine\Events\KeyEventListener.cpp" />
+    <ClCompile Include="Engine\Events\MouseEventListener.cpp" />
+    <ClCompile Include="Engine\Graphics\ShaderHandler.cpp" />
+    <ClCompile Include="Engine\Graphics\TextureHandler.cpp" />
+    <ClCompile Include="Engine\Math\CollisionDetection.cpp" />
+    <ClCompile Include="Engine\Math\CollisionHandler.cpp" />
+    <ClCompile Include="Engine\Math\Physics2D.cpp" />
+    <ClCompile Include="Engine\Rendering\GameObject.cpp" />
+    <ClCompile Include="Engine\Rendering\GUI\GUIObject.cpp" />
+    <ClCompile Include="Engine\Rendering\Types\Image.cpp" />
+    <ClCompile Include="Engine\Rendering\SceneGraph.cpp" />
+    <ClCompile Include="Engine\Rendering\SpriteSurface.cpp" />
     <ClCompile Include="Engine\Core\Debug.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../pch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="Engine\Core\Engine.cpp">
+    <ClCompile Include="Engine\Core\CoreEngine.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -221,42 +222,10 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../pch.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="Game\GameObjects\PlayerCharacter.cpp" />
     <ClCompile Include="Game\Scenes\GameScene.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../pch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="Game\UI\MenuObjects\TextBox.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../pch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="Game\UI\Menu\InteractiveMenu.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../pch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="Game\Monsters\Monster.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../pch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="Game\Animation\Monster\MonsterAnimController.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../pch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="Game\Animation\Monster\MonsterIdle.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../pch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="Game\UI\Menu\PauseMenu.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../pch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="Game\Monsters\MonsterTest.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../pch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="HurtBox.cpp" />
-    <ClCompile Include="Engine\Core\Options.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -265,19 +234,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Game\Animation\Player\PlayerAnimController.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../pch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="Game\Animation\Player\PlayerIdle.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../pch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="Projectile.cpp" />
-    <ClCompile Include="Game\Animation\Player\Roll.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../pch.h</PrecompiledHeaderFile>
-    </ClCompile>
     <ClCompile Include="Game\SceneManager.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../pch.h</PrecompiledHeaderFile>
@@ -286,16 +242,10 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../pch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="PlayerCharacter.cpp" />
-    <ClCompile Include="Game\Scenes\TestScene.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../pch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="Game\UI\UI.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../pch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="SpacialPartition.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Engine\Shaders\SpriteFragShader.glsl" />
+    <None Include="Engine\Shaders\SpriteVertShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

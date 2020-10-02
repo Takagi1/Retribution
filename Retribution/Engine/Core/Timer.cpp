@@ -1,7 +1,4 @@
-#include "../../pch.h"
 #include "Timer.h"
-#include "../../Game/UI/UI.h"
-
 
 
 
@@ -19,15 +16,7 @@ void Timer::UpdateFrameTicks()
 {
 	prevTicks = currentTicks;
 	currentTicks = SDL_GetTicks();
-	if (Options::GetDisplayFPS()) {
-		currentCount += 1;
-		totalTime += GetDeltaTime();
-		if (totalTime >= 1.0f) {
-			UI::fpsCounter.setString("FPS: " + std::to_string(currentCount));
-			totalTime = 0;
-			currentCount = 0;
-		}
-	}
+
 }
 
 float Timer::GetDeltaTime() const
