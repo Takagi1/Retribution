@@ -24,7 +24,7 @@ void TextureHandler::OnDestroy()
 }
 
 void TextureHandler::CreateTexture(const std::string & textureName_, 
-	const std::string & textureFilePath_)
+	const std::string& textureFilePath_)
 {
 	Texture* t = new Texture();
 	SDL_Surface* surface = nullptr;

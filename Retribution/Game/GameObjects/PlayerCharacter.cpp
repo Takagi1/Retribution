@@ -8,7 +8,7 @@ int PlayerCharacter::maxHealth = 5;
 int PlayerCharacter::health = 5;
 
 
-PlayerCharacter::PlayerCharacter(glm::vec2 position_) : GameObject(position_, 1)
+PlayerCharacter::PlayerCharacter(glm::vec2 position_) : GameObject(position_, 0)
 {
 
 }
@@ -23,7 +23,7 @@ bool PlayerCharacter::OnCreate()
 	AddComponent<Image>();
 
 	GetComponent<Image>()->OnCreate(this);
-	GetComponent<Image>()->OnCreate("mario");
+	GetComponent<Image>()->OnCreate("Mario");
 
 
 

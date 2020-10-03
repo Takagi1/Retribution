@@ -163,6 +163,7 @@
     <ClInclude Include="Engine\Events\EventListener.h" />
     <ClInclude Include="Engine\Events\KeyEventListener.h" />
     <ClInclude Include="Engine\Events\MouseEventListener.h" />
+    <ClInclude Include="Engine\FX\LightSource.h" />
     <ClInclude Include="Engine\Graphics\ShaderHandler.h" />
     <ClInclude Include="Engine\Graphics\TextureHandler.h" />
     <ClInclude Include="Engine\Math\BoundingBox.h" />
@@ -199,6 +200,7 @@
     <ClCompile Include="Engine\Events\EventListener.cpp" />
     <ClCompile Include="Engine\Events\KeyEventListener.cpp" />
     <ClCompile Include="Engine\Events\MouseEventListener.cpp" />
+    <ClCompile Include="Engine\FX\LightSource.cpp" />
     <ClCompile Include="Engine\Graphics\ShaderHandler.cpp" />
     <ClCompile Include="Engine\Graphics\TextureHandler.cpp" />
     <ClCompile Include="Engine\Math\CollisionDetection.cpp" />
@@ -216,10 +218,6 @@
     <ClCompile Include="Engine\Core\CoreEngine.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../pch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="Engine\Rendering\2D\GameObject.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="Game\GameObjects\PlayerCharacter.cpp" />
     <ClCompile Include="Game\Scenes\GameScene.cpp">

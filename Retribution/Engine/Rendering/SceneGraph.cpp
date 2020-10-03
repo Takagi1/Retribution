@@ -104,14 +104,12 @@ void SceneGraph::Update(const float deltaTime_)
 
 void SceneGraph::Draw(Camera* camera_)
 {
-	glDisable(GL_DEPTH_TEST);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	glUseProgram(ShaderHandler::GetInstance()->GetShader("BasicShader"));
 
 	for (auto g : sceneGameObjects) {
 		g.second->Draw(camera_);
 	}
-	glEnable(GL_DEPTH_TEST);
 }
 
 void SceneGraph::OnDestroy()

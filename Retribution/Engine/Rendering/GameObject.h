@@ -58,9 +58,9 @@ public:
 			comp = nullptr;
 			return;
 		}
-
 		item->OnCreate(this);
 		components.push_back(item);
+		Debug::Info("Component created", "GameObject.h", __LINE__);
 	}
 
 	template<typename T>
