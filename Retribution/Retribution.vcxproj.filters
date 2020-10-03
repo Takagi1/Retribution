@@ -123,9 +123,6 @@
     <ClInclude Include="Engine\Rendering\GUI\GUIObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Rendering\GUI\GUIComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

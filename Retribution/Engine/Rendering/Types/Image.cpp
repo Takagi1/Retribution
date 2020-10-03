@@ -1,7 +1,7 @@
 #include "Image.h"
 #include "../../Events/MouseEventListener.h"
 #include "../GameObject.h"
-Image::Image() : Component()
+Image::Image() : Component(), sprite(nullptr)
 {
 
 }
@@ -28,6 +28,10 @@ bool Image::OnCreate(std::string name_, glm::vec2 offset_, glm::vec2 scale_, flo
 		box.pos = parent->GetPosition();
 	}
 	return true;
+}
+
+void Image::Update(const float deltaTime_)
+{
 }
 
 void Image::Draw(Camera* camera_)
@@ -85,6 +89,7 @@ bool Image::FindContainingPoint()
 		}
 		return false;
 	}
+	return false;
 }
 
 void Image::UpdateBox(glm::vec2 pos_)

@@ -8,11 +8,13 @@ public:
 	Image();
 	~Image();
 
-	bool OnCreate(GameObject* parent_);
+	bool OnCreate(GameObject* parent_) override;
 	bool OnCreate(std::string name_, glm::vec2 offset_ = glm::vec2(0), 
 		glm::vec2 scale_ = glm::vec2(1), float angle_ = 0, glm::vec4 tint_ = glm::vec4(1));
 
-	void Draw(Camera* camera_);
+	void Update(const float deltaTime_) override;
+
+	void Draw(Camera* camera_) override;
 
 	//Getters
 	glm::vec2 GetOffset() const;
@@ -25,7 +27,7 @@ public:
 	void SetScale(const glm::vec2 scale_);
 
 
-	bool FindContainingPoint();
+	bool FindContainingPoint() override;
 
 	void UpdateBox(glm::vec2 pos_);
 

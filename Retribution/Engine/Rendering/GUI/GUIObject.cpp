@@ -1,6 +1,6 @@
 #include "GUIObject.h"
 
-GUIObject::GUIObject(glm::vec2 position_)
+GUIObject::GUIObject(glm::vec2 position_) : rotation(0)
 {
 	position = position_;
 }

@@ -1,8 +1,8 @@
 #pragma once
-#include "GUI_Component.h"
+#include "../Component.h"
 #include "../SpriteSurface.h"
 
-class GUI_Image : public GUI_Component {
+class GUI_Image : public Component {
 public:
 	GUI_Image();
 	~GUI_Image();

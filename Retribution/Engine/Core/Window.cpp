@@ -1,7 +1,7 @@
 #include "Window.h"
 #include "Debug.h"
 
-Window::Window() :window(nullptr), width(0), height(0)
+Window::Window() :window(nullptr), width(0), height(0), context(nullptr)
 {
 
 

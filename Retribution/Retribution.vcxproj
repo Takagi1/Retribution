@@ -171,7 +171,6 @@
     <ClInclude Include="Engine\Math\Physics2D.h" />
     <ClInclude Include="Engine\Rendering\Component.h" />
     <ClInclude Include="Engine\Rendering\GameObject.h" />
-    <ClInclude Include="Engine\Rendering\GUI\GUIComponent.h" />
     <ClInclude Include="Engine\Rendering\GUI\GUIObject.h" />
     <ClInclude Include="Engine\Rendering\Types\Image.h" />
     <ClInclude Include="Engine\Rendering\SceneGraph.h" />

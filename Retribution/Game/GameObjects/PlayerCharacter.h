@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PLAYERCHARACTER_H
+#define PLAYERCHARACTER_H
 
 #include "../../Engine/Rendering/GameObject.h"
 
@@ -18,3 +19,4 @@ public:
 private:
 
 };
+#endif // !PLAYERCHARACTER_H

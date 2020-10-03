@@ -2,7 +2,8 @@
 #include "../Rendering/GameObject.h"
 
 
-Physics2D::Physics2D() : Component() {
+Physics2D::Physics2D() : Component(), torque(0),rotationalInertia(0),mass(0),
+applyGravity(false),angularVel(0),angularAcc(0){
 
 }
 

@@ -1,6 +1,6 @@
 #include "GameObject.h"
 #include "Types/Image.h"
-GameObject::GameObject(glm::vec2 position_, float depth_)
+GameObject::GameObject(glm::vec2 position_, float depth_) : angle(0)
 {
 	position = glm::vec3(position_,depth_);
 }
