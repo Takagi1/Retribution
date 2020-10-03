@@ -21,7 +21,7 @@ if frame rate is unlocked cannot dodge up.
 int main(int argc, char* argv[]) {
 	CoreEngine::GetInstance()->SetGameInterface(new SceneManager);
 
-	if (!CoreEngine::GetInstance()->OnCreate("Retribution", 1920, 1080)) {
+	if (!CoreEngine::GetInstance()->OnCreate("Retribution", 800, 600)) {
 		return 0;
 	}
 

@@ -1,4 +1,4 @@
- #include "SpriteSurface.h"
+#include "SpriteSurface.h"
 #include "../Graphics/TextureHandler.h"
 
 
@@ -12,20 +12,22 @@ SpriteSurface::SpriteSurface(GLuint shaderProgram_, std::string name_, glm::vec2
 
 	vertexList.reserve(4);
 
+
+	//Inverted the position y.s got facing the right direction but now i need to get him to turn -90
 	vertexList.push_back(Vertex2D());
-	vertexList[0].position = glm::vec2(0.5f, -0.5f);
+	vertexList[0].position = glm::vec2(0.5f, 0.5f);
 	vertexList[0].texCoord = glm::vec2(0, 0);
 
 	vertexList.push_back(Vertex2D());
-	vertexList[1].position = glm::vec2(0.5f, 0.5f);
+	vertexList[1].position = glm::vec2(0.5f, -0.5f);
 	vertexList[1].texCoord = glm::vec2(1, 0);
 
 	vertexList.push_back(Vertex2D());
-	vertexList[2].position = glm::vec2(-0.5f, -0.5f);
+	vertexList[2].position = glm::vec2(-0.5f, 0.5f);
 	vertexList[2].texCoord = glm::vec2(0, 1);
 
 	vertexList.push_back(Vertex2D());
-	vertexList[3].position = glm::vec2(-0.5f, 0.5f);
+	vertexList[3].position = glm::vec2(-0.5f, -0.5f);
 	vertexList[3].texCoord = glm::vec2(1, 1);
 
 	if (!TextureHandler::GetInstance()->GetTexture(name)) {

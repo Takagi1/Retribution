@@ -26,8 +26,8 @@ bool PlayerCharacter::OnCreate()
 	GetComponent<Image>()->OnCreate("Mario");
 
 
-
-	SetScale(glm::vec2(0.5));
+	SetPosition(glm::vec2(400.0f, 300.0f));
+	SetScale(glm::vec2(100.0f,100.0f));
 
 	health = 5;
 
