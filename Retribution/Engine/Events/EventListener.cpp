@@ -1,11 +1,11 @@
 #include "EventListener.h"
 #include "../Core/CoreEngine.h"
+#include "KeyEventListener.h"
 
 bool EventListener::KEY_UP = false;
 bool EventListener::KEY_DOWN = false;
 bool EventListener::KEY_LEFT = false;
 bool EventListener::KEY_RIGHT = false;
-bool EventListener::KEY_A = false;
 bool EventListener::KEY_B = false;
 bool EventListener::KEY_C = false;
 
@@ -30,36 +30,10 @@ void EventListener::Update()
 			MouseEventListener::Update(sdlEvent);
 			break;
 		case SDL_KEYDOWN:
-			switch (sdlEvent.key.keysym.sym) {
-
-			}
+			KeyEventListener::PressKey(sdlEvent.key.keysym.sym);
 			break;
 		case SDL_KEYUP:
-			switch (sdlEvent.key.keysym.sym) {
-			case SDLK_LEFT:
-				KEY_LEFT = false;
-				break;
-			case SDLK_RIGHT:
-				KEY_RIGHT = false;
-				break;
-			case SDLK_UP:
-				KEY_UP = false;
-				break;
-			case SDLK_DOWN:
-				KEY_DOWN = false;
-				break;
-			case SDLK_a:
-				KEY_A = false;
-				break;
-			case SDLK_b:
-				KEY_B = false;
-				break;
-			case SDLK_c:
-				KEY_C = false;
-				break;
-			default:
-				break;
-			}
+			KeyEventListener::ReleaseKey(sdlEvent.key.keysym.sym);
 			break;
 		default:
 			break;

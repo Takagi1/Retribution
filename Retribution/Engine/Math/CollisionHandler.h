@@ -2,7 +2,7 @@
 #define COLLISIONHANDLER_H
 
 #include "../Rendering/GameObject.h"
-//#include "../Core/OctSpatialPartition.h"
+#include "../Core/QuadSpatialPartition.h"
 
 class CollisionHandler
 {
@@ -17,6 +17,7 @@ public:
 	void OnCreate(float worldSize_);
 	void AddObject(GameObject* go_);
 	void MouseUpdate(glm::vec2 mousePosition_, int buttonType_);
+	std::vector<GameObject*> AABB(BoundingBox box);
 
 private:
 	CollisionHandler();
@@ -28,7 +29,9 @@ private:
 	
 	static std::vector<GameObject*> prevCollisions;
 
-	//static OctSpatialPartition* scenePartition;
+	//static std::vector
+
+	static QuadSpatialPartition* scenePartition;
 
 };
 #endif // !COLLISIONHANDLER_H

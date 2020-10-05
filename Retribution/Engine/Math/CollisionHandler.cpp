@@ -3,7 +3,7 @@
 
 std::unique_ptr<CollisionHandler> CollisionHandler::collisionInstance = nullptr;
 std::vector<GameObject*> CollisionHandler::prevCollisions = std::vector<GameObject*>();
-//OctSpatialPartition* CollisionHandler::scenePartition = nullptr;
+QuadSpatialPartition* CollisionHandler::scenePartition = nullptr;
 
 CollisionHandler::CollisionHandler()
 {
@@ -31,19 +31,19 @@ void CollisionHandler::OnDestroy()
 	}
 	prevCollisions.clear();
 
-	//delete scenePartition;
-	//scenePartition = nullptr;
+	delete scenePartition;
+	scenePartition = nullptr;
 }
 
 void CollisionHandler::OnCreate(float worldSize_)
 {
 	prevCollisions.clear();
-	//scenePartition = new OctSpatialPartition(worldSize_);
+	scenePartition = new QuadSpatialPartition(worldSize_);
 }
 
 void CollisionHandler::AddObject(GameObject * go_)
 {
-	//scenePartition->AddObject(go_);
+	scenePartition->AddObject(go_);
 }
 
 //Issue is that mouse Ray origin is said to be in the 10ns of thousands
@@ -73,4 +73,11 @@ void CollisionHandler::MouseUpdate(glm::vec2 mousePosition_, int buttonType_)
 		}
 	}
 	*/
+}
+
+std::vector<GameObject*> CollisionHandler::AABB(BoundingBox box)
+{
+	if (scenePartition) {
+		return scenePartition->GetCollision(box);
+	}
 }

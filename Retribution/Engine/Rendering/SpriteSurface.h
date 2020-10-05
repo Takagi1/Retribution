@@ -19,7 +19,7 @@ struct Vertex2D {
 
 class SpriteSurface {
 public:
-	SpriteSurface(GLuint shaderProgram_, std::string name_, glm::vec2 scale_ = glm::vec2(1.0f), float angle_ = 0.0f, glm::vec4 tint_ = glm::vec4(1));
+	SpriteSurface(bool useView_, GLuint shaderProgram_, std::string name_, glm::vec2 scale_ = glm::vec2(1.0f), float angle_ = 0.0f, glm::vec4 tint_ = glm::vec4(1));
 	~SpriteSurface();
 
 	void Draw(Camera* camera_,  glm::vec2 position_);
@@ -41,8 +41,11 @@ private:
 
 	GLuint VAO, VBO;
 	GLuint shaderProgram;
-	GLuint modelLoc, projLoc, colourLoc;
+	GLuint modelLoc, projLoc, viewLoc, colourLoc;
 
 	GLuint textureID;
+
+	//Use to stop sprite from being effected by view matrix;
+	bool useView;
 };
 #endif // !SPRITESURFACE_H

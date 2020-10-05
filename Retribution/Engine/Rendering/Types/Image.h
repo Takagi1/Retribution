@@ -9,7 +9,7 @@ public:
 	~Image();
 
 	bool OnCreate(GameObject* parent_) override;
-	bool OnCreate(std::string name_, glm::vec2 offset_ = glm::vec2(0), 
+	bool OnCreate(GLuint shaderID, std::string name_, bool useView_, glm::vec2 offset_ = glm::vec2(0), 
 		glm::vec2 scale_ = glm::vec2(1), float angle_ = 0, glm::vec4 tint_ = glm::vec4(1));
 
 	void Update(const float deltaTime_) override;

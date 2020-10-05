@@ -3,8 +3,6 @@
 #include "../Core/CoreEngine.h"
 
 
-
-
 CollisionDetection::~CollisionDetection()
 {
 }

@@ -3,6 +3,13 @@
 #include "../Rendering/Component.h"
 #include <glm/glm.hpp>
 
+
+enum class COLLISIONTYPE {
+	NONE,
+	CONTINUOUS,
+	DISCRETE
+};
+
 class GameObject;
 
 class Physics2D : public Component {
@@ -27,11 +34,22 @@ public:
 	//Apply gravity to object
 	void ApplyGravity(bool state_);
 
+//Section for Collision
+
+	//TODO: optional: create ray and implement this
+	void ContinuousDetection();
+
+
+	void DiscreteDetection();
+
 private:
-	bool applyGravity;
 
 	glm::vec2 velocity, acceleration, forward_thrust_space, forward_thrust_world, force;
 
-	float torque, mass, rotationalInertia, angularVel, angularAcc;
+	float torque, mass, rotationalInertia, angularVel, angularAcc, gravity;
+
+	COLLISIONTYPE collisionType;
+
+
 
 };

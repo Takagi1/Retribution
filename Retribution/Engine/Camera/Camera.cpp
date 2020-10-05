@@ -42,6 +42,11 @@ void Camera::SetRotation(float yaw_, float pitch_)
 	UpdateCameraVectors();
 }
 
+void Camera::Translate(const glm::vec3 movement_)
+{
+	SetPosition(position + movement_);
+}
+
 glm::mat4 Camera::GetView() const
 {
 	return glm::lookAt(position, position + forward, up);
@@ -79,6 +84,7 @@ glm::vec2 Camera::GetClippingPlanes() const
 
 void Camera::ProcessMouseMovement(glm::vec2 offset_)
 {
+	/*
 	offset_ *= 0.05f;
 	
 	yaw += offset_.x;
@@ -98,7 +104,7 @@ void Camera::ProcessMouseMovement(glm::vec2 offset_)
 	if (yaw > 360.0f) {
 		yaw -= 360.0f;
 	}
-
+	*/
 	UpdateCameraVectors();
 }
 

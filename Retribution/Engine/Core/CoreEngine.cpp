@@ -33,6 +33,10 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 		"Engine/Shaders/SpriteVertShader.glsl",
 		"Engine/Shaders/SpriteFragShader.glsl");
 
+	ShaderHandler::GetInstance()->CreateProgram("GUIShader",
+		"Engine/Shaders/GUIVertShader.glsl",
+		"Engine/Shaders/GUIFragShader.glsl");
+
 	if (gameInterface) {
 		if (!gameInterface->OnCreate()) {
 			Debug::Error("GameInterface could not be created", "CoreEngine.cpp", __LINE__);
@@ -113,7 +117,7 @@ void CoreEngine::Draw()
 
 	//TODO: should i remove the depth buffer bit? is it redunedt or needed
 	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	if (gameInterface) {
 		gameInterface->Draw();
 	}

@@ -1,4 +1,3 @@
-#include "../pch.h"
 #include "SceneManager.h"
 
 SceneManager::SceneManager() : GameInterface(), currentScene(nullptr), currentSceneNum(0)

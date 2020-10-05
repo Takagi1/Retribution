@@ -3,11 +3,13 @@
 
 #include <glm/glm.hpp>
 
+//Pos is Top Left
 struct BoundingBox {
 public:
 
 	//x = Width, y = Height
 	glm::vec2 dimentions;
+
 	glm::vec2 pos;
 
 	inline BoundingBox() {
@@ -20,7 +22,8 @@ public:
 		pos = pos_;
 	}
 
-
+	//Is not in collision because collision should be for the objects 
+	//not the box's (I think?)
 	inline bool Intersects(BoundingBox* box_) {
 		//return (glm::abs((point.x + width / 2) - (box_->point.x + box_->width / 2)) * 2 < (width + box_->width)) &&
 		//	(glm::abs((point.y + height / 2) - (box_->point.y + box_->height / 2)) * 2 < (height + box_->height));

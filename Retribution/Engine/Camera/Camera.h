@@ -17,6 +17,10 @@ public:
 	void SetPosition(glm::vec3 position_);
 	void SetRotation(float yaw_, float pitch_);
 
+	//Use instead of SetPosition to move the camera easier unless you want
+	//to move it to a specific location
+	void Translate(const glm::vec3 movement_);
+
 	glm::mat4 GetView() const;
 	glm::mat4 GetPerspective() const;
 	glm::mat4 GetOrthographic() const;

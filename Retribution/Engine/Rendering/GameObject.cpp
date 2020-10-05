@@ -7,6 +7,13 @@ GameObject::GameObject(glm::vec2 position_, float depth_) : angle(0)
 
 GameObject::~GameObject()
 {
+	if (components.size() > 0) {
+		for (auto c : components) {
+			delete c;
+			c = nullptr;
+		}
+		components.clear();
+	}
 }
 
 bool GameObject::OnCreate()
@@ -26,6 +33,16 @@ void GameObject::Draw(Camera* camera_)
 	for (auto c : components) {
 		c->Draw(camera_);
 	}
+}
+
+void GameObject::Translate(glm::vec2 trans)
+{
+	SetPosition(GetPosition() + trans);
+}
+
+void GameObject::Rotate(float angle_)
+{
+	SetAngle(GetAngle() + angle);
 }
 
 void GameObject::SetPosition(glm::vec2 position_)
@@ -51,14 +68,19 @@ void GameObject::SetScale(glm::vec2 scale_)
 	}
 }
 
-void GameObject::SetTag(std::string tag_)
+void GameObject::SetName(std::string name_)
 {
-	tag = tag_;
+	name = name_;
 }
 
 void GameObject::SetDepth(float depth_)
 {
 	position.z = depth_;
+}
+
+void GameObject::SetTag(std::string tag_)
+{
+	tag = tag_;
 }
 
 glm::vec2 GameObject::GetPosition() const
@@ -87,4 +109,9 @@ bool GameObject::MouseDettection()
 		}
 	}
 	return false;
+}
+
+BoundingBox GameObject::GetBoundingBox() const
+{
+	return box;
 }

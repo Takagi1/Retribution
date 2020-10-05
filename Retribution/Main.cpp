@@ -2,7 +2,7 @@
 
 #include "pch.h"
 #include <iostream>
-#include "Game/SceneManager.h"
+#include "Game/Scenes/SceneManager.h"
 
 //TODO: Finish animation and animation controller to a satesfactory degree
 //TODO: Improve and finish UI

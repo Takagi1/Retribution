@@ -1,8 +1,8 @@
 #ifndef SCENEMANAGER_H
 #define SCENEMANAGER_H
-#include "../Engine/Core/CoreEngine.h"
-#include "Scenes/StartScene.h"
-#include "Scenes/GameScene.h"
+#include "../../Engine/Core/CoreEngine.h"
+#include "StartScene.h"
+#include "GameScene.h"
 
 class SceneManager : public GameInterface
 {

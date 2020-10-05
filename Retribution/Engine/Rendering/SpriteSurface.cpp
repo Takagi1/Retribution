@@ -2,42 +2,40 @@
 #include "../Graphics/TextureHandler.h"
 
 
-SpriteSurface::SpriteSurface(GLuint shaderProgram_, std::string name_, glm::vec2 scale_, float angle_, glm::vec4 tint_)
+SpriteSurface::SpriteSurface(bool useView_, GLuint shaderProgram_, std::string name_, glm::vec2 scale_, float angle_, glm::vec4 tint_)
 {
 	name = name_;
 	scale = scale_;
 	angle = angle_;
 	tint = tint_;
 	shaderProgram = shaderProgram_;
+	useView = useView_;
 
 	vertexList.reserve(4);
-
-
-	//Inverted the position y.s got facing the right direction but now i need to get him to turn -90
 	vertexList.push_back(Vertex2D());
-	vertexList[0].position = glm::vec2(0.5f, 0.5f);
+	vertexList.push_back(Vertex2D());
+	vertexList.push_back(Vertex2D());
+	vertexList.push_back(Vertex2D());
+
+	vertexList[0].position = glm::vec2(-0.5f, 0.5f);
 	vertexList[0].texCoord = glm::vec2(0, 0);
 
-	vertexList.push_back(Vertex2D());
-	vertexList[1].position = glm::vec2(0.5f, -0.5f);
+	vertexList[1].position = glm::vec2(0.5f, 0.5f);
 	vertexList[1].texCoord = glm::vec2(1, 0);
 
-	vertexList.push_back(Vertex2D());
-	vertexList[2].position = glm::vec2(-0.5f, 0.5f);
+	vertexList[2].position = glm::vec2(-0.5f, -0.5f);
 	vertexList[2].texCoord = glm::vec2(0, 1);
 
-	vertexList.push_back(Vertex2D());
-	vertexList[3].position = glm::vec2(-0.5f, -0.5f);
+	vertexList[3].position = glm::vec2(0.5f, -0.5f);
 	vertexList[3].texCoord = glm::vec2(1, 1);
 
 	if (!TextureHandler::GetInstance()->GetTexture(name)) {
 		TextureHandler::GetInstance()->CreateTexture(name_,
 			"./Resources/Textures/" + name_ + ".png");
-
-		textureID = TextureHandler::GetInstance()->GetTextureData(name)->textureID;
-		height = TextureHandler::GetInstance()->GetTextureData(name)->height;
-		width = TextureHandler::GetInstance()->GetTextureData(name)->width;
 	}
+	textureID = TextureHandler::GetInstance()->GetTextureData(name)->textureID;
+	height = TextureHandler::GetInstance()->GetTextureData(name)->height;
+	width = TextureHandler::GetInstance()->GetTextureData(name)->width;
 	GenerateBuffers();
 }
 
@@ -90,6 +88,11 @@ void SpriteSurface::GenerateBuffers()
 
 	modelLoc = glGetUniformLocation(shaderProgram, "model");
 	projLoc = glGetUniformLocation(shaderProgram, "proj");
+
+	//TODO: is this a good idea?
+	if (useView) {
+		viewLoc = glGetUniformLocation(shaderProgram, "view");
+	}
 	colourLoc = glGetUniformLocation(shaderProgram, "tintColour");
 }
 
@@ -116,6 +119,10 @@ void SpriteSurface::Draw(Camera* camera_, glm::vec2 position_)
 
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(transform));
 	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(camera_->GetOrthographic()));
+
+	if (useView) {
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(camera_->GetView()));
+	}
 
 	glUniform4fv(colourLoc, 1, glm::value_ptr(tint));
 	

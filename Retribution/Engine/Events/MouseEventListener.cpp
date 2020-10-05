@@ -18,6 +18,9 @@ void MouseEventListener::RegisterEngineObject(CoreEngine * engine_)
 
 void MouseEventListener::Update(SDL_Event e_)
 {
+	if (e_.type == SDL_KEYDOWN) {
+
+	}
 	if (e_.type == SDL_MOUSEBUTTONDOWN) {
 		UpdateMousePosition();
 		NotifyOfMousePressed(e_.button.button);

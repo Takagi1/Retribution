@@ -1,6 +1,8 @@
 [INFO]: Creating Start Scene in file: StartScene.cpp on line: 16
-[INFO]: Everything was created okay in file: CoreEngine.cpp on line: 45
+[INFO]: Everything was created okay in file: CoreEngine.cpp on line: 49
 [INFO]: Creating Game Scene in file: GameScene.cpp on line: 19
-[ERROR]: Component does not exist in file: GameObject.h on line: 76
-[INFO]: Component created in file: GameObject.h on line: 63
-[ERROR]: Component does not exist in file: GameObject.h on line: 76
+[ERROR]: Component does not exist in file: GameObject.h on line: 83
+[INFO]: Component created in file: GameObject.h on line: 70
+[ERROR]: Component does not exist in file: GameObject.h on line: 83
+[ERROR]: Component does not exist in file: GameObject.h on line: 83
+[INFO]: Component created in file: GameObject.h on line: 70

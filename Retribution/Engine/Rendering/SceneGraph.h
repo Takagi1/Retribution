@@ -6,7 +6,6 @@
 #include <vector>
 #include "GameObject.h"
 #include "../Math/CollisionHandler.h"
-#include "GUI/GUIObject.h"
 
 class SceneGraph
 {
@@ -17,15 +16,19 @@ public:
 	SceneGraph& operator =(SceneGraph&&) = delete;
 
 	static SceneGraph* GetInstance();
-	void AddGameObject(GameObject* go_, std::string tag_ = "GameObject");
-	void AddGUIObject(GUIObject* go, std::string tag_ = "GUI_Object");
+	void AddGameObject(GameObject* go_, std::string name_ = "GameObject");
 	
 	GameObject* GetGameObject(std::string tag_);
-	GUIObject* GetGUIObject(std::string tag_);
+
 	void Update(const float deltaTime_);
 	void Draw(Camera* camera_);
 	void OnDestroy();
 
+	//Use to add objects to gui
+	void AddGUIObject(GameObject* go, std::string name_ = "GUI_Object");
+
+	//Use to get objects from GUI
+	GameObject* GetGUIObject(std::string tag_);
 
 private:
 	SceneGraph();
@@ -35,7 +38,10 @@ private:
 	friend std::default_delete<SceneGraph>;
 
 	static std::map<std::string, GameObject*> sceneGameObjects;
-	static std::map<std::string, GUIObject*> sceneGUIObjects;
+
+	//Used to store objects for GUI
+	static std::map<std::string, GameObject*> sceneGUIObjects;
+
 
 };
 #endif // !SCENEGRAPH_H

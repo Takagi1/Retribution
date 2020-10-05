@@ -2,6 +2,7 @@
 #define PLAYERCHARACTER_H
 
 #include "../../Engine/Rendering/GameObject.h"
+ 
 
 class PlayerCharacter : public GameObject
 {
@@ -13,10 +14,12 @@ public:
 	bool OnCreate();
 	virtual void Update(const float deltaTime_);
 
-	static int health;
-	static int maxHealth;
+	int GetHealth() const ;
+
+	void SetHealth(const int health_);
 
 private:
-
+	static int health;
+	static int maxHealth;
 };
 #endif // !PLAYERCHARACTER_H

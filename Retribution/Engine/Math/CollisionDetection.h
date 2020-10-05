@@ -3,7 +3,7 @@
 
 #include "../Camera/Camera.h"
 
-/*Function of this class is to detect all types of collisions*/
+/*Function of this class is to detect collisions between different class types*/
 
 
 struct BoundingBox;
@@ -17,9 +17,6 @@ public:
 	CollisionDetection& operator =(CollisionDetection&&) = delete;
 
 	CollisionDetection() = delete;
-
-	//TODO: use this for one of the graph things
-	static bool AABB(const glm::vec3 pos1, const glm::vec3 size1, const glm::vec3 pos2, const glm::vec3 size2);
 
 	~CollisionDetection();
 };

@@ -18,10 +18,11 @@ bool Image::OnCreate(GameObject* parent_)
 	return true;
 }
 
-bool Image::OnCreate(std::string name_, glm::vec2 offset_, glm::vec2 scale_, float angle_, glm::vec4 tint_)
+bool Image::OnCreate(GLuint shaderID, std::string name_, bool useView_, glm::vec2 offset_,
+	glm::vec2 scale_, float angle_, glm::vec4 tint_)
 {
 	offset = offset_;
-	sprite = new SpriteSurface(ShaderHandler::GetInstance()->GetShader("BasicShader"), name_, scale_, angle_, tint_);
+	sprite = new SpriteSurface(useView_, shaderID, name_, scale_, angle_, tint_);
 
 	if (sprite) {
 		box.dimentions = glm::vec2(sprite->GetWidth(), sprite->GetHeight());

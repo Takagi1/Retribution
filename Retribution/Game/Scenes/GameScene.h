@@ -5,6 +5,8 @@
 #include <array>
 #include <glm/gtx/string_cast.hpp>
 #include "../GameObjects/PlayerCharacter.h"
+#include "../GUI/HUD.h"
+#include "../Scripts/Controller.h"
 
 class GameScene : public Scene
 {
@@ -19,5 +21,10 @@ public:
 private:
 
 	PlayerCharacter player;
+	HUD hud;
+
+	Controller controller;
+
+
 };
 #endif // !GAMESCENE_H

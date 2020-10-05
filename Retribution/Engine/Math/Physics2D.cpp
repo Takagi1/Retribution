@@ -2,8 +2,10 @@
 #include "../Rendering/GameObject.h"
 
 
+#define Gravity 9.8f
+
 Physics2D::Physics2D() : Component(), torque(0),rotationalInertia(0),mass(0),
-applyGravity(false),angularVel(0),angularAcc(0){
+gravity(0.0f),angularVel(0),angularAcc(0), collisionType(COLLISIONTYPE::NONE){
 
 }
 
@@ -25,7 +27,7 @@ void Physics2D::Update(const float deltaTime_)
 	*/
 
 	//Step 4. orientation
-	parent->SetAngle(parent->GetAngle() + angularVel * deltaTime_ + 0.5f * angularAcc * pow(deltaTime_, 2));
+	parent->Rotate(angularVel * deltaTime_ + 0.5f * angularAcc * pow(deltaTime_, 2));
 
 	//Step 3. angle velocity
 	angularVel += angularAcc * deltaTime_;
@@ -34,15 +36,7 @@ void Physics2D::Update(const float deltaTime_)
 	Move object
 	*/
 
-	//Step 5.
-	//acceleration = (glm::mat2(cos(parent->GetAngle()), -sin(parent->GetAngle()), sin(parent->GetAngle()), cos(parent->GetAngle())) * force) / mass;
-
-	//Step 6. Find liniar acceleration vector in world space
-	//forward_thrust_world = acceleration * mass;
-
-	//Step 8. Calculate new position
-
-	parent->SetPosition(parent->GetPosition() + glm::vec2(velocity * deltaTime_ + acceleration / 2.0f * pow(deltaTime_, 2)));
+	parent->Translate(glm::vec2(velocity * deltaTime_ + acceleration / 2.0f * pow(deltaTime_, 2)));
 
 	//Step 7. Find velocity vector
 	velocity += acceleration * deltaTime_;
@@ -90,5 +84,10 @@ void Physics2D::SetForce(glm::vec2 force_)
 
 void Physics2D::ApplyGravity(bool state_)
 {
-	applyGravity = state_;
+	if (state_) {
+		gravity = Gravity;
+	}
+	else {
+		gravity = 0.0f;
+	}
 }

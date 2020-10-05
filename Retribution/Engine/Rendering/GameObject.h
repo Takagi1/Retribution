@@ -17,13 +17,19 @@ public:
 	void Update(const float deltaTime_);
 	void Draw(Camera* camera_);
 
+	//Movers
+	void Translate(glm::vec2 trans_);
+	void Rotate(float angle_);
+
+
 	//Setters
 
 	void SetPosition(glm::vec2 position_);
 	void SetAngle(float angle_);
 	void SetScale(glm::vec2 scale_);
-	void SetTag(std::string tag_);
+	void SetName(std::string name_);
 	void SetDepth(float depth_);
+	void SetTag(std::string tag_);
 
 	//Getters
 
@@ -33,6 +39,8 @@ public:
 	float GetDepth() const;
 
 	bool MouseDettection();
+
+	BoundingBox GetBoundingBox() const;
 
 	template<typename T>
 	inline void AddComponent()
@@ -93,7 +101,12 @@ public:
 		Debug::Error("Component does not exist", "GameObject.h", __LINE__);
 	}
 private:
+
+	//Used to designate type of object, used for collision exclusion
 	std::string tag;
+
+	//name of the object
+	std::string name;
 
 	//Z is depth
 	glm::vec3 position;
@@ -101,7 +114,6 @@ private:
 	glm::vec2 scale;
 
 	std::vector<Component*> components;
-
 
 	BoundingBox box;
 };

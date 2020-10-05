@@ -28,6 +28,11 @@ bool GameScene::OnCreate()
 	player.OnCreate();
 	SceneGraph::GetInstance()->AddGameObject(&player, "Man");
 
+	hud.OnCreate();
+
+	controller.OnCreate(&player);
+	
+
 	//player.GetComponent<Physics3D>()->SetForce(glm::vec3(0.01f, 0, 0));
 
 
@@ -36,6 +41,10 @@ bool GameScene::OnCreate()
 
 void GameScene::Update(const float deltaTime_)
 {
+	//Take in player inputs
+	controller.Update(deltaTime_);
+	
+
 	SceneGraph::GetInstance()->Update(deltaTime_);
 }
 
