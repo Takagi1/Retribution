@@ -112,6 +112,12 @@
     <Filter Include="Source Files\Game\Scripts">
       <UniqueIdentifier>{e518c3d0-a132-446f-9ca7-9f1c27255485}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine\Audio">
+      <UniqueIdentifier>{03663193-59f6-4309-9547-ed5d2db459f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Audio">
+      <UniqueIdentifier>{05a21351-8350-4277-8e8f-6b92c22ffe37}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -216,6 +222,9 @@
     <ClInclude Include="Game\Scripts\Controller.h">
       <Filter>Header Files\Game\Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Audio\AudioHandler.h">
+      <Filter>Header Files\Engine\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -304,6 +313,9 @@
     </ClCompile>
     <ClCompile Include="Game\Scripts\Controller.cpp">
       <Filter>Source Files\Game\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Audio\AudioHandler.cpp">
+      <Filter>Source Files\Engine\Audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
