@@ -42,9 +42,7 @@ void SceneGraph::AddGameObject(GameObject * go_, std::string name_)
 		sceneGameObjects[newTag] = go_;
 	}
 
-	if (go_->GetComponent<BoundingBox>()) {
-		CollisionHandler::GetInstance()->AddObject(go_);
-	}
+	CollisionHandler::GetInstance()->AddObject(go_);
 }
 
 
@@ -73,8 +71,6 @@ void SceneGraph::AddGUIObject(GameObject* go, std::string name_)
 		go->SetName(newTag);
 		sceneGUIObjects[newTag] = go;
 	}
-	//TODO:
-	//CollisionHandler::GetInstance()->AddObject(go);
 }
 
 GameObject * SceneGraph::GetGameObject(std::string tag_)
@@ -101,9 +97,16 @@ void SceneGraph::Update(const float deltaTime_)
 	}
 	//Collision fixing here?
 
+	for (auto go : sceneGameObjects) {
+		go.second->CollisionResponse(CollisionHandler::GetInstance()->AABB(go.second->GetBoundingBox()));
+	}
+
+
 	for (auto go : sceneGUIObjects) {
 		go.second->Update(deltaTime_);
 	}
+
+
 }
 
 void SceneGraph::Draw(Camera* camera_)

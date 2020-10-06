@@ -37,15 +37,19 @@ public:
 	float GetAngle() const;
 	glm::vec2 GetScale() const;
 	float GetDepth() const;
+	std::string GetTag() const;
 
 	bool MouseDettection();
 
 	BoundingBox GetBoundingBox() const;
 
-	template<typename T>
-	inline void AddComponent()
+	//Used to allow for the direct programing of collision response from objects
+	virtual void CollisionResponse(std::vector<GameObject*> obj_) = 0;
+
+	template<typename T, typename Args>
+	inline void AddComponent(Args&& args_)
 	{
-		T* comp = new T();
+		T* comp = new T(std::forward<Args>(args_));
 
 		//First check to see if it is a child of component
 		Component* item = dynamic_cast<Component*>(comp);
@@ -66,7 +70,6 @@ public:
 			comp = nullptr;
 			return;
 		}
-		item->OnCreate(this);
 		components.push_back(item);
 		Debug::Info("Component created", "GameObject.h", __LINE__);
 	}
@@ -100,6 +103,17 @@ public:
 		
 		Debug::Error("Component does not exist", "GameObject.h", __LINE__);
 	}
+protected:
+	enum class COLLISIONTYPE {
+		NONE,
+		CONTINUOUS,
+		DISCRETE
+	};
+
+	void SetCollisionType(COLLISIONTYPE type_);
+
+	//Use this when adding image to 
+	void SetBoxScale(glm::vec2 scale_);
 private:
 
 	//Used to designate type of object, used for collision exclusion
@@ -116,4 +130,7 @@ private:
 	std::vector<Component*> components;
 
 	BoundingBox box;
+
+	COLLISIONTYPE collisionType;
+
 };

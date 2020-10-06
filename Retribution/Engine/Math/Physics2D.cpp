@@ -5,18 +5,12 @@
 #define Gravity 9.8f
 
 Physics2D::Physics2D() : Component(), torque(0),rotationalInertia(0),mass(0),
-gravity(0.0f),angularVel(0),angularAcc(0), collisionType(COLLISIONTYPE::NONE){
+gravity(0.0f),angularVel(0),angularAcc(0){
 
 }
 
 Physics2D::~Physics2D() {
 
-}
-
-bool Physics2D::OnCreate(GameObject* parent_)
-{
-	parent = parent_;
-	return true;
 }
 
 void Physics2D::Update(const float deltaTime_)

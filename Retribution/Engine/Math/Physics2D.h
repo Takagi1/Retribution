@@ -4,12 +4,6 @@
 #include <glm/glm.hpp>
 
 
-enum class COLLISIONTYPE {
-	NONE,
-	CONTINUOUS,
-	DISCRETE
-};
-
 class GameObject;
 
 class Physics2D : public Component {
@@ -17,7 +11,6 @@ public:
 	Physics2D();
 	virtual ~Physics2D();
 
-	virtual bool OnCreate(GameObject* parent_) override;
 	virtual void Update(const float deltaTime_) override;
 
 	//Getters 
@@ -48,7 +41,6 @@ private:
 
 	float torque, mass, rotationalInertia, angularVel, angularAcc, gravity;
 
-	COLLISIONTYPE collisionType;
 
 
 

@@ -18,6 +18,11 @@ public:
 
 	void SetHealth(const int health_);
 
+	//Takes in input?
+	void Dash();
+
+	void CollisionResponse(std::vector<GameObject*> obj_) override;
+
 private:
 	static int health;
 	static int maxHealth;

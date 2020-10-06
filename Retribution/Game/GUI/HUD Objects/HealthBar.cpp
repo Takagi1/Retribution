@@ -11,9 +11,9 @@ HealthBar::~HealthBar()
 
 bool HealthBar::OnCreate()
 {
-	AddComponent<Image>();
+	AddComponent<Image>(this);
 
-	GetComponent<Image>()->OnCreate(this);
+	//GetComponent<Image>()->OnCreate(this);
 	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("GUIShader"), "Mario2", false);
 
 
@@ -30,4 +30,8 @@ void HealthBar::Update(const float deltaTime_)
 void HealthBar::UpdateHealth(int health_)
 {
 	health = health_;
+}
+
+void HealthBar::CollisionResponse(std::vector<GameObject*> obj_)
+{
 }

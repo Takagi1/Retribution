@@ -8,8 +8,8 @@
 
 struct BoundingBox;
 
-class CollisionDetection
-{
+class CollisionDetection{
+
 public:
 	CollisionDetection(const CollisionDetection&) = delete;
 	CollisionDetection(CollisionDetection&&) = delete;
@@ -19,6 +19,8 @@ public:
 	CollisionDetection() = delete;
 
 	~CollisionDetection();
+
+	static glm::vec2 ClickToWorldPos(glm::vec2 mousePos, glm::vec2 screenSize_, Camera* camera_);
 };
 #endif //! COLLISIONDETECTION_H
 

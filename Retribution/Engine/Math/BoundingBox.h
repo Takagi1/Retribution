@@ -22,16 +22,15 @@ public:
 		pos = pos_;
 	}
 
-	//Is not in collision because collision should be for the objects 
-	//not the box's (I think?)
+	//Is not in collision because Screen partition could not access it
 	inline bool Intersects(BoundingBox* box_) {
 		//return (glm::abs((point.x + width / 2) - (box_->point.x + box_->width / 2)) * 2 < (width + box_->width)) &&
 		//	(glm::abs((point.y + height / 2) - (box_->point.y + box_->height / 2)) * 2 < (height + box_->height));
 
-		glm::vec2 minCorner = GetTransformedPoint(pos);
+		glm::vec2 minCorner = pos;
 		glm::vec2 maxCorner = GetTransformedPoint(pos, dimentions);
 
-		glm::vec2 otherMinCorner = GetTransformedPoint(box_->pos);
+		glm::vec2 otherMinCorner = box_->pos;
 		glm::vec2 otherMaxCorner = GetTransformedPoint(box_->pos, box_->dimentions);
 
 		if (minCorner.x <= otherMaxCorner.x && maxCorner.x >= otherMinCorner.x &&
@@ -39,6 +38,17 @@ public:
 			return true;
 		}
 
+		return false;
+	}
+
+	inline bool ClickIntersect(glm::vec2 point_) {
+		if (point_.x >= pos.x &&
+			point_.y <= pos.y &&
+			point_.x <= pos.x + dimentions.x &&
+			point_.y >= pos.y - dimentions.y) {
+
+			return true;
+		}
 		return false;
 	}
 

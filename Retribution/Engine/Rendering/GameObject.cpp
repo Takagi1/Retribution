@@ -1,6 +1,6 @@
 #include "GameObject.h"
 #include "Types/Image.h"
-GameObject::GameObject(glm::vec2 position_, float depth_) : angle(0)
+GameObject::GameObject(glm::vec2 position_, float depth_) : angle(0), collisionType(COLLISIONTYPE::NONE)
 {
 	position = glm::vec3(position_,depth_);
 }
@@ -49,7 +49,7 @@ void GameObject::SetPosition(glm::vec2 position_)
 {
 	position = glm::vec3(position_, position.z);
 	if (GetComponent<Image>()) {
-		GetComponent<Image>()->UpdateBox(position_);
+		box.pos = position_;
 	}
 }
 
@@ -65,6 +65,7 @@ void GameObject::SetScale(glm::vec2 scale_)
 	scale = scale_;
 	if (GetComponent<Image>()) {
 		GetComponent<Image>()->SetScale(scale_);
+		box.dimentions = scale;
 	}
 }
 
@@ -101,10 +102,16 @@ float GameObject::GetDepth() const
 	return position.z;
 }
 
+std::string GameObject::GetTag() const
+{
+	return tag;
+}
+
 bool GameObject::MouseDettection()
 {
 	for (auto g : components) {
 		if (g->FindContainingPoint()) {
+			printf("hello jim");
 			return true;
 		}
 	}
@@ -114,4 +121,14 @@ bool GameObject::MouseDettection()
 BoundingBox GameObject::GetBoundingBox() const
 {
 	return box;
+}
+
+void GameObject::SetCollisionType(COLLISIONTYPE type_)
+{
+	collisionType = type_;
+}
+
+void GameObject::SetBoxScale(glm::vec2 scale_)
+{
+	box.dimentions = scale_;
 }

@@ -20,13 +20,13 @@ PlayerCharacter::~PlayerCharacter()
 
 bool PlayerCharacter::OnCreate()
 {
-	AddComponent<Image>();
+	AddComponent<Image>(this);
 
-	GetComponent<Image>()->OnCreate(this);
-	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Mario", true);
+	//GetComponent<Image>()->OnCreate(this);
+	SetBoxScale(GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Mario", true));
 
 
-	SetPosition(glm::vec2(0.0f, 0.0f));
+	SetPosition(glm::vec2(10.0f, 10.0f));
 	SetDepth(1);
 	SetScale(glm::vec2(100.0f,100.0f));
 
@@ -39,13 +39,13 @@ bool PlayerCharacter::OnCreate()
 
 void PlayerCharacter::Update(const float deltaTime_)
 {
-	//TODO:Should i have a check here to see if image is added or would that be redundant 
-	//because it should not get here if image is not added?
-
-	//All things gameobject collides with this frame
-
 
 	GameObject::Update(deltaTime_);
+
+	//TODO:Should i have a check here to see if image is added or would that be redundant 
+//because it should not get here if image is not added?
+
+//All things gameobject collides with this frame
 
 	//null the obj
 }
@@ -58,4 +58,17 @@ int PlayerCharacter::GetHealth() const
 void PlayerCharacter::SetHealth(const int health_)
 {
 	health = health_;
+}
+
+//This might be realllllly dirty
+void PlayerCharacter::CollisionResponse(std::vector<GameObject*> obj_)
+{
+	if (!obj_.empty()) {
+		for (auto obj : obj_) {
+			if (obj->GetTag() == "Man") {
+				//Translate(glm::vec2(-0.1f, 0.0f));
+				//printf("we got him");
+			}
+		}
+	}
 }

@@ -16,14 +16,14 @@ Archer::~Archer()
 
 bool Archer::OnCreate()
 {
-	AddComponent<Image>();
+	AddComponent<Image>(this);
 
-	GetComponent<Image>()->OnCreate(this);
-	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Mario", true);
+	SetBoxScale(GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Mario", true));
 
-
-	SetPosition(glm::vec2(0.0f, 0.0f));
-	SetScale(glm::vec2(100.0f, 100.0f));
+	
+	SetPosition(glm::vec2(40.0f, 40.0f));
+	//SetScale(glm::vec2(50.0f, 50.0f));
+	SetTag("Man");
 
 	//GetComponent<Physics3D>()->SetMass(1);
 	//SceneGraph::GetInstance()->AddModel(model);
@@ -33,6 +33,10 @@ bool Archer::OnCreate()
 void Archer::Update(const float deltaTime_)
 {
 	GameObject::Update(deltaTime_);
+}
+
+void Archer::CollisionResponse(std::vector<GameObject*> obj_)
+{
 }
 
 void Archer::CreateArrow()

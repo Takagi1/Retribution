@@ -40,6 +40,11 @@ void Controller::Update(const float deltaTime_)
 		player->Translate(glm::vec2(-1.0f, 0));
 	}
 	else if (KeyEventListener::keys[SDLK_RIGHT]) {
-		player->Translate(glm::vec2(1.0f, 0));
+		if (1 == 0) {
+			
+		}
+		else {
+			player->Translate(glm::vec2(1.0f, 0));
+		}
 	}
 }

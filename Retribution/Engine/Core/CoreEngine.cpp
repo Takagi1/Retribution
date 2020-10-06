@@ -115,8 +115,6 @@ void CoreEngine::Draw()
 {
 	glClearColor(0, 0, 0.0f, 1.0f);
 
-	//TODO: should i remove the depth buffer bit? is it redunedt or needed
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	if (gameInterface) {
 		gameInterface->Draw();

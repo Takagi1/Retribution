@@ -7,6 +7,7 @@
 #include "../GameObjects/PlayerCharacter.h"
 #include "../GUI/HUD.h"
 #include "../Scripts/Controller.h"
+#include "../GameObjects/Archer.h"
 
 class GameScene : public Scene
 {
@@ -21,6 +22,7 @@ public:
 private:
 
 	PlayerCharacter player;
+	Archer archer;
 	HUD hud;
 
 	Controller controller;

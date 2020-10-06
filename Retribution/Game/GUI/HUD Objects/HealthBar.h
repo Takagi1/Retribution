@@ -11,6 +11,8 @@ public:
 	virtual void Update(const float deltaTime_);
 
 	void UpdateHealth(int health_);
+
+	void CollisionResponse(std::vector<GameObject*> obj_) override;
 private:
 	int health;
 };

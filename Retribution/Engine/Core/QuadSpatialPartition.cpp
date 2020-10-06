@@ -53,30 +53,30 @@ void QuadNode::Quadify(int depth_)
 	if (depth_ > 0 && this) {
 		float half = size / 2.0f;
 
-		//Top Left is neutral
+		//Bottom Left is neutral
 
 		//Top Left
 		children[static_cast<int>(QuadChildren::QUAD_TL)] =
 			new QuadNode(glm::vec2(quadBounds->pos.x,
-				quadBounds->pos.y),
+				quadBounds->pos.y + half),
 				half, this);
 
 		//Bottom Left
 		children[static_cast<int>(QuadChildren::QUAD_BL)] =
 			new QuadNode(glm::vec2(quadBounds->pos.x,
-				quadBounds->pos.y - half),
+				quadBounds->pos.y),
 				half, this);
 
 		//Top Right
 		children[static_cast<int>(QuadChildren::QUAD_TR)] =
 			new QuadNode(glm::vec2(quadBounds->pos.x + half,
-				quadBounds->pos.y),
+				quadBounds->pos.y + half),
 				half, this);
 
 		//Bottom Right
 		children[static_cast<int>(QuadChildren::QUAD_BR)] =
 			new QuadNode(glm::vec2(quadBounds->pos.x + half,
-				quadBounds->pos.y - half),
+				quadBounds->pos.y),
 				half, this);
 
 
@@ -131,7 +131,7 @@ int QuadNode::GetChildCount() const
 QuadSpatialPartition::QuadSpatialPartition(float worldSize_)
 {
 	root = new QuadNode(glm::vec2(-(worldSize_ / 2.0f)), worldSize_, nullptr);
-	root->Quadify(2);
+	root->Quadify(1);
 	std::cout << "There are " << root->GetChildCount() << " total child nodes" << std::endl;
 	objIntersectionList = std::vector<QuadNode*>();
 
@@ -174,8 +174,21 @@ std::vector<GameObject*> QuadSpatialPartition::GetCollision(BoundingBox box_)
 			}
 		}
 	}
-	if (result.empty()) {
-		result[0] = nullptr;
+
+	return result;
+}
+
+GameObject* QuadSpatialPartition::GetCollision(glm::vec2 point_)
+{
+	objIntersectionList.reserve(20);
+	PrepareCollisionQuery(root, point_);
+
+	GameObject* result = nullptr;
+
+	for (auto cell : objIntersectionList) {
+		for (auto obj : cell->objectList) {
+			obj->MouseDettection();
+		}
 	}
 
 	return result;
@@ -190,7 +203,7 @@ void QuadSpatialPartition::AddObjectToCell(QuadNode* cell_, GameObject* obj_)
 				cell_->AddCollisionObject(obj_);
 			}
 			else {
-				for (int i = 0; i < 8; i++) {
+				for (int i = 0; i < 4; i++) {
 					AddObjectToCell(cell_->GetChild(static_cast<QuadChildren>(i)), obj_);
 				}
 			}
@@ -207,8 +220,25 @@ void QuadSpatialPartition::PrepareCollisionQuery(QuadNode* cell_, BoundingBox bo
 				objIntersectionList.push_back(cell_);
 			}
 			else {
-				for (int i = 0; i < 8; i++) {
+				for (int i = 0; i < 4; i++) {
 					PrepareCollisionQuery(cell_->GetChild(static_cast<QuadChildren>(i)), box_);
+				}
+			}
+		}
+	}
+}
+
+void QuadSpatialPartition::PrepareCollisionQuery(QuadNode* cell_, glm::vec2 point_)
+{
+	if (cell_ != nullptr) {
+		BoundingBox box = *cell_->GetBoundingBox();
+		if (box.ClickIntersect(point_)) {
+			if (cell_->IsLeaf()) {
+				objIntersectionList.push_back(cell_);
+			}
+			else {
+				for (int i = 0; i < 4; i++) {
+					PrepareCollisionQuery(cell_->GetChild(static_cast<QuadChildren>(i)), point_);
 				}
 			}
 		}

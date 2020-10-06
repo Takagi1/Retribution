@@ -50,6 +50,7 @@ public:
 
 	//Returns a std::vector becuase there could be multiple collisions at once
 	std::vector<GameObject*> GetCollision(BoundingBox box_);
+	GameObject* GetCollision(glm::vec2 point_);
 	//GameObject* GetCollision(Ray ray_);
 
 private:
@@ -60,6 +61,8 @@ private:
 
 	//TODO: could i template this class to take in anything?
 	void PrepareCollisionQuery(QuadNode* cell_, BoundingBox box_);
+
+	void PrepareCollisionQuery(QuadNode* cell_, glm::vec2 point_);
 
 };
 #endif // !QUADSPATIALPARTITION_H

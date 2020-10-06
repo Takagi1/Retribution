@@ -23,10 +23,14 @@ bool GameScene::OnCreate()
 
 	//CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(0.0f, 0.0f, 2.0f), 0.1f, 0.5f, glm::vec3(1.0f, 1.0f, 1.0f)));
 
-	CollisionHandler::GetInstance()->OnCreate(100.0f);
+	CollisionHandler::GetInstance()->OnCreate(1000.0f);
 
 	player.OnCreate();
 	SceneGraph::GetInstance()->AddGameObject(&player, "Man");
+
+
+	archer.OnCreate();
+	SceneGraph::GetInstance()->AddGameObject(&archer, "Ban");
 
 	hud.OnCreate();
 

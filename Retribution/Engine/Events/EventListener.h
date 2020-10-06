@@ -16,9 +16,6 @@ public:
 
 	static void Update();
 	
-
-
-	//TODO: Create a container of some sort to make this look nicer? would this interfere with a multiplayer game?
 	static bool KEY_UP;
 	static bool KEY_DOWN;
 	static bool KEY_LEFT;

@@ -1,5 +1,7 @@
 #include "CollisionHandler.h"
+#include "CollisionDetection.h"
 #include "../Core/CoreEngine.h"
+#include <iostream>
 
 std::unique_ptr<CollisionHandler> CollisionHandler::collisionInstance = nullptr;
 std::vector<GameObject*> CollisionHandler::prevCollisions = std::vector<GameObject*>();
@@ -48,7 +50,22 @@ void CollisionHandler::AddObject(GameObject * go_)
 
 //Issue is that mouse Ray origin is said to be in the 10ns of thousands
 void CollisionHandler::MouseUpdate(glm::vec2 mousePosition_, int buttonType_)
-{/*
+{
+	glm::vec2 mousePos = CollisionDetection::ClickToWorldPos(mousePosition_, 
+		CoreEngine::GetInstance()->GetWindowSize(),
+		CoreEngine::GetInstance()->GetCamera());
+
+	if (scenePartition) {
+		scenePartition->GetCollision(mousePosition_);
+		const char* in = "pos";
+		int x = mousePos.x;
+		int y = mousePos.y;
+		
+		Debug::Info(" " + std::to_string(x) + " " + std::to_string(y), " collision", __LINE__);
+	}
+
+	
+	/*
 	Ray mouseRay = CollisionDetection::ScreenPosToWorldRay(mousePosition_,
 		CoreEngine::GetInstance()->GetWindowSize(),
 		CoreEngine::GetInstance()->GetCamera());
@@ -78,6 +95,6 @@ void CollisionHandler::MouseUpdate(glm::vec2 mousePosition_, int buttonType_)
 std::vector<GameObject*> CollisionHandler::AABB(BoundingBox box)
 {
 	if (scenePartition) {
-		return scenePartition->GetCollision(box);
+		return scenePartition->GetCollision(box); 
 	}
 }

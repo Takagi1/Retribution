@@ -47,12 +47,12 @@ SpriteSurface::~SpriteSurface() {
 
 float SpriteSurface::GetWidth() const
 {
-	return width;
+	return width * scale.x;
 }
 
 float SpriteSurface::GetHeight() const
 {
-	return height;
+	return height * scale.y;
 }
 
 void SpriteSurface::SetAngle(const float angle_)
