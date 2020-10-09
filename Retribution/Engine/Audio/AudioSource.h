@@ -6,11 +6,11 @@
 
 class AudioSource : public Component {
 public:
-	AudioSource(GameObject* parent_, const std::string name_, 
-		bool loop_, bool is3D_, bool stream_);
+	AudioSource(GameObject* parent_);
 	~AudioSource();
 
-	bool OnCreate();
+	bool OnCreate(const std::string name_,
+		bool loop_, bool is3D_, bool stream_);
 	void Update(const float deltaTime_) override;
 
 

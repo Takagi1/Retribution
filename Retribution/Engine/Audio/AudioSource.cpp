@@ -4,19 +4,25 @@
 
 
 
-AudioSource::AudioSource(GameObject* parent_, const std::string name_,
-	bool loop_, bool is3D_, bool stream_) : Component()
+AudioSource::AudioSource(GameObject* parent_) : Component()
 {
 	parent = parent_;
 }
 
 AudioSource::~AudioSource()
 {
+
 }
 
-bool AudioSource::OnCreate()
+bool AudioSource::OnCreate(const std::string name_,
+	bool loop_, bool is3D_, bool stream_)
 {
-	return false;
+	channelID = -1;
+	fileName = name_;
+
+	AudioHandler::GetInstance()->LoadSound(name_, loop_, is3D_, stream_);
+
+	return true;
 }
 
 void AudioSource::Update(const float deltaTime_)
