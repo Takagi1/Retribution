@@ -28,7 +28,7 @@ bool PlayerCharacter::OnCreate()
 
 	SetPosition(glm::vec2(10.0f, 10.0f));
 	SetDepth(1);
-	SetScale(glm::vec2(100.0f,100.0f));
+	SetScale(glm::vec2(0.1f,0.1f));
 
 	health = 5;
 

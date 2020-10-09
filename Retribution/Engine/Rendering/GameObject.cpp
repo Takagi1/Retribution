@@ -64,8 +64,7 @@ void GameObject::SetScale(glm::vec2 scale_)
 {
 	scale = scale_;
 	if (GetComponent<Image>()) {
-		GetComponent<Image>()->SetScale(scale_);
-		box.dimentions = scale;
+		box = GetComponent<Image>()->SetScale(scale_);
 	}
 }
 

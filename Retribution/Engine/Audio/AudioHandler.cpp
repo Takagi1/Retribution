@@ -1,15 +1,17 @@
 #include "AudioHandler.h"
 
+
+std::unique_ptr<AudioHandler> AudioHandler::audioInstance = nullptr;
 std::map<std::string, FMOD::Sound* > AudioHandler::soundPtrList = std::map<std::string, FMOD::Sound*>();
 std::map<int, FMOD::Channel*> AudioHandler::channelList = std::map<int, FMOD::Channel*>();
 
-AudioHandler::AudioHandler()
+AudioHandler::AudioHandler() : systemPtr(nullptr), channelCount(0)
 {
 
 }
 
 AudioHandler::~AudioHandler() {
-
+	OnDestroy();
 }
 
 AudioHandler * AudioHandler::GetInstance()
@@ -33,10 +35,10 @@ bool AudioHandler::Initialize(glm::vec3 position_, glm::vec3 velocity_, glm::vec
 
 	//TODO: is the amount of channels right?
 	systemPtr->init(2, FMOD_INIT_NORMAL, nullptr);
-	systemPtr->set3DListenerAttributes(1, &glmToFMOD(position_), &glmToFMOD(velocity_),
-		&glmToFMOD(forward_), &glmToFMOD(up_));
-	
-	return true;
+systemPtr->set3DListenerAttributes(1, &glmToFMOD(position_), &glmToFMOD(velocity_),
+	&glmToFMOD(forward_), &glmToFMOD(up_));
+
+return true;
 }
 
 void AudioHandler::OnDestroy()
@@ -60,11 +62,6 @@ void AudioHandler::Update(const float deltaTime_)
 	systemPtr->update();
 }
 
-AudioHandler::~AudioHandler()
-{
-	OnDestroy();
-}
-
 FMOD_VECTOR AudioHandler::glmToFMOD(glm::vec3 vec_)
 {
 	FMOD_VECTOR vec;
@@ -74,27 +71,25 @@ FMOD_VECTOR AudioHandler::glmToFMOD(glm::vec3 vec_)
 	return vec;
 }
 
-void AudioHandler::LoadSound(const std::string name_, bool loop_, bool is3D_, bool play_)
+void AudioHandler::LoadSound(const std::string name_, bool loop_, bool is3D_, bool stream_)
 {
 	if (!GetSound(name_)) {
-		Debug::Error("Sound already loaded", "AudioHandler", __LINE__);
+		Debug::Error("Sound already loaded", "AudioHandler.cpp", __LINE__);
 		return;
 	}
 
 	//TODO: Test this extensively because i have no idea if i messed up here with bitwise
 	FMOD_MODE mode = FMOD_DEFAULT;
-	mode = loop_ | FMOD_LOOP_NORMAL;
-	mode = is3D_ | FMOD_3D;
-	//TODO: FMOD_SOFTWARE is not found, i have to have it here.
-	//Though it may be create stream acording to the paper?
-	mode = play_ | FMOD_CREATESTREAM;
+
+	mode |= loop_ ? FMOD_LOOP_NORMAL : FMOD_LOOP_OFF;
+
+	mode |= is3D_ ? FMOD_3D : FMOD_2D;
+
+	mode |= stream_ ? FMOD_CREATESTREAM : FMOD_CREATECOMPRESSEDSAMPLE;
 
 	FMOD::Sound* sound_ = nullptr;
-	FMOD_CREATESOUNDEXINFO info;
 
-	
-
-	systemPtr->createSound(name_.c_str(), mode, &info, &sound_);
+	systemPtr->createSound(name_.c_str(), mode, nullptr, &sound_);
 
 
 	//TODO: pull the full extend here but im missing the end
@@ -102,10 +97,10 @@ void AudioHandler::LoadSound(const std::string name_, bool loop_, bool is3D_, bo
 
 	if (sound_) {
 		soundPtrList[name_] = sound_;
-		Debug::Info("Sound sucssessfully loaded", "AudioHandler", __LINE__);
+		Debug::Info("Sound sucssessfully loaded", "AudioHandler.cpp", __LINE__);
 		return;
 	}
-	Debug::Error("Sound failed to load", "AudioHandler", __LINE__);
+	Debug::Error("Sound failed to load", "AudioHandler.cpp", __LINE__);
 }
 
 FMOD::Sound* AudioHandler::GetSound(std::string name_)
@@ -122,8 +117,45 @@ int AudioHandler::PlaySound(std::string name_, glm::vec3 position_, glm::vec3 ve
 	FMOD::Channel* channel_ = nullptr;
 
 	systemPtr->playSound(GetSound(name_), nullptr, true, &channel_);
-	FMOD::Sound* fom = GetSound(name_);
+	if (!channel_) {
+		Debug::Error("Channel failed to load", "AudioHandler", __LINE__);
+		return channelID;
+	}
+	FMOD_MODE curMode;
+	GetSound(name_)->getMode(&curMode);
+	if (curMode & FMOD_3D){
+		channel_->set3DAttributes(&glmToFMOD(position_), nullptr);
+	}
+	channel_->setVolume(volume_);
+	channel_->setPaused(false);
 
-	//if())
-	return 0;
+	channelID = channelCount;
+	channelCount++;
+
+	channelList.emplace(channelID, channel_);
+	return channelID;
+}
+
+void AudioHandler::UpdateChannelPositionVelocity(int channelID_, glm::vec3 position_, glm::vec3 velocity_)
+{
+	if(channelList[channelID_] == nullptr){
+		Debug::Error("Channel not found", "AudioHandler.cpp", __LINE__);
+		return;
+	}
+
+	channelList[channelID_]->set3DAttributes(&glmToFMOD(position_), &glmToFMOD(velocity_));
+
+}
+
+bool AudioHandler::IsPlaying(int channelID_)
+{
+	if (channelList[channelID_] == nullptr) {
+		Debug::Error("Channel not found", "AudioHandler.cpp", __LINE__);
+		return false;
+	}
+	bool isPlaying = false;
+
+	channelList[channelID_]->isPlaying(&isPlaying);
+
+	return isPlaying;
 }

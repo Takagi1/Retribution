@@ -22,7 +22,7 @@ bool Archer::OnCreate()
 
 	
 	SetPosition(glm::vec2(40.0f, 40.0f));
-	//SetScale(glm::vec2(50.0f, 50.0f));
+	SetScale(glm::vec2(0.1f, 0.1f));
 	SetTag("Man");
 
 	//GetComponent<Physics3D>()->SetMass(1);

@@ -21,7 +21,7 @@ public:
 	//Setters
 	void SetOffset(const glm::vec2 offset_);
 	void SetAngle(const float angle_);
-	void SetScale(const glm::vec2 scale_);
+	BoundingBox SetScale(const glm::vec2 scale_);
 
 
 	bool FindContainingPoint() override;

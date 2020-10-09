@@ -5,7 +5,6 @@
 SpriteSurface::SpriteSurface(bool useView_, GLuint shaderProgram_, std::string name_, glm::vec2 scale_, float angle_, glm::vec4 tint_)
 {
 	name = name_;
-	scale = scale_;
 	angle = angle_;
 	tint = tint_;
 	shaderProgram = shaderProgram_;
@@ -36,6 +35,8 @@ SpriteSurface::SpriteSurface(bool useView_, GLuint shaderProgram_, std::string n
 	textureID = TextureHandler::GetInstance()->GetTextureData(name)->textureID;
 	height = TextureHandler::GetInstance()->GetTextureData(name)->height;
 	width = TextureHandler::GetInstance()->GetTextureData(name)->width;
+
+	SetScale(scale_);
 	GenerateBuffers();
 }
 
@@ -47,12 +48,17 @@ SpriteSurface::~SpriteSurface() {
 
 float SpriteSurface::GetWidth() const
 {
-	return width * scale.x;
+	return width;
 }
 
 float SpriteSurface::GetHeight() const
 {
-	return height * scale.y;
+	return height;
+}
+
+glm::vec2 SpriteSurface::GetScale() const
+{
+	return scale;
 }
 
 void SpriteSurface::SetAngle(const float angle_)
@@ -62,7 +68,7 @@ void SpriteSurface::SetAngle(const float angle_)
 
 void SpriteSurface::SetScale(const glm::vec2 scale_)
 {
-	scale = scale_;
+	scale = glm::vec2(scale_.x * width, scale_.y * height);
 }
 
 void SpriteSurface::GenerateBuffers()

@@ -8,10 +8,12 @@ class GameObject;
 
 class Physics2D : public Component {
 public:
-	Physics2D();
+	Physics2D(GameObject* parent_);
 	virtual ~Physics2D();
 
-	virtual void Update(const float deltaTime_) override;
+	void Update(const float deltaTime_) override;
+
+	//bool FindContainingPoint() override;
 
 	//Getters 
 	glm::vec2 GetVelocity() const;

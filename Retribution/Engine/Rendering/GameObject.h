@@ -49,7 +49,7 @@ public:
 	template<typename T, typename Args>
 	inline void AddComponent(Args&& args_)
 	{
-		T* comp = new T(std::forward<Args>(args_));
+		T* comp = new T(std::forward<Args>(args_)...);
 
 		//First check to see if it is a child of component
 		Component* item = dynamic_cast<Component*>(comp);

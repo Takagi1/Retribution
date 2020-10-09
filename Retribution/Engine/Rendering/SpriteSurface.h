@@ -26,6 +26,7 @@ public:
 
 	float GetWidth() const;
 	float GetHeight() const;
+	glm::vec2 GetScale() const;
 	
 	void SetAngle(const float angle_);
 	void SetScale(const glm::vec2 scale_);

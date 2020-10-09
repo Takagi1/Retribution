@@ -12,7 +12,7 @@ public:
 	};
 
 	virtual void Update(const float deltaTime_) = 0;
-	virtual void Draw(Camera* camera_) = 0;
+	virtual void Draw(Camera* camera) = 0;
 
 	//Get if mouse click is inside the component
 	virtual bool FindContainingPoint() = 0;

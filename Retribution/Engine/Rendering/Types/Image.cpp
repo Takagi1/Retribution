@@ -3,6 +3,7 @@
 #include "../GameObject.h"
 #include "../../Math/CollisionDetection.h"
 #include "../../Core/CoreEngine.h"
+
 Image::Image(GameObject* parent_) : Component(), sprite(nullptr)
 {
 	parent = parent_;
@@ -21,7 +22,7 @@ glm::vec2 Image::OnCreate(GLuint shaderID, std::string name_, bool useView_, glm
 	sprite = new SpriteSurface(useView_, shaderID, name_, scale_, angle_, tint_);
 
 	if (sprite) {
-		box.dimentions = glm::vec2(sprite->GetWidth(), sprite->GetHeight());
+		box.dimentions = sprite->GetScale();
 		box.pos = parent->GetPosition();
 	}
 	return box.dimentions;
@@ -54,9 +55,10 @@ void Image::SetAngle(const float angle_)
 	sprite->SetAngle(angle_);
 }
 
-void Image::SetScale(const glm::vec2 scale_)
+BoundingBox Image::SetScale(const glm::vec2 scale_)
 {
 	sprite->SetScale(scale_);
+	return box;
 }
 
 //I think the way find is done here is horse shit and i want to fix it
@@ -75,13 +77,27 @@ bool Image::FindContainingPoint()
 		//TODO: why is this the way it is? it seems like the image is not being displayed in the same 
 		//Place as the object nor is it displaying from the top left? could it be that it is displaying
 		//from the center of the object? if so then I will have to adjust that to get accurate display.
-		if (mousePos.x <= obbPosition.x &&
+
+
+		/*if (mousePos.x <= obbPosition.x &&
 			mousePos.y <= obbPosition.y &&
 			mousePos.x >= obbPosition.x - sprite->GetWidth() /1200 && 
 			mousePos.y >= obbPosition.y - sprite->GetHeight() / 1200) {
 
 			return true;
 		}
+		*/
+		if(mousePos.x <= obbPosition.x &&
+			mousePos.y <= obbPosition.y &&
+			mousePos.x >= obbPosition.x - sprite->GetWidth() / 1200 &&
+			mousePos.y >= obbPosition.y - sprite->GetHeight() / 1200) {
+
+			return true;
+		}
+
+		float a = sprite->GetWidth();
+		float b = 0;
+
 	}
 	return false;
 }

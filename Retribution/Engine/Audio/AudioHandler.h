@@ -5,6 +5,7 @@
 #include <fmod.hpp> 
 #include <glm/glm.hpp> 
 #include "../Core/Debug.h"
+#include "AudioSource.h"
 
 class AudioHandler {
 public:
@@ -27,6 +28,8 @@ private:
 	static std::unique_ptr<AudioHandler> audioInstance;
 	friend std::default_delete<AudioHandler>;
 
+	friend class AudioSource;
+
 	FMOD::System * systemPtr;
 	static std::map<std::string, FMOD::Sound* > soundPtrList;
 	static std::map<int, FMOD::Channel*> channelList;
@@ -34,7 +37,7 @@ private:
 
 	FMOD_VECTOR glmToFMOD(glm::vec3 vec_);
 
-	void LoadSound(const std::string name_, bool loop_, bool is3D_, bool play_);
+	void LoadSound(const std::string name_, bool loop_, bool is3D_, bool stream_);
 
 	FMOD::Sound* GetSound(std::string name_);
 
@@ -42,8 +45,9 @@ private:
 	int PlaySound(std::string name_, glm::vec3 position_ = glm::vec3(0),
 		glm::vec3 velocity_ = glm::vec3(0), float volume_ = 1.0f);
 
-	//void UpdateChannel(glm::vec3 position_, glm::vec3 velocity_);
+	void UpdateChannelPositionVelocity(int channelID_, glm::vec3 position_,
+		glm::vec3 velocity_ = glm::vec3(0));
 
 	//Function to check if a specific channel is playing a sound
-	//bool IsPlaying();
+	bool IsPlaying(int channelID_);
 };

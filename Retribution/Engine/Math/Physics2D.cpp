@@ -4,9 +4,10 @@
 
 #define Gravity 9.8f
 
-Physics2D::Physics2D() : Component(), torque(0),rotationalInertia(0),mass(0),
+Physics2D::Physics2D(GameObject* parent_) : Component(), torque(0),rotationalInertia(0),mass(0),
 gravity(0.0f),angularVel(0),angularAcc(0){
 
+	parent = parent_;
 }
 
 Physics2D::~Physics2D() {
