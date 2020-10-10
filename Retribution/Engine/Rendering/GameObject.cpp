@@ -64,7 +64,7 @@ void GameObject::SetScale(glm::vec2 scale_)
 {
 	scale = scale_;
 	if (GetComponent<Image>()) {
-		box = GetComponent<Image>()->SetScale(scale_);
+		box.dimentions = GetComponent<Image>()->SetScale(scale_);
 	}
 }
 
@@ -127,7 +127,8 @@ void GameObject::SetCollisionType(COLLISIONTYPE type_)
 	collisionType = type_;
 }
 
-void GameObject::SetBoxScale(glm::vec2 scale_)
+void GameObject::UpdateBoundingBox(BoundingBox box_)
 {
-	box.dimentions = scale_;
+	box = box_;
 }
+

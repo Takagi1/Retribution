@@ -18,8 +18,8 @@ bool Archer::OnCreate()
 {
 	AddComponent<Image>(this);
 
-	SetBoxScale(GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Mario", true));
-
+	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Mario", true);
+	UpdateBoundingBox(GetComponent<Image>()->GetBoundingBox());
 	
 	SetPosition(glm::vec2(40.0f, 40.0f));
 	SetScale(glm::vec2(0.1f, 0.1f));

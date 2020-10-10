@@ -63,33 +63,6 @@ void CollisionHandler::MouseUpdate(glm::vec2 mousePosition_, int buttonType_)
 		
 		Debug::Info(" " + std::to_string(x) + " " + std::to_string(y), " collision", __LINE__);
 	}
-
-	
-	/*
-	Ray mouseRay = CollisionDetection::ScreenPosToWorldRay(mousePosition_,
-		CoreEngine::GetInstance()->GetWindowSize(),
-		CoreEngine::GetInstance()->GetCamera());
-
-	if (scenePartition != nullptr) {
-		GameObject* hitResult = scenePartition->GetCollision(mouseRay);
-
-		if (hitResult) {
-			hitResult->SetHit(true, buttonType_);
-		}
-
-		for (auto c : prevCollisions) {
-			if (c != hitResult && c != nullptr) {
-				c->SetHit(false, buttonType_);
-				c = nullptr;
-			}
-		}
-		prevCollisions.clear();
-
-		if (hitResult) {
-			prevCollisions.push_back(hitResult);
-		}
-	}
-	*/
 }
 
 std::vector<GameObject*> CollisionHandler::AABB(BoundingBox box)

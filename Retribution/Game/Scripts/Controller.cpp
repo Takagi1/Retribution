@@ -37,14 +37,14 @@ void Controller::Update(const float deltaTime_)
 	}
 
 	if (KeyEventListener::keys[SDLK_LEFT]) {
-		player->Translate(glm::vec2(-1.0f, 0));
+		player->Move(-1);
 	}
 	else if (KeyEventListener::keys[SDLK_RIGHT]) {
-		if (1 == 0) {
-			
+		if (KeyEventListener::keys[SDLK_x]) {
+			player->Dash(1,0);
 		}
 		else {
-			player->Translate(glm::vec2(1.0f, 0));
+			player->Move(1);
 		}
 	}
 }

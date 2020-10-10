@@ -19,9 +19,12 @@ public:
 	void SetHealth(const int health_);
 
 	//Takes in input?
-	void Dash();
+	void Dash(int horizontal_, int vertical_);
 
 	void CollisionResponse(std::vector<GameObject*> obj_) override;
+
+	//-1 is left, 1 is right
+	void Move(int direction_);
 
 private:
 	static int health;

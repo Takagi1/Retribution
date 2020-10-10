@@ -15,7 +15,7 @@ Image::~Image()
 	sprite = nullptr;
 }
 
-glm::vec2 Image::OnCreate(GLuint shaderID, std::string name_, bool useView_, glm::vec2 offset_,
+bool Image::OnCreate(GLuint shaderID, std::string name_, bool useView_, glm::vec2 offset_,
 	glm::vec2 scale_, float angle_, glm::vec4 tint_)
 {
 	offset = offset_;
@@ -25,7 +25,7 @@ glm::vec2 Image::OnCreate(GLuint shaderID, std::string name_, bool useView_, glm
 		box.dimentions = sprite->GetScale();
 		box.pos = parent->GetPosition();
 	}
-	return box.dimentions;
+	return true;
 }
 
 void Image::Update(const float deltaTime_)
@@ -55,10 +55,10 @@ void Image::SetAngle(const float angle_)
 	sprite->SetAngle(angle_);
 }
 
-BoundingBox Image::SetScale(const glm::vec2 scale_)
+glm::vec2 Image::SetScale(const glm::vec2 scale_)
 {
 	sprite->SetScale(scale_);
-	return box;
+	return sprite->GetScale();
 }
 
 //I think the way find is done here is horse shit and i want to fix it
@@ -74,30 +74,20 @@ bool Image::FindContainingPoint()
 			CoreEngine::GetInstance()->GetWindowSize(),
 			CoreEngine::GetInstance()->GetCamera());
 
-		//TODO: why is this the way it is? it seems like the image is not being displayed in the same 
-		//Place as the object nor is it displaying from the top left? could it be that it is displaying
-		//from the center of the object? if so then I will have to adjust that to get accurate display.
+		float a = obbPosition.x + sprite->GetScale().x;
+		float b = obbPosition.y - sprite->GetScale().y;
 
-
-		/*if (mousePos.x <= obbPosition.x &&
-			mousePos.y <= obbPosition.y &&
-			mousePos.x >= obbPosition.x - sprite->GetWidth() /1200 && 
-			mousePos.y >= obbPosition.y - sprite->GetHeight() / 1200) {
+		if(mousePos.x >= obbPosition.x &&
+			mousePos.y >= obbPosition.y &&
+			mousePos.x <= obbPosition.x + sprite->GetScale().x &&
+			mousePos.y <= obbPosition.y + sprite->GetScale().y) {
 
 			return true;
 		}
-		*/
-		if(mousePos.x <= obbPosition.x &&
-			mousePos.y <= obbPosition.y &&
-			mousePos.x >= obbPosition.x - sprite->GetWidth() / 1200 &&
-			mousePos.y >= obbPosition.y - sprite->GetHeight() / 1200) {
-
-			return true;
-		}
-
-		float a = sprite->GetWidth();
-		float b = 0;
-
 	}
 	return false;
+} 
+
+BoundingBox Image::GetBoundingBox() const {
+	return box;
 }

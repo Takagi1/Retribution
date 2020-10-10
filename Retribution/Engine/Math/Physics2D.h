@@ -13,8 +13,6 @@ public:
 
 	void Update(const float deltaTime_) override;
 
-	//bool FindContainingPoint() override;
-
 	//Getters 
 	glm::vec2 GetVelocity() const;
 	glm::vec2 GetAcceleration() const;
@@ -34,7 +32,6 @@ public:
 	//TODO: optional: create ray and implement this
 	void ContinuousDetection();
 
-
 	void DiscreteDetection();
 
 private:
@@ -44,6 +41,9 @@ private:
 	float torque, mass, rotationalInertia, angularVel, angularAcc, gravity;
 
 
+	//Non used 
 
+	bool FindContainingPoint() override;
+	void Draw(Camera* camera) override;
 
 };

@@ -43,9 +43,9 @@ public:
 
 	inline bool ClickIntersect(glm::vec2 point_) {
 		if (point_.x >= pos.x &&
-			point_.y <= pos.y &&
+			point_.y >= pos.y &&
 			point_.x <= pos.x + dimentions.x &&
-			point_.y >= pos.y - dimentions.y) {
+			point_.y <= pos.y + dimentions.y) {
 
 			return true;
 		}

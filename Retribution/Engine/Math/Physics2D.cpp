@@ -33,8 +33,20 @@ void Physics2D::Update(const float deltaTime_)
 
 	parent->Translate(glm::vec2(velocity * deltaTime_ + acceleration / 2.0f * pow(deltaTime_, 2)));
 
+
+
 	//Step 7. Find velocity vector
 	velocity += acceleration * deltaTime_;
+}
+
+
+void Physics2D::Draw(Camera* camera)
+{
+}
+
+bool Physics2D::FindContainingPoint()
+{
+	return false;
 }
 
 glm::vec2 Physics2D::GetVelocity() const
@@ -74,7 +86,11 @@ void Physics2D::SetForce(glm::vec2 force_)
 	force = force_;
 
 	//apply force relative to direction. Is this wrong?
-	acceleration = glm::mat2(cos(parent->GetAngle()), -sin(parent->GetAngle()), sin(parent->GetAngle()), cos(parent->GetAngle())) * force / mass;
+	acceleration = glm::mat2(cos(parent->GetAngle()), -sin(parent->GetAngle()), sin(parent->GetAngle()), cos(parent->GetAngle())) * force;
+
+	if (mass != 0) {
+		acceleration / mass;
+	}
 }
 
 void Physics2D::ApplyGravity(bool state_)

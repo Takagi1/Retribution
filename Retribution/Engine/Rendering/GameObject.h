@@ -112,8 +112,7 @@ protected:
 
 	void SetCollisionType(COLLISIONTYPE type_);
 
-	//Use this when adding image to 
-	void SetBoxScale(glm::vec2 scale_);
+	void UpdateBoundingBox(BoundingBox box_);
 private:
 
 	//Used to designate type of object, used for collision exclusion

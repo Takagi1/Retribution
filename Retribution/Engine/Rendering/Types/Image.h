@@ -8,7 +8,7 @@ public:
 	Image(GameObject* parent_);
 	~Image();
 
-	glm::vec2 OnCreate(GLuint shaderID, std::string name_, bool useView_, glm::vec2 offset_ = glm::vec2(0), 
+	bool OnCreate(GLuint shaderID, std::string name_, bool useView_, glm::vec2 offset_ = glm::vec2(0), 
 		glm::vec2 scale_ = glm::vec2(1), float angle_ = 0, glm::vec4 tint_ = glm::vec4(1));
 
 	void Update(const float deltaTime_) override;
@@ -21,10 +21,12 @@ public:
 	//Setters
 	void SetOffset(const glm::vec2 offset_);
 	void SetAngle(const float angle_);
-	BoundingBox SetScale(const glm::vec2 scale_);
+	glm::vec2 SetScale(const glm::vec2 scale_);
 
 
 	bool FindContainingPoint() override;
+
+	BoundingBox GetBoundingBox() const;
 
 private:
 	SpriteSurface* sprite;

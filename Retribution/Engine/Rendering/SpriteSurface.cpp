@@ -16,16 +16,16 @@ SpriteSurface::SpriteSurface(bool useView_, GLuint shaderProgram_, std::string n
 	vertexList.push_back(Vertex2D());
 	vertexList.push_back(Vertex2D());
 
-	vertexList[0].position = glm::vec2(-0.5f, 0.5f);
+	vertexList[0].position = glm::vec2(0.0f, 1.0f);
 	vertexList[0].texCoord = glm::vec2(0, 0);
 
-	vertexList[1].position = glm::vec2(0.5f, 0.5f);
+	vertexList[1].position = glm::vec2(1.0f, 1.0f);
 	vertexList[1].texCoord = glm::vec2(1, 0);
 
-	vertexList[2].position = glm::vec2(-0.5f, -0.5f);
+	vertexList[2].position = glm::vec2(0.0f, 0.0f);
 	vertexList[2].texCoord = glm::vec2(0, 1);
 
-	vertexList[3].position = glm::vec2(0.5f, -0.5f);
+	vertexList[3].position = glm::vec2(1.0f, 0.0f);
 	vertexList[3].texCoord = glm::vec2(1, 1);
 
 	if (!TextureHandler::GetInstance()->GetTexture(name)) {
@@ -116,11 +116,10 @@ void SpriteSurface::Draw(Camera* camera_, glm::vec2 position_)
 
 	//TODO: this might not work well/may cause serious issues, however it might be a performance improvement due to skiping on 
 	//usless steps
-	if (angle != 0) {
-		transform = glm::translate(transform, glm::vec3(0.5f * scale.x, 0.5f * scale.y, 0.0f)); // move origin of rotation to center of quad
-		transform = glm::rotate(transform, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f)); // rotate
-		transform = glm::translate(transform, glm::vec3(-0.5f * scale.x, -0.5f * scale.y, 0.0f)); // move origin back
-	}
+	transform = glm::translate(transform, glm::vec3(0.5f * scale.x, 0.5f * scale.y, 0.0f)); // move origin of rotation to center of quad
+	transform = glm::rotate(transform, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f)); // rotate
+	transform = glm::translate(transform, glm::vec3(-0.5f * scale.x, -0.5f * scale.y, 0.0f)); // move origin back
+	
 	transform = glm::scale(transform, glm::vec3(scale,0));
 
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(transform));

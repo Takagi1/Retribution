@@ -7,3 +7,5 @@
 [INFO]: Component created in file: GameObject.h on line: 74
 [ERROR]: Component does not exist in file: GameObject.h on line: 87
 [INFO]: Component created in file: GameObject.h on line: 74
+[ERROR]: Component does not exist in file: GameObject.h on line: 87
+[INFO]: Component created in file: GameObject.h on line: 74
