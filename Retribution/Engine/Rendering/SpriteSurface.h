@@ -47,6 +47,6 @@ private:
 	GLuint textureID;
 
 	//Use to stop sprite from being effected by view matrix;
-	bool useView;
+	bool useView;;
 };
 #endif // !SPRITESURFACE_H

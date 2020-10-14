@@ -1,33 +1,41 @@
 #ifndef PLAYERCHARACTER_H
 #define PLAYERCHARACTER_H
 
-#include "../../Engine/Rendering/GameObject.h"
+#include "Character.h"
  
 
-class PlayerCharacter : public GameObject
+class PlayerCharacter : public Character
 {
 public:
 	PlayerCharacter(glm::vec2 position_ = glm::vec2());
 	virtual ~PlayerCharacter();
 
 
-	bool OnCreate();
+	virtual bool OnCreate();
 	virtual void Update(const float deltaTime_);
-
-	int GetHealth() const ;
-
-	void SetHealth(const int health_);
-
-	//Takes in input?
-	void Dash(int horizontal_, int vertical_);
 
 	void CollisionResponse(std::vector<GameObject*> obj_) override;
 
-	//-1 is left, 1 is right
-	void Move(int direction_);
+	//Takes in input?
+	//void Dash(int horizontal_, int vertical_); might not do dash for now
 
+	void Parry();
+
+	void Counter();
+
+
+	//Getters
+
+	int GetEnergy() const;
+
+	//Setters
+
+	
+	void SetEnergy(const int energy_); //Use to set energy to a specific amount
+	
+	void ChangeEnergy(const int energy_);//Use to add or subtract from energy
 private:
-	static int health;
-	static int maxHealth;
+	int energy;
+	int maxEnergy;
 };
 #endif // !PLAYERCHARACTER_H

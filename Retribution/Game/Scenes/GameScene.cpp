@@ -10,7 +10,7 @@ GameScene::GameScene()
 
 GameScene::~GameScene()
 {
-
+	SceneGraph::GetInstance()->OnDestroy();
 }
 
 
@@ -25,16 +25,28 @@ bool GameScene::OnCreate()
 
 	CollisionHandler::GetInstance()->OnCreate(1000.0f);
 
+	//Create Player
+
+	//PlayerCharacter* player = new PlayerCharacter();
 	player.OnCreate();
-	SceneGraph::GetInstance()->AddGameObject(&player, "Man");
+
+	SceneGraph::GetInstance()->AddGameObject(&player, "Player");
+
+	SceneGraph::GetInstance()->RemoveGameObject("Player");
+
+	//Create GameManager and controller
+
+	//gameManager.OnCreate(player);
+	//controller.OnCreate(player);
+
 
 
 	archer.OnCreate();
-	SceneGraph::GetInstance()->AddGameObject(&archer, "Ban");
+	SceneGraph::GetInstance()->AddGameObject(&archer, "Archer");
 
 	hud.OnCreate();
 
-	controller.OnCreate(&player);
+
 	
 
 	//player.GetComponent<Physics3D>()->SetForce(glm::vec3(0.01f, 0, 0));

@@ -58,5 +58,6 @@ void SceneManager::BuildScene()
 		Debug::FatalError("Scene has failed on create", "Game1", __LINE__);
 		CoreEngine::GetInstance()->Exit();
 	}
+	
 	currentSceneNum = CoreEngine::GetInstance()->GetCurrentScene();
 }

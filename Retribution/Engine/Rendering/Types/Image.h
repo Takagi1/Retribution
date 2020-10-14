@@ -1,4 +1,6 @@
-#pragma once
+#ifndef IMAGE_H
+#define IMAGE_H
+
 #include "../Component.h"
 #include "../SpriteSurface.h"
 #include "../../Math/BoundingBox.h"
@@ -35,4 +37,6 @@ private:
 	glm::mat4 transform;
 
 	BoundingBox box;
+
 };
+#endif // !IMAGE_H

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef KEYEVENTLISTENER_H
+#define KEYEVENTLISTENER_H
 
 #include <SDL.h>
 #include <map>
@@ -19,3 +20,4 @@ public:
 
 	static std::map<SDL_Keycode, bool> keys;
 };
+#endif // !KEYEVENTLISTENER_H

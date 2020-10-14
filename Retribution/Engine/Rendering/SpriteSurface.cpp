@@ -2,7 +2,8 @@
 #include "../Graphics/TextureHandler.h"
 
 
-SpriteSurface::SpriteSurface(bool useView_, GLuint shaderProgram_, std::string name_, glm::vec2 scale_, float angle_, glm::vec4 tint_)
+SpriteSurface::SpriteSurface(bool useView_, GLuint shaderProgram_, std::string name_, 
+	glm::vec2 scale_, float angle_, glm::vec4 tint_)
 {
 	name = name_;
 	angle = angle_;
@@ -16,6 +17,7 @@ SpriteSurface::SpriteSurface(bool useView_, GLuint shaderProgram_, std::string n
 	vertexList.push_back(Vertex2D());
 	vertexList.push_back(Vertex2D());
 
+
 	vertexList[0].position = glm::vec2(0.0f, 1.0f);
 	vertexList[0].texCoord = glm::vec2(0, 0);
 
@@ -27,6 +29,8 @@ SpriteSurface::SpriteSurface(bool useView_, GLuint shaderProgram_, std::string n
 
 	vertexList[3].position = glm::vec2(1.0f, 0.0f);
 	vertexList[3].texCoord = glm::vec2(1, 1);
+
+
 
 	if (!TextureHandler::GetInstance()->GetTexture(name)) {
 		TextureHandler::GetInstance()->CreateTexture(name_,
@@ -95,7 +99,6 @@ void SpriteSurface::GenerateBuffers()
 	modelLoc = glGetUniformLocation(shaderProgram, "model");
 	projLoc = glGetUniformLocation(shaderProgram, "proj");
 
-	//TODO: is this a good idea?
 	if (useView) {
 		viewLoc = glGetUniformLocation(shaderProgram, "view");
 	}
@@ -114,8 +117,6 @@ void SpriteSurface::Draw(Camera* camera_, glm::vec2 position_)
 
 	transform = glm::translate(transform, glm::vec3(position_,0));
 
-	//TODO: this might not work well/may cause serious issues, however it might be a performance improvement due to skiping on 
-	//usless steps
 	transform = glm::translate(transform, glm::vec3(0.5f * scale.x, 0.5f * scale.y, 0.0f)); // move origin of rotation to center of quad
 	transform = glm::rotate(transform, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f)); // rotate
 	transform = glm::translate(transform, glm::vec3(-0.5f * scale.x, -0.5f * scale.y, 0.0f)); // move origin back

@@ -59,7 +59,6 @@ private:
 	std::vector<QuadNode*> objIntersectionList;
 	void AddObjectToCell(QuadNode* cell_, GameObject* obj_);
 
-	//TODO: could i template this class to take in anything?
 	void PrepareCollisionQuery(QuadNode* cell_, BoundingBox box_);
 
 	void PrepareCollisionQuery(QuadNode* cell_, glm::vec2 point_);

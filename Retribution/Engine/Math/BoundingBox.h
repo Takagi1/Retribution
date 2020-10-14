@@ -33,12 +33,51 @@ public:
 		glm::vec2 otherMinCorner = box_->pos;
 		glm::vec2 otherMaxCorner = GetTransformedPoint(box_->pos, box_->dimentions);
 
+		//Both maxs must be larger the the others mins
+
 		if (minCorner.x <= otherMaxCorner.x && maxCorner.x >= otherMinCorner.x &&
 			minCorner.y <= otherMaxCorner.y && maxCorner.y >= otherMinCorner.y) {
 			return true;
 		}
-
+		
 		return false;
+	}
+
+	//Use this to find the how far the box's are colliding to push them appart.
+	//the x is negative if the box comes from the right and the y is negative if 
+	//it comes from the top.
+	inline glm::vec2 CollisionDepth(BoundingBox* box_) {
+		glm::vec2 minCorner = pos;
+		glm::vec2 maxCorner = GetTransformedPoint(pos, dimentions);
+
+		glm::vec2 otherMinCorner = box_->pos;
+		glm::vec2 otherMaxCorner = GetTransformedPoint(box_->pos, box_->dimentions);
+
+		glm::vec2 depth(0);
+
+		//First get which side is colliding
+
+		float x1 = maxCorner.x - otherMinCorner.x;
+		float x2 = otherMaxCorner.x - minCorner.x;
+
+		float y1 = maxCorner.y - otherMinCorner.y;
+		float y2 = otherMaxCorner.y - minCorner.y;
+
+		if (x1 < x2) {
+			depth.x = -x1;
+		}
+		else {
+			depth.x = x2;
+		}
+		
+		if (y1 < y2) {
+			depth.y = -y1;
+		}
+		else {
+			depth.y = y2;
+		}
+
+		return depth;
 	}
 
 	inline bool ClickIntersect(glm::vec2 point_) {

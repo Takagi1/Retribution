@@ -4,10 +4,10 @@
 #include "../../Engine/Core/CoreEngine.h"
 #include <array>
 #include <glm/gtx/string_cast.hpp>
-#include "../GameObjects/PlayerCharacter.h"
+#include "../Scripts/GameManager.h"
 #include "../GUI/HUD.h"
 #include "../Scripts/Controller.h"
-#include "../GameObjects/Archer.h"
+#include "../GameObjects/Monsters/Archer.h"
 
 class GameScene : public Scene
 {
@@ -20,7 +20,10 @@ public:
 	virtual void Draw();
 
 private:
+	GameManager gameManager;
 
+
+	//TODO: decide ownership, this is priority 1.
 	PlayerCharacter player;
 	Archer archer;
 	HUD hud;

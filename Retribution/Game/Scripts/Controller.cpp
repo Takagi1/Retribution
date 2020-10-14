@@ -2,17 +2,16 @@
 #include "../../Engine/Events/KeyEventListener.h"
 #include "../../Engine/Core/CoreEngine.h"
 
-Controller::Controller() : player(nullptr)
+Controller::Controller() : player(std::weak_ptr<PlayerCharacter>())
 {
 
 }
 
 Controller::~Controller()
 {
-	player = nullptr;
 }
 
-bool Controller::OnCreate(PlayerCharacter* player_)
+bool Controller::OnCreate(std::weak_ptr<PlayerCharacter> player_)
 {
 	player = player_;
 	return true;
@@ -37,14 +36,9 @@ void Controller::Update(const float deltaTime_)
 	}
 
 	if (KeyEventListener::keys[SDLK_LEFT]) {
-		player->Move(-1);
+		player.lock()->Move(-1, 0);
 	}
 	else if (KeyEventListener::keys[SDLK_RIGHT]) {
-		if (KeyEventListener::keys[SDLK_x]) {
-			player->Dash(1,0);
-		}
-		else {
-			player->Move(1);
-		}
+		player.lock()->Move(1, 0);
 	}
 }

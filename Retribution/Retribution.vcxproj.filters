@@ -31,9 +31,6 @@
     <Filter Include="Header Files\Engine\Rendering">
       <UniqueIdentifier>{959fa880-48df-4afe-b293-ae586fdfd471}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Engine\Core">
-      <UniqueIdentifier>{aaa7cec5-d798-42dd-8187-e7566659fb51}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Engine\Event">
       <UniqueIdentifier>{0d6e2097-c794-409d-885f-9efd1519e570}</UniqueIdentifier>
     </Filter>
@@ -118,13 +115,25 @@
     <Filter Include="Source Files\Engine\Audio">
       <UniqueIdentifier>{05a21351-8350-4277-8e8f-6b92c22ffe37}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Game\GameObjects\Monsters">
+      <UniqueIdentifier>{29328c44-df54-4da3-99ab-c8801af227b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\GameObjects\Monsters">
+      <UniqueIdentifier>{109a2df9-f04a-4f90-b386-2256852b1d9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Core">
+      <UniqueIdentifier>{aaa7cec5-d798-42dd-8187-e7566659fb51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\GameObjects\Projectiles">
+      <UniqueIdentifier>{75099576-b38a-4c49-b683-6d588907b3e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\GameObjects\Projectiles">
+      <UniqueIdentifier>{b0aa61e9-cf14-439c-8e42-c043adfa49df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\GameObjects\Archer.h">
-      <Filter>Header Files\Game\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Math\BoundingBox.h">
       <Filter>Header Files\Engine\Math</Filter>
@@ -158,9 +167,6 @@
     </ClInclude>
     <ClInclude Include="Game\Scenes\GameScene.h">
       <Filter>Header Files\Game\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Rendering\GUI\GUIObject.h">
-      <Filter>Header Files\Engine\Rendering\GUI</Filter>
     </ClInclude>
     <ClInclude Include="Game\GUI\HUD Objects\HealthBar.h">
       <Filter>Header Files\Game\GUI\HUD Objects</Filter>
@@ -228,6 +234,24 @@
     <ClInclude Include="Engine\Audio\AudioSource.h">
       <Filter>Header Files\Engine\Audio</Filter>
     </ClInclude>
+    <ClInclude Include="Game\GameObjects\Character.h">
+      <Filter>Header Files\Game\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scripts\GameManager.h">
+      <Filter>Header Files\Game\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameObjects\Monsters\Monster.h">
+      <Filter>Header Files\Game\GameObjects\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameObjects\Monsters\Archer.h">
+      <Filter>Header Files\Game\GameObjects\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\FX\Particle.h">
+      <Filter>Header Files\Engine\FX</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameObjects\Projectiles\Arrow.h">
+      <Filter>Header Files\Game\GameObjects\Projectiles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -235,9 +259,6 @@
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\GameObjects\Archer.cpp">
-      <Filter>Source Files\Game\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Math\CollisionDetection.cpp">
       <Filter>Source Files\Engine\Math</Filter>
@@ -322,6 +343,18 @@
     </ClCompile>
     <ClCompile Include="Engine\Audio\AudioSource.cpp">
       <Filter>Source Files\Engine\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameObjects\Character.cpp">
+      <Filter>Source Files\Game\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scripts\GameManager.cpp">
+      <Filter>Source Files\Game\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameObjects\Monsters\Monster.cpp">
+      <Filter>Source Files\Game\GameObjects\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameObjects\Monsters\Archer.cpp">
+      <Filter>Source Files\Game\GameObjects\Monsters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

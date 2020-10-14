@@ -5,11 +5,7 @@
 #include "../../Engine/Math/Physics2D.h"
 #include "../../Engine/Math/BoundingBox.h"
 
-int PlayerCharacter::maxHealth = 5;
-int PlayerCharacter::health = 5;
-
-
-PlayerCharacter::PlayerCharacter(glm::vec2 position_) : GameObject(position_, 0)
+PlayerCharacter::PlayerCharacter(glm::vec2 position_) : Character(position_,0), energy(0), maxEnergy(0)
 {
 
 }
@@ -21,6 +17,7 @@ PlayerCharacter::~PlayerCharacter()
 
 bool PlayerCharacter::OnCreate()
 {
+	Character::OnCreate();
 	AddComponent<Image>(this);
 
 	//GetComponent<Image>()->OnCreate(this);
@@ -31,58 +28,66 @@ bool PlayerCharacter::OnCreate()
 	SetDepth(1);
 	SetScale(glm::vec2(0.1f,0.1f));
 
-	AddComponent<Physics2D>(this);
+	SetHealth(5);
 
-
-	health = 5;
-
-	//GetComponent<Physics3D>()->SetMass(1);
-	//SceneGraph::GetInstance()->AddModel(model);
 	return true;
 }
 
 void PlayerCharacter::Update(const float deltaTime_)
 {
+	Character::Update(deltaTime_);
 
-	GameObject::Update(deltaTime_);
 
 	//TODO:Should i have a check here to see if image is added or would that be redundant 
 //because it should not get here if image is not added?
 
-//All things gameobject collides with this frame
-
 	//null the obj
 }
 
-int PlayerCharacter::GetHealth() const
-{
-	return health;
-}
-
-void PlayerCharacter::SetHealth(const int health_)
-{
-	health = health_;
-}
-
+/*
 void PlayerCharacter::Dash(int horizontal_, int vertical_)
 {
 	
 }
+*/
 
 //This might be realllllly dirty
 void PlayerCharacter::CollisionResponse(std::vector<GameObject*> obj_)
 {
-	if (!obj_.empty()) {
-		for (auto obj : obj_) {
-			if (obj->GetTag() == "Man") {
-				Translate(glm::vec2(-0.1f, 0.0f));
-				//printf("we got him");
-			}
+	//Clean the end
+	
+	//TODO: note it seems here on the first frame that both objects hit twise?
+	if (obj_.size() != 0) {
+		for (int i = 0; obj_.size() != 0;) {
+			obj_[i] = nullptr;
+			obj_.erase(obj_.begin() + i);
 		}
 	}
+
 }
 
-void PlayerCharacter::Move(int direction_)
+void PlayerCharacter::Parry()
 {
-	GetComponent<Physics2D>()->SetForce(glm::vec2(10.0f * direction_, 0));
+	//TODO: Decide if it should be a seperate class or not
+	
+	//for now the idea is that when the box is created the 
+	//it should be added into the collision response
+	//so that the game will do a collision check with it?
+	
+	//Then there will be checks to see if it collides with 
+	//an attack. collision response has been planned out
+	//so you should know it already.
+}
+
+int PlayerCharacter::GetEnergy() const
+{
+	return energy;
+}
+
+void PlayerCharacter::ChangeEnergy(const int energy_)
+{
+	energy += energy_;
+
+	if (energy < 0) { energy = 0; }
+	if (energy > maxEnergy) { energy = maxEnergy; }
 }

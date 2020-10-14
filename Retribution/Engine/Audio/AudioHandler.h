@@ -1,4 +1,6 @@
-#pragma once
+#ifndef AUDIOHANDLER_H
+#define AUDIOHANDLER_H
+
 #include <string>
 #include <map>
 #include <memory>
@@ -51,3 +53,4 @@ private:
 	//Function to check if a specific channel is playing a sound
 	bool IsPlaying(int channelID_);
 };
+#endif // !AUDIOHANDLER_H

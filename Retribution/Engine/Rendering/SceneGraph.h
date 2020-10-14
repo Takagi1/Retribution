@@ -17,7 +17,9 @@ public:
 
 	static SceneGraph* GetInstance();
 	void AddGameObject(GameObject* go_, std::string name_ = "GameObject");
-	
+	bool RemoveGameObject(std::string name_);
+
+
 	GameObject* GetGameObject(std::string tag_);
 
 	void Update(const float deltaTime_);

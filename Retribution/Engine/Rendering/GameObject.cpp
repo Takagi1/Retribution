@@ -1,6 +1,6 @@
 #include "GameObject.h"
 #include "Types/Image.h"
-GameObject::GameObject(glm::vec2 position_, float depth_) : angle(0), collisionType(COLLISIONTYPE::NONE)
+GameObject::GameObject(glm::vec2 position_, float depth_) : angle(0)
 {
 	position = glm::vec3(position_,depth_);
 }
@@ -83,6 +83,7 @@ void GameObject::SetTag(std::string tag_)
 	tag = tag_;
 }
 
+
 glm::vec2 GameObject::GetPosition() const
 {
 	return glm::vec2(position.x, position.y);
@@ -122,9 +123,9 @@ BoundingBox GameObject::GetBoundingBox() const
 	return box;
 }
 
-void GameObject::SetCollisionType(COLLISIONTYPE type_)
+std::string GameObject::GetName() const
 {
-	collisionType = type_;
+	return name;
 }
 
 void GameObject::UpdateBoundingBox(BoundingBox box_)

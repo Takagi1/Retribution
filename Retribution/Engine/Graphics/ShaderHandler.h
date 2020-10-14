@@ -1,5 +1,5 @@
-#ifndef SHADER_H
-#define SHADER_H
+#ifndef SHADERHANDLER_H
+#define SHADERHANDLER_H
 
 #include <sstream>
 #include <map>
@@ -34,5 +34,5 @@ private:
 
 	static std::map<std::string, GLuint> programs;
 };
-#endif //! SHADER_H
+#endif //! SHADERHANDLER_H
 

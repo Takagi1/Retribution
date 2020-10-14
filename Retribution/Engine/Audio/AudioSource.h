@@ -1,4 +1,5 @@
-#pragma once
+#ifndef AUDIOSOURCE_H
+#define AUDIOSOURCE_H
 
 #include "../Rendering/Component.h"
 #include <string>
@@ -24,3 +25,5 @@ private:
 	int channelID;
 
 };
+
+#endif // !AUDIOSOURCE_H

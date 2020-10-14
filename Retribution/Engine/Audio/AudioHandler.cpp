@@ -35,6 +35,7 @@ bool AudioHandler::Initialize(glm::vec3 position_, glm::vec3 velocity_, glm::vec
 
 	//TODO: is the amount of channels right?
 	systemPtr->init(2, FMOD_INIT_NORMAL, nullptr);
+
 systemPtr->set3DListenerAttributes(1, &glmToFMOD(position_), &glmToFMOD(velocity_),
 	&glmToFMOD(forward_), &glmToFMOD(up_));
 
@@ -78,7 +79,6 @@ void AudioHandler::LoadSound(const std::string name_, bool loop_, bool is3D_, bo
 		return;
 	}
 
-	//TODO: Test this extensively because i have no idea if i messed up here with bitwise
 	FMOD_MODE mode = FMOD_DEFAULT;
 
 	mode |= loop_ ? FMOD_LOOP_NORMAL : FMOD_LOOP_OFF;

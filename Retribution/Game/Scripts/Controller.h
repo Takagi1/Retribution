@@ -10,10 +10,10 @@ public:
 	Controller();
 	~Controller();
 
-	bool OnCreate(PlayerCharacter* player_);
+	bool OnCreate(std::weak_ptr<PlayerCharacter> player_);
 
 	void Update(const float deltaTime_);
 
 private:
-	PlayerCharacter* player;
+	std::weak_ptr<PlayerCharacter> player;
 };

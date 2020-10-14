@@ -1,5 +1,6 @@
 #include "SceneGraph.h"
 #include "../Graphics/ShaderHandler.h"
+#include "../Math/Physics2D.h"
 
 std::unique_ptr<SceneGraph> SceneGraph::sceneGraphInstance = nullptr;
 
@@ -43,6 +44,21 @@ void SceneGraph::AddGameObject(GameObject * go_, std::string name_)
 	}
 
 	CollisionHandler::GetInstance()->AddObject(go_);
+}
+
+bool SceneGraph::RemoveGameObject(std::string name_)
+{
+	std::map<std::string,GameObject*>::iterator obj = sceneGameObjects.find(name_);
+	if (obj == sceneGameObjects.end()) {
+		Debug::Error("No game object of that name has been found.", "SceneGraph.cpp", __LINE__);
+		return false;
+	}
+	else {
+		//delete sceneGameObjects[name_];
+		//delete obj->second;
+		sceneGameObjects.erase(obj);
+		return true;
+	}
 }
 
 
@@ -95,10 +111,26 @@ void SceneGraph::Update(const float deltaTime_)
 	for (auto go : sceneGameObjects) {
 		go.second->Update(deltaTime_);
 	}
-	//Collision fixing here?
-
+	
+	//Collision update
 	for (auto go : sceneGameObjects) {
-		go.second->CollisionResponse(CollisionHandler::GetInstance()->AABB(go.second->GetBoundingBox()));
+		std::vector<GameObject*> obj;
+		obj.reserve(5);
+		obj = CollisionHandler::GetInstance()->AABB(go.second->GetBoundingBox());
+
+		//First check if the object even has physics 
+		Physics2D* physicsPtr = go.second->GetComponent<Physics2D>();
+
+		if (physicsPtr) {
+			//if the object has rigid body and is not static make it apply collision detection
+			if (physicsPtr->GetRigidBody() && !physicsPtr->GetStaticObj()) {
+				physicsPtr->CollisionResponse(obj, deltaTime_);
+			}
+			physicsPtr = nullptr;
+		}
+
+		//At the end do the manually programed collision responses for the game object
+		go.second->CollisionResponse(obj);
 	}
 
 

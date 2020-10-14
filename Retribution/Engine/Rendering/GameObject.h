@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GAMEOBJECT_H
+#define GAMEOBJECT_H
+
 #include <vector>
 #include <string>
 #include <glm/glm.hpp>
@@ -38,13 +40,16 @@ public:
 	glm::vec2 GetScale() const;
 	float GetDepth() const;
 	std::string GetTag() const;
+	BoundingBox GetBoundingBox() const;
+	std::string GetName() const;
 
 	bool MouseDettection();
 
-	BoundingBox GetBoundingBox() const;
+
 
 	//Used to allow for the direct programing of collision response from objects
 	virtual void CollisionResponse(std::vector<GameObject*> obj_) = 0;
+
 
 	template<typename T, typename Args>
 	inline void AddComponent(Args&& args_)
@@ -103,14 +108,8 @@ public:
 		
 		Debug::Error("Component does not exist", "GameObject.h", __LINE__);
 	}
-protected:
-	enum class COLLISIONTYPE {
-		NONE,
-		CONTINUOUS,
-		DISCRETE
-	};
 
-	void SetCollisionType(COLLISIONTYPE type_);
+protected:
 
 	void UpdateBoundingBox(BoundingBox box_);
 private:
@@ -130,6 +129,5 @@ private:
 
 	BoundingBox box;
 
-	COLLISIONTYPE collisionType;
-
 };
+#endif // !GAMEOBJECT_H
