@@ -8,7 +8,7 @@
 #include "../Camera/Camera.h"
 #include "../../Engine/Core/Debug.h"
 #include "../Math/BoundingBox.h"
-
+#include "../../Engine/Audio/AudioSource.h"
 
 class GameObject {
 public:
@@ -83,7 +83,7 @@ public:
 	inline T* GetComponent()
 	{
 		//Loop to find the component
-		for (int i = 0; i < components.size(); i++)
+		for (size_t i = 0; i < components.size(); i++)
 		{
 			if (T* ptr = dynamic_cast<T*>(components[i])) {
 				return ptr;
@@ -109,6 +109,8 @@ public:
 		Debug::Error("Component does not exist", "GameObject.h", __LINE__);
 	}
 
+	AudioSource* sound;
+
 protected:
 
 	void UpdateBoundingBox(BoundingBox box_);
@@ -128,6 +130,8 @@ private:
 	std::vector<Component*> components;
 
 	BoundingBox box;
+
+
 
 };
 #endif // !GAMEOBJECT_H

@@ -14,15 +14,16 @@ public:
 		bool loop_, bool is3D_, bool stream_);
 	void Update(const float deltaTime_) override;
 
-
-	//bool FindContainingPoint() override;
-
 	void PlaySound();
 	bool IsPlaying();
 
 private:
 	std::string fileName;
 	int channelID;
+
+	void Draw(Camera* camera) override;
+	bool FindContainingPoint() override;
+
 
 };
 

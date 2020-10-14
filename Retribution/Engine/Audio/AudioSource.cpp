@@ -38,3 +38,12 @@ bool AudioSource::IsPlaying()
 {
 	return AudioHandler::GetInstance()->IsPlaying(channelID);
 }
+
+void AudioSource::Draw(Camera* camera)
+{
+}
+
+bool AudioSource::FindContainingPoint()
+{
+	return false;
+}

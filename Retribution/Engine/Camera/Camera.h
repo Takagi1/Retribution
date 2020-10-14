@@ -5,6 +5,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <vector>
 #include "../FX/LightSource.h"
+#include "../Audio/BackgroundSound.h"
 
 struct BoundingBox;
 
@@ -36,6 +37,8 @@ public:
 	std::vector<glm::vec4> GetFrustumPlanes();
 
 	bool FrustumCull(std::vector<glm::vec4> frustum_, BoundingBox* box_);
+
+	BackgroundSound* sound;
 
 private: 
 	void UpdateCameraVectors();

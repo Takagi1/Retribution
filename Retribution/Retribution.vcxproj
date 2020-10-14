@@ -159,6 +159,7 @@
   <ItemGroup>
     <ClInclude Include="Engine\Audio\AudioHandler.h" />
     <ClInclude Include="Engine\Audio\AudioSource.h" />
+    <ClInclude Include="Engine\Audio\BackgroundSound.h" />
     <ClInclude Include="Engine\Camera\Camera.h" />
     <ClInclude Include="Engine\Core\QuadSpatialPartition.h" />
     <ClInclude Include="Engine\Core\Timer.h" />
@@ -201,6 +202,7 @@
   <ItemGroup>
     <ClCompile Include="Engine\Audio\AudioHandler.cpp" />
     <ClCompile Include="Engine\Audio\AudioSource.cpp" />
+    <ClCompile Include="Engine\Audio\BackgroundSound.cpp" />
     <ClCompile Include="Engine\Camera\Camera.cpp" />
     <ClCompile Include="Engine\Core\QuadSpatialPartition.cpp" />
     <ClCompile Include="Engine\Core\Timer.cpp">

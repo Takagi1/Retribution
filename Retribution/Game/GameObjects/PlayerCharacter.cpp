@@ -20,11 +20,9 @@ bool PlayerCharacter::OnCreate()
 	Character::OnCreate();
 	AddComponent<Image>(this);
 
-	//GetComponent<Image>()->OnCreate(this);
 	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Mario", true);
 	UpdateBoundingBox(GetComponent<Image>()->GetBoundingBox());
 
-	SetPosition(glm::vec2(10.0f, 10.0f));
 	SetDepth(1);
 	SetScale(glm::vec2(0.1f,0.1f));
 

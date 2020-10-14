@@ -8,6 +8,7 @@
 #include <glm/glm.hpp> 
 #include "../Core/Debug.h"
 #include "AudioSource.h"
+#include "BackgroundSound.h"
 
 class AudioHandler {
 public:
@@ -31,6 +32,7 @@ private:
 	friend std::default_delete<AudioHandler>;
 
 	friend class AudioSource;
+	friend class BackgroundSound;
 
 	FMOD::System * systemPtr;
 	static std::map<std::string, FMOD::Sound* > soundPtrList;

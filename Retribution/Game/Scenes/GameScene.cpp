@@ -1,6 +1,7 @@
 #include "GameScene.h"
 #include <time.h>
 #include <math.h>
+#include "../../Engine/Audio/AudioHandler.h"
 
 GameScene::GameScene()
 {
@@ -35,9 +36,6 @@ bool GameScene::OnCreate()
 
 	SceneGraph::GetInstance()->AddGameObject(std::move(player), "Player");
 
-	//Create GameManager and controller
-
-
 
 	std::shared_ptr<Archer> archer = std::make_shared<Archer>(glm::vec2(40,40));
 
@@ -48,12 +46,12 @@ bool GameScene::OnCreate()
 
 	hud.OnCreate();
 
+	CoreEngine::GetInstance()->GetCamera()->sound = new BackgroundSound(CoreEngine::GetInstance()->GetCamera());
 
+	CoreEngine::GetInstance()->GetCamera()->sound->OnCreate("LOZ.mp3", false, false, false);
+
+	CoreEngine::GetInstance()->GetCamera()->sound->PlaySound();
 	
-
-	//player.GetComponent<Physics3D>()->SetForce(glm::vec3(0.01f, 0, 0));
-
-
 	return true;
 }
 

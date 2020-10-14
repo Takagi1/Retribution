@@ -26,10 +26,11 @@ bool Archer::OnCreate()
 	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Mario", true);
 	UpdateBoundingBox(GetComponent<Image>()->GetBoundingBox());
 	
-	SetPosition(glm::vec2(40.0f, 40.0f));
 	SetScale(glm::vec2(0.1f, 0.1f));
 	SetTag("Man");
 
+
+	projectiles.reserve(5);
 	return true;
 }
 
@@ -38,8 +39,8 @@ void Archer::Update(const float deltaTime_)
 	Character::Update(deltaTime_);
 
 	
-	for (int i = 0; i > projectiles.size(); i++) {
-		projectiles[i]->Update(deltaTime_);
+	for (auto p : projectiles) {
+		p->Update(deltaTime_);
 	}
 
 }
@@ -52,8 +53,8 @@ void Archer::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_)
 void Archer::CreateArrow()
 { 
 	
-	//std::unique_ptr<Projectile> shot = std::make_unique<Projectile>();
-	//CollisionHandler::GetInstance()->AddObject(shot.get());
-	//projectiles.push_back(std::move(shot));
+	std::shared_ptr<Projectile> shot = std::make_shared<Projectile>();
+	CollisionHandler::GetInstance()->AddObject(shot);
+	projectiles.push_back(std::move(shot));
 	
 }

@@ -1,8 +1,9 @@
 #include "Timer.h"
+#include <iostream>
+#include <string>
 
 
-
-Timer::Timer() : prevTicks(0), currentTicks(0)
+Timer::Timer() : prevTicks(0), currentTicks(0), secCounter(0), secTimer(1)
 {
 }
 
@@ -16,7 +17,6 @@ void Timer::UpdateFrameTicks()
 {
 	prevTicks = currentTicks;
 	currentTicks = SDL_GetTicks();
-
 }
 
 float Timer::GetDeltaTime() const
@@ -40,6 +40,20 @@ unsigned int Timer::GetSleepTime(unsigned int fps_) const
 float Timer::GetCurrentTicks()
 {
 	return static_cast<float>(currentTicks) / 1000.0f;
+}
+
+void Timer::FPSCounter(const float deltaTime_)
+{
+	secCounter++;
+	secTimer -= deltaTime_;
+	if (secTimer <= 0) {
+		if (secCounter <= 30) {
+			int a = 1;
+		}
+		secTimer += 1;
+		std::cout << secCounter << std::endl;
+		secCounter = 0;
+	}
 }
 
 

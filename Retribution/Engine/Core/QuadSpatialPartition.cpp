@@ -162,6 +162,7 @@ void QuadSpatialPartition::AddObject(std::weak_ptr<GameObject> obj_)
 
 std::vector<std::weak_ptr<GameObject>> QuadSpatialPartition::GetCollision(BoundingBox box_)
 {
+	objIntersectionList.clear();
 	objIntersectionList.reserve(20);
 	PrepareCollisionQuery(root, box_);
 
@@ -181,6 +182,7 @@ std::vector<std::weak_ptr<GameObject>> QuadSpatialPartition::GetCollision(Boundi
 
 std::weak_ptr<GameObject> QuadSpatialPartition::GetCollision(glm::vec2 point_)
 {
+	objIntersectionList.clear();
 	objIntersectionList.reserve(20);
 	PrepareCollisionQuery(root, point_);
 

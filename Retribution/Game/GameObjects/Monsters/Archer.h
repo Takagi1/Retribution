@@ -19,7 +19,7 @@ public:
 
 private:
 	//Making it a shared pointer for memory safety
-	std::vector<std::unique_ptr<Projectile>> projectiles;
+	std::vector<std::shared_ptr<Projectile>> projectiles;
 
 	void CreateArrow();
 

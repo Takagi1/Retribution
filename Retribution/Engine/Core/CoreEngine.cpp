@@ -2,6 +2,7 @@
 #include "Window.h"
 #include "Debug.h"
 #include "Scene.h"
+#include "../Audio/AudioHandler.h"
 
 std::unique_ptr<CoreEngine> CoreEngine::engineInstance = nullptr;
 
@@ -44,6 +45,8 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 		}
 	}
 
+	AudioHandler::GetInstance()->Initialize();
+
 	timer.Start();
 
 	Debug::Info("Everything was created okay", "CoreEngine.cpp", __LINE__);
@@ -54,17 +57,21 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 
 void CoreEngine::Run()
 {
+	float time;
 	while (isRunning) {
 		timer.UpdateFrameTicks();
 
 		EventListener::Update();
 
-		Update(timer.GetDeltaTime());
+		time = timer.GetDeltaTime();
+		Update(time);
+
 
 		Draw();
 
-		SDL_Delay(timer.GetSleepTime(fps));
+		timer.FPSCounter(time);
 
+		SDL_Delay(timer.GetSleepTime(fps));	
 	}
 
 	if (!isRunning) {
@@ -90,6 +97,7 @@ void CoreEngine::OnDestroy()
 	ShaderHandler::GetInstance()->OnDestroy();
 	TextureHandler::GetInstance()->OnDestroy();
 	SceneGraph::GetInstance()->OnDestroy();
+	AudioHandler::GetInstance()->OnDestroy();
 
 	delete gameInterface;
 	gameInterface = nullptr;

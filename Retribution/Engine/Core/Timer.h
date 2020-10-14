@@ -20,8 +20,14 @@ public:
 	unsigned int GetSleepTime(unsigned int fps_) const;
 	float GetCurrentTicks();
 
+	void FPSCounter(const float deltaTime_);
+
 private:
 	unsigned int prevTicks, currentTicks;
+
+	unsigned int secCounter;
+
+	float secTimer;
 
 
 

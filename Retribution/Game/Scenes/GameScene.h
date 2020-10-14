@@ -9,6 +9,7 @@
 #include "../Scripts/Controller.h"
 #include "../GameObjects/Monsters/Archer.h"
 
+
 class GameScene : public Scene
 {
 public:
@@ -22,8 +23,6 @@ public:
 private:
 	GameManager gameManager;
 
-
-	//TODO: decide ownership, this is priority 1.
 	HUD hud;
 
 	Controller controller;
