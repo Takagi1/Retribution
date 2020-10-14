@@ -43,7 +43,7 @@ void CollisionHandler::OnCreate(float worldSize_)
 	scenePartition = new QuadSpatialPartition(worldSize_);
 }
 
-void CollisionHandler::AddObject(GameObject * go_)
+void CollisionHandler::AddObject(std::weak_ptr<GameObject> go_)
 {
 	scenePartition->AddObject(go_);
 }
@@ -65,7 +65,7 @@ void CollisionHandler::MouseUpdate(glm::vec2 mousePosition_, int buttonType_)
 	}
 }
 
-std::vector<GameObject*> CollisionHandler::AABB(BoundingBox box)
+std::vector<std::weak_ptr<GameObject>> CollisionHandler::AABB(BoundingBox box)
 {
 	if (scenePartition) {
 		return scenePartition->GetCollision(box); 

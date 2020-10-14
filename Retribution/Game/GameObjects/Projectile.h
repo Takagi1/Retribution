@@ -14,5 +14,5 @@ public:
 	Projectile(glm::vec2 position_ = glm::vec2(), const float depth_ = 0.0f) :GameObject(position_, depth_){};
 	virtual ~Projectile() {};
 
-	virtual void CollisionResponse(std::vector<GameObject*> obj_) {};
+	virtual void CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_) {};
 };

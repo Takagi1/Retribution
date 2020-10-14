@@ -3,7 +3,8 @@
 
 int QuadNode::childNum = 0;
 
-QuadNode::QuadNode(glm::vec2 position_, float size_, QuadNode* parent_) : parent(nullptr), objectList(std::vector<GameObject*>()), children()
+QuadNode::QuadNode(glm::vec2 position_, float size_, QuadNode* parent_) : parent(nullptr), 
+objectList(std::vector<std::weak_ptr<GameObject>>()), children()
 {
 	objectList.reserve(10);
 
@@ -33,7 +34,7 @@ void QuadNode::OnDestroy()
 
 	if (objectList.size() > 0) {
 		for (auto obj : objectList) {
-			obj = nullptr;
+			obj.reset();
 		}
 		objectList.clear();
 	}
@@ -99,7 +100,7 @@ QuadNode* QuadNode::GetChild(QuadChildren childPosition_)
 	return children[static_cast<int>(childPosition_)];
 }
 
-void QuadNode::AddCollisionObject(GameObject* obj_)
+void QuadNode::AddCollisionObject(std::weak_ptr<GameObject> obj_)
 {
 	objectList.push_back(obj_);
 }
@@ -154,22 +155,22 @@ void QuadSpatialPartition::OnDestroy()
 	root = nullptr;
 }
 
-void QuadSpatialPartition::AddObject(GameObject* obj_)
+void QuadSpatialPartition::AddObject(std::weak_ptr<GameObject> obj_)
 {
 	AddObjectToCell(root, obj_);
 }
 
-std::vector<GameObject*> QuadSpatialPartition::GetCollision(BoundingBox box_)
+std::vector<std::weak_ptr<GameObject>> QuadSpatialPartition::GetCollision(BoundingBox box_)
 {
 	objIntersectionList.reserve(20);
 	PrepareCollisionQuery(root, box_);
 
-	std::vector<GameObject*> result;
+	std::vector<std::weak_ptr<GameObject>> result;
 	result.reserve(5);
 
 	for (auto cell : objIntersectionList) {
 		for (auto obj : cell->objectList) {
-			if (box_.Intersects(&obj->GetBoundingBox())) {
+			if (box_.Intersects(&obj.lock()->GetBoundingBox())) {
 				result.push_back(obj);
 			}
 		}
@@ -178,27 +179,27 @@ std::vector<GameObject*> QuadSpatialPartition::GetCollision(BoundingBox box_)
 	return result;
 }
 
-GameObject* QuadSpatialPartition::GetCollision(glm::vec2 point_)
+std::weak_ptr<GameObject> QuadSpatialPartition::GetCollision(glm::vec2 point_)
 {
 	objIntersectionList.reserve(20);
 	PrepareCollisionQuery(root, point_);
 
-	GameObject* result = nullptr;
+	std::weak_ptr<GameObject> result = std::weak_ptr<GameObject>();
 
 	for (auto cell : objIntersectionList) {
 		for (auto obj : cell->objectList) {
-			obj->MouseDettection();
+			obj.lock()->MouseDettection();
 		}
 	}
 
 	return result;
 }
 
-void QuadSpatialPartition::AddObjectToCell(QuadNode* cell_, GameObject* obj_)
+void QuadSpatialPartition::AddObjectToCell(QuadNode* cell_, std::weak_ptr<GameObject> obj_)
 {
 	if (cell_ != nullptr) {
 		BoundingBox box = *cell_->GetBoundingBox();
-		if (box.Intersects(&obj_->GetBoundingBox())) {
+		if (box.Intersects(&obj_.lock()->GetBoundingBox())) {
 			if (cell_->IsLeaf()) {
 				cell_->AddCollisionObject(obj_);
 			}

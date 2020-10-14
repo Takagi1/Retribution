@@ -21,10 +21,12 @@ public:
 	~GameManager();
 
 	bool OnCreate(std::weak_ptr<PlayerCharacter> player_);
-
+	void Update(const float deltaTime_);
+	void AddMonster(std::weak_ptr<Monster> monster_);
+	void RemoveMonster();
 
 private:
 	
-	PlayerCharacter* player;
-	std::vector<Monster*> monsters;
+	std::weak_ptr<PlayerCharacter> player;
+	std::vector<std::weak_ptr<Monster>> monsters;
 };

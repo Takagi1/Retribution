@@ -32,6 +32,6 @@ void HealthBar::UpdateHealth(int health_)
 	health = health_;
 }
 
-void HealthBar::CollisionResponse(std::vector<GameObject*> obj_)
+void HealthBar::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_)
 {
 }

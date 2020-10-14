@@ -149,15 +149,15 @@ void Physics2D::ApplyGravity(bool state_)
 }
 
 //This function is designed to push two objects that are colliding appart.
-void Physics2D::CollisionResponse(std::vector<GameObject*> obj, const float deltaTime_)
+void Physics2D::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj, const float deltaTime_)
 {
 	for (auto o : obj) {
-		if (o->GetName() != parent->GetName()) {
-			Physics2D* physics = o->GetComponent<Physics2D>();
+		if (o.lock()->GetName() != parent->GetName()) {
+			Physics2D* physics = o.lock()->GetComponent<Physics2D>();
 			if (physics) {
 				if (physics->GetRigidBody()) {
 					
-					glm::vec2 depth = parent->GetBoundingBox().CollisionDepth(&o->GetBoundingBox());
+					glm::vec2 depth = parent->GetBoundingBox().CollisionDepth(&o.lock()->GetBoundingBox());
 					
 					//if the colliding object is static push by full force else split between both objects
 					if (physics->GetStaticObj()) {
@@ -165,7 +165,7 @@ void Physics2D::CollisionResponse(std::vector<GameObject*> obj, const float delt
 					}
 					else {
 						parent->Translate(glm::vec2(depth.x / 2, depth.y / 2));
-						o->Translate(glm::vec2(-depth.x / 2, -depth.y / 2));
+						o.lock()->Translate(glm::vec2(-depth.x / 2, -depth.y / 2));
 					}
 				}
 				physics = nullptr;

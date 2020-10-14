@@ -24,8 +24,6 @@ private:
 
 
 	//TODO: decide ownership, this is priority 1.
-	PlayerCharacter player;
-	Archer archer;
 	HUD hud;
 
 	Controller controller;

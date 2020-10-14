@@ -44,15 +44,16 @@ void Archer::Update(const float deltaTime_)
 
 }
 
-void Archer::CollisionResponse(std::vector<GameObject*> obj_)
+void Archer::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_)
 {
 }
 
 //I think this is a good first draft here.
 void Archer::CreateArrow()
 { 
-	std::unique_ptr<Projectile> shot = std::make_unique<Projectile>();
-	CollisionHandler::GetInstance()->AddObject(shot.get());
-	projectiles.push_back(std::move(shot));
+	
+	//std::unique_ptr<Projectile> shot = std::make_unique<Projectile>();
+	//CollisionHandler::GetInstance()->AddObject(shot.get());
+	//projectiles.push_back(std::move(shot));
 	
 }

@@ -52,17 +52,17 @@ void PlayerCharacter::Dash(int horizontal_, int vertical_)
 */
 
 //This might be realllllly dirty
-void PlayerCharacter::CollisionResponse(std::vector<GameObject*> obj_)
+void PlayerCharacter::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_)
 {
 	//Clean the end
 	
 	//TODO: note it seems here on the first frame that both objects hit twise?
-	if (obj_.size() != 0) {
-		for (int i = 0; obj_.size() != 0;) {
-			obj_[i] = nullptr;
-			obj_.erase(obj_.begin() + i);
-		}
-	}
+	//if (obj_.size() != 0) {
+	//	for (int i = 0; obj_.size() != 0;) {
+	//		//obj_[i] = nullptr;
+	//		obj_.erase(obj_.begin() + i);
+	//	}
+	//}
 
 }
 

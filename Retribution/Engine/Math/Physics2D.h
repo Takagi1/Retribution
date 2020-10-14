@@ -4,6 +4,7 @@
 #include "../Rendering/Component.h"
 #include <glm/glm.hpp>
 #include <vector>
+#include <memory>
 
 
 class GameObject;
@@ -36,7 +37,7 @@ public:
 
 //Section for Collision
 
-	void CollisionResponse(std::vector<GameObject*> obj, const float deltaTime_);
+	void CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj, const float deltaTime_);
 
 private:
 

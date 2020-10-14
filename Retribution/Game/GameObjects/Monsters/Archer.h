@@ -14,7 +14,7 @@ public:
 	bool OnCreate();
 	virtual void Update(const float deltaTime_);
 
-	void CollisionResponse(std::vector<GameObject*> obj_) override;
+	void CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_) override;
 
 
 private:

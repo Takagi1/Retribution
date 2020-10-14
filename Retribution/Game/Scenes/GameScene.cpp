@@ -27,22 +27,24 @@ bool GameScene::OnCreate()
 
 	//Create Player
 
-	//PlayerCharacter* player = new PlayerCharacter();
-	player.OnCreate();
+	std::shared_ptr<PlayerCharacter> player = std::make_shared<PlayerCharacter>(glm::vec2(10,10));
+	player->OnCreate();
 
-	SceneGraph::GetInstance()->AddGameObject(&player, "Player");
+	gameManager.OnCreate(player);
+	controller.OnCreate(player);
 
-	SceneGraph::GetInstance()->RemoveGameObject("Player");
+	SceneGraph::GetInstance()->AddGameObject(std::move(player), "Player");
 
 	//Create GameManager and controller
 
-	//gameManager.OnCreate(player);
-	//controller.OnCreate(player);
 
 
+	std::shared_ptr<Archer> archer = std::make_shared<Archer>(glm::vec2(40,40));
 
-	archer.OnCreate();
-	SceneGraph::GetInstance()->AddGameObject(&archer, "Archer");
+	archer->OnCreate();
+	gameManager.AddMonster(archer);
+
+	SceneGraph::GetInstance()->AddGameObject(std::move(archer), "Archer");
 
 	hud.OnCreate();
 
@@ -59,9 +61,10 @@ void GameScene::Update(const float deltaTime_)
 {
 	//Take in player inputs
 	controller.Update(deltaTime_);
-	
 
 	SceneGraph::GetInstance()->Update(deltaTime_);
+
+	gameManager.Update(deltaTime_);
 }
 
 void GameScene::Draw()

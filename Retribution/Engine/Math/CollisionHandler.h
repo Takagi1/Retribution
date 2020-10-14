@@ -15,9 +15,9 @@ public:
 	static CollisionHandler* GetInstance();
 	void OnDestroy();
 	void OnCreate(float worldSize_);
-	void AddObject(GameObject* go_);
+	void AddObject(std::weak_ptr<GameObject> go_);
 	void MouseUpdate(glm::vec2 mousePosition_, int buttonType_);
-	std::vector<GameObject*> AABB(BoundingBox box);
+	std::vector<std::weak_ptr<GameObject>> AABB(BoundingBox box);
 
 private:
 	CollisionHandler();

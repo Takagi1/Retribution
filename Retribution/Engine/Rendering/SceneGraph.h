@@ -16,11 +16,11 @@ public:
 	SceneGraph& operator =(SceneGraph&&) = delete;
 
 	static SceneGraph* GetInstance();
-	void AddGameObject(GameObject* go_, std::string name_ = "GameObject");
+	void AddGameObject(std::shared_ptr<GameObject> go_, std::string name_ = "GameObject");
 	bool RemoveGameObject(std::string name_);
 
 
-	GameObject* GetGameObject(std::string tag_);
+	std::weak_ptr<GameObject> GetGameObject(std::string tag_);
 
 	void Update(const float deltaTime_);
 	void Draw(Camera* camera_);
@@ -39,7 +39,7 @@ private:
 	static std::unique_ptr<SceneGraph> sceneGraphInstance;
 	friend std::default_delete<SceneGraph>;
 
-	static std::map<std::string, GameObject*> sceneGameObjects;
+	static std::map<std::string, std::shared_ptr<GameObject>> sceneGameObjects;
 
 	//Used to store objects for GUI
 	static std::map<std::string, GameObject*> sceneGUIObjects;

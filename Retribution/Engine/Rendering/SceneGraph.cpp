@@ -4,7 +4,7 @@
 
 std::unique_ptr<SceneGraph> SceneGraph::sceneGraphInstance = nullptr;
 
-std::map<std::string, GameObject*> SceneGraph::sceneGameObjects = std::map<std::string, GameObject*>();
+std::map<std::string, std::shared_ptr<GameObject>> SceneGraph::sceneGameObjects = std::map<std::string, std::shared_ptr<GameObject>>();
 std::map<std::string, GameObject*> SceneGraph::sceneGUIObjects = std::map<std::string, GameObject*>();
 
 SceneGraph * SceneGraph::GetInstance()
@@ -16,7 +16,7 @@ SceneGraph * SceneGraph::GetInstance()
 }
 
 
-void SceneGraph::AddGameObject(GameObject * go_, std::string name_)
+void SceneGraph::AddGameObject(std::shared_ptr<GameObject> go_, std::string name_)
 {
 
 	if (sceneGameObjects.find(name_) == sceneGameObjects.end()) {
@@ -48,15 +48,18 @@ void SceneGraph::AddGameObject(GameObject * go_, std::string name_)
 
 bool SceneGraph::RemoveGameObject(std::string name_)
 {
-	std::map<std::string,GameObject*>::iterator obj = sceneGameObjects.find(name_);
+	std::map<std::string,std::shared_ptr<GameObject>>::iterator obj = sceneGameObjects.find(name_);
 	if (obj == sceneGameObjects.end()) {
 		Debug::Error("No game object of that name has been found.", "SceneGraph.cpp", __LINE__);
 		return false;
 	}
 	else {
-		//delete sceneGameObjects[name_];
-		//delete obj->second;
+
+		//TODO: remove obj from collision handler
+		obj->second.reset();
+		
 		sceneGameObjects.erase(obj);
+		
 		return true;
 	}
 }
@@ -89,12 +92,12 @@ void SceneGraph::AddGUIObject(GameObject* go, std::string name_)
 	}
 }
 
-GameObject * SceneGraph::GetGameObject(std::string tag_)
+std::weak_ptr<GameObject> SceneGraph::GetGameObject(std::string tag_)
 {
 	if (sceneGameObjects.find(tag_) != sceneGameObjects.end()) {
 		return sceneGameObjects[tag_];
 	}
-	return nullptr;
+	return std::weak_ptr<GameObject>();
 }
 
 GameObject* SceneGraph::GetGUIObject(std::string tag_)
@@ -114,7 +117,7 @@ void SceneGraph::Update(const float deltaTime_)
 	
 	//Collision update
 	for (auto go : sceneGameObjects) {
-		std::vector<GameObject*> obj;
+		std::vector<std::weak_ptr<GameObject>> obj;
 		obj.reserve(5);
 		obj = CollisionHandler::GetInstance()->AABB(go.second->GetBoundingBox());
 
@@ -163,8 +166,7 @@ void SceneGraph::OnDestroy()
 {
 	if (sceneGameObjects.size() > 0) {
 		for (auto go : sceneGameObjects) {
-			delete go.second;
-			go.second = nullptr;
+			go.second.reset();
 		}
 		sceneGameObjects.clear();
 	}

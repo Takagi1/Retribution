@@ -48,7 +48,7 @@ public:
 
 
 	//Used to allow for the direct programing of collision response from objects
-	virtual void CollisionResponse(std::vector<GameObject*> obj_) = 0;
+	virtual void CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_) = 0;
 
 
 	template<typename T, typename Args>

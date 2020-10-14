@@ -12,7 +12,7 @@ public:
 
 	void UpdateHealth(int health_);
 
-	void CollisionResponse(std::vector<GameObject*> obj_) override;
+	void CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_) override;
 private:
 	int health;
 };

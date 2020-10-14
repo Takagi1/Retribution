@@ -22,7 +22,7 @@ public:
 
 	QuadNode* GetParent();
 	QuadNode* GetChild(QuadChildren childPosition_);
-	void AddCollisionObject(GameObject* obj_);
+	void AddCollisionObject(std::weak_ptr<GameObject> obj_);
 	int GetObjectCount() const;
 	bool IsLeaf() const;
 	BoundingBox* GetBoundingBox() const;
@@ -34,7 +34,7 @@ private:
 	BoundingBox* quadBounds;
 	QuadNode* parent;
 	QuadNode* children[CHILDREN_NUMBER];
-	std::vector<GameObject*> objectList;
+	std::vector<std::weak_ptr<GameObject>> objectList;
 	float size;
 	static int childNum;
 };
@@ -46,18 +46,18 @@ public:
 	QuadSpatialPartition(float worldSize_);
 	~QuadSpatialPartition();
 	void OnDestroy();
-	void AddObject(GameObject* obj_);
+	void AddObject(std::weak_ptr<GameObject> obj_);
 
 	//Returns a std::vector becuase there could be multiple collisions at once
-	std::vector<GameObject*> GetCollision(BoundingBox box_);
-	GameObject* GetCollision(glm::vec2 point_);
+	std::vector<std::weak_ptr<GameObject>> GetCollision(BoundingBox box_);
+	std::weak_ptr<GameObject> GetCollision(glm::vec2 point_);
 	//GameObject* GetCollision(Ray ray_);
 
 private:
 
 	QuadNode* root;
 	std::vector<QuadNode*> objIntersectionList;
-	void AddObjectToCell(QuadNode* cell_, GameObject* obj_);
+	void AddObjectToCell(QuadNode* cell_, std::weak_ptr<GameObject> obj_);
 
 	void PrepareCollisionQuery(QuadNode* cell_, BoundingBox box_);
 
