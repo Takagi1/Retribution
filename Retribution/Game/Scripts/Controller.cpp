@@ -41,4 +41,8 @@ void Controller::Update(const float deltaTime_)
 	else if (KeyEventListener::keys[SDLK_RIGHT]) {
 		player.lock()->Move(1, 0);
 	}
+
+	if (KeyEventListener::keys[SDLK_x]) {
+		player.lock()->Parry(true);
+	}
 }

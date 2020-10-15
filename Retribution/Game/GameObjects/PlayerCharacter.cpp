@@ -35,11 +35,9 @@ void PlayerCharacter::Update(const float deltaTime_)
 {
 	Character::Update(deltaTime_);
 
-
-	//TODO:Should i have a check here to see if image is added or would that be redundant 
-//because it should not get here if image is not added?
-
-	//null the obj
+	if (triggerBox) {
+		triggerBox->Update();
+	}
 }
 
 /*
@@ -52,34 +50,55 @@ void PlayerCharacter::Dash(int horizontal_, int vertical_)
 //This might be realllllly dirty
 void PlayerCharacter::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_)
 {
-	//Clean the end
-	
-	//TODO: note it seems here on the first frame that both objects hit twise?
-	//if (obj_.size() != 0) {
-	//	for (int i = 0; obj_.size() != 0;) {
-	//		//obj_[i] = nullptr;
-	//		obj_.erase(obj_.begin() + i);
-	//	}
-	//}
 
 }
 
-void PlayerCharacter::Parry()
+void PlayerCharacter::Parry(const bool isRight_)
 {
-	//TODO: Decide if it should be a seperate class or not
-	
-	//for now the idea is that when the box is created the 
-	//it should be added into the collision response
-	//so that the game will do a collision check with it?
-	
-	//Then there will be checks to see if it collides with 
-	//an attack. collision response has been planned out
-	//so you should know it already.
+	//TODO: This is temp as it needs to be seriously improved
+
+
+	//Step 1. Create box
+	triggerBox = new TriggerBox(this, parryType, glm::vec2(100.0f, GetBoundingBox().dimentions.y), 
+		glm::vec2(GetPosition().x + (isRight_ ? GetBoundingBox().dimentions.x : 0), GetPosition().y));
 }
 
 int PlayerCharacter::GetEnergy() const
 {
 	return energy;
+}
+
+std::string PlayerCharacter::GetParryType() const
+{
+	return parryType;
+}
+
+std::string PlayerCharacter::GetCounterType() const
+{
+	return counterType;
+}
+
+void PlayerCharacter::SetEnergy(const int energy_)
+{
+	if (energy_ <= 0) {
+		energy = 0;
+	}
+	else if (energy_ >= maxEnergy) {
+		energy = maxEnergy;
+	}
+	else {
+		energy = energy_;
+	}
+}
+
+void PlayerCharacter::SetParryType(const std::string parry_)
+{
+	parryType = parry_;
+}
+
+void PlayerCharacter::SetCounterType(const std::string counter_)
+{
+	counterType = counter_;
 }
 
 void PlayerCharacter::ChangeEnergy(const int energy_)

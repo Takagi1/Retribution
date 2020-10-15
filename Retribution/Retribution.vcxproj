@@ -196,6 +196,7 @@
     <ClInclude Include="Game\Scenes\SceneManager.h" />
     <ClInclude Include="Game\Scripts\Controller.h" />
     <ClInclude Include="Game\Scripts\GameManager.h" />
+    <ClInclude Include="Game\Scripts\TriggerBox.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Game\Scenes\StartScene.h" />
   </ItemGroup>
@@ -238,6 +239,7 @@
     <ClCompile Include="Game\GameObjects\Monsters\Archer.cpp" />
     <ClCompile Include="Game\GameObjects\Monsters\Monster.cpp" />
     <ClCompile Include="Game\GameObjects\PlayerCharacter.cpp" />
+    <ClCompile Include="Game\GameObjects\Projectile.cpp" />
     <ClCompile Include="Game\GUI\HUD Objects\HealthBar.cpp" />
     <ClCompile Include="Game\GUI\HUD.cpp" />
     <ClCompile Include="Game\Scenes\GameScene.cpp">
@@ -247,6 +249,7 @@
     <ClCompile Include="Game\Scenes\SceneManager.cpp" />
     <ClCompile Include="Game\Scripts\Controller.cpp" />
     <ClCompile Include="Game\Scripts\GameManager.cpp" />
+    <ClCompile Include="Game\Scripts\TriggerBox.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

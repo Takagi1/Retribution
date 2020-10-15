@@ -11,3 +11,5 @@
 [INFO]: Component created in file: GameObject.h on line: 79
 [ERROR]: Component does not exist in file: GameObject.h on line: 92
 [INFO]: Component created in file: GameObject.h on line: 79
+[INFO]: Sound sucssessfully loaded in file: AudioHandler.cpp on line: 102
+[ERROR]: Sound already loaded in file: AudioHandler.cpp on line: 78

@@ -255,6 +255,9 @@
     <ClInclude Include="Engine\Audio\BackgroundSound.h">
       <Filter>Header Files\Engine\Audio</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Scripts\TriggerBox.h">
+      <Filter>Header Files\Game\Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -361,6 +364,12 @@
     </ClCompile>
     <ClCompile Include="Engine\Audio\BackgroundSound.cpp">
       <Filter>Source Files\Engine\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scripts\TriggerBox.cpp">
+      <Filter>Source Files\Game\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameObjects\Projectile.cpp">
+      <Filter>Source Files\Game\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
