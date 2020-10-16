@@ -36,13 +36,19 @@ void Controller::Update(const float deltaTime_)
 	}
 
 	if (KeyEventListener::keys[SDLK_LEFT]) {
-		player.lock()->Move(-1, 0);
+		if (player.lock()->GetState() == State::Neutral) {
+			player.lock()->Move(-1, 0);
+		}
 	}
 	else if (KeyEventListener::keys[SDLK_RIGHT]) {
-		player.lock()->Move(1, 0);
+		if (player.lock()->GetState() == State::Neutral) {
+			player.lock()->Move(1, 0);
+		}
 	}
 
 	if (KeyEventListener::keys[SDLK_x]) {
-		player.lock()->Parry(true);
+		if (player.lock()->GetState() == State::Neutral) {
+			player.lock()->Parry(true);
+		}
 	}
 }

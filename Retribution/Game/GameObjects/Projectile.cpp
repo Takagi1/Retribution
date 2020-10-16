@@ -1,6 +1,7 @@
 #include "Projectile.h"
 
-Projectile::Projectile(glm::vec2 position_, const float depth_) :GameObject(position_, depth_), power(0)
+Projectile::Projectile(glm::vec2 position_, const float depth_) :GameObject(position_, depth_), 
+power(0), isRight_(false)
 {
 }
 
@@ -15,6 +16,7 @@ bool Projectile::OnCreate()
 
 void Projectile::Update(const float deltaTime_)
 {
+	GameObject::Update(deltaTime_);
 }
 
 void Projectile::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_)

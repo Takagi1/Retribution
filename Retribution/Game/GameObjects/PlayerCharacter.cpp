@@ -5,7 +5,8 @@
 #include "../../Engine/Math/Physics2D.h"
 #include "../../Engine/Math/BoundingBox.h"
 
-PlayerCharacter::PlayerCharacter(glm::vec2 position_) : Character(position_,0), energy(0), maxEnergy(0)
+PlayerCharacter::PlayerCharacter(glm::vec2 position_) : Character(position_,0), energy(0), maxEnergy(0),
+pState(State::Neutral), triggerBox(nullptr)
 {
 
 }
@@ -38,6 +39,14 @@ void PlayerCharacter::Update(const float deltaTime_)
 	if (triggerBox) {
 		triggerBox->Update();
 	}
+
+	if (lifeTime > 0) {
+		lifeTime -= deltaTime_;
+		if (lifeTime < 0) {
+			lifeTime = 0;
+			pState = State::Neutral;
+		}
+	}
 }
 
 /*
@@ -57,10 +66,15 @@ void PlayerCharacter::Parry(const bool isRight_)
 {
 	//TODO: This is temp as it needs to be seriously improved
 
+	//TODO: create method of suspending player actions
 
 	//Step 1. Create box
 	triggerBox = new TriggerBox(this, parryType, glm::vec2(100.0f, GetBoundingBox().dimentions.y), 
 		glm::vec2(GetPosition().x + (isRight_ ? GetBoundingBox().dimentions.x : 0), GetPosition().y));
+
+	pState = State::Action;
+
+	lifeTime = 1.5f;
 }
 
 int PlayerCharacter::GetEnergy() const
@@ -76,6 +90,11 @@ std::string PlayerCharacter::GetParryType() const
 std::string PlayerCharacter::GetCounterType() const
 {
 	return counterType;
+}
+
+State PlayerCharacter::GetState() const
+{
+	return pState;
 }
 
 void PlayerCharacter::SetEnergy(const int energy_)

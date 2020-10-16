@@ -13,3 +13,16 @@
 [INFO]: Component created in file: GameObject.h on line: 79
 [INFO]: Sound sucssessfully loaded in file: AudioHandler.cpp on line: 102
 [ERROR]: Sound already loaded in file: AudioHandler.cpp on line: 78
+[INFO]:  250 62 in file:  collision on line: 64
+[INFO]:  246 53 in file:  collision on line: 64
+[INFO]:  246 52 in file:  collision on line: 64
+[INFO]:  246 52 in file:  collision on line: 64
+[INFO]:  246 52 in file:  collision on line: 64
+[INFO]:  246 52 in file:  collision on line: 64
+[INFO]:  246 52 in file:  collision on line: 64
+[INFO]:  40 61 in file:  collision on line: 64
+[INFO]:  39 62 in file:  collision on line: 64
+[INFO]:  39 62 in file:  collision on line: 64
+[INFO]:  254 59 in file:  collision on line: 64
+[INFO]:  255 59 in file:  collision on line: 64
+[INFO]:  257 54 in file:  collision on line: 64

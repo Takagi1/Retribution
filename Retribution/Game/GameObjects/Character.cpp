@@ -61,7 +61,7 @@ void Character::SetMaxHealth(const int health_)
 
 void Character::Move(int directionX_, int directionY_)
 {
-	//GetComponent<Physics2D>()->SetVelocity(glm::vec2(10.0f * directionX_, 0));
+	GetComponent<Physics2D>()->SetVelocity(glm::vec2(10.0f * directionX_, 0));
 
 	//flip object to direction it needs to face
 

@@ -17,7 +17,7 @@ public:
 
 
 	virtual bool OnCreate();
-	virtual void Update(const float deltaTime_);
+	virtual void Update(const float deltaTime_) override;
 
 	//Getters
 	int GetHealth() const;

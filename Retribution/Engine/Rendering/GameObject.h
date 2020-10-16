@@ -16,7 +16,7 @@ public:
 	~GameObject();
 
 	bool OnCreate();
-	void Update(const float deltaTime_);
+	virtual void Update(const float deltaTime_);
 	void Draw(Camera* camera_);
 
 	//Movers

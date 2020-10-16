@@ -74,9 +74,6 @@ bool Image::FindContainingPoint()
 			CoreEngine::GetInstance()->GetWindowSize(),
 			CoreEngine::GetInstance()->GetCamera());
 
-		float a = obbPosition.x + sprite->GetScale().x;
-		float b = obbPosition.y - sprite->GetScale().y;
-
 		if(mousePos.x >= obbPosition.x &&
 			mousePos.y >= obbPosition.y &&
 			mousePos.x <= obbPosition.x + sprite->GetScale().x &&

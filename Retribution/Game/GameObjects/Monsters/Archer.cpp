@@ -4,6 +4,7 @@
 #include "../../../Engine/Rendering/Types/Image.h"
 #include "../../../Engine/Math/BoundingBox.h"
 #include "../../../Engine/Math/Physics2D.h"
+#include "../../GameObjects/Projectiles/Arrow.h"
 
 Archer::Archer(glm::vec2 position_) : Monster(position_, 0)
 {
@@ -36,6 +37,8 @@ bool Archer::OnCreate()
 
 void Archer::Update(const float deltaTime_)
 {
+	//Should AI and update be sperate? as in two different functions?
+
 	Character::Update(deltaTime_);
 
 	
@@ -53,7 +56,10 @@ void Archer::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_)
 void Archer::CreateArrow()
 { 
 	
-	std::shared_ptr<Projectile> shot = std::make_shared<Projectile>();
+	//Should pass direction + location here.
+
+
+	std::shared_ptr<Arrow> shot = std::make_shared<Arrow>();
 	CollisionHandler::GetInstance()->AddObject(shot);
 	projectiles.push_back(std::move(shot));
 	

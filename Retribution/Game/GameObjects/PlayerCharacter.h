@@ -4,6 +4,10 @@
 #include "Character.h"
 #include "../Scripts/TriggerBox.h"
 
+enum class State {
+	Neutral,
+	Action
+};
 
 class PlayerCharacter : public Character
 {
@@ -13,7 +17,7 @@ public:
 
 
 	virtual bool OnCreate();
-	virtual void Update(const float deltaTime_);
+	virtual void Update(const float deltaTime_) override;
 
 	void CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_) override;
 
@@ -30,6 +34,7 @@ public:
 	int GetEnergy() const;
 	std::string GetParryType() const;
 	std::string GetCounterType() const;
+	State GetState() const;
 
 	//Setters
 
@@ -38,6 +43,7 @@ public:
 	void SetCounterType(const std::string counter_);
 	
 	void ChangeEnergy(const int energy_);//Use to add or subtract from energy
+
 private:
 	int energy;
 	int maxEnergy;
@@ -49,6 +55,10 @@ private:
 
 	std::string counterType;
 	std::string parryType;
+
+
+
+	State pState;
 
 };
 #endif // !PLAYERCHARACTER_H

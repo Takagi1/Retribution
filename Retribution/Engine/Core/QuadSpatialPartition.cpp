@@ -197,6 +197,7 @@ std::weak_ptr<GameObject> QuadSpatialPartition::GetCollision(glm::vec2 point_)
 	return result;
 }
 
+//TODO: The multiple check issue is something i would like to adress
 void QuadSpatialPartition::AddObjectToCell(QuadNode* cell_, std::weak_ptr<GameObject> obj_)
 {
 	if (cell_ != nullptr) {

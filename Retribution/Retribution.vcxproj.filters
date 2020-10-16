@@ -371,6 +371,9 @@
     <ClCompile Include="Game\GameObjects\Projectile.cpp">
       <Filter>Source Files\Game\GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="Game\GameObjects\Projectiles\Arrow.cpp">
+      <Filter>Source Files\Game\GameObjects\Projectiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Shaders\SpriteFragShader.glsl">

@@ -57,23 +57,33 @@ public:
 
 		//First get which side is colliding
 
+		//TODO: test if this works with objects of different size
+
+
+		//Coming from the right
 		float x1 = maxCorner.x - otherMinCorner.x;
+
+		//Coming from the left
 		float x2 = otherMaxCorner.x - minCorner.x;
 
+
+		//Coming from the top
 		float y1 = maxCorner.y - otherMinCorner.y;
+
+		//Coming from the bottom
 		float y2 = otherMaxCorner.y - minCorner.y;
 
 		if (x1 < x2) {
 			depth.x = -x1;
 		}
-		else {
+		else if (x2 < x1) {
 			depth.x = x2;
 		}
 		
 		if (y1 < y2) {
 			depth.y = -y1;
 		}
-		else {
+		else if (y2 < y1) {
 			depth.y = y2;
 		}
 

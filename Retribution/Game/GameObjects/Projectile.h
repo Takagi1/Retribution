@@ -15,9 +15,9 @@ public:
 	virtual ~Projectile();
 
 	virtual bool OnCreate();
-	virtual void Update(const float deltaTime_);
+	virtual void Update(const float deltaTime_) override;
 
-	virtual void CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_);
+	void CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_) override;
 
 	//Getter
 
@@ -29,4 +29,6 @@ public:
 
 private:
 	int power;
+
+	bool isRight_;
 };

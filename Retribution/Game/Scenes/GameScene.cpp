@@ -28,7 +28,7 @@ bool GameScene::OnCreate()
 
 	//Create Player
 
-	std::shared_ptr<PlayerCharacter> player = std::make_shared<PlayerCharacter>(glm::vec2(10,10));
+	std::shared_ptr<PlayerCharacter> player = std::make_shared<PlayerCharacter>(glm::vec2(200,0));
 	player->OnCreate();
 
 	gameManager.OnCreate(player);
@@ -36,8 +36,8 @@ bool GameScene::OnCreate()
 
 	SceneGraph::GetInstance()->AddGameObject(std::move(player), "Player");
 
-
-	std::shared_ptr<Archer> archer = std::make_shared<Archer>(glm::vec2(40,40));
+	//TODO: fix the collision issue that makes the object move up.
+	std::shared_ptr<Archer> archer = std::make_shared<Archer>(glm::vec2(10,0));
 
 	archer->OnCreate();
 	gameManager.AddMonster(archer);
