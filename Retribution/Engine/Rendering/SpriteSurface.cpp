@@ -34,7 +34,7 @@ SpriteSurface::SpriteSurface(bool useView_, GLuint shaderProgram_, std::string n
 
 	if (!TextureHandler::GetInstance()->GetTexture(name)) {
 		TextureHandler::GetInstance()->CreateTexture(name_,
-			"./Resources/Textures/" + name_ + ".png");
+			"./Resources/Textures/" + name_);
 	}
 	textureID = TextureHandler::GetInstance()->GetTextureData(name)->textureID;
 	height = TextureHandler::GetInstance()->GetTextureData(name)->height;

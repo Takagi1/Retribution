@@ -51,4 +51,8 @@ void Controller::Update(const float deltaTime_)
 			player.lock()->Parry(true);
 		}
 	}
+
+	if (KeyEventListener::keys[SDLK_p]) {
+		SceneGraph::GetInstance()->Pause();
+	}
 }

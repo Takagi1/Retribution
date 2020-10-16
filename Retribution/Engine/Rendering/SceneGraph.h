@@ -32,6 +32,8 @@ public:
 	//Use to get objects from GUI
 	GameObject* GetGUIObject(std::string tag_);
 
+	void Pause();
+
 private:
 	SceneGraph();
 	~SceneGraph();
@@ -44,7 +46,7 @@ private:
 	//Used to store objects for GUI
 	static std::map<std::string, GameObject*> sceneGUIObjects;
 
-
+	bool isPaused;
 };
 #endif // !SCENEGRAPH_H
 

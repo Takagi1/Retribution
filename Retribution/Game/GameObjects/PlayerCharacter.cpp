@@ -21,7 +21,7 @@ bool PlayerCharacter::OnCreate()
 	Character::OnCreate();
 	AddComponent<Image>(this);
 
-	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Mario", true);
+	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Mario.png", true);
 	UpdateBoundingBox(GetComponent<Image>()->GetBoundingBox());
 
 	SetDepth(1);
@@ -34,8 +34,6 @@ bool PlayerCharacter::OnCreate()
 
 void PlayerCharacter::Update(const float deltaTime_)
 {
-	Character::Update(deltaTime_);
-
 	if (triggerBox) {
 		triggerBox->Update();
 	}
@@ -47,6 +45,8 @@ void PlayerCharacter::Update(const float deltaTime_)
 			pState = State::Neutral;
 		}
 	}
+
+	Character::Update(deltaTime_);
 }
 
 /*

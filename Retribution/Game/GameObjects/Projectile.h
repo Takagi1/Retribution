@@ -11,10 +11,10 @@ Rules of projectiles
 class Projectile : public GameObject {
 
 public:
-	Projectile(glm::vec2 position_ = glm::vec2(), const float depth_ = 0.0f);
+	Projectile(GameObject* parent_, glm::vec2 position_ = glm::vec2(), const float depth_ = 0.0f);
 	virtual ~Projectile();
 
-	virtual bool OnCreate();
+	virtual bool OnCreate(bool isFliped_);
 	virtual void Update(const float deltaTime_) override;
 
 	void CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_) override;
@@ -22,13 +22,19 @@ public:
 	//Getter
 
 	int GetPower() const;
+	float GetSpeed() const;
 
 	//Setter
 
 	void SetPower(const int power_);
+	void SetSpeed(const float speed_);
 
 private:
 	int power;
 
-	bool isRight_;
+	bool isFliped;
+
+	float speed;
+
+	GameObject* parent;
 };

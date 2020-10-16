@@ -20,21 +20,25 @@ public:
 	virtual void Update(const float deltaTime_) override;
 
 	//Getters
+
 	int GetHealth() const;
 	int GetMaxHealth() const;
+	bool GetDirFaceing() const;
 
 	//Setters
+
 	void SetHealth(const int health_);
 	void SetMaxHealth(const int health_);
 
 	void Move(int directionX_, int directionY_);
-
 	void Flip(bool flip_);
 
 private:
 	int health;
 	int maxHealth;
 
+
+	//Has the object been fliped? false is right, true is left.
 	bool flip;
 };
 

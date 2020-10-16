@@ -42,6 +42,11 @@ int Character::GetMaxHealth() const
 	return maxHealth;
 }
 
+bool Character::GetDirFaceing() const
+{
+	return flip;
+}
+
 void Character::SetHealth(const int health_)
 {
 	health += health_;

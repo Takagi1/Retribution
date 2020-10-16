@@ -11,7 +11,7 @@ public:
 	virtual ~Archer();
 
 
-	bool OnCreate();
+	bool OnCreate() override;
 	virtual void Update(const float deltaTime_);
 
 	void CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_) override;
@@ -19,9 +19,11 @@ public:
 
 private:
 	//Making it a shared pointer for memory safety
-	std::vector<std::shared_ptr<Projectile>> projectiles;
+	std::vector<std::weak_ptr<Projectile>> projectiles;
 
 	void CreateArrow();
+
+	float time;
 
 };
 #endif // !ARCHER_H

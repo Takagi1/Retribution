@@ -15,7 +15,8 @@ SceneGraph * SceneGraph::GetInstance()
 	return sceneGraphInstance.get();
 }
 
-
+//TODO: There is an issue in the fact that sprite objects scale is internal as that would require all spirte of that object to be the
+//Same size.
 void SceneGraph::AddGameObject(std::shared_ptr<GameObject> go_, std::string name_)
 {
 
@@ -29,18 +30,18 @@ void SceneGraph::AddGameObject(std::shared_ptr<GameObject> go_, std::string name
 
 		bool check = false;
 		int loop = 1;
-		std::string newTag = name_ + std::to_string(loop);
+		std::string newName = name_ + std::to_string(loop);
 		while(!check){
-			if (sceneGameObjects.find(name_) == sceneGameObjects.end()) {
+			if (sceneGameObjects.find(newName) == sceneGameObjects.end()) {
 				check = true;
 			}
 			else {
 				loop++;
-				newTag = name_ + std::to_string(loop);
+				newName = name_ + std::to_string(loop);
 			}
 		}
-		go_->SetName(newTag);
-		sceneGameObjects[newTag] = go_;
+		go_->SetName(newName);
+		sceneGameObjects[newName] = go_;
 	}
 
 
@@ -110,35 +111,47 @@ GameObject* SceneGraph::GetGUIObject(std::string tag_)
 	return nullptr;
 }
 
+void SceneGraph::Pause()
+{
+	if (isPaused) {
+		isPaused = false;
+	}
+	else {
+		isPaused = true;
+	}
+}
+
 
 void SceneGraph::Update(const float deltaTime_)
 {
-	for (auto go : sceneGameObjects) {
-		go.second->Update(deltaTime_);
-	}
-	
-	//Collision update
-	for (auto go : sceneGameObjects) {
-		std::vector<std::weak_ptr<GameObject>> obj;
-		obj.reserve(5);
-		obj = CollisionHandler::GetInstance()->AABB(go.second->GetBoundingBox());
 
-		//First check if the object even has physics 
-		
-
-		if (go.second->GetComponent<Physics2D>()) {
-			//if the object has rigid body and is not static make it apply collision detection
-			if (go.second->GetComponent<Physics2D>()->GetRigidBody() && 
-				!go.second->GetComponent<Physics2D>()->GetStaticObj()) {
-
-				go.second->GetComponent<Physics2D>()->CollisionResponse(obj, deltaTime_);
-			}
+	if (!isPaused) {
+		for (auto go : sceneGameObjects) {
+			go.second->Update(deltaTime_);
 		}
 
-		//At the end do the manually programed collision responses for the game object
-		go.second->CollisionResponse(obj);
-	}
+		//Collision update
+		for (auto go : sceneGameObjects) {
+			std::vector<std::weak_ptr<GameObject>> obj;
+			obj.reserve(5);
+			obj = CollisionHandler::GetInstance()->AABB(go.second->GetBoundingBox());
 
+			//First check if the object even has physics 
+
+
+			if (go.second->GetComponent<Physics2D>()) {
+				//if the object has rigid body and is not static make it apply collision detection
+				if (go.second->GetComponent<Physics2D>()->GetRigidBody() &&
+					!go.second->GetComponent<Physics2D>()->GetStaticObj()) {
+
+					go.second->GetComponent<Physics2D>()->CollisionResponse(obj, deltaTime_);
+				}
+			}
+
+			//At the end do the manually programed collision responses for the game object
+			go.second->CollisionResponse(obj);
+		}
+	}
 
 	for (auto go : sceneGUIObjects) {
 		go.second->Update(deltaTime_);
@@ -175,7 +188,7 @@ void SceneGraph::OnDestroy()
 	}
 }
 
-SceneGraph::SceneGraph()
+SceneGraph::SceneGraph() : isPaused(false)
 {
 }
 

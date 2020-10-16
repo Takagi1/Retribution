@@ -37,7 +37,7 @@ bool GameScene::OnCreate()
 	SceneGraph::GetInstance()->AddGameObject(std::move(player), "Player");
 
 	//TODO: fix the collision issue that makes the object move up.
-	std::shared_ptr<Archer> archer = std::make_shared<Archer>(glm::vec2(10,0));
+	std::shared_ptr<Archer> archer = std::make_shared<Archer>(glm::vec2(300,0));
 
 	archer->OnCreate();
 	gameManager.AddMonster(archer);

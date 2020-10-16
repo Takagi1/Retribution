@@ -49,6 +49,7 @@ public:
 	void NotifyOfMouseMove(glm::vec2 mouse_);
 	void NotifyOfMouseScroll(int y_);
 
+
 private:
 	CoreEngine();
 	~CoreEngine();
