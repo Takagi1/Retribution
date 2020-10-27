@@ -48,6 +48,7 @@ void CollisionHandler::AddObject(std::weak_ptr<GameObject> go_)
 	scenePartition->AddObject(go_);
 }
 
+
 //Issue is that mouse Ray origin is said to be in the 10ns of thousands
 void CollisionHandler::MouseUpdate(glm::vec2 mousePosition_, int buttonType_)
 {

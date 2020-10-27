@@ -15,7 +15,7 @@ public:
 
 	void Update(const float deltaTime_) override;
 
-	void Draw(Camera* camera_) override;
+	void Draw() override;
 
 	//Getters
 	glm::vec2 GetOffset() const;
@@ -30,6 +30,8 @@ public:
 
 	BoundingBox GetBoundingBox() const;
 
+	void Flip(bool invert_);
+
 private:
 	SpriteSurface* sprite;
 	glm::vec2 offset;
@@ -37,6 +39,8 @@ private:
 	glm::mat4 transform;
 
 	BoundingBox box;
+
+	bool flip;
 
 };
 #endif // !IMAGE_H

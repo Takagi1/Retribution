@@ -7,7 +7,7 @@ SpriteSurface::SpriteSurface(bool useView_, GLuint shaderProgram_, std::string n
 {
 	name = name_;
 	angle = angle_;
-	tint = tint_;
+	tint = glm::vec4(1.0f,0.8f,0.8f, 1.0f);
 	shaderProgram = shaderProgram_;
 	useView = useView_;
 
@@ -29,6 +29,25 @@ SpriteSurface::SpriteSurface(bool useView_, GLuint shaderProgram_, std::string n
 
 	vertexList[3].position = glm::vec2(1.0f, 0.0f);
 	vertexList[3].texCoord = glm::vec2(1, 1);
+
+	vertexListFlip.reserve(4);
+	vertexListFlip.push_back(Vertex2D());
+	vertexListFlip.push_back(Vertex2D());
+	vertexListFlip.push_back(Vertex2D());
+	vertexListFlip.push_back(Vertex2D());
+
+
+	vertexListFlip[0].position = glm::vec2(1.0f, 1.0f);
+	vertexListFlip[0].texCoord = glm::vec2(0, 0);
+
+	vertexListFlip[1].position = glm::vec2(0.0f, 1.0f);
+	vertexListFlip[1].texCoord = glm::vec2(1, 0);
+
+	vertexListFlip[2].position = glm::vec2(1.0f, 0.0f);
+	vertexListFlip[2].texCoord = glm::vec2(0, 1);
+
+	vertexListFlip[3].position = glm::vec2(0.0f, 0.0f);
+	vertexListFlip[3].texCoord = glm::vec2(1, 1);
 
 
 
@@ -103,6 +122,19 @@ void SpriteSurface::GenerateBuffers()
 		viewLoc = glGetUniformLocation(shaderProgram, "view");
 	}
 	colourLoc = glGetUniformLocation(shaderProgram, "tintColour");
+}
+
+void SpriteSurface::Flip(const bool invert_) {
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+	if (!invert_) {
+		glBufferData(GL_ARRAY_BUFFER, vertexList.size() * sizeof(Vertex2D), &vertexList[0], GL_STATIC_DRAW);
+	}
+	else {
+		glBufferData(GL_ARRAY_BUFFER, vertexList.size() * sizeof(Vertex2D), &vertexListFlip[0], GL_STATIC_DRAW);
+	}
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 void SpriteSurface::Draw(Camera* camera_, glm::vec2 position_)

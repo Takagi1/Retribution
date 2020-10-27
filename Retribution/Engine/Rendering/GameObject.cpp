@@ -1,8 +1,11 @@
 #include "GameObject.h"
 #include "Types/Image.h"
-GameObject::GameObject(glm::vec2 position_, float depth_) : angle(0)
+#include "SceneGraph.h"
+
+GameObject::GameObject(glm::vec2 position_, int depth_) : angle(0)
 {
-	position = glm::vec3(position_,depth_);
+	position = position_;
+	depth = depth_;
 }
 
 GameObject::~GameObject()
@@ -24,14 +27,19 @@ bool GameObject::OnCreate()
 void GameObject::Update(const float deltaTime_)
 {
 	for (auto c : components) {
-		c->Update(deltaTime_);
+		if (!c->GetDelayUpdate()) {
+			c->Update(deltaTime_);
+		}
+		else {
+			SceneGraph::GetInstance()->AddDelayedUpdate(c);
+		}
 	}
 }
 
-void GameObject::Draw(Camera* camera_)
+void GameObject::Draw()
 {
 	for (auto c : components) {
-		c->Draw(camera_);
+		c->Draw();
 	}
 }
 
@@ -47,7 +55,7 @@ void GameObject::Rotate(float angle_)
 
 void GameObject::SetPosition(glm::vec2 position_)
 {
-	position = glm::vec3(position_, position.z);
+	position = position_;
 	if (GetComponent<Image>()) {
 		box.pos = position_;
 	}
@@ -73,9 +81,9 @@ void GameObject::SetName(std::string name_)
 	name = name_;
 }
 
-void GameObject::SetDepth(float depth_)
+void GameObject::SetDepth(int depth_)
 {
-	position.z = depth_;
+	depth = depth_;
 }
 
 void GameObject::SetTag(std::string tag_)
@@ -97,9 +105,9 @@ glm::vec2 GameObject::GetScale() const
 	return scale;
 }
 
-float GameObject::GetDepth() const
+int GameObject::GetDepth() const
 {
-	return position.z;
+	return depth;
 }
 
 std::string GameObject::GetTag() const

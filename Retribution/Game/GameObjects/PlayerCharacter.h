@@ -24,7 +24,7 @@ public:
 	//Takes in input?
 	//void Dash(int horizontal_, int vertical_); might not do dash for now
 
-	void Parry(const bool isRight_);
+	void Parry();
 
 	void Counter();
 

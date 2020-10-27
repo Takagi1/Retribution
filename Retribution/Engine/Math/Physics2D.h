@@ -9,6 +9,8 @@
 
 class GameObject;
 
+
+
 class Physics2D : public Component {
 public:
 	Physics2D(GameObject* parent_);
@@ -35,9 +37,12 @@ public:
 	//Apply gravity to object
 	void ApplyGravity(bool state_);
 
+	void ApplyDrag(bool state_);
+
 //Section for Collision
 
 	void CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj, const float deltaTime_);
+
 
 private:
 
@@ -45,16 +50,20 @@ private:
 
 	float torque, mass, rotationalInertia, angularVel, angularAcc, gravity;
 
-	bool rigidBody;
-	bool staticObj;
+	bool rigidBody; //Does the object have collision with other objects of rigidBody?
+
+	bool staticObj; //Skips the update function
 
 	glm::vec2 drag;
 
+	bool applyDrag;
+
+	void Drag();
 
 	//Non used 
 
 	bool FindContainingPoint() override;
-	void Draw(Camera* camera) override;
+	void Draw() override;
 
 };
 #endif // !PHYSICS2D_H

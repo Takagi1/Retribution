@@ -27,6 +27,7 @@ bool AudioSource::OnCreate(const std::string name_,
 
 void AudioSource::Update(const float deltaTime_)
 {
+	AudioHandler::GetInstance()->UpdateChannelPositionVelocity(channelID, glm::vec3(parent->GetPosition(),0));
 }
 
 void AudioSource::PlaySound()
@@ -39,7 +40,7 @@ bool AudioSource::IsPlaying()
 	return AudioHandler::GetInstance()->IsPlaying(channelID);
 }
 
-void AudioSource::Draw(Camera* camera)
+void AudioSource::Draw()
 {
 }
 

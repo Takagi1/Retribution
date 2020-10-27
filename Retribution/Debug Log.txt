@@ -1,5 +1,5 @@
 [INFO]: Creating Start Scene in file: StartScene.cpp on line: 16
-[INFO]: Everything was created okay in file: CoreEngine.cpp on line: 52
+[INFO]: Everything was created okay in file: CoreEngine.cpp on line: 61
 [INFO]: Creating Game Scene in file: GameScene.cpp on line: 20
 [ERROR]: Component does not exist in file: GameObject.h on line: 92
 [INFO]: Component created in file: GameObject.h on line: 79
@@ -11,8 +11,6 @@
 [INFO]: Component created in file: GameObject.h on line: 79
 [ERROR]: Component does not exist in file: GameObject.h on line: 92
 [INFO]: Component created in file: GameObject.h on line: 79
-[INFO]: Sound sucssessfully loaded in file: AudioHandler.cpp on line: 102
-[ERROR]: Sound already loaded in file: AudioHandler.cpp on line: 78
 [ERROR]: Component does not exist in file: GameObject.h on line: 92
 [INFO]: Component created in file: GameObject.h on line: 79
 [ERROR]: Component does not exist in file: GameObject.h on line: 92
@@ -21,209 +19,19 @@
 [INFO]: Component created in file: GameObject.h on line: 79
 [ERROR]: Component does not exist in file: GameObject.h on line: 92
 [INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
 [ERROR]: Component does not exist in file: GameObject.h on line: 92
 [INFO]: Component created in file: GameObject.h on line: 79
 [ERROR]: Component does not exist in file: GameObject.h on line: 92
 [INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
 [ERROR]: Component does not exist in file: GameObject.h on line: 92
 [INFO]: Component created in file: GameObject.h on line: 79
 [ERROR]: Component does not exist in file: GameObject.h on line: 92
 [INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
 [ERROR]: Component does not exist in file: GameObject.h on line: 92
 [INFO]: Component created in file: GameObject.h on line: 79
 [ERROR]: Component does not exist in file: GameObject.h on line: 92
 [INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
 [ERROR]: Component does not exist in file: GameObject.h on line: 92
 [INFO]: Component created in file: GameObject.h on line: 79
 [ERROR]: Component does not exist in file: GameObject.h on line: 92
 [INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[ERROR]: Component does not exist in file: GameObject.h on line: 92
-[INFO]: Component created in file: GameObject.h on line: 79
-[WARNING]: Trying to add a GameObject with a tag Arrow that already exist. in file: SceneGraph.cpp on line: 29

@@ -33,8 +33,7 @@ bool AudioHandler::Initialize(glm::vec3 position_, glm::vec3 velocity_, glm::vec
 		return false;
 	}
 
-	//TODO: is the amount of channels right?
-	systemPtr->init(2, FMOD_INIT_NORMAL | FMOD_3D | FMOD_INIT_3D_RIGHTHANDED, nullptr);
+	systemPtr->init(10, FMOD_INIT_NORMAL | FMOD_3D | FMOD_INIT_3D_RIGHTHANDED, nullptr);
 
 systemPtr->set3DListenerAttributes(1, &glmToFMOD(position_), &glmToFMOD(velocity_),
 	&glmToFMOD(forward_), &glmToFMOD(up_));
@@ -89,7 +88,6 @@ void AudioHandler::LoadSound(const std::string name_, bool loop_, bool is3D_, bo
 
 	FMOD::Sound* sound_ = nullptr;
 
-	//TODO: pull the full extend here but im missing the end
 	std::string path_ = "./Resources/Audio/" + name_;
 
 	systemPtr->createSound(path_.c_str(), mode, nullptr, &sound_);
@@ -100,9 +98,11 @@ void AudioHandler::LoadSound(const std::string name_, bool loop_, bool is3D_, bo
 	if (sound_) {
 		soundPtrList[name_] = sound_;
 		Debug::Info("Sound sucssessfully loaded", "AudioHandler.cpp", __LINE__);
+		sound_ = nullptr;
 		return;
 	}
 	Debug::Error("Sound failed to load", "AudioHandler.cpp", __LINE__);
+
 }
 
 FMOD::Sound* AudioHandler::GetSound(std::string name_)
@@ -113,7 +113,7 @@ FMOD::Sound* AudioHandler::GetSound(std::string name_)
 int AudioHandler::PlaySound(std::string name_, glm::vec3 position_, glm::vec3 velocity_, float volume_)
 {
 	int channelID = -1;
-	if (GetSound(name_)) {
+	if (!GetSound(name_)) {
 		LoadSound(name_, false, true, false);
 	}
 	FMOD::Channel* channel_ = nullptr;
@@ -135,6 +135,7 @@ int AudioHandler::PlaySound(std::string name_, glm::vec3 position_, glm::vec3 ve
 	channelCount++;
 
 	channelList.emplace(channelID, channel_);
+	channel_ = nullptr;
 	return channelID;
 }
 

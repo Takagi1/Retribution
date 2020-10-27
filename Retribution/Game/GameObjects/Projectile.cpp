@@ -17,6 +17,8 @@ bool Projectile::OnCreate(bool isFliped_)
 	AddComponent<Physics2D>(this);
 	isFliped = isFliped_;
 
+	SetTag("Projectile");
+
 	if (isFliped) {
 		SetScale(GetScale() * -1.0f);
 	}
@@ -26,8 +28,6 @@ bool Projectile::OnCreate(bool isFliped_)
 
 void Projectile::Update(const float deltaTime_)
 {
-	GetComponent<Physics2D>()->SetVelocity(glm::vec2(speed * isFliped ? -1 : 1, 0));
-
 	GameObject::Update(deltaTime_);
 }
 
@@ -53,4 +53,5 @@ void Projectile::SetPower(const int power_)
 void Projectile::SetSpeed(const float speed_)
 {
 	speed = speed_;
+	GetComponent<Physics2D>()->SetVelocity(glm::vec2(speed * (isFliped ? -1 : 1), 0));
 }

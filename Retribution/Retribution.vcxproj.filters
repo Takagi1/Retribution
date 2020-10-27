@@ -94,9 +94,6 @@
     <Filter Include="Source Files\Game\GUI\HUD Objects">
       <UniqueIdentifier>{071f489f-80ca-417e-93f0-eeae65adaa6f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Engine\Shader">
-      <UniqueIdentifier>{d7234e8a-5299-4339-9b43-5c09d279444e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Engine\Graphics">
       <UniqueIdentifier>{2e40408d-bf70-4baf-8c74-cd201c29cd69}</UniqueIdentifier>
     </Filter>
@@ -129,6 +126,9 @@
     </Filter>
     <Filter Include="Header Files\Game\GameObjects\Projectiles">
       <UniqueIdentifier>{b0aa61e9-cf14-439c-8e42-c043adfa49df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Shaders">
+      <UniqueIdentifier>{d7234e8a-5299-4339-9b43-5c09d279444e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -258,6 +258,12 @@
     <ClInclude Include="Game\Scripts\TriggerBox.h">
       <Filter>Header Files\Game\Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\FX\ParticleEmitter.h">
+      <Filter>Header Files\Engine\FX</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Math\RandomNumber.h">
+      <Filter>Header Files\Engine\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -317,12 +323,6 @@
     <ClCompile Include="Game\Scenes\StartScene.cpp">
       <Filter>Source Files\Game\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Game\GameObjects\PlayerCharacter.cpp">
-      <Filter>Source Files\Game\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Core\Window.cpp">
-      <Filter>Source Files\Engine\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Core\Timer.cpp">
       <Filter>Source Files\Engine\Core</Filter>
     </ClCompile>
@@ -374,19 +374,37 @@
     <ClCompile Include="Game\GameObjects\Projectiles\Arrow.cpp">
       <Filter>Source Files\Game\GameObjects\Projectiles</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Core\Window.cpp">
+      <Filter>Source Files\Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\FX\Particle.cpp">
+      <Filter>Source Files\Engine\FX</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\FX\ParticleEmitter.cpp">
+      <Filter>Source Files\Engine\FX</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameObjects\PlayerCharacter.cpp">
+      <Filter>Source Files\Game\GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Shaders\SpriteFragShader.glsl">
-      <Filter>Header Files\Engine\Shader</Filter>
+      <Filter>Header Files\Engine\Shaders</Filter>
     </None>
     <None Include="Engine\Shaders\SpriteVertShader.glsl">
-      <Filter>Header Files\Engine\Shader</Filter>
+      <Filter>Header Files\Engine\Shaders</Filter>
     </None>
     <None Include="Engine\Shaders\GUIVertShader.glsl">
-      <Filter>Header Files\Engine\Shader</Filter>
+      <Filter>Header Files\Engine\Shaders</Filter>
     </None>
     <None Include="Engine\Shaders\GUIFragShader.glsl">
-      <Filter>Header Files\Engine\Shader</Filter>
+      <Filter>Header Files\Engine\Shaders</Filter>
+    </None>
+    <None Include="Engine\Shaders\ParticleVertShader.glsl">
+      <Filter>Header Files\Engine\Shaders</Filter>
+    </None>
+    <None Include="Engine\Shaders\ParticleFragShader.glsl">
+      <Filter>Header Files\Engine\Shaders</Filter>
     </None>
   </ItemGroup>
 </Project>

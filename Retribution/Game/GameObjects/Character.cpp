@@ -81,7 +81,7 @@ void Character::Move(int directionX_, int directionY_)
 void Character::Flip(bool flip_)
 {
 	if (flip != flip_) {
-		SetScale(glm::vec2(GetScale().x * -1.0f, GetScale().y));
+		GetComponent<Image>()->Flip(flip_);
 		flip = flip_;
 	}
 }

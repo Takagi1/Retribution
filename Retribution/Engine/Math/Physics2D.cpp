@@ -6,7 +6,7 @@
 #define Gravity 9.8f
 
 Physics2D::Physics2D(GameObject* parent_) : Component(), torque(0),rotationalInertia(0),mass(0),
-gravity(0.0f),angularVel(0),angularAcc(0), staticObj(false), rigidBody(false), drag(1)
+gravity(0.0f),angularVel(0),angularAcc(0), staticObj(false), rigidBody(false), drag(1), applyDrag(false)
 {
 
 	parent = parent_;
@@ -39,33 +39,13 @@ void Physics2D::Update(const float deltaTime_)
 		//Step 7. Find velocity vector
 		velocity += acceleration * deltaTime_;
 
-
-		//TODO: Apply drag to slow down the object (this is TODO because i dont know 
-		//if this method sucks or not.
-
-		if (velocity.x > 0) { 
-			if (velocity.x <= drag.x) { velocity.x = 0; }
-			else { velocity.x -= drag.x; }
-		}
-		else if (velocity.x < 0) {
-			if (velocity.x >= -drag.x) { velocity.x = 0; }
-			else { velocity.x += drag.x; }
-		}
-
-		if (velocity.y > 0) {
-			if (velocity.y <= drag.y) { velocity.y = 0; }
-			else { velocity.y -= drag.y; }
-		}
-		else if (velocity.y < 0) {
-			if (velocity.y >= -drag.y) { velocity.y = 0; }
-			else { velocity.y += drag.y; }
-		}
+		if (applyDrag) { Drag(); }
 
 	}
 }
 
 
-void Physics2D::Draw(Camera* camera)
+void Physics2D::Draw()
 {
 }
 
@@ -103,6 +83,8 @@ bool Physics2D::GetStaticObj() const
 void Physics2D::SetVelocity(glm::vec2 velocity_)
 {
 	velocity = velocity_;
+
+
 }
 
 void Physics2D::SetAcceleration(glm::vec2 acceleration_)
@@ -123,7 +105,7 @@ void Physics2D::ApplyForce(glm::vec2 force_)
 	acceleration = glm::mat2(cos(parent->GetAngle()), -sin(parent->GetAngle()), sin(parent->GetAngle()), cos(parent->GetAngle())) * force_;
 
 	if (mass != 0) {
-		acceleration / mass;
+		acceleration /= mass;
 	}
 }
 
@@ -148,6 +130,33 @@ void Physics2D::ApplyGravity(bool state_)
 	}
 }
 
+void Physics2D::ApplyDrag(bool state_)
+{
+	applyDrag = state_;
+}
+
+//TODO: Apply drag to slow down the object (this is TODO because i dont know if this method sucks or not.
+void Physics2D::Drag()
+{
+	if (velocity.x > 0) {
+		if (velocity.x <= drag.x) { velocity.x = 0; }
+		else { velocity.x -= drag.x; }
+	}
+	else if (velocity.x < 0) {
+		if (velocity.x >= -drag.x) { velocity.x = 0; }
+		else { velocity.x += drag.x; }
+	}
+
+	if (velocity.y > 0) {
+		if (velocity.y <= drag.y) { velocity.y = 0; }
+		else { velocity.y -= drag.y; }
+	}
+	else if (velocity.y < 0) {
+		if (velocity.y >= -drag.y) { velocity.y = 0; }
+		else { velocity.y += drag.y; }
+	}
+}
+
 //This function is designed to push two objects that are colliding appart.
 void Physics2D::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj, const float deltaTime_)
 {
@@ -156,17 +165,9 @@ void Physics2D::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj, co
 			Physics2D* physics = o.lock()->GetComponent<Physics2D>();
 			if (physics) {
 				if (physics->GetRigidBody()) {
-					
 					glm::vec2 depth = parent->GetBoundingBox().CollisionDepth(&o.lock()->GetBoundingBox());
-					
-					//if the colliding object is static push by full force else split between both objects
-					if (physics->GetStaticObj()) {
-						parent->Translate(depth);
-					}
-					else {
-						parent->Translate(glm::vec2(depth.x / 2, depth.y / 2));
-						o.lock()->Translate(glm::vec2(-depth.x / 2, -depth.y / 2));
-					}
+
+					parent->Translate(depth);
 				}
 				physics = nullptr;
 			}

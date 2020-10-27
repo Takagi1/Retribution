@@ -6,7 +6,7 @@
 #include "../../Engine/Math/BoundingBox.h"
 
 PlayerCharacter::PlayerCharacter(glm::vec2 position_) : Character(position_,0), energy(0), maxEnergy(0),
-pState(State::Neutral), triggerBox(nullptr)
+pState(State::Neutral), triggerBox(nullptr), parryType("Parry"), counterType("Counter")
 {
 
 }
@@ -21,8 +21,10 @@ bool PlayerCharacter::OnCreate()
 	Character::OnCreate();
 	AddComponent<Image>(this);
 
-	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Mario.png", true);
+	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Mario3.png", true);
 	UpdateBoundingBox(GetComponent<Image>()->GetBoundingBox());
+
+	GetComponent<Physics2D>()->ApplyDrag(true);
 
 	SetDepth(1);
 	SetScale(glm::vec2(0.1f,0.1f));
@@ -38,13 +40,13 @@ void PlayerCharacter::Update(const float deltaTime_)
 		triggerBox->Update();
 	}
 
-	if (lifeTime > 0) {
+	/*f (lifeTime > 0) {
 		lifeTime -= deltaTime_;
 		if (lifeTime < 0) {
 			lifeTime = 0;
 			pState = State::Neutral;
 		}
-	}
+	}*/
 
 	Character::Update(deltaTime_);
 }
@@ -62,15 +64,14 @@ void PlayerCharacter::CollisionResponse(std::vector<std::weak_ptr<GameObject>> o
 
 }
 
-void PlayerCharacter::Parry(const bool isRight_)
+void PlayerCharacter::Parry()
 {
-	//TODO: This is temp as it needs to be seriously improved
 
 	//TODO: create method of suspending player actions
 
 	//Step 1. Create box
-	triggerBox = new TriggerBox(this, parryType, glm::vec2(100.0f, GetBoundingBox().dimentions.y), 
-		glm::vec2(GetPosition().x + (isRight_ ? GetBoundingBox().dimentions.x : 0), GetPosition().y));
+	triggerBox = new TriggerBox(this, parryType, glm::vec2(50.0f, GetBoundingBox().dimentions.y * 2.0f), 
+		glm::vec2(GetPosition().x + (GetDirFaceing() ?  -60.0f : GetBoundingBox().dimentions.x), GetPosition().y));
 
 	pState = State::Action;
 
@@ -125,5 +126,5 @@ void PlayerCharacter::ChangeEnergy(const int energy_)
 	energy += energy_;
 
 	if (energy < 0) { energy = 0; }
-	if (energy > maxEnergy) { energy = maxEnergy; }
+	else if (energy > maxEnergy) { energy = maxEnergy; }
 }

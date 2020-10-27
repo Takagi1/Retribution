@@ -8,6 +8,7 @@
 #include "../GUI/HUD.h"
 #include "../Scripts/Controller.h"
 #include "../GameObjects/Monsters/Archer.h"
+#include "../../Engine/FX/ParticleEmitter.h"
 
 
 class GameScene : public Scene
@@ -26,6 +27,8 @@ private:
 	HUD hud;
 
 	Controller controller;
+
+	
 
 
 };

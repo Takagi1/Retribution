@@ -48,7 +48,7 @@ void Controller::Update(const float deltaTime_)
 
 	if (KeyEventListener::keys[SDLK_x]) {
 		if (player.lock()->GetState() == State::Neutral) {
-			player.lock()->Parry(true);
+			player.lock()->Parry();
 		}
 	}
 

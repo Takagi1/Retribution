@@ -17,8 +17,8 @@ bool Arrow::OnCreate(bool isFliped_)
 	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Arrow.jpg", true);
 	UpdateBoundingBox(GetComponent<Image>()->GetBoundingBox());
 
-	SetSpeed(10);
-	SetScale(glm::vec2(0.15));
+	SetSpeed(100);
+	SetScale(glm::vec2(0.05f));
 	return true;
 }
 

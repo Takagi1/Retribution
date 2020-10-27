@@ -3,7 +3,7 @@
 #include "Debug.h"
 #include "Scene.h"
 #include "../Audio/AudioHandler.h"
-
+#include <ctime>
 std::unique_ptr<CoreEngine> CoreEngine::engineInstance = nullptr;
 
 CoreEngine::CoreEngine() : window(nullptr), isRunning(false), fps(120), gameInterface(nullptr), currentSceneNum(0), camera(nullptr) {
@@ -38,6 +38,10 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 		"Engine/Shaders/GUIVertShader.glsl",
 		"Engine/Shaders/GUIFragShader.glsl");
 
+	ShaderHandler::GetInstance()->CreateProgram("ParticleShader",
+		"Engine/Shaders/ParticleVertShader.glsl",
+		"Engine/Shaders/ParticleFragShader.glsl");
+
 	if (gameInterface) {
 		if (!gameInterface->OnCreate()) {
 			Debug::Error("GameInterface could not be created", "CoreEngine.cpp", __LINE__);
@@ -48,6 +52,11 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 	AudioHandler::GetInstance()->Initialize();
 
 	timer.Start();
+
+	//Initalize random seed
+
+	
+	srand(std::time(0));
 
 	Debug::Info("Everything was created okay", "CoreEngine.cpp", __LINE__);
 

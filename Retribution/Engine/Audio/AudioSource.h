@@ -21,7 +21,7 @@ private:
 	std::string fileName;
 	int channelID;
 
-	void Draw(Camera* camera) override;
+	void Draw() override;
 	bool FindContainingPoint() override;
 
 

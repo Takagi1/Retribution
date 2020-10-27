@@ -7,6 +7,8 @@
 #include "GameObject.h"
 #include "../Math/CollisionHandler.h"
 
+class SpriteSurface;
+
 class SceneGraph
 {
 public:
@@ -16,21 +18,19 @@ public:
 	SceneGraph& operator =(SceneGraph&&) = delete;
 
 	static SceneGraph* GetInstance();
+
 	void AddGameObject(std::shared_ptr<GameObject> go_, std::string name_ = "GameObject");
-	bool RemoveGameObject(std::string name_);
-
-
 	std::weak_ptr<GameObject> GetGameObject(std::string tag_);
+	bool RemoveGameObject(std::string name_);
 
 	void Update(const float deltaTime_);
 	void Draw(Camera* camera_);
 	void OnDestroy();
 
-	//Use to add objects to gui
-	void AddGUIObject(GameObject* go, std::string name_ = "GUI_Object");
+	void AddGUIObject(GameObject* go, std::string name_ = "GUI_Object"); //Use to add objects to gui
+	GameObject* GetGUIObject(std::string tag_);	//Use to get objects from GUI
 
-	//Use to get objects from GUI
-	GameObject* GetGUIObject(std::string tag_);
+	void AddDelayedUpdate(Component* comp);
 
 	void Pause();
 
@@ -41,10 +41,14 @@ private:
 	static std::unique_ptr<SceneGraph> sceneGraphInstance;
 	friend std::default_delete<SceneGraph>;
 
+	//static std::map<std::string, Image*> sceneImages;
 	static std::map<std::string, std::shared_ptr<GameObject>> sceneGameObjects;
 
 	//Used to store objects for GUI
 	static std::map<std::string, GameObject*> sceneGUIObjects;
+
+	std::vector<Component*> delayedUpdates;
+	float prevDeltaTime;
 
 	bool isPaused;
 };

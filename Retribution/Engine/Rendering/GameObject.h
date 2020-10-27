@@ -12,12 +12,12 @@
 
 class GameObject {
 public:
-	GameObject(glm::vec2 position_, float depth_);
+	GameObject(glm::vec2 position_, int depth_);
 	~GameObject();
 
 	bool OnCreate();
 	virtual void Update(const float deltaTime_);
-	void Draw(Camera* camera_);
+	void Draw();
 
 	//Movers
 	void Translate(glm::vec2 trans_);
@@ -30,7 +30,7 @@ public:
 	void SetAngle(float angle_);
 	void SetScale(glm::vec2 scale_);
 	void SetName(std::string name_);
-	void SetDepth(float depth_);
+	void SetDepth(const int depth_);
 	void SetTag(std::string tag_);
 
 	//Getters
@@ -38,7 +38,7 @@ public:
 	glm::vec2 GetPosition() const;
 	float GetAngle() const;
 	glm::vec2 GetScale() const;
-	float GetDepth() const;
+	int GetDepth() const;
 	std::string GetTag() const;
 	BoundingBox GetBoundingBox() const;
 	std::string GetName() const;
@@ -122,14 +122,16 @@ private:
 	//name of the object
 	std::string name;
 
-	//Z is depth
-	glm::vec3 position;
+	glm::vec2 position;
 	float angle;
 	glm::vec2 scale;
+	int depth;
 
 	std::vector<Component*> components;
 
 	BoundingBox box;
+
+
 
 
 

@@ -24,11 +24,11 @@ bool GameScene::OnCreate()
 
 	//CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(0.0f, 0.0f, 2.0f), 0.1f, 0.5f, glm::vec3(1.0f, 1.0f, 1.0f)));
 
-	CollisionHandler::GetInstance()->OnCreate(1000.0f);
+	CollisionHandler::GetInstance()->OnCreate(10000.0f);
 
 	//Create Player
 
-	std::shared_ptr<PlayerCharacter> player = std::make_shared<PlayerCharacter>(glm::vec2(200,0));
+	std::shared_ptr<PlayerCharacter> player = std::make_shared<PlayerCharacter>(glm::vec2(450,0));
 	player->OnCreate();
 
 	gameManager.OnCreate(player);
@@ -36,8 +36,13 @@ bool GameScene::OnCreate()
 
 	SceneGraph::GetInstance()->AddGameObject(std::move(player), "Player");
 
-	//TODO: fix the collision issue that makes the object move up.
-	std::shared_ptr<Archer> archer = std::make_shared<Archer>(glm::vec2(300,0));
+
+
+	//emitter = new ParticleEmitter(7, "ParticleShader");
+	//emitter->SetPosition(glm::vec2(60));
+
+	
+	std::shared_ptr<Archer> archer = std::make_shared<Archer>(glm::vec2(80,0));
 
 	archer->OnCreate();
 	gameManager.AddMonster(archer);
@@ -46,12 +51,14 @@ bool GameScene::OnCreate()
 
 	hud.OnCreate();
 
-	CoreEngine::GetInstance()->GetCamera()->sound = new BackgroundSound(CoreEngine::GetInstance()->GetCamera());
+	//CoreEngine::GetInstance()->GetCamera()->sound = new BackgroundSound(CoreEngine::GetInstance()->GetCamera());
 
-	CoreEngine::GetInstance()->GetCamera()->sound->OnCreate("LOZ.mp3", false, false, false);
+	//CoreEngine::GetInstance()->GetCamera()->sound->OnCreate("LOZ.mp3", false, false, false);
 
-	CoreEngine::GetInstance()->GetCamera()->sound->PlaySound();
+	//CoreEngine::GetInstance()->GetCamera()->sound->PlaySound();
 	
+
+
 	return true;
 }
 
@@ -62,10 +69,14 @@ void GameScene::Update(const float deltaTime_)
 
 	SceneGraph::GetInstance()->Update(deltaTime_);
 
+	AudioHandler::GetInstance()->Update(deltaTime_);
+
 	gameManager.Update(deltaTime_);
 }
 
 void GameScene::Draw()
 {
 	SceneGraph::GetInstance()->Draw(CoreEngine::GetInstance()->GetCamera());
+
+	//emitter->Update(0.03f);
 }

@@ -31,6 +31,8 @@ public:
 	void SetAngle(const float angle_);
 	void SetScale(const glm::vec2 scale_);
 
+	void Flip(bool invert_);
+
 private:
 	void GenerateBuffers();
 	glm::vec2 scale;
@@ -39,6 +41,7 @@ private:
 	std::string name;
 
 	std::vector<Vertex2D> vertexList;
+	std::vector<Vertex2D> vertexListFlip;
 
 	GLuint VAO, VBO;
 	GLuint shaderProgram;

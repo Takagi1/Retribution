@@ -23,6 +23,7 @@ public:
 	QuadNode* GetParent();
 	QuadNode* GetChild(QuadChildren childPosition_);
 	void AddCollisionObject(std::weak_ptr<GameObject> obj_);
+	void RemoveCollisionObject(std::weak_ptr<GameObject> obj);
 	int GetObjectCount() const;
 	bool IsLeaf() const;
 	BoundingBox* GetBoundingBox() const;

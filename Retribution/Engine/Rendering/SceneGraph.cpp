@@ -1,11 +1,13 @@
 #include "SceneGraph.h"
 #include "../Graphics/ShaderHandler.h"
 #include "../Math/Physics2D.h"
+#include "../Rendering/Types/Image.h"
 
 std::unique_ptr<SceneGraph> SceneGraph::sceneGraphInstance = nullptr;
 
 std::map<std::string, std::shared_ptr<GameObject>> SceneGraph::sceneGameObjects = std::map<std::string, std::shared_ptr<GameObject>>();
 std::map<std::string, GameObject*> SceneGraph::sceneGUIObjects = std::map<std::string, GameObject*>();
+//std::map<std::string, Image*> SceneGraph::sceneImages = std::map<std::string, Image*>();
 
 SceneGraph * SceneGraph::GetInstance()
 {
@@ -15,8 +17,7 @@ SceneGraph * SceneGraph::GetInstance()
 	return sceneGraphInstance.get();
 }
 
-//TODO: There is an issue in the fact that sprite objects scale is internal as that would require all spirte of that object to be the
-//Same size.
+
 void SceneGraph::AddGameObject(std::shared_ptr<GameObject> go_, std::string name_)
 {
 
@@ -111,6 +112,11 @@ GameObject* SceneGraph::GetGUIObject(std::string tag_)
 	return nullptr;
 }
 
+void SceneGraph::AddDelayedUpdate(Component* comp)
+{
+	delayedUpdates.push_back(comp);
+}
+
 void SceneGraph::Pause()
 {
 	if (isPaused) {
@@ -127,18 +133,18 @@ void SceneGraph::Update(const float deltaTime_)
 
 	if (!isPaused) {
 		for (auto go : sceneGameObjects) {
-			go.second->Update(deltaTime_);
-		}
 
-		//Collision update
-		for (auto go : sceneGameObjects) {
+			//First Update the object 
+
+			go.second->Update(deltaTime_);
+
+			//Then check the collision
+
 			std::vector<std::weak_ptr<GameObject>> obj;
 			obj.reserve(5);
 			obj = CollisionHandler::GetInstance()->AABB(go.second->GetBoundingBox());
 
 			//First check if the object even has physics 
-
-
 			if (go.second->GetComponent<Physics2D>()) {
 				//if the object has rigid body and is not static make it apply collision detection
 				if (go.second->GetComponent<Physics2D>()->GetRigidBody() &&
@@ -150,6 +156,7 @@ void SceneGraph::Update(const float deltaTime_)
 
 			//At the end do the manually programed collision responses for the game object
 			go.second->CollisionResponse(obj);
+
 		}
 	}
 
@@ -157,16 +164,22 @@ void SceneGraph::Update(const float deltaTime_)
 		go.second->Update(deltaTime_);
 	}
 
-
+	prevDeltaTime = deltaTime_;
 }
-
+//TODO: Finish the depth draw system to allow for ease of drawing.
 void SceneGraph::Draw(Camera* camera_)
 {
+
+	for (auto d : delayedUpdates) {
+		d->Update(prevDeltaTime);
+		d = nullptr;
+	}
+	delayedUpdates.clear();
 
 	glUseProgram(ShaderHandler::GetInstance()->GetShader("BasicShader"));
 
 	for (auto g : sceneGameObjects) {
-		g.second->Draw(camera_);
+		g.second->Draw();
 	}
 
 	//Update GUI after objects to ignore depth
@@ -174,7 +187,7 @@ void SceneGraph::Draw(Camera* camera_)
 	glUseProgram(ShaderHandler::GetInstance()->GetShader("GUIShader"));
 
 	for (auto g : sceneGUIObjects) {
-		g.second->Draw(camera_);
+		g.second->Draw();
 	}
 }
 
@@ -188,8 +201,9 @@ void SceneGraph::OnDestroy()
 	}
 }
 
-SceneGraph::SceneGraph() : isPaused(false)
+SceneGraph::SceneGraph() : isPaused(false), prevDeltaTime(0)
 {
+	delayedUpdates.reserve(10);
 }
 
 SceneGraph::~SceneGraph()

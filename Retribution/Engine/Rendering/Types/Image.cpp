@@ -4,13 +4,14 @@
 #include "../../Math/CollisionDetection.h"
 #include "../../Core/CoreEngine.h"
 
-Image::Image(GameObject* parent_) : Component(), sprite(nullptr)
+Image::Image(GameObject* parent_) : Component(), sprite(nullptr), flip(false)
 {
 	parent = parent_;
 }
 
 Image::~Image()
 {
+	//SceneGraph::GetInstance()->
 	delete sprite;
 	sprite = nullptr;
 }
@@ -32,10 +33,10 @@ void Image::Update(const float deltaTime_)
 {
 }
 
-void Image::Draw(Camera* camera_)
+void Image::Draw()
 {
 	if (sprite) {
-		sprite->Draw(camera_, parent->GetPosition() + offset);
+		sprite->Draw(CoreEngine::GetInstance()->GetCamera(), parent->GetPosition() + offset);
 	}
 }
 
@@ -87,4 +88,9 @@ bool Image::FindContainingPoint()
 
 BoundingBox Image::GetBoundingBox() const {
 	return box;
+}
+
+void Image::Flip(bool invert_)
+{
+	sprite->Flip(invert_);
 }

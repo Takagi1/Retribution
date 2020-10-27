@@ -23,7 +23,10 @@ public:
 
 	int GetHealth() const;
 	int GetMaxHealth() const;
+
+	//returns false if facing right, true if facing right.
 	bool GetDirFaceing() const;
+
 
 	//Setters
 

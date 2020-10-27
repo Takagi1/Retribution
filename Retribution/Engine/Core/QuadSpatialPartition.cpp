@@ -170,10 +170,15 @@ std::vector<std::weak_ptr<GameObject>> QuadSpatialPartition::GetCollision(Boundi
 	result.reserve(5);
 
 	for (auto cell : objIntersectionList) {
-		for (auto obj : cell->objectList) {
-			if (box_.Intersects(&obj.lock()->GetBoundingBox())) {
-				result.push_back(obj);
+		for (int i = 0; i < cell->objectList.size();) {
+			if (cell->objectList[i].expired()) {
+				cell->objectList.erase(cell->objectList.begin() + i);
+				continue;
 			}
+			else if (box_.Intersects(&cell->objectList[i].lock()->GetBoundingBox())) {
+				result.push_back(cell->objectList[i]);
+			}
+			i++;
 		}
 	}
 
