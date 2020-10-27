@@ -2,24 +2,17 @@
 
 #include "pch.h"
 #include <iostream>
-#include "Game/SceneManager.h"
-
-//TODO: Finish animation and animation controller to a satesfactory degree
-//TODO: Improve and finish UI
-//TODO: Finish dodge and make a sample animation for it
-//TODO: Finish basic monster and create basic ai for it
-//TODO: Make basic start screen and loss screen with the option of restarting
-//TODO: Create other abilites
+#include "Game/Scenes/SceneManager.h"
 
 
 int main(int argc, char* argv[]) {
-	Engine::GetInstance()->SetGameInterface(new SceneManager);
+	CoreEngine::GetInstance()->SetGameInterface(new SceneManager);
 
-	if (!Engine::GetInstance()->OnCreate("GAME258_Engine")) {
+	if (!CoreEngine::GetInstance()->OnCreate("Retribution", 800, 600)) {
 		return 0;
 	}
 
-	Engine::GetInstance()->Run();
+	CoreEngine::GetInstance()->Run();
 
 	return 0;
 }

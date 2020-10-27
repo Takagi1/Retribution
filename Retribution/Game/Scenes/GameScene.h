@@ -1,10 +1,15 @@
 #ifndef GAMESCENE_H
 #define GAMESCENE_H
 
-#include "../../Engine/Core/Engine.h"
-#include "../../PlayerCharacter.h"
-#include "../Monsters/MonsterTest.h"
-#include "../../Projectile.h"
+#include "../../Engine/Core/CoreEngine.h"
+#include <array>
+#include <glm/gtx/string_cast.hpp>
+#include "../Scripts/GameManager.h"
+#include "../GUI/HUD.h"
+#include "../Scripts/Controller.h"
+#include "../GameObjects/Monsters/Archer.h"
+#include "../../Engine/FX/ParticleEmitter.h"
+
 
 class GameScene : public Scene
 {
@@ -12,28 +17,19 @@ public:
 	GameScene();
 	virtual ~GameScene();
 
-	virtual bool OnCreate() = 0;
-
-	void Input();
-	void Update(const float deltaTime_);
-	void Render(sf::RenderWindow* r_Window);
-	void RenderHUD(sf::RenderWindow* r_Window);
-
-	float gravity;
-
-	//Enemies
-	std::vector<std::unique_ptr<Monster> > monsters;
-	
-	//Player
-	std::unique_ptr<PlayerCharacter> player;
-
-	sf::RectangleShape ground;
-
-	//PAUSE MENU 
-
-	void Pause();
+	virtual bool OnCreate();
+	virtual void Update(const float deltaTime_);
+	virtual void Draw();
 
 private:
-	bool isPaused;
+	GameManager gameManager;
+
+	HUD hud;
+
+	Controller controller;
+
+	
+
+
 };
 #endif // !GAMESCENE_H

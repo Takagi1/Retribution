@@ -4,13 +4,12 @@
 class Scene
 {
 public:
+	Scene() {}
+	virtual ~Scene() {}
 
 	virtual bool OnCreate() = 0;
-
-	virtual void Input() = 0;
 	virtual void Update(const float deltaTime_) = 0;
-	virtual void Render(sf::RenderWindow* r_Window) = 0;
-	virtual void RenderHUD(sf::RenderWindow* r_Window) = 0;
+	virtual void Draw() = 0;
 
 };
 #endif // !SCENE_H

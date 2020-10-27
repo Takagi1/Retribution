@@ -13,118 +13,256 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Animation">
-      <UniqueIdentifier>{ae056542-9dc1-42d6-b690-465db8df9a27}</UniqueIdentifier>
+    <Filter Include="Header Files\Engine">
+      <UniqueIdentifier>{ce52b46e-fd68-44da-beaf-4147b66fe688}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Animation">
-      <UniqueIdentifier>{90dc3b61-5f29-47e2-a977-b3dcffc149ef}</UniqueIdentifier>
+    <Filter Include="Header Files\Engine\Camera">
+      <UniqueIdentifier>{04783582-85de-4a95-85a9-79b4ffe38ee6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Animation\Character">
-      <UniqueIdentifier>{690c1fca-688f-4196-9e9e-70e1304c87f6}</UniqueIdentifier>
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{e8a90b3c-4f7c-40d3-a1c3-5ba4f925ec5a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Animation\Character\Player">
-      <UniqueIdentifier>{7e8f5264-01b5-4b76-bd3e-fe45d04b8ffe}</UniqueIdentifier>
+    <Filter Include="Header Files\Game\GameObjects">
+      <UniqueIdentifier>{9ea1a43c-63a7-46ac-a114-efb8fc40cbd7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Animation\Character\Monster">
-      <UniqueIdentifier>{f6842aea-47ad-4604-97e9-c6755558368d}</UniqueIdentifier>
+    <Filter Include="Header Files\Engine\Math">
+      <UniqueIdentifier>{082116c0-7d81-4dc3-9b38-a11a2f9b57e7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Animation\Character">
-      <UniqueIdentifier>{702f94e9-90b7-4bfa-a134-b990b7861b87}</UniqueIdentifier>
+    <Filter Include="Header Files\Engine\Rendering">
+      <UniqueIdentifier>{959fa880-48df-4afe-b293-ae586fdfd471}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Animation\Character\Player">
-      <UniqueIdentifier>{5898a52a-f628-4824-a840-edcb23e4948e}</UniqueIdentifier>
+    <Filter Include="Header Files\Engine\Event">
+      <UniqueIdentifier>{0d6e2097-c794-409d-885f-9efd1519e570}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Animation\Character\Monster">
-      <UniqueIdentifier>{4c2dcbdb-aafd-443b-a5db-060eebf6263f}</UniqueIdentifier>
+    <Filter Include="Header Files\Game\Scene">
+      <UniqueIdentifier>{509d9bb3-28b5-49d1-b31a-e4edd97f192f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Rendering\GUI">
+      <UniqueIdentifier>{83edef19-e2f8-4ba5-aad5-df3762a00d9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\GUI">
+      <UniqueIdentifier>{0f1e9ef4-734c-4576-adf1-880713b790a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\GUI\HUD Objects">
+      <UniqueIdentifier>{d117cb92-dc7f-4afb-8f7f-19562c6184e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Rendering\Types">
+      <UniqueIdentifier>{0aea61e1-38e8-438e-900f-c3950670b1cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\FX">
+      <UniqueIdentifier>{1bf1a161-9c53-48bb-9508-318e3a3847d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine">
+      <UniqueIdentifier>{9b495224-9221-4068-add0-308675452ec7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{3f473f7e-2380-4011-9045-4798033f9d8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\GameObjects">
+      <UniqueIdentifier>{8553ee08-8453-4a25-8ae3-3c53b049c375}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Core">
+      <UniqueIdentifier>{00dcb22b-fc04-4862-b10e-a387367100ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Math">
+      <UniqueIdentifier>{99cb342e-161a-461c-8b1f-2a94c642f950}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Event">
+      <UniqueIdentifier>{3e98e195-600d-4461-9af9-3e5b2fdf9ce3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Rendering">
+      <UniqueIdentifier>{0d7fc80f-2fd1-4d5e-a58e-f512d3a3537a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Rendering\GUI">
+      <UniqueIdentifier>{9a1c6dcb-50a5-4ae0-80f3-597621183b13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Rendering\Types">
+      <UniqueIdentifier>{4fd4f8ec-48b0-4986-b968-2665b0df70ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Camera">
+      <UniqueIdentifier>{cd1d56b7-5560-42bd-90e3-2c73c85cc69e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\FX">
+      <UniqueIdentifier>{e48c4dbd-8cff-4ed9-b326-81ab9d91dd84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Scene">
+      <UniqueIdentifier>{274f73f8-0b8b-4f7c-9282-078f0a9f6916}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\GUI">
+      <UniqueIdentifier>{c9fe0dd3-0d0c-44e3-a1d8-50d47a85416b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\GUI\HUD Objects">
+      <UniqueIdentifier>{071f489f-80ca-417e-93f0-eeae65adaa6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Graphics">
+      <UniqueIdentifier>{2e40408d-bf70-4baf-8c74-cd201c29cd69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Graphics">
+      <UniqueIdentifier>{297be921-f6c3-4751-88ac-793933b09cd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Scripts">
+      <UniqueIdentifier>{517f0888-c28e-4177-a75f-a6cc99714c2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Scripts">
+      <UniqueIdentifier>{e518c3d0-a132-446f-9ca7-9f1c27255485}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Audio">
+      <UniqueIdentifier>{03663193-59f6-4309-9547-ed5d2db459f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Audio">
+      <UniqueIdentifier>{05a21351-8350-4277-8e8f-6b92c22ffe37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\GameObjects\Monsters">
+      <UniqueIdentifier>{29328c44-df54-4da3-99ab-c8801af227b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\GameObjects\Monsters">
+      <UniqueIdentifier>{109a2df9-f04a-4f90-b386-2256852b1d9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Core">
+      <UniqueIdentifier>{aaa7cec5-d798-42dd-8187-e7566659fb51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\GameObjects\Projectiles">
+      <UniqueIdentifier>{75099576-b38a-4c49-b683-6d588907b3e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\GameObjects\Projectiles">
+      <UniqueIdentifier>{b0aa61e9-cf14-439c-8e42-c043adfa49df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Shaders">
+      <UniqueIdentifier>{d7234e8a-5299-4339-9b43-5c09d279444e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\Math\BoundingBox.h">
+      <Filter>Header Files\Engine\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Hurtbox.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\Camera\Camera.h">
+      <Filter>Header Files\Engine\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\Math\CollisionDetection.h">
+      <Filter>Header Files\Engine\Math</Filter>
     </ClInclude>
-    <ClInclude Include="CounterBox.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\Math\CollisionHandler.h">
+      <Filter>Header Files\Engine\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Projectile.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\Rendering\Component.h">
+      <Filter>Header Files\Engine\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerCharacter.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\Core\CoreEngine.h">
+      <Filter>Header Files\Engine\Core</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Core\Debug.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Core\Engine.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\Events\EventListener.h">
+      <Filter>Header Files\Engine\Event</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Core\GameInterface.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Core\Scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\SceneManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\UI\UI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\UI\TextBox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\InteractiveMenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\UI\Menu\PauseMenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\UI\Menu\StartMenu.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\Rendering\GameObject.h">
+      <Filter>Header Files\Engine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Game\Scenes\GameScene.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GUI\HUD Objects\HealthBar.h">
+      <Filter>Header Files\Game\GUI\HUD Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GUI\HUD.h">
+      <Filter>Header Files\Game\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Rendering\Types\Image.h">
+      <Filter>Header Files\Engine\Rendering\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Events\KeyEventListener.h">
+      <Filter>Header Files\Engine\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\FX\LightSource.h">
+      <Filter>Header Files\Engine\FX</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Events\MouseEventListener.h">
+      <Filter>Header Files\Engine\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Math\Physics2D.h">
+      <Filter>Header Files\Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameObjects\PlayerCharacter.h">
+      <Filter>Header Files\Game\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameObjects\Projectile.h">
+      <Filter>Header Files\Game\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Core\QuadSpatialPartition.h">
+      <Filter>Header Files\Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Core\Scene.h">
+      <Filter>Header Files\Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Core\Timer.h">
+      <Filter>Header Files\Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Core\Window.h">
+      <Filter>Header Files\Engine\Core</Filter>
     </ClInclude>
     <ClInclude Include="Game\Scenes\StartScene.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Scenes\TestScene.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\Rendering\SceneGraph.h">
+      <Filter>Header Files\Engine\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Monsters\Monster.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\Rendering\SpriteSurface.h">
+      <Filter>Header Files\Engine\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Monsters\MonsterTest.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\Graphics\ShaderHandler.h">
+      <Filter>Header Files\Engine\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Animation\Monster\MonsterAnimController.h">
-      <Filter>Header Files\Animation\Character\Monster</Filter>
+    <ClInclude Include="Engine\Graphics\TextureHandler.h">
+      <Filter>Header Files\Engine\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Animation\Monster\MonsterIdle.h">
-      <Filter>Header Files\Animation\Character\Monster</Filter>
+    <ClInclude Include="Game\Scenes\SceneManager.h">
+      <Filter>Header Files\Game\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Animation\Player\PlayerAnimController.h">
-      <Filter>Header Files\Animation\Character\Player</Filter>
+    <ClInclude Include="Game\Scripts\Controller.h">
+      <Filter>Header Files\Game\Scripts</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Animation\Player\PlayerIdle.h">
-      <Filter>Header Files\Animation\Character\Player</Filter>
+    <ClInclude Include="Engine\Audio\AudioHandler.h">
+      <Filter>Header Files\Engine\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Animation\Player\Roll.h">
-      <Filter>Header Files\Animation\Character\Player</Filter>
+    <ClInclude Include="Engine\Audio\AudioSource.h">
+      <Filter>Header Files\Engine\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Animation\Animation.h">
-      <Filter>Header Files\Animation</Filter>
+    <ClInclude Include="Game\GameObjects\Character.h">
+      <Filter>Header Files\Game\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Animation\AnimationController.h">
-      <Filter>Header Files\Animation</Filter>
+    <ClInclude Include="Game\Scripts\GameManager.h">
+      <Filter>Header Files\Game\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameObjects\Monsters\Monster.h">
+      <Filter>Header Files\Game\GameObjects\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameObjects\Monsters\Archer.h">
+      <Filter>Header Files\Game\GameObjects\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\FX\Particle.h">
+      <Filter>Header Files\Engine\FX</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameObjects\Projectiles\Arrow.h">
+      <Filter>Header Files\Game\GameObjects\Projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Audio\BackgroundSound.h">
+      <Filter>Header Files\Engine\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scripts\TriggerBox.h">
+      <Filter>Header Files\Game\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\FX\ParticleEmitter.h">
+      <Filter>Header Files\Engine\FX</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Math\RandomNumber.h">
+      <Filter>Header Files\Engine\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -134,83 +272,139 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Engine\Math\CollisionDetection.cpp">
+      <Filter>Source Files\Engine\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Hurtbox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CounterBox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Projectile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerCharacter.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Engine\Math\CollisionHandler.cpp">
+      <Filter>Source Files\Engine\Math</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Core\Debug.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Engine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Core\Engine.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Engine\Core\CoreEngine.cpp">
+      <Filter>Source Files\Engine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Game\SceneManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Engine\Camera\Camera.cpp">
+      <Filter>Source Files\Engine\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Game\UI\UI.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Engine\Rendering\GameObject.cpp">
+      <Filter>Source Files\Engine\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Game\UI\TextBox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\InteractiveMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\UI\Menu\PauseMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\UI\Menu\StartMenu.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Engine\Events\EventListener.cpp">
+      <Filter>Source Files\Engine\Event</Filter>
     </ClCompile>
     <ClCompile Include="Game\Scenes\GameScene.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GUI\HUD Objects\HealthBar.cpp">
+      <Filter>Source Files\Game\GUI\HUD Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Rendering\Types\Image.cpp">
+      <Filter>Source Files\Engine\Rendering\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\FX\LightSource.cpp">
+      <Filter>Source Files\Engine\FX</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Events\KeyEventListener.cpp">
+      <Filter>Source Files\Engine\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Events\MouseEventListener.cpp">
+      <Filter>Source Files\Engine\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Math\Physics2D.cpp">
+      <Filter>Source Files\Engine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Graphics\ShaderHandler.cpp">
+      <Filter>Source Files\Engine\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Graphics\TextureHandler.cpp">
+      <Filter>Source Files\Engine\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Game\Scenes\StartScene.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Scenes\TestScene.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Engine\Core\Timer.cpp">
+      <Filter>Source Files\Engine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Monsters\Monster.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Engine\Core\QuadSpatialPartition.cpp">
+      <Filter>Source Files\Engine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Monsters\MonsterTest.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Engine\Rendering\SceneGraph.cpp">
+      <Filter>Source Files\Engine\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Animation\Monster\MonsterAnimController.cpp">
-      <Filter>Source Files\Animation\Character\Monster</Filter>
+    <ClCompile Include="Engine\Rendering\SpriteSurface.cpp">
+      <Filter>Source Files\Engine\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Animation\Monster\MonsterIdle.cpp">
-      <Filter>Source Files\Animation\Character\Monster</Filter>
+    <ClCompile Include="Game\GUI\HUD.cpp">
+      <Filter>Source Files\Game\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Animation\Player\PlayerAnimController.cpp">
-      <Filter>Source Files\Animation\Character\Player</Filter>
+    <ClCompile Include="Game\Scenes\SceneManager.cpp">
+      <Filter>Source Files\Game\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Animation\Player\PlayerIdle.cpp">
-      <Filter>Source Files\Animation\Character\Player</Filter>
+    <ClCompile Include="Game\Scripts\Controller.cpp">
+      <Filter>Source Files\Game\Scripts</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Animation\Player\Roll.cpp">
-      <Filter>Source Files\Animation\Character\Player</Filter>
+    <ClCompile Include="Engine\Audio\AudioHandler.cpp">
+      <Filter>Source Files\Engine\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Animation\Animation.cpp">
-      <Filter>Source Files\Animation</Filter>
+    <ClCompile Include="Engine\Audio\AudioSource.cpp">
+      <Filter>Source Files\Engine\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Animation\AnimationController.cpp">
-      <Filter>Source Files\Animation</Filter>
+    <ClCompile Include="Game\GameObjects\Character.cpp">
+      <Filter>Source Files\Game\GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Scripts\GameManager.cpp">
+      <Filter>Source Files\Game\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameObjects\Monsters\Monster.cpp">
+      <Filter>Source Files\Game\GameObjects\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameObjects\Monsters\Archer.cpp">
+      <Filter>Source Files\Game\GameObjects\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Audio\BackgroundSound.cpp">
+      <Filter>Source Files\Engine\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scripts\TriggerBox.cpp">
+      <Filter>Source Files\Game\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameObjects\Projectile.cpp">
+      <Filter>Source Files\Game\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameObjects\Projectiles\Arrow.cpp">
+      <Filter>Source Files\Game\GameObjects\Projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Core\Window.cpp">
+      <Filter>Source Files\Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\FX\Particle.cpp">
+      <Filter>Source Files\Engine\FX</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\FX\ParticleEmitter.cpp">
+      <Filter>Source Files\Engine\FX</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameObjects\PlayerCharacter.cpp">
+      <Filter>Source Files\Game\GameObjects</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Engine\Shaders\SpriteFragShader.glsl">
+      <Filter>Header Files\Engine\Shaders</Filter>
+    </None>
+    <None Include="Engine\Shaders\SpriteVertShader.glsl">
+      <Filter>Header Files\Engine\Shaders</Filter>
+    </None>
+    <None Include="Engine\Shaders\GUIVertShader.glsl">
+      <Filter>Header Files\Engine\Shaders</Filter>
+    </None>
+    <None Include="Engine\Shaders\GUIFragShader.glsl">
+      <Filter>Header Files\Engine\Shaders</Filter>
+    </None>
+    <None Include="Engine\Shaders\ParticleVertShader.glsl">
+      <Filter>Header Files\Engine\Shaders</Filter>
+    </None>
+    <None Include="Engine\Shaders\ParticleFragShader.glsl">
+      <Filter>Header Files\Engine\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
