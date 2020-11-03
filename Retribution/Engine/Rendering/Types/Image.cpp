@@ -3,6 +3,8 @@
 #include "../GameObject.h"
 #include "../../Math/CollisionDetection.h"
 #include "../../Core/CoreEngine.h"
+#include "../OpenGL/OpenGLSpriteSurface.h"
+#include "../../Core/CoreEngine.h"
 
 Image::Image(GameObject* parent_) : Component(), sprite(nullptr), flip(false)
 {
@@ -20,13 +22,24 @@ bool Image::OnCreate(GLuint shaderID, std::string name_, bool useView_, glm::vec
 	glm::vec2 scale_, float angle_, glm::vec4 tint_)
 {
 	offset = offset_;
-	sprite = new SpriteSurface(useView_, shaderID, name_, scale_, angle_, tint_);
+
+	switch (CoreEngine::GetInstance()->GetDrawType())
+	{
+	case DrawType::OpenGL:
+		sprite = new OpenGLSpriteSurface(useView_, shaderID, name_, scale_, angle_, tint_);
+		break;
+	default:
+		Debug::FatalError("No Draw Type Found", "Image.cpp", __LINE__);
+		break;
+	}
 
 	if (sprite) {
 		box.dimentions = sprite->GetScale();
 		box.pos = parent->GetPosition();
+		SceneGraph::GetInstance()->AddImage(this, shaderID);
+		return true;
 	}
-	return true;
+	return false;
 }
 
 void Image::Update(const float deltaTime_)
@@ -94,3 +107,5 @@ void Image::Flip(bool invert_)
 {
 	sprite->Flip(invert_);
 }
+
+

@@ -5,9 +5,10 @@
 
 std::unique_ptr<SceneGraph> SceneGraph::sceneGraphInstance = nullptr;
 
+
 std::map<std::string, std::shared_ptr<GameObject>> SceneGraph::sceneGameObjects = std::map<std::string, std::shared_ptr<GameObject>>();
 std::map<std::string, GameObject*> SceneGraph::sceneGUIObjects = std::map<std::string, GameObject*>();
-//std::map<std::string, Image*> SceneGraph::sceneImages = std::map<std::string, Image*>();
+std::map<unsigned int, std::vector<Image*>> SceneGraph::sceneImages = std::map<unsigned int, std::vector<Image*>>();
 
 SceneGraph * SceneGraph::GetInstance()
 {
@@ -66,6 +67,11 @@ bool SceneGraph::RemoveGameObject(std::string name_)
 		
 		return true;
 	}
+}
+
+void SceneGraph::AddImage(Image* im, unsigned int shaderProgram_)
+{
+	sceneImages[shaderProgram_].push_back(im);
 }
 
 
@@ -176,10 +182,11 @@ void SceneGraph::Draw(Camera* camera_)
 	}
 	delayedUpdates.clear();
 
-	glUseProgram(ShaderHandler::GetInstance()->GetShader("BasicShader"));
-
-	for (auto g : sceneGameObjects) {
-		g.second->Draw();
+	for (auto gl : sceneImages) {
+		glUseProgram(gl.first);
+		for (auto images : gl.second) {
+			images->Draw();
+		}
 	}
 
 	//Update GUI after objects to ignore depth

@@ -13,6 +13,8 @@ bool GameManager::OnCreate(std::weak_ptr<PlayerCharacter> player_)
 {
     player = player_;
     monsters.reserve(10);
+
+    hud.OnCreate();
     return true;
 }
 
@@ -30,6 +32,8 @@ void GameManager::Update(const float deltaTime_)
         }
         else { i++; }
     }
+
+    hud.Update(deltaTime_);
 }
 
 void GameManager::AddMonster(std::weak_ptr<Monster> monster_)

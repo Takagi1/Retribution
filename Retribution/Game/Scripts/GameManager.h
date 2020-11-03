@@ -2,6 +2,7 @@
 
 #include "../GameObjects/PlayerCharacter.h"
 #include "../GameObjects/Monsters/Monster.h"
+#include "../GUI/HUD.h"
 
 //TODO:Finish this
 
@@ -29,4 +30,7 @@ private:
 	
 	std::weak_ptr<PlayerCharacter> player;
 	std::vector<std::weak_ptr<Monster>> monsters;
+
+
+	HUD hud;
 };

@@ -3,7 +3,9 @@
 #include "Debug.h"
 #include "Scene.h"
 #include "../Audio/AudioHandler.h"
+#include "../Graphics/OpenGL/OpenGLWindow.h"
 #include <ctime>
+
 std::unique_ptr<CoreEngine> CoreEngine::engineInstance = nullptr;
 
 CoreEngine::CoreEngine() : window(nullptr), isRunning(false), fps(120), gameInterface(nullptr), currentSceneNum(0), camera(nullptr) {
@@ -20,6 +22,8 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 	Debug::DebugInit("Debug Log");
 	Debug::SetSeverity(MessageType::TYPE_INFO);
 
+	CreateDrawer();
+
 	window = new Window();
 	if (!window->OnCreate(name_, width_, height_)) {
 		Debug::FatalError("Window failed to initialize", "CoreEngine", __LINE__);
@@ -29,18 +33,6 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 	SDL_WarpMouseInWindow(window->GetWindow(), window->GetWidth() / 2, window->GetHeight() / 2);
 
 	MouseEventListener::RegisterEngineObject(this);
-
-	ShaderHandler::GetInstance()->CreateProgram("BasicShader",
-		"Engine/Shaders/SpriteVertShader.glsl",
-		"Engine/Shaders/SpriteFragShader.glsl");
-
-	ShaderHandler::GetInstance()->CreateProgram("GUIShader",
-		"Engine/Shaders/GUIVertShader.glsl",
-		"Engine/Shaders/GUIFragShader.glsl");
-
-	ShaderHandler::GetInstance()->CreateProgram("ParticleShader",
-		"Engine/Shaders/ParticleVertShader.glsl",
-		"Engine/Shaders/ParticleFragShader.glsl");
 
 	if (gameInterface) {
 		if (!gameInterface->OnCreate()) {
@@ -130,19 +122,24 @@ void CoreEngine::Update(const float deltaTime_)
 
 void CoreEngine::Draw()
 {
-	glClearColor(0, 0, 0.0f, 1.0f);
-
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	if (gameInterface) {
 		gameInterface->Draw();
 	}
 
-	SDL_GL_SwapWindow(window->GetWindow());
+
 }
 
-void CoreEngine::SetGameInterface(GameInterface* gameInterface_)
+void CoreEngine::CreateDrawer()
+{
+	if (drawType == DrawType::OpenGL) {
+		drawer = new OpenGLWindow();
+	}
+}
+
+void CoreEngine::SetGameInterface(GameInterface* gameInterface_, DrawType drawType_)
 {
 	gameInterface = gameInterface_;
+	drawType = drawType_;
 }
 
 glm::vec2 CoreEngine::GetWindowSize() const
@@ -197,4 +194,19 @@ void CoreEngine::NotifyOfMouseScroll(int y_)
 	if (camera) {
 		camera->ProcessMouseScroll(y_);
 	}
+}
+
+DrawType CoreEngine::GetDrawType() const
+{
+	return drawType;
+}
+
+WindowDrawer* CoreEngine::GetDrawer() const
+{
+	return drawer;
+}
+
+Window* CoreEngine::GetWindow() const
+{
+	return window;
 }

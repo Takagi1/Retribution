@@ -49,7 +49,6 @@ bool GameScene::OnCreate()
 
 	SceneGraph::GetInstance()->AddGameObject(std::move(archer), "Archer");
 
-	hud.OnCreate();
 
 	//CoreEngine::GetInstance()->GetCamera()->sound = new BackgroundSound(CoreEngine::GetInstance()->GetCamera());
 

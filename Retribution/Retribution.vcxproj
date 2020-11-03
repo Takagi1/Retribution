@@ -170,6 +170,8 @@
     <ClInclude Include="Engine\FX\LightSource.h" />
     <ClInclude Include="Engine\FX\Particle.h" />
     <ClInclude Include="Engine\FX\ParticleEmitter.h" />
+    <ClInclude Include="Engine\Graphics\OpenGL\OpenGLWindow.h" />
+    <ClInclude Include="Engine\Graphics\WindowDrawer.h" />
     <ClInclude Include="Engine\Graphics\ShaderHandler.h" />
     <ClInclude Include="Engine\Graphics\TextureHandler.h" />
     <ClInclude Include="Engine\Math\BoundingBox.h" />
@@ -179,10 +181,12 @@
     <ClInclude Include="Engine\Math\RandomNumber.h" />
     <ClInclude Include="Engine\Rendering\Component.h" />
     <ClInclude Include="Engine\Rendering\GameObject.h" />
+    <ClInclude Include="Engine\Rendering\OpenGL\OpenGLSpriteSurface.h" />
     <ClInclude Include="Game\GameObjects\Character.h" />
     <ClInclude Include="Game\GameObjects\Monsters\Archer.h" />
     <ClInclude Include="Game\GameObjects\Monsters\Monster.h" />
     <ClInclude Include="Game\GameObjects\Projectiles\Arrow.h" />
+    <ClInclude Include="Game\GUI\HUD Objects\EnergyBar.h" />
     <ClInclude Include="Game\GUI\HUD.h" />
     <ClInclude Include="Engine\Rendering\Types\Image.h" />
     <ClInclude Include="Engine\Rendering\SceneGraph.h" />
@@ -222,12 +226,14 @@
     <ClCompile Include="Engine\FX\LightSource.cpp" />
     <ClCompile Include="Engine\FX\Particle.cpp" />
     <ClCompile Include="Engine\FX\ParticleEmitter.cpp" />
+    <ClCompile Include="Engine\Graphics\OpenGL\OpenGLWindow.cpp" />
     <ClCompile Include="Engine\Graphics\ShaderHandler.cpp" />
     <ClCompile Include="Engine\Graphics\TextureHandler.cpp" />
     <ClCompile Include="Engine\Math\CollisionDetection.cpp" />
     <ClCompile Include="Engine\Math\CollisionHandler.cpp" />
     <ClCompile Include="Engine\Math\Physics2D.cpp" />
     <ClCompile Include="Engine\Rendering\GameObject.cpp" />
+    <ClCompile Include="Engine\Rendering\OpenGL\OpenGLSpriteSurface.cpp" />
     <ClCompile Include="Engine\Rendering\Types\Image.cpp" />
     <ClCompile Include="Engine\Rendering\SceneGraph.cpp" />
     <ClCompile Include="Engine\Rendering\SpriteSurface.cpp" />
@@ -243,8 +249,11 @@
     <ClCompile Include="Game\GameObjects\Monsters\Archer.cpp" />
     <ClCompile Include="Game\GameObjects\Monsters\Monster.cpp" />
     <ClCompile Include="Game\GameObjects\PlayerCharacter.cpp" />
-    <ClCompile Include="Game\GameObjects\Projectile.cpp" />
+    <ClCompile Include="Game\GameObjects\Projectile.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
     <ClCompile Include="Game\GameObjects\Projectiles\Arrow.cpp" />
+    <ClCompile Include="Game\GUI\HUD Objects\EnergyBar.cpp" />
     <ClCompile Include="Game\GUI\HUD Objects\HealthBar.cpp" />
     <ClCompile Include="Game\GUI\HUD.cpp" />
     <ClCompile Include="Game\Scenes\GameScene.cpp">

@@ -40,13 +40,15 @@ void PlayerCharacter::Update(const float deltaTime_)
 		triggerBox->Update();
 	}
 
-	/*f (lifeTime > 0) {
+	if (lifeTime > 0) {
 		lifeTime -= deltaTime_;
 		if (lifeTime < 0) {
 			lifeTime = 0;
+			delete triggerBox;
+			triggerBox = nullptr;
 			pState = State::Neutral;
 		}
-	}*/
+	}
 
 	Character::Update(deltaTime_);
 }
@@ -66,9 +68,6 @@ void PlayerCharacter::CollisionResponse(std::vector<std::weak_ptr<GameObject>> o
 
 void PlayerCharacter::Parry()
 {
-
-	//TODO: create method of suspending player actions
-
 	//Step 1. Create box
 	triggerBox = new TriggerBox(this, parryType, glm::vec2(50.0f, GetBoundingBox().dimentions.y * 2.0f), 
 		glm::vec2(GetPosition().x + (GetDirFaceing() ?  -60.0f : GetBoundingBox().dimentions.x), GetPosition().y));

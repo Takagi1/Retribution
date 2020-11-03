@@ -33,7 +33,7 @@ void Physics2D::Update(const float deltaTime_)
 		Move object
 		*/
 
-		parent->Translate(glm::vec2(velocity * deltaTime_ + acceleration / 2.0f * pow(deltaTime_, 2)));
+		parent->Translate(glm::vec2(velocity * deltaTime_ + (acceleration / 2.0f * pow(deltaTime_, 2))));
 
 
 		//Step 7. Find velocity vector

@@ -89,7 +89,7 @@ public:
 				return ptr;
 			}
 		}
-		Debug::Error("Component does not exist", "GameObject.h", __LINE__);
+		//TODO: for consideration figure out a way to add in the debug error without it being triggered when adding.
 		return nullptr;
 	}
 

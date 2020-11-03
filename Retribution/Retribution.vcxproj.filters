@@ -46,9 +46,6 @@
     <Filter Include="Header Files\Game\GUI\HUD Objects">
       <UniqueIdentifier>{d117cb92-dc7f-4afb-8f7f-19562c6184e5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Engine\Rendering\Types">
-      <UniqueIdentifier>{0aea61e1-38e8-438e-900f-c3950670b1cf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Engine\FX">
       <UniqueIdentifier>{1bf1a161-9c53-48bb-9508-318e3a3847d8}</UniqueIdentifier>
     </Filter>
@@ -75,9 +72,6 @@
     </Filter>
     <Filter Include="Source Files\Engine\Rendering\GUI">
       <UniqueIdentifier>{9a1c6dcb-50a5-4ae0-80f3-597621183b13}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Engine\Rendering\Types">
-      <UniqueIdentifier>{4fd4f8ec-48b0-4986-b968-2665b0df70ea}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Engine\Camera">
       <UniqueIdentifier>{cd1d56b7-5560-42bd-90e3-2c73c85cc69e}</UniqueIdentifier>
@@ -129,6 +123,24 @@
     </Filter>
     <Filter Include="Header Files\Engine\Shaders">
       <UniqueIdentifier>{d7234e8a-5299-4339-9b43-5c09d279444e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Rendering\Types">
+      <UniqueIdentifier>{0aea61e1-38e8-438e-900f-c3950670b1cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Rendering\Types">
+      <UniqueIdentifier>{4fd4f8ec-48b0-4986-b968-2665b0df70ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Graphics\OpenGL">
+      <UniqueIdentifier>{cacec64e-ccb6-4fd9-bca6-84197ad81d90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Rendering\OpenGL">
+      <UniqueIdentifier>{adae48a9-1095-4f79-9400-7f6c50e1936f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Graphics\OpenGL">
+      <UniqueIdentifier>{cefc79f0-bb59-4152-ac42-d612559e5275}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Rendering\OpenGL">
+      <UniqueIdentifier>{2bac3a46-44e0-490e-9ea5-ce21e2ef58d9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -264,6 +276,18 @@
     <ClInclude Include="Engine\Math\RandomNumber.h">
       <Filter>Header Files\Engine\Math</Filter>
     </ClInclude>
+    <ClInclude Include="Game\GUI\HUD Objects\EnergyBar.h">
+      <Filter>Header Files\Game\GUI\HUD Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Graphics\WindowDrawer.h">
+      <Filter>Header Files\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Graphics\OpenGL\OpenGLWindow.h">
+      <Filter>Header Files\Engine\Graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Rendering\OpenGL\OpenGLSpriteSurface.h">
+      <Filter>Header Files\Engine\Rendering\OpenGL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -385,6 +409,15 @@
     </ClCompile>
     <ClCompile Include="Game\GameObjects\PlayerCharacter.cpp">
       <Filter>Source Files\Game\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GUI\HUD Objects\EnergyBar.cpp">
+      <Filter>Source Files\Game\GUI\HUD Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Graphics\OpenGL\OpenGLWindow.cpp">
+      <Filter>Source Files\Engine\Graphics\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Rendering\OpenGL\OpenGLSpriteSurface.cpp">
+      <Filter>Source Files\Engine\Rendering\OpenGL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

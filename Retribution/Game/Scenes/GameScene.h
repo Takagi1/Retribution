@@ -5,7 +5,6 @@
 #include <array>
 #include <glm/gtx/string_cast.hpp>
 #include "../Scripts/GameManager.h"
-#include "../GUI/HUD.h"
 #include "../Scripts/Controller.h"
 #include "../GameObjects/Monsters/Archer.h"
 #include "../../Engine/FX/ParticleEmitter.h"
@@ -24,7 +23,7 @@ public:
 private:
 	GameManager gameManager;
 
-	HUD hud;
+
 
 	Controller controller;
 

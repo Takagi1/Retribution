@@ -17,6 +17,7 @@
 #include "../Camera/Camera.h"
 #include "../Events/EventListener.h"
 
+#include "../Graphics/WindowDrawer.h"
 
 class CoreEngine
 {
@@ -35,8 +36,11 @@ public:
 	int GetCurrentScene();
 	glm::vec2 GetWindowSize() const;
 	Camera* GetCamera() const;
+	DrawType GetDrawType() const;
+	WindowDrawer* GetDrawer() const;
+	Window* GetWindow() const;
 
-	void SetGameInterface(GameInterface* gameInterface);
+	void SetGameInterface(GameInterface* gameInterface, DrawType drawType_ = DrawType::OpenGL);
 	void SetCurrentScene(int sceneNum_);
 	void SetCamera(Camera* camera_);
 
@@ -46,6 +50,8 @@ public:
 	void NotifyOfMouseRelease(glm::vec2 mouse_, int buttonType_);
 	void NotifyOfMouseMove(glm::vec2 mouse_);
 	void NotifyOfMouseScroll(int y_);
+
+
 
 
 private:
@@ -59,6 +65,8 @@ private:
 	void Update(const float deltaTime_);
 	void Draw();
 
+	void CreateDrawer();
+
 	Window* window;
 	bool isRunning;
 
@@ -70,6 +78,9 @@ private:
 	int currentSceneNum;
 
 	Camera* camera;
+
+	WindowDrawer* drawer;
+	DrawType drawType;
 };
 
 #endif // ! COREENGINE_H

@@ -34,7 +34,6 @@ void TriggerBox::Trigger(std::weak_ptr<GameObject> obj_)
 
 	if (triggerType == "Parry") {
 		parent->ChangeEnergy(dynamic_cast<Projectile*>(obj_.lock().get())->GetPower());
-		//SceneGraph::GetInstance()->RemoveGameObject(obj_.lock()->GetName());
 		return;
 	}
 	else if (triggerType == "Counter") {

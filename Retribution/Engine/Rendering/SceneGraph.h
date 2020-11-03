@@ -8,7 +8,7 @@
 #include "../Math/CollisionHandler.h"
 
 class SpriteSurface;
-
+class Image;
 class SceneGraph
 {
 public:
@@ -22,6 +22,8 @@ public:
 	void AddGameObject(std::shared_ptr<GameObject> go_, std::string name_ = "GameObject");
 	std::weak_ptr<GameObject> GetGameObject(std::string tag_);
 	bool RemoveGameObject(std::string name_);
+
+	void AddImage(Image* im, unsigned int shaderProgram_);
 
 	void Update(const float deltaTime_);
 	void Draw(Camera* camera_);
@@ -41,7 +43,7 @@ private:
 	static std::unique_ptr<SceneGraph> sceneGraphInstance;
 	friend std::default_delete<SceneGraph>;
 
-	//static std::map<std::string, Image*> sceneImages;
+	static std::map<unsigned int, std::vector<Image*>> sceneImages;
 	static std::map<std::string, std::shared_ptr<GameObject>> sceneGameObjects;
 
 	//Used to store objects for GUI

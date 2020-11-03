@@ -5,6 +5,8 @@
 #include "../SpriteSurface.h"
 #include "../../Math/BoundingBox.h"
 
+enum class DrawType;
+
 class Image : public Component {
 public:
 	Image(GameObject* parent_);
@@ -41,6 +43,9 @@ private:
 	BoundingBox box;
 
 	bool flip;
+
+
+	DrawType type;
 
 };
 #endif // !IMAGE_H

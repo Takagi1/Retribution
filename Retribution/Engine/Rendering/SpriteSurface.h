@@ -1,15 +1,11 @@
 #ifndef SPRITESURFACE_H
 #define SPRITESURFACE_H
 
-#include <glew.h>
 #include <vector>
 #include <string>
 #include <memory>
-#include <glm/glm.hpp>
-#include <glm/gtc/type_ptr.hpp>
 #include "../Camera/Camera.h"
 #include "../Graphics/ShaderHandler.h"
-
 
 
 struct Vertex2D {
@@ -19,10 +15,10 @@ struct Vertex2D {
 
 class SpriteSurface {
 public:
-	SpriteSurface(bool useView_, GLuint shaderProgram_, std::string name_, glm::vec2 scale_ = glm::vec2(1.0f), float angle_ = 0.0f, glm::vec4 tint_ = glm::vec4(1));
+	SpriteSurface(bool useView_, std::string name_, glm::vec2 scale_ = glm::vec2(1.0f), float angle_ = 0.0f);
 	~SpriteSurface();
 
-	void Draw(Camera* camera_,  glm::vec2 position_);
+	virtual void Draw(Camera* camera_,  glm::vec2 position_) = 0;
 
 	float GetWidth() const;
 	float GetHeight() const;
@@ -31,25 +27,25 @@ public:
 	void SetAngle(const float angle_);
 	void SetScale(const glm::vec2 scale_);
 
-	void Flip(bool invert_);
+	virtual void Flip(bool invert_) = 0;
 
-private:
-	void GenerateBuffers();
+protected:
+	static std::vector<Vertex2D> vertexList;
+	static std::vector<Vertex2D> vertexListFlip;
+
 	glm::vec2 scale;
 	float angle, width, height;
-	glm::vec4 tint;
-	std::string name;
-
-	std::vector<Vertex2D> vertexList;
-	std::vector<Vertex2D> vertexListFlip;
-
-	GLuint VAO, VBO;
-	GLuint shaderProgram;
-	GLuint modelLoc, projLoc, viewLoc, colourLoc;
-
-	GLuint textureID;
 
 	//Use to stop sprite from being effected by view matrix;
-	bool useView;;
+	bool useView;
+
+	std::string name;
+
+	unsigned int textureID;
+
+private:
+
+
+
 };
 #endif // !SPRITESURFACE_H

@@ -14,6 +14,20 @@ SceneManager::~SceneManager()
 
 bool SceneManager::OnCreate()
 {
+	//TODO: i assume this is what she means by game class
+
+	ShaderHandler::GetInstance()->CreateProgram("BasicShader",
+		"Engine/Shaders/SpriteVertShader.glsl",
+		"Engine/Shaders/SpriteFragShader.glsl");
+
+	ShaderHandler::GetInstance()->CreateProgram("GUIShader",
+		"Engine/Shaders/GUIVertShader.glsl",
+		"Engine/Shaders/GUIFragShader.glsl");
+
+	ShaderHandler::GetInstance()->CreateProgram("ParticleShader",
+		"Engine/Shaders/ParticleVertShader.glsl",
+		"Engine/Shaders/ParticleFragShader.glsl");
+
 	if (CoreEngine::GetInstance()->GetCurrentScene() == 0) {
 		currentScene = new StartScene();
 		if (!currentScene->OnCreate()) {
@@ -36,7 +50,12 @@ void SceneManager::Update(const float deltaTime_)
 
 void SceneManager::Draw()
 {
+	glClearColor(0, 0, 0.0f, 1.0f);
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	currentScene->Draw();
+
+	SDL_GL_SwapWindow(CoreEngine::GetInstance()->GetWindow()->GetWindow());
 }
 
 void SceneManager::BuildScene()

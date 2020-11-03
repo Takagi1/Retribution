@@ -38,9 +38,9 @@ void GameObject::Update(const float deltaTime_)
 
 void GameObject::Draw()
 {
-	for (auto c : components) {
-		c->Draw();
-	}
+	//for (auto c : components) {
+		//c->Draw();
+	//}
 }
 
 void GameObject::Translate(glm::vec2 trans)
