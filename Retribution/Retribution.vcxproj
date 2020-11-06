@@ -91,7 +91,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>D:\Github\Retribution\Linking\SDL\include;D:\Github\Retribution\Linking\OpenGL\include;D:\Github\Retribution\Linking\FMOD\inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Github\Retribution\Linking\SDL\include;D:\Github\Retribution\Linking\OpenGL\include;D:\Github\Retribution\Linking\FMOD\inc;D:\Github\Retribution\Linking\XMLParser;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -179,6 +179,7 @@
     <ClInclude Include="Engine\Math\CollisionHandler.h" />
     <ClInclude Include="Engine\Math\Physics2D.h" />
     <ClInclude Include="Engine\Math\RandomNumber.h" />
+    <ClInclude Include="Engine\Parser\XMLParser.h" />
     <ClInclude Include="Engine\Rendering\Component.h" />
     <ClInclude Include="Engine\Rendering\GameObject.h" />
     <ClInclude Include="Engine\Rendering\OpenGL\OpenGLSpriteSurface.h" />
@@ -202,6 +203,7 @@
     <ClInclude Include="Game\Scenes\SceneManager.h" />
     <ClInclude Include="Game\Scripts\Controller.h" />
     <ClInclude Include="Game\Scripts\GameManager.h" />
+    <ClInclude Include="Game\Scripts\MonsterLoader.h" />
     <ClInclude Include="Game\Scripts\TriggerBox.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Game\Scenes\StartScene.h" />
@@ -232,6 +234,7 @@
     <ClCompile Include="Engine\Math\CollisionDetection.cpp" />
     <ClCompile Include="Engine\Math\CollisionHandler.cpp" />
     <ClCompile Include="Engine\Math\Physics2D.cpp" />
+    <ClCompile Include="Engine\Parser\XMLParser.cpp" />
     <ClCompile Include="Engine\Rendering\GameObject.cpp" />
     <ClCompile Include="Engine\Rendering\OpenGL\OpenGLSpriteSurface.cpp" />
     <ClCompile Include="Engine\Rendering\Types\Image.cpp" />
@@ -283,6 +286,10 @@
     <None Include="Engine\Shaders\SpriteVertShader.glsl" />
     <None Include="Engine\Shaders\ParticleFragShader.glsl" />
     <None Include="Engine\Shaders\ParticleVertShader.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\XML\Characters\Archer.txt" />
+    <Text Include="Resources\XML\Scenes\GameScene.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

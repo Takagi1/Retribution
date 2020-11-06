@@ -1,0 +1,3 @@
+<Archer>
+	<Power> 1 </Power>
+</Archer>

@@ -5,7 +5,6 @@
 
 std::unique_ptr<SceneGraph> SceneGraph::sceneGraphInstance = nullptr;
 
-
 std::map<std::string, std::shared_ptr<GameObject>> SceneGraph::sceneGameObjects = std::map<std::string, std::shared_ptr<GameObject>>();
 std::map<std::string, GameObject*> SceneGraph::sceneGUIObjects = std::map<std::string, GameObject*>();
 std::map<unsigned int, std::vector<Image*>> SceneGraph::sceneImages = std::map<unsigned int, std::vector<Image*>>();
@@ -190,7 +189,8 @@ void SceneGraph::Draw(Camera* camera_)
 	}
 
 	//Update GUI after objects to ignore depth
-
+	
+	//TODO: abstract the gui shader 
 	glUseProgram(ShaderHandler::GetInstance()->GetShader("GUIShader"));
 
 	for (auto g : sceneGUIObjects) {

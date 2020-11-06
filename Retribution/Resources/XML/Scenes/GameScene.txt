@@ -1,0 +1,17 @@
+<Scene>
+  <PartitionSize>
+    <Size> 10000.0000 </Size>
+  </PartitionSize>
+  <Camera>
+    <Location> 0.0000 0.0000 0.0000 </Location>
+  </Camera>
+  <Player>
+    <Location> 450.0000 0.0000 </Location>
+  </Player>
+  <Monsters>
+    <Spawn> 
+      <Name>Archer</Name>
+      <Location> 80.0000 0 </Location> 
+    </Spawn>
+  </Monsters>
+</Scene>

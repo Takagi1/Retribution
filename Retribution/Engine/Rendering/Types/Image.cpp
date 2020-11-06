@@ -6,7 +6,7 @@
 #include "../OpenGL/OpenGLSpriteSurface.h"
 #include "../../Core/CoreEngine.h"
 
-Image::Image(GameObject* parent_) : Component(), sprite(nullptr), flip(false)
+Image::Image(GameObject* parent_) : Component(), sprite(nullptr), flip(false), type(DrawType::OpenGL)
 {
 	parent = parent_;
 }
