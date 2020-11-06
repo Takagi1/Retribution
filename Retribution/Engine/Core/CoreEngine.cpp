@@ -4,11 +4,13 @@
 #include "Scene.h"
 #include "../Audio/AudioHandler.h"
 #include "../Graphics/OpenGL/OpenGLWindow.h"
+#include "../Parser/XMLParser.h"
 #include <ctime>
 
 std::unique_ptr<CoreEngine> CoreEngine::engineInstance = nullptr;
 
-CoreEngine::CoreEngine() : window(nullptr), isRunning(false), fps(120), gameInterface(nullptr), currentSceneNum(0), camera(nullptr) {
+CoreEngine::CoreEngine() : window(nullptr), isRunning(false), fps(120), gameInterface(nullptr), currentSceneNum(0), camera(nullptr),
+drawer(nullptr), drawType(DrawType::OpenGL) {
 
 }
 
@@ -99,6 +101,7 @@ void CoreEngine::OnDestroy()
 	TextureHandler::GetInstance()->OnDestroy();
 	SceneGraph::GetInstance()->OnDestroy();
 	AudioHandler::GetInstance()->OnDestroy();
+
 
 	delete gameInterface;
 	gameInterface = nullptr;

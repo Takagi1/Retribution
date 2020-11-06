@@ -6,7 +6,7 @@
 #include "../../Engine/Math/BoundingBox.h"
 
 PlayerCharacter::PlayerCharacter(glm::vec2 position_) : Character(position_,0), energy(0), maxEnergy(0),
-pState(State::Neutral), triggerBox(nullptr), parryType("Parry"), counterType("Counter")
+pState(State::Neutral), triggerBox(nullptr), parryType("Parry"), counterType("Counter"), lifeTime(0)
 {
 
 }

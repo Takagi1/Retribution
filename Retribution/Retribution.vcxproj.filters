@@ -142,6 +142,18 @@
     <Filter Include="Source Files\Engine\Rendering\OpenGL">
       <UniqueIdentifier>{2bac3a46-44e0-490e-9ea5-ce21e2ef58d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine\Parser">
+      <UniqueIdentifier>{77bbbd2d-6e5b-430c-b474-7ef286d4bda5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Parser">
+      <UniqueIdentifier>{0c97e1b3-fe68-430c-aa34-0bd124e19773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\XML">
+      <UniqueIdentifier>{ea927677-5967-4002-b368-b7580161d095}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\XML\Scenes">
+      <UniqueIdentifier>{d47e5bf9-f8f7-4bb5-a58d-f8f32dec1f59}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -288,6 +300,12 @@
     <ClInclude Include="Engine\Rendering\OpenGL\OpenGLSpriteSurface.h">
       <Filter>Header Files\Engine\Rendering\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Parser\XMLParser.h">
+      <Filter>Header Files\Engine\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scripts\MonsterLoader.h">
+      <Filter>Header Files\Game\Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -419,6 +437,9 @@
     <ClCompile Include="Engine\Rendering\OpenGL\OpenGLSpriteSurface.cpp">
       <Filter>Source Files\Engine\Rendering\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Parser\XMLParser.cpp">
+      <Filter>Source Files\Engine\Parser</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Shaders\SpriteFragShader.glsl">
@@ -439,5 +460,13 @@
     <None Include="Engine\Shaders\ParticleFragShader.glsl">
       <Filter>Header Files\Engine\Shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\XML\Scenes\GameScene.txt">
+      <Filter>Resource Files\XML\Scenes</Filter>
+    </Text>
+    <Text Include="Resources\XML\Characters\Archer.txt">
+      <Filter>Resource Files\XML\Scenes</Filter>
+    </Text>
   </ItemGroup>
 </Project>
