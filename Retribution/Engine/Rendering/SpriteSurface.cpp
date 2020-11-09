@@ -8,7 +8,6 @@ SpriteSurface::SpriteSurface(bool useView_, std::string name_,
 	glm::vec2 scale_, float angle_)
 {
 	name = name_;
-	angle = angle_;
 
 	useView = useView_;
 
@@ -63,7 +62,7 @@ SpriteSurface::SpriteSurface(bool useView_, std::string name_,
 	height = TextureHandler::GetInstance()->GetTextureData(name)->height;
 	width = TextureHandler::GetInstance()->GetTextureData(name)->width;
 
-	SetScale(scale_);
+	scale = glm::vec2(width, height);
 }
 
 SpriteSurface::~SpriteSurface() {
@@ -83,14 +82,4 @@ float SpriteSurface::GetHeight() const
 glm::vec2 SpriteSurface::GetScale() const
 {
 	return scale;
-}
-
-void SpriteSurface::SetAngle(const float angle_)
-{
-	angle = angle_;
-}
-
-void SpriteSurface::SetScale(const glm::vec2 scale_)
-{
-	scale = glm::vec2(scale_.x * width, scale_.y * height);
 }

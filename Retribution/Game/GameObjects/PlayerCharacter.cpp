@@ -21,12 +21,12 @@ bool PlayerCharacter::OnCreate()
 	Character::OnCreate();
 	AddComponent<Image>(this);
 
-	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Mario3.png", true);
+	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Mario3.png", true, 0.0f);
 	UpdateBoundingBox(GetComponent<Image>()->GetBoundingBox());
 
 	GetComponent<Physics2D>()->ApplyDrag(true);
 
-	SetDepth(1);
+	//SetDepth(1);
 	SetScale(glm::vec2(0.1f,0.1f));
 
 	SetHealth(5);

@@ -57,14 +57,15 @@ void GameObject::SetPosition(glm::vec2 position_)
 {
 	position = position_;
 	if (GetComponent<Image>()) {
-		box.pos = position_;
+		GetComponent<Image>()->UpdateTransform(position, angle, scale);
+		box = GetComponent<Image>()->GetBoundingBox();
 	}
 }
 
 void GameObject::SetAngle(float angle_) {
 	angle = angle_;
 	if (GetComponent<Image>()) {
-		GetComponent<Image>()->SetAngle(angle);
+		GetComponent<Image>()->UpdateTransform(position, angle, scale);
 	}
 }
 
@@ -72,7 +73,8 @@ void GameObject::SetScale(glm::vec2 scale_)
 {
 	scale = scale_;
 	if (GetComponent<Image>()) {
-		box.dimentions = GetComponent<Image>()->SetScale(scale_);
+		GetComponent<Image>()->UpdateTransform(position, angle, scale);
+		box = GetComponent<Image>()->GetBoundingBox();
 	}
 }
 

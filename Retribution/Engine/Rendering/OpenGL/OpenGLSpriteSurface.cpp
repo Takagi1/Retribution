@@ -15,22 +15,12 @@ OpenGLSpriteSurface::~OpenGLSpriteSurface()
 	glDeleteBuffers(1, &VBO);
 }
 
-void OpenGLSpriteSurface::Draw(Camera* camera_, glm::vec2 position_)
+void OpenGLSpriteSurface::Draw(Camera* camera_, glm::mat4 transform)
 {
 	glUniform1f(textureID, 0);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textureID);
-
-	glm::mat4 transform = glm::mat4(1.0f);
-
-	transform = glm::translate(transform, glm::vec3(position_, 0));
-
-	transform = glm::translate(transform, glm::vec3(0.5f * scale.x, 0.5f * scale.y, 0.0f)); // move origin of rotation to center of quad
-	transform = glm::rotate(transform, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f)); // rotate
-	transform = glm::translate(transform, glm::vec3(-0.5f * scale.x, -0.5f * scale.y, 0.0f)); // move origin back
-
-	transform = glm::scale(transform, glm::vec3(scale, 0));
 
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(transform));
 	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(camera_->GetOrthographic()));

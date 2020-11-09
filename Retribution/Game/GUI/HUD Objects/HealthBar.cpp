@@ -14,7 +14,7 @@ bool HealthBar::OnCreate()
 	AddComponent<Image>(this);
 
 	//GetComponent<Image>()->OnCreate(this);
-	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("GUIShader"), "Mario2.png", false);
+	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("GUIShader"), "Mario2.png", false, 0);
 
 
 	SetPosition(glm::vec2(0.0f, 800.0f));

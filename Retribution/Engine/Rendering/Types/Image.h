@@ -12,7 +12,7 @@ public:
 	Image(GameObject* parent_);
 	~Image();
 
-	bool OnCreate(GLuint shaderID, std::string name_, bool useView_, glm::vec2 offset_ = glm::vec2(0), 
+	bool OnCreate(GLuint shaderID, std::string name_, bool useView_, float depth_, glm::vec2 offset_ = glm::vec2(0), 
 		glm::vec2 scale_ = glm::vec2(1), float angle_ = 0, glm::vec4 tint_ = glm::vec4(1));
 
 	void Update(const float deltaTime_) override;
@@ -24,8 +24,7 @@ public:
 
 	//Setters
 	void SetOffset(const glm::vec2 offset_);
-	void SetAngle(const float angle_);
-	glm::vec2 SetScale(const glm::vec2 scale_);
+	void UpdateTransform(glm::vec2 position_, float angle_, glm::vec2 scale_);
 
 
 	bool FindContainingPoint() override;
@@ -44,6 +43,7 @@ private:
 
 	bool flip;
 
+	float depth;
 
 	DrawType type;
 
