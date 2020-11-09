@@ -10,14 +10,14 @@
 //TODO: Can make improvement with rendering by having a update for sprite's transform.
 
 Image::Image(GameObject* parent_) : Component(), sprite(nullptr), flip(false), type(DrawType::OpenGL), depth(0), 
-transform(glm::mat4(0))
+transform(glm::mat4(0)), imageLoc(0)
 {
 	parent = parent_;
 }
 
 Image::~Image()
 {
-	//SceneGraph::GetInstance()->
+	SceneGraph::GetInstance()->RemoveImage(imageLoc, shaderProgram);
 	delete sprite;
 	sprite = nullptr;
 }
@@ -25,6 +25,8 @@ Image::~Image()
 bool Image::OnCreate(GLuint shaderID, std::string name_, bool useView_, float depth_, glm::vec2 offset_,
 	glm::vec2 scale_, float angle_, glm::vec4 tint_)
 {
+	shaderProgram = shaderID;
+
 	offset = offset_;
 
 	depth = depth_;
@@ -71,6 +73,9 @@ void Image::SetOffset(const glm::vec2 offset_)
 
 void Image::UpdateTransform(glm::vec2 position_, float angle_, glm::vec2 scale_)
 {
+
+	//TODO: this may be less effective then just having it in the draw
+
 	glm::mat4 transform_ = glm::mat4(1.0f);
 
 	glm::vec2 trueScale = scale_ * sprite->GetScale();
@@ -82,7 +87,6 @@ void Image::UpdateTransform(glm::vec2 position_, float angle_, glm::vec2 scale_)
 	transform_ = glm::translate(transform_, glm::vec3(-0.5f * trueScale.x, -0.5f * trueScale.y, 0.0f)); // move origin back
 
 	transform_ = glm::scale(transform_, glm::vec3(trueScale, 0));
-
 
 	box.dimentions = trueScale;
 	box.pos = position_;
@@ -120,6 +124,11 @@ BoundingBox Image::GetBoundingBox() const {
 void Image::Flip(bool invert_)
 {
 	sprite->Flip(invert_);
+}
+
+void Image::SetImageLoc(int loc_)
+{
+	imageLoc = loc_;
 }
 
 

@@ -24,6 +24,7 @@ public:
 	bool RemoveGameObject(std::string name_);
 
 	void AddImage(Image* im, unsigned int shaderProgram_);
+	void RemoveImage(int loc_, unsigned int shaderProgram_);
 
 	void Update(const float deltaTime_);
 	void Draw(Camera* camera_);

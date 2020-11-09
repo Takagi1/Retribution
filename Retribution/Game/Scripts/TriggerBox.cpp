@@ -30,8 +30,6 @@ void TriggerBox::Update()
 
 void TriggerBox::Trigger(std::weak_ptr<GameObject> obj_)
 {
-	//Dynamicly cast to Projectile
-
 	if (triggerType == "Parry") {
 		parent->ChangeEnergy(dynamic_cast<Projectile*>(obj_.lock().get())->GetPower());
 		return;

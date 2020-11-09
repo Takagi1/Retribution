@@ -71,6 +71,17 @@ bool SceneGraph::RemoveGameObject(std::string name_)
 void SceneGraph::AddImage(Image* im, unsigned int shaderProgram_)
 {
 	sceneImages[shaderProgram_].push_back(im);
+	im->SetImageLoc(sceneImages[shaderProgram_].size() - 1);
+}
+
+void SceneGraph::RemoveImage(int loc_, unsigned int shaderProgram_)
+{
+	for (int i = loc_ + 1; i < sceneImages[shaderProgram_].size(); i++) {
+		sceneImages[shaderProgram_][i]->SetImageLoc(i - 1);
+	}
+	delete sceneImages[shaderProgram_][loc_];
+	sceneImages[shaderProgram_][loc_] = nullptr;
+	sceneImages[shaderProgram_].erase(sceneImages[shaderProgram_].begin() + loc_);
 }
 
 
@@ -206,6 +217,7 @@ void SceneGraph::OnDestroy()
 		}
 		sceneGameObjects.clear();
 	}
+	//TODO: Delete Images
 }
 
 SceneGraph::SceneGraph() : isPaused(false), prevDeltaTime(0)

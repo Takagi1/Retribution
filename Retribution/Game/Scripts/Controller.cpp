@@ -37,12 +37,12 @@ void Controller::Update(const float deltaTime_)
 
 	if (KeyEventListener::keys[SDLK_LEFT]) {
 		if (player.lock()->GetState() == State::Neutral) {
-			player.lock()->Move(-1, 0);
+			player.lock()->Move(-5, 0);
 		}
 	}
 	else if (KeyEventListener::keys[SDLK_RIGHT]) {
 		if (player.lock()->GetState() == State::Neutral) {
-			player.lock()->Move(1, 0);
+			player.lock()->Move(5, 0);
 		}
 	}
 

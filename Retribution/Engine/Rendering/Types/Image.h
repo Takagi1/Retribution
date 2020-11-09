@@ -33,9 +33,15 @@ public:
 
 	void Flip(bool invert_);
 
+	void SetImageLoc(int loc_);
+
 private:
+	GLuint shaderProgram;
+
 	SpriteSurface* sprite;
 	glm::vec2 offset;
+
+	int imageLoc;
 
 	glm::mat4 transform;
 
