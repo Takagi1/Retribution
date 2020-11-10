@@ -14,4 +14,10 @@
       <Location> 80.0000 0 </Location> 
     </Spawn>
   </Monsters>
+  <Level>
+    <Spawn>
+        <Image> </Image>
+        <Location> 100.0000 0.0000 </Location>
+    </Spawn>
+  </Level>
 </Scene>

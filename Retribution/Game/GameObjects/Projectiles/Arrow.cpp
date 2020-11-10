@@ -19,6 +19,7 @@ bool Arrow::OnCreate(bool isFliped_)
 
 	SetSpeed(100);
 	SetScale(glm::vec2(0.05f));
+	SetPower(1);
 	return true;
 }
 

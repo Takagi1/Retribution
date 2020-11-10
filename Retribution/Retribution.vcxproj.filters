@@ -306,6 +306,24 @@
     <ClInclude Include="Game\Scripts\MonsterLoader.h">
       <Filter>Header Files\Game\Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="Game\GUI\HUD Objects\EnergyDisplay.h">
+      <Filter>Header Files\Game\GUI\HUD Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Rendering\GUI\GUIObject.h">
+      <Filter>Header Files\Engine\Rendering\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Rendering\GUI\GUIComponent.h">
+      <Filter>Header Files\Engine\Rendering\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Rendering\GUI\GUIImage.h">
+      <Filter>Header Files\Engine\Rendering\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameObjects\Tile.h">
+      <Filter>Header Files\Game\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scripts\LevelLoader.h">
+      <Filter>Header Files\Game\Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -439,6 +457,18 @@
     </ClCompile>
     <ClCompile Include="Engine\Parser\XMLParser.cpp">
       <Filter>Source Files\Engine\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GUI\HUD Objects\EnergyDisplay.cpp">
+      <Filter>Source Files\Game\GUI\HUD Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Rendering\GUI\GUIObject.cpp">
+      <Filter>Source Files\Engine\Rendering\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Rendering\GUI\GUIImage.cpp">
+      <Filter>Source Files\Engine\Rendering\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameObjects\Tile.cpp">
+      <Filter>Source Files\Game\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

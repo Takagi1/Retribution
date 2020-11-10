@@ -4,7 +4,6 @@
 #include "../../Math/CollisionDetection.h"
 #include "../../Core/CoreEngine.h"
 #include "../OpenGL/OpenGLSpriteSurface.h"
-#include "../../Core/CoreEngine.h"
 
 
 //TODO: Can make improvement with rendering by having a update for sprite's transform.
@@ -17,7 +16,6 @@ transform(glm::mat4(0)), imageLoc(0)
 
 Image::~Image()
 {
-	SceneGraph::GetInstance()->RemoveImage(imageLoc, shaderProgram);
 	delete sprite;
 	sprite = nullptr;
 }
@@ -25,7 +23,6 @@ Image::~Image()
 bool Image::OnCreate(GLuint shaderID, std::string name_, bool useView_, float depth_, glm::vec2 offset_,
 	glm::vec2 scale_, float angle_, glm::vec4 tint_)
 {
-	shaderProgram = shaderID;
 
 	offset = offset_;
 
@@ -44,7 +41,7 @@ bool Image::OnCreate(GLuint shaderID, std::string name_, bool useView_, float de
 	if (sprite) {
 		box.dimentions = sprite->GetScale();
 		box.pos = parent->GetPosition();
-		SceneGraph::GetInstance()->AddImage(this, shaderID);
+		imageLoc = SceneGraph::GetInstance()->AddImage(this, shaderID);
 		return true;
 	}
 	return false;
@@ -52,6 +49,7 @@ bool Image::OnCreate(GLuint shaderID, std::string name_, bool useView_, float de
 
 void Image::Update(const float deltaTime_)
 {
+
 }
 
 void Image::Draw()
@@ -131,4 +129,8 @@ void Image::SetImageLoc(int loc_)
 	imageLoc = loc_;
 }
 
+int Image::GetImageLoc() const
+{
+	return imageLoc;
+}
 

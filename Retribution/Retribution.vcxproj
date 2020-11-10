@@ -182,12 +182,17 @@
     <ClInclude Include="Engine\Parser\XMLParser.h" />
     <ClInclude Include="Engine\Rendering\Component.h" />
     <ClInclude Include="Engine\Rendering\GameObject.h" />
+    <ClInclude Include="Engine\Rendering\GUI\GUIComponent.h" />
+    <ClInclude Include="Engine\Rendering\GUI\GUIImage.h" />
+    <ClInclude Include="Engine\Rendering\GUI\GUIObject.h" />
     <ClInclude Include="Engine\Rendering\OpenGL\OpenGLSpriteSurface.h" />
     <ClInclude Include="Game\GameObjects\Character.h" />
     <ClInclude Include="Game\GameObjects\Monsters\Archer.h" />
     <ClInclude Include="Game\GameObjects\Monsters\Monster.h" />
     <ClInclude Include="Game\GameObjects\Projectiles\Arrow.h" />
+    <ClInclude Include="Game\GameObjects\Tile.h" />
     <ClInclude Include="Game\GUI\HUD Objects\EnergyBar.h" />
+    <ClInclude Include="Game\GUI\HUD Objects\EnergyDisplay.h" />
     <ClInclude Include="Game\GUI\HUD.h" />
     <ClInclude Include="Engine\Rendering\Types\Image.h" />
     <ClInclude Include="Engine\Rendering\SceneGraph.h" />
@@ -203,6 +208,7 @@
     <ClInclude Include="Game\Scenes\SceneManager.h" />
     <ClInclude Include="Game\Scripts\Controller.h" />
     <ClInclude Include="Game\Scripts\GameManager.h" />
+    <ClInclude Include="Game\Scripts\LevelLoader.h" />
     <ClInclude Include="Game\Scripts\MonsterLoader.h" />
     <ClInclude Include="Game\Scripts\TriggerBox.h" />
     <ClInclude Include="pch.h" />
@@ -236,6 +242,8 @@
     <ClCompile Include="Engine\Math\Physics2D.cpp" />
     <ClCompile Include="Engine\Parser\XMLParser.cpp" />
     <ClCompile Include="Engine\Rendering\GameObject.cpp" />
+    <ClCompile Include="Engine\Rendering\GUI\GUIImage.cpp" />
+    <ClCompile Include="Engine\Rendering\GUI\GUIObject.cpp" />
     <ClCompile Include="Engine\Rendering\OpenGL\OpenGLSpriteSurface.cpp" />
     <ClCompile Include="Engine\Rendering\Types\Image.cpp" />
     <ClCompile Include="Engine\Rendering\SceneGraph.cpp" />
@@ -256,7 +264,9 @@
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Game\GameObjects\Projectiles\Arrow.cpp" />
+    <ClCompile Include="Game\GameObjects\Tile.cpp" />
     <ClCompile Include="Game\GUI\HUD Objects\EnergyBar.cpp" />
+    <ClCompile Include="Game\GUI\HUD Objects\EnergyDisplay.cpp" />
     <ClCompile Include="Game\GUI\HUD Objects\HealthBar.cpp" />
     <ClCompile Include="Game\GUI\HUD.cpp" />
     <ClCompile Include="Game\Scenes\GameScene.cpp">

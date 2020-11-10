@@ -31,4 +31,7 @@ private:
 
 
 	HUD hud;
+
+	int health;
+	int energy;
 };

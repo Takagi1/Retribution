@@ -13,7 +13,7 @@
 class GameObject {
 public:
 	GameObject(glm::vec2 position_, int depth_);
-	~GameObject();
+	virtual ~GameObject();
 
 	bool OnCreate();
 	virtual void Update(const float deltaTime_);
@@ -44,8 +44,6 @@ public:
 	std::string GetName() const;
 
 	bool MouseDettection();
-
-
 
 	//Used to allow for the direct programing of collision response from objects
 	virtual void CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_) = 0;
@@ -114,6 +112,7 @@ public:
 protected:
 
 	void UpdateBoundingBox(BoundingBox box_);
+
 private:
 
 	//Used to designate type of object, used for collision exclusion

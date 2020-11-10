@@ -26,7 +26,7 @@ bool Archer::OnCreate()
 	Character::OnCreate();
 	AddComponent<Image>(this);
 
-	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Mario.png", true, 0);
+	int imageLoc = GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Mario.png", true, 0);
 	UpdateBoundingBox(GetComponent<Image>()->GetBoundingBox());
 	
 	SetScale(glm::vec2(0.1f, 0.1f));

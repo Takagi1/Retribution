@@ -2,7 +2,7 @@
 #define HUD_H
 
 #include "HUD Objects/HealthBar.h"
-#include "HUD Objects/EnergyBar.h"
+#include "HUD Objects/EnergyDisplay.h"
 
 /*
 Used to hold and update all GUI objects
@@ -25,9 +25,11 @@ public:
 	void Update(const float deltaTime_);
 
 	void UpdateHealth(int health_);
+	void UpdateEnergy(int energy_);
 
 private:
 	
 	HealthBar healthBar;
+	EnergyDisplay energyBar;
 };
 #endif // !HUD_H

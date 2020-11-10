@@ -14,6 +14,7 @@ pState(State::Neutral), triggerBox(nullptr), parryType("Parry"), counterType("Co
 
 PlayerCharacter::~PlayerCharacter()
 {
+	
 }
 
 bool PlayerCharacter::OnCreate()
@@ -22,6 +23,7 @@ bool PlayerCharacter::OnCreate()
 	AddComponent<Image>(this);
 
 	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Mario3.png", true, 0.0f);
+
 	UpdateBoundingBox(GetComponent<Image>()->GetBoundingBox());
 
 	GetComponent<Physics2D>()->ApplyDrag(true);
@@ -30,6 +32,7 @@ bool PlayerCharacter::OnCreate()
 	SetScale(glm::vec2(0.1f,0.1f));
 
 	SetHealth(5);
+	maxEnergy = 10;
 
 	return true;
 }
@@ -124,6 +127,5 @@ void PlayerCharacter::ChangeEnergy(const int energy_)
 {
 	energy += energy_;
 
-	if (energy < 0) { energy = 0; }
-	else if (energy > maxEnergy) { energy = maxEnergy; }
+	SetEnergy(energy);
 }

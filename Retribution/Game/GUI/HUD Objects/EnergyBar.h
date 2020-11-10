@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../../../Engine/Rendering/GameObject.h"
+#include "../../../Engine/Rendering/GUI/GUIObject.h"
 
-class EnergyBar : public GameObject {
+class EnergyBar : public GUIObject {
 public:
 	EnergyBar(glm::vec2 position_ = glm::vec2());
 	virtual ~EnergyBar();
@@ -11,9 +11,7 @@ public:
 	bool OnCreate();
 	virtual void Update(const float deltaTime_);
 
-	void UpdateHealth(int health_);
-
-	void CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_) override;
+	void UpdateEnergy(int energy_);
 private:
-	
+
 };

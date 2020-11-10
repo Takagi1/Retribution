@@ -1,7 +1,7 @@
 #include "GameManager.h"
 #include "../../Engine/Rendering/SceneGraph.h"
 
-GameManager::GameManager() {
+GameManager::GameManager() : health(0), energy(0) {
 
 }
 
@@ -33,7 +33,12 @@ void GameManager::Update(const float deltaTime_)
         else { i++; }
     }
 
-    hud.Update(deltaTime_);
+    if (player.lock()->GetHealth() != health) {
+        hud.UpdateHealth(player.lock()->GetHealth());
+    }
+    if (player.lock()->GetEnergy() != energy) {
+        hud.UpdateEnergy(player.lock()->GetEnergy());
+    }
 }
 
 void GameManager::AddMonster(std::weak_ptr<Monster> monster_)

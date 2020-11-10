@@ -6,7 +6,7 @@
 std::unique_ptr<SceneGraph> SceneGraph::sceneGraphInstance = nullptr;
 
 std::map<std::string, std::shared_ptr<GameObject>> SceneGraph::sceneGameObjects = std::map<std::string, std::shared_ptr<GameObject>>();
-std::map<std::string, GameObject*> SceneGraph::sceneGUIObjects = std::map<std::string, GameObject*>();
+std::map<std::string, GUIObject*> SceneGraph::sceneGUIObjects = std::map<std::string, GUIObject*>();
 std::map<unsigned int, std::vector<Image*>> SceneGraph::sceneImages = std::map<unsigned int, std::vector<Image*>>();
 
 SceneGraph * SceneGraph::GetInstance()
@@ -68,24 +68,23 @@ bool SceneGraph::RemoveGameObject(std::string name_)
 	}
 }
 
-void SceneGraph::AddImage(Image* im, unsigned int shaderProgram_)
+int SceneGraph::AddImage(Image* im, unsigned int shaderProgram_)
 {
 	sceneImages[shaderProgram_].push_back(im);
-	im->SetImageLoc(sceneImages[shaderProgram_].size() - 1);
+	return sceneImages[shaderProgram_].size() - 1;
 }
 
 void SceneGraph::RemoveImage(int loc_, unsigned int shaderProgram_)
 {
-	for (int i = loc_ + 1; i < sceneImages[shaderProgram_].size(); i++) {
-		sceneImages[shaderProgram_][i]->SetImageLoc(i - 1);
-	}
-	delete sceneImages[shaderProgram_][loc_];
 	sceneImages[shaderProgram_][loc_] = nullptr;
 	sceneImages[shaderProgram_].erase(sceneImages[shaderProgram_].begin() + loc_);
+	for (int i = loc_; i < sceneImages[shaderProgram_].size(); i++) {
+		sceneImages[shaderProgram_][i]->SetImageLoc(i);
+	}
 }
 
 
-void SceneGraph::AddGUIObject(GameObject* go, std::string name_)
+void SceneGraph::AddGUIObject(GUIObject* go, std::string name_)
 {
 	if (sceneGUIObjects.find(name_) == sceneGUIObjects.end()) {
 		go->SetName(name_);
@@ -120,7 +119,9 @@ std::weak_ptr<GameObject> SceneGraph::GetGameObject(std::string tag_)
 	return std::weak_ptr<GameObject>();
 }
 
-GameObject* SceneGraph::GetGUIObject(std::string tag_)
+//TODO: Create Seperate GUIObjects class and GUIImage class that has a surface sprite in it.
+
+GUIObject* SceneGraph::GetGUIObject(std::string tag_)
 {
 	if (sceneGUIObjects.find(tag_) != sceneGUIObjects.end()) {
 		return sceneGUIObjects[tag_];
@@ -182,6 +183,7 @@ void SceneGraph::Update(const float deltaTime_)
 
 	prevDeltaTime = deltaTime_;
 }
+
 //TODO: Finish the depth draw system to allow for ease of drawing.
 void SceneGraph::Draw(Camera* camera_)
 {
@@ -205,7 +207,7 @@ void SceneGraph::Draw(Camera* camera_)
 	glUseProgram(ShaderHandler::GetInstance()->GetShader("GUIShader"));
 
 	for (auto g : sceneGUIObjects) {
-		g.second->Draw();
+		g.second->Draw(camera_);
 	}
 }
 

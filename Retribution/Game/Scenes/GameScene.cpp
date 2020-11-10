@@ -4,6 +4,7 @@
 #include "../../Engine/Audio/AudioHandler.h"
 #include "../../Engine/Parser/XMLParser.h"
 #include "../Scripts/MonsterLoader.h"
+#include "../Scripts/LevelLoader.h"
 
 GameScene::GameScene()
 {
@@ -59,6 +60,8 @@ bool GameScene::OnCreate()
 
 		SceneGraph::GetInstance()->AddGameObject(std::move(m));
 	}
+	XMLParser::GetInstance()->Move("Level");
+	for(auto m : LevelLoader::)
 
 
 	//CoreEngine::GetInstance()->GetCamera()->sound = new BackgroundSound(CoreEngine::GetInstance()->GetCamera());
