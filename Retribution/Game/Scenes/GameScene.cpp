@@ -4,6 +4,7 @@
 #include "../../Engine/Audio/AudioHandler.h"
 #include "../../Engine/Parser/XMLParser.h"
 #include "../Scripts/MonsterLoader.h"
+#include "../Scripts/LevelLoader.h"
 
 GameScene::GameScene()
 {
@@ -45,18 +46,22 @@ bool GameScene::OnCreate()
 
 	SceneGraph::GetInstance()->AddGameObject(std::move(player), "Player");
 
-	XMLParser::GetInstance()->Move("Monsters");
-
-	//emitter = new ParticleEmitter(7, "ParticleShader");
-	//emitter->SetPosition(glm::vec2(60));
+	emitter = new ParticleEmitter(7, "ParticleShader");
+	emitter->SetPosition(glm::vec2(60));
 
 
 	//Load Monster's Here
 
-	for (auto m : MonsterLoader::LoadMonsters()) {
+	//for (auto m : MonsterLoader::LoadMonsters()) {
 
-		gameManager.AddMonster(m);
+	//	gameManager.AddMonster(m);
 
+	//	SceneGraph::GetInstance()->AddGameObject(std::move(m));
+	//}
+
+	XMLParser::GetInstance()->Move("Level");
+
+	for (auto m : LevelLoader::LoadTiles()) {
 		SceneGraph::GetInstance()->AddGameObject(std::move(m));
 	}
 
@@ -86,5 +91,5 @@ void GameScene::Draw()
 {
 	SceneGraph::GetInstance()->Draw(CoreEngine::GetInstance()->GetCamera());
 
-	//emitter->Update(0.03f);
+	emitter->Update(0.03f);
 }

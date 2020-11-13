@@ -11,7 +11,6 @@ public:
 		parent = nullptr;
 	};
 
-	virtual bool OnCreate(GUIObject* parent_) = 0;
 	virtual void Update(const float deltaTime_) = 0;
 	virtual void Draw(Camera* camera_) = 0;
 

@@ -1,7 +1,7 @@
 #include "HealthBar.h"
-#include "../../../Engine/Rendering/Types/Image.h"
+#include "../../../Engine/Rendering/GUI/GUIImage.h"
 
-HealthBar::HealthBar(glm::vec2 position_) : GameObject(position_, 0), health(1) {
+HealthBar::HealthBar(glm::vec2 position_) : GUIObject(position_), health(1) {
 
 }
 
@@ -11,10 +11,10 @@ HealthBar::~HealthBar()
 
 bool HealthBar::OnCreate()
 {
-	AddComponent<Image>(this);
+	AddComponent<GUIImage>(this);
 
 	//GetComponent<Image>()->OnCreate(this);
-	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("GUIShader"), "Mario2.png", false);
+	GetComponent<GUIImage>()->OnCreate("Mario2.png");
 
 
 	SetPosition(glm::vec2(0.0f, 800.0f));
@@ -30,8 +30,4 @@ void HealthBar::Update(const float deltaTime_)
 void HealthBar::UpdateHealth(int health_)
 {
 	health = health_;
-}
-
-void HealthBar::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_)
-{
 }

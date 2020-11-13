@@ -5,7 +5,6 @@
 
 /*Function of this class is to detect collisions between different class types*/
 
-
 struct BoundingBox;
 
 class CollisionDetection{
@@ -21,6 +20,8 @@ public:
 	~CollisionDetection();
 
 	static glm::vec2 ClickToWorldPos(glm::vec2 mousePos, glm::vec2 screenSize_, Camera* camera_);
+
+
 };
 #endif //! COLLISIONDETECTION_H
 

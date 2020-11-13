@@ -66,9 +66,18 @@ void CollisionHandler::MouseUpdate(glm::vec2 mousePosition_, int buttonType_)
 	}
 }
 
-std::vector<std::weak_ptr<GameObject>> CollisionHandler::AABB(BoundingBox box)
+std::weak_ptr<GameObject> CollisionHandler::AABB(BoundingBox box, std::vector<std::string> tags_)
 {
 	if (scenePartition) {
-		return scenePartition->GetCollision(box); 
+		return scenePartition->GetCollision(box, tags_); 
 	}
+	return std::weak_ptr<GameObject>();
+}
+
+std::vector<std::weak_ptr<GameObject>> CollisionHandler::AABBAll(BoundingBox box)
+{
+	if (scenePartition) {
+		return scenePartition->GetCollisionAll(box);
+	}
+	return std::vector<std::weak_ptr<GameObject>>();
 }

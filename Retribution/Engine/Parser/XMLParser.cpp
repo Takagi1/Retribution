@@ -47,6 +47,7 @@ rapidxml::xml_node<>* XMLParser::NodeQuery(rapidxml::xml_node<>* currentNode_, s
 
 		//std::string line = root->first_node(className_.c_str())->first_node(elementName_.c_str())->value();
 	}
+	return nullptr;
 }
 
 glm::vec3 XMLParser::GetVec3(std::string elementName_)

@@ -1,7 +1,7 @@
 #pragma once
-#include "../../../Engine/Rendering/GameObject.h"
+#include "../../../Engine/Rendering/GUI/GUIObject.h"
 
-class HealthBar : public GameObject {
+class HealthBar : public GUIObject {
 public:
 	HealthBar(glm::vec2 position_ = glm::vec2());
 	virtual ~HealthBar();
@@ -12,7 +12,6 @@ public:
 
 	void UpdateHealth(int health_);
 
-	void CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_) override;
 private:
 	int health;
 };

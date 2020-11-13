@@ -67,12 +67,10 @@ void CoreEngine::Run()
 		EventListener::Update();
 
 		time = timer.GetDeltaTime();
+
 		Update(time);
 
-
 		Draw();
-
-		timer.FPSCounter(time);
 
 		SDL_Delay(timer.GetSleepTime(fps));	
 	}
@@ -101,6 +99,7 @@ void CoreEngine::OnDestroy()
 	TextureHandler::GetInstance()->OnDestroy();
 	SceneGraph::GetInstance()->OnDestroy();
 	AudioHandler::GetInstance()->OnDestroy();
+	XMLParser::GetInstance()->OnDestroy();
 
 
 	delete gameInterface;

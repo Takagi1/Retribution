@@ -49,8 +49,8 @@ public:
 	void OnDestroy();
 	void AddObject(std::weak_ptr<GameObject> obj_);
 
-	//Returns a std::vector becuase there could be multiple collisions at once
-	std::vector<std::weak_ptr<GameObject>> GetCollision(BoundingBox box_);
+	std::weak_ptr<GameObject> GetCollision(BoundingBox box_, std::vector<std::string> tags_);
+	std::vector<std::weak_ptr<GameObject>> GetCollisionAll(BoundingBox box);
 	std::weak_ptr<GameObject> GetCollision(glm::vec2 point_);
 	//GameObject* GetCollision(Ray ray_);
 

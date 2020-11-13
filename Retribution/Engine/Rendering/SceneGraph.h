@@ -6,6 +6,7 @@
 #include <vector>
 #include "GameObject.h"
 #include "../Math/CollisionHandler.h"
+#include "GUI/GUIObject.h"
 
 class SpriteSurface;
 class Image;
@@ -23,14 +24,15 @@ public:
 	std::weak_ptr<GameObject> GetGameObject(std::string tag_);
 	bool RemoveGameObject(std::string name_);
 
-	void AddImage(Image* im, unsigned int shaderProgram_);
+	int AddImage(Image* im, unsigned int shaderProgram_);
+	void RemoveImage(int loc_, unsigned int shaderProgram_);
 
 	void Update(const float deltaTime_);
 	void Draw(Camera* camera_);
 	void OnDestroy();
 
-	void AddGUIObject(GameObject* go, std::string name_ = "GUI_Object"); //Use to add objects to gui
-	GameObject* GetGUIObject(std::string tag_);	//Use to get objects from GUI
+	void AddGUIObject(GUIObject* go, std::string name_ = "GUI_Object"); //Use to add objects to gui
+	GUIObject* GetGUIObject(std::string tag_);	//Use to get objects from GUI
 
 	void AddDelayedUpdate(Component* comp);
 
@@ -47,7 +49,7 @@ private:
 	static std::map<std::string, std::shared_ptr<GameObject>> sceneGameObjects;
 
 	//Used to store objects for GUI
-	static std::map<std::string, GameObject*> sceneGUIObjects;
+	static std::map<std::string, GUIObject*> sceneGUIObjects;
 
 	std::vector<Component*> delayedUpdates;
 	float prevDeltaTime;

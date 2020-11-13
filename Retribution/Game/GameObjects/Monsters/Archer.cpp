@@ -26,7 +26,7 @@ bool Archer::OnCreate()
 	Character::OnCreate();
 	AddComponent<Image>(this);
 
-	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Mario.png", true);
+	int imageLoc = GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Mario.png", 0);
 	UpdateBoundingBox(GetComponent<Image>()->GetBoundingBox());
 	
 	SetScale(glm::vec2(0.1f, 0.1f));
@@ -50,7 +50,7 @@ void Archer::Update(const float deltaTime_)
 	Character::Update(deltaTime_);
 }
 
-void Archer::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_)
+void Archer::CollisionResponse(std::weak_ptr<GameObject> obj_)
 {
 }
 

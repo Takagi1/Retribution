@@ -1,8 +1,11 @@
 #include "Projectile.h"
 #include "../../Engine/Math/Physics2D.h"
+#include "../../Engine/Rendering/SceneGraph.h"
+#include "../../Engine/Graphics/ShaderHandler.h"
+#include "../../Engine/Rendering/Types/Image.h"
 
 Projectile::Projectile(GameObject* parent_, glm::vec2 position_, const float depth_) :GameObject(position_, depth_), 
-power(0), isFliped(false) , speed(0)
+power(0), isFliped(false), speed(0)
 {
 	parent = parent_;
 
@@ -10,6 +13,7 @@ power(0), isFliped(false) , speed(0)
 
 Projectile::~Projectile()
 {
+	SceneGraph::GetInstance()->RemoveImage(GetComponent<Image>()->GetImageLoc(), ShaderHandler::GetInstance()->GetShader("BasicShader"));
 }
 
 bool Projectile::OnCreate(bool isFliped_)
@@ -31,7 +35,7 @@ void Projectile::Update(const float deltaTime_)
 	GameObject::Update(deltaTime_);
 }
 
-void Projectile::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_)
+void Projectile::CollisionResponse(std::weak_ptr<GameObject> obj_)
 {
 }
 

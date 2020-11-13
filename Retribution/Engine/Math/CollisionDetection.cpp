@@ -20,4 +20,6 @@ glm::vec2 CollisionDetection::ClickToWorldPos(glm::vec2 mousePos, glm::vec2 scre
 	rayStart_World /= rayStart_World.w;
 
 	return glm::vec2 (rayStart_World.x, rayStart_World.y);
+
+	
 }

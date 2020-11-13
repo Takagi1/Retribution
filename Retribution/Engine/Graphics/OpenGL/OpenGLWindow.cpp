@@ -37,10 +37,9 @@ SDL_Window* OpenGLWindow::CreateWindow(std::string name_, int width_, int height
 		return nullptr;
 	}
 
-	//TODO: test altering the objects with depth and then using depth test for the depth system
-
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_DEPTH_TEST);
 
 	glViewport(0, 0, width_, height_);
 

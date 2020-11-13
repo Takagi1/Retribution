@@ -10,7 +10,7 @@ public:
 		parent = nullptr;
 	};
 	virtual void Update(const float deltaTime_) = 0;
-
+	
 	virtual void Draw() = 0;
 
 	//Get if mouse click is inside the component

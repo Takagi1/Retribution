@@ -23,7 +23,7 @@ public:
 private:
 	GameManager gameManager;
 
-	//ParticleEmitter* emitter;
+	ParticleEmitter* emitter;
 
 	Controller controller;
 

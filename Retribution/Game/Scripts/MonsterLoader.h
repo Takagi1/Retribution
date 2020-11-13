@@ -17,6 +17,8 @@ public:
 	//This function will get the monsters and parse the information from the lines
 	//Should the break be the number of children or will the nullptr check idea work here?
 	static std::vector<std::shared_ptr<Monster>> LoadMonsters() {
+		XMLParser::GetInstance()->Move("Monsters");
+
 		std::vector<std::shared_ptr<Monster>> obj;
 		obj.reserve(5);
 		XMLParser::GetInstance()->ListBegin();
@@ -35,6 +37,7 @@ public:
 			//If done return the object
 
 			if (!XMLParser::GetInstance()->HasSibling()) {
+				XMLParser::GetInstance()->Return();
 				return obj;
 			}
 

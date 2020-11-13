@@ -1,6 +1,7 @@
 #include "Character.h"
 #include "../../Engine/Rendering/Types/Image.h"
 #include "../../Engine/Math/Physics2D.h"
+#include "../../Engine/Rendering/SceneGraph.h"
 
 
 Character::Character(glm::vec2 position_, const float depth_) : GameObject(position_, depth_), 
@@ -11,6 +12,7 @@ health(0), maxHealth(0), flip(false)
 
 Character::~Character()
 {
+	SceneGraph::GetInstance()->RemoveImage(GetComponent<Image>()->GetImageLoc(), ShaderHandler::GetInstance()->GetShader("BasicShader"));
 }
 
 bool Character::OnCreate()
@@ -18,6 +20,8 @@ bool Character::OnCreate()
 	AddComponent<Physics2D>(this);
 
 	GetComponent<Physics2D>()->SetRigidBody(true);
+
+	AddCollisionTag("Tile");
 
 	if (GetComponent<Physics2D>()) {
 		return true;
@@ -66,7 +70,9 @@ void Character::SetMaxHealth(const int health_)
 
 void Character::Move(int directionX_, int directionY_)
 {
-	GetComponent<Physics2D>()->SetVelocity(glm::vec2(10.0f * directionX_, 0));
+
+	//TODO: move speed?
+	GetComponent<Physics2D>()->SetVelocity(glm::vec2(15.0f * directionX_, 0));
 
 	//flip object to direction it needs to face
 

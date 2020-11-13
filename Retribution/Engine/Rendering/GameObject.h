@@ -13,7 +13,7 @@
 class GameObject {
 public:
 	GameObject(glm::vec2 position_, int depth_);
-	~GameObject();
+	virtual ~GameObject();
 
 	bool OnCreate();
 	virtual void Update(const float deltaTime_);
@@ -32,6 +32,7 @@ public:
 	void SetName(std::string name_);
 	void SetDepth(const int depth_);
 	void SetTag(std::string tag_);
+	void AddCollisionTag(std::string tag_);
 
 	//Getters
 
@@ -42,13 +43,12 @@ public:
 	std::string GetTag() const;
 	BoundingBox GetBoundingBox() const;
 	std::string GetName() const;
+	std::vector<std::string> GetCollisionTags() const;
 
 	bool MouseDettection();
 
-
-
 	//Used to allow for the direct programing of collision response from objects
-	virtual void CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_) = 0;
+	virtual void CollisionResponse(std::weak_ptr<GameObject> obj_) = 0;
 
 
 	template<typename T, typename Args>
@@ -114,6 +114,7 @@ public:
 protected:
 
 	void UpdateBoundingBox(BoundingBox box_);
+
 private:
 
 	//Used to designate type of object, used for collision exclusion
@@ -130,6 +131,8 @@ private:
 	std::vector<Component*> components;
 
 	BoundingBox box;
+
+	std::vector<std::string> collisionTags;
 
 
 

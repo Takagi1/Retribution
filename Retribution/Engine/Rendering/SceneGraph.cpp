@@ -6,7 +6,7 @@
 std::unique_ptr<SceneGraph> SceneGraph::sceneGraphInstance = nullptr;
 
 std::map<std::string, std::shared_ptr<GameObject>> SceneGraph::sceneGameObjects = std::map<std::string, std::shared_ptr<GameObject>>();
-std::map<std::string, GameObject*> SceneGraph::sceneGUIObjects = std::map<std::string, GameObject*>();
+std::map<std::string, GUIObject*> SceneGraph::sceneGUIObjects = std::map<std::string, GUIObject*>();
 std::map<unsigned int, std::vector<Image*>> SceneGraph::sceneImages = std::map<unsigned int, std::vector<Image*>>();
 
 SceneGraph * SceneGraph::GetInstance()
@@ -68,13 +68,24 @@ bool SceneGraph::RemoveGameObject(std::string name_)
 	}
 }
 
-void SceneGraph::AddImage(Image* im, unsigned int shaderProgram_)
+int SceneGraph::AddImage(Image* im, unsigned int shaderProgram_)
 {
 	sceneImages[shaderProgram_].push_back(im);
+	return sceneImages[shaderProgram_].size() - 1;
+}
+
+//TODO: Fix out of scope issue related to exiting the game 
+void SceneGraph::RemoveImage(int loc_, unsigned int shaderProgram_)
+{
+	sceneImages[shaderProgram_][loc_] = nullptr;
+	sceneImages[shaderProgram_].erase(sceneImages[shaderProgram_].begin() + loc_);
+	for (size_t i = loc_; i < sceneImages[shaderProgram_].size(); i++) {
+		sceneImages[shaderProgram_][i]->SetImageLoc(i);
+	}
 }
 
 
-void SceneGraph::AddGUIObject(GameObject* go, std::string name_)
+void SceneGraph::AddGUIObject(GUIObject* go, std::string name_)
 {
 	if (sceneGUIObjects.find(name_) == sceneGUIObjects.end()) {
 		go->SetName(name_);
@@ -109,7 +120,9 @@ std::weak_ptr<GameObject> SceneGraph::GetGameObject(std::string tag_)
 	return std::weak_ptr<GameObject>();
 }
 
-GameObject* SceneGraph::GetGUIObject(std::string tag_)
+//TODO: Create Seperate GUIObjects class and GUIImage class that has a surface sprite in it.
+
+GUIObject* SceneGraph::GetGUIObject(std::string tag_)
 {
 	if (sceneGUIObjects.find(tag_) != sceneGUIObjects.end()) {
 		return sceneGUIObjects[tag_];
@@ -143,25 +156,39 @@ void SceneGraph::Update(const float deltaTime_)
 
 			go.second->Update(deltaTime_);
 
-			//Then check the collision
+			//Check if the object should check collision with physics.
 
-			std::vector<std::weak_ptr<GameObject>> obj;
-			obj.reserve(5);
-			obj = CollisionHandler::GetInstance()->AABB(go.second->GetBoundingBox());
+			bool coll = false;
 
-			//First check if the object even has physics 
 			if (go.second->GetComponent<Physics2D>()) {
 				//if the object has rigid body and is not static make it apply collision detection
 				if (go.second->GetComponent<Physics2D>()->GetRigidBody() &&
 					!go.second->GetComponent<Physics2D>()->GetStaticObj()) {
 
-					go.second->GetComponent<Physics2D>()->CollisionResponse(obj, deltaTime_);
+					coll = true;
 				}
 			}
 
-			//At the end do the manually programed collision responses for the game object
-			go.second->CollisionResponse(obj);
+			//Then check the collision
 
+			while (true) {
+
+				std::weak_ptr<GameObject> obj = CollisionHandler::GetInstance()->AABB(go.second->GetBoundingBox(), go.second->GetCollisionTags());
+
+				if (obj.expired()) { break; }
+				//First check if the object even has physics 
+
+				if (coll) {
+					if (obj.lock()->GetComponent<Physics2D>()) {
+						if (obj.lock()->GetComponent<Physics2D>()->GetRigidBody()) {
+							go.second->GetComponent<Physics2D>()->CollisionResponse(obj, deltaTime_);
+						}
+					}
+				}
+
+				//At the end do the manually programed collision responses for the game object
+				go.second->CollisionResponse(obj);
+			}
 		}
 	}
 
@@ -171,6 +198,7 @@ void SceneGraph::Update(const float deltaTime_)
 
 	prevDeltaTime = deltaTime_;
 }
+
 //TODO: Finish the depth draw system to allow for ease of drawing.
 void SceneGraph::Draw(Camera* camera_)
 {
@@ -194,7 +222,7 @@ void SceneGraph::Draw(Camera* camera_)
 	glUseProgram(ShaderHandler::GetInstance()->GetShader("GUIShader"));
 
 	for (auto g : sceneGUIObjects) {
-		g.second->Draw();
+		g.second->Draw(camera_);
 	}
 }
 
@@ -206,6 +234,7 @@ void SceneGraph::OnDestroy()
 		}
 		sceneGameObjects.clear();
 	}
+	//TODO: Delete Images
 }
 
 SceneGraph::SceneGraph() : isPaused(false), prevDeltaTime(0)

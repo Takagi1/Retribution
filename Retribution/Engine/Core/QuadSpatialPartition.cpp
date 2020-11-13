@@ -160,7 +160,32 @@ void QuadSpatialPartition::AddObject(std::weak_ptr<GameObject> obj_)
 	AddObjectToCell(root, obj_);
 }
 
-std::vector<std::weak_ptr<GameObject>> QuadSpatialPartition::GetCollision(BoundingBox box_)
+std::weak_ptr<GameObject> QuadSpatialPartition::GetCollision(BoundingBox box_, std::vector<std::string> tags_)
+{
+	objIntersectionList.clear();
+	objIntersectionList.reserve(20);
+	PrepareCollisionQuery(root, box_);
+
+	for (auto cell : objIntersectionList) {
+		for (size_t i = 0; i < cell->objectList.size();) {
+			if (cell->objectList[i].expired()) {
+				cell->objectList.erase(cell->objectList.begin() + i);
+				continue;
+			}
+			else if (box_.Intersects(&cell->objectList[i].lock()->GetBoundingBox())) {
+				for (auto t : tags_) {
+					if (cell->objectList[i].lock()->GetTag() == t) {
+						return cell->objectList[i];
+					}
+				}
+			}
+			i++;
+		}
+	}
+	return std::weak_ptr<GameObject>();
+}
+
+std::vector<std::weak_ptr<GameObject>> QuadSpatialPartition::GetCollisionAll(BoundingBox box_)
 {
 	objIntersectionList.clear();
 	objIntersectionList.reserve(20);
@@ -170,7 +195,7 @@ std::vector<std::weak_ptr<GameObject>> QuadSpatialPartition::GetCollision(Boundi
 	result.reserve(5);
 
 	for (auto cell : objIntersectionList) {
-		for (int i = 0; i < cell->objectList.size();) {
+		for (size_t i = 0; i < cell->objectList.size();) {
 			if (cell->objectList[i].expired()) {
 				cell->objectList.erase(cell->objectList.begin() + i);
 				continue;
@@ -181,7 +206,6 @@ std::vector<std::weak_ptr<GameObject>> QuadSpatialPartition::GetCollision(Boundi
 			i++;
 		}
 	}
-
 	return result;
 }
 
