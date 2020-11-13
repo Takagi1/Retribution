@@ -35,7 +35,7 @@ void Projectile::Update(const float deltaTime_)
 	GameObject::Update(deltaTime_);
 }
 
-void Projectile::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_)
+void Projectile::CollisionResponse(std::weak_ptr<GameObject> obj_)
 {
 }
 

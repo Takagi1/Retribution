@@ -20,7 +20,7 @@ Image::~Image()
 	sprite = nullptr;
 }
 
-bool Image::OnCreate(GLuint shaderID, std::string name_, bool useView_, float depth_, glm::vec2 offset_,
+bool Image::OnCreate(GLuint shaderID, std::string name_, float depth_, glm::vec2 offset_,
 	glm::vec2 scale_, float angle_, glm::vec4 tint_)
 {
 
@@ -31,7 +31,7 @@ bool Image::OnCreate(GLuint shaderID, std::string name_, bool useView_, float de
 	switch (CoreEngine::GetInstance()->GetDrawType())
 	{
 	case DrawType::OpenGL:
-		sprite = new OpenGLSpriteSurface(useView_, shaderID, name_, scale_, angle_, tint_);
+		sprite = new OpenGLSpriteSurface(true, shaderID, name_, tint_);
 		break;
 	default:
 		Debug::FatalError("No Draw Type Found", "Image.cpp", __LINE__);

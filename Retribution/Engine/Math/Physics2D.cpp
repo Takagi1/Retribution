@@ -34,7 +34,7 @@ void Physics2D::Update(const float deltaTime_)
 		*/
 
 		
-		parent->Translate(glm::vec2(velocity - glm::vec2(0.0f, -1.0f) * deltaTime_ + (acceleration / 2.0f * pow(deltaTime_, 2))));
+		parent->Translate(glm::vec2((velocity + glm::vec2(0.0f, -30.0f)) * deltaTime_ + (acceleration / 2.0f * pow(deltaTime_, 2))));
 
 
 		//Step 7. Find velocity vector
@@ -159,19 +159,9 @@ void Physics2D::Drag()
 }
 
 //This function is designed to push two objects that are colliding appart.
-void Physics2D::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj, const float deltaTime_)
+void Physics2D::CollisionResponse(std::weak_ptr<GameObject> obj, const float deltaTime_)
 {
-	for (auto o : obj) {
-		if (o.lock()->GetName() != parent->GetName()) {
-			Physics2D* physics = o.lock()->GetComponent<Physics2D>();
-			if (physics) {
-				if (physics->GetRigidBody()) {
-					glm::vec2 depth = parent->GetBoundingBox().CollisionDepth(&o.lock()->GetBoundingBox());
-
-					parent->Translate(depth);
-				}
-				physics = nullptr;
-			}
-		}
-	}
+	//TODO: note that the x issue still techniqely happens but is so small that it is nigh unseable
+	glm::vec2 depth = parent->GetBoundingBox().CollisionDepth(&obj.lock()->GetBoundingBox());
+	parent->Translate(depth);
 }

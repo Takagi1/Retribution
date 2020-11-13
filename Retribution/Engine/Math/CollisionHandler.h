@@ -17,7 +17,8 @@ public:
 	void OnCreate(float worldSize_);
 	void AddObject(std::weak_ptr<GameObject> go_);
 	void MouseUpdate(glm::vec2 mousePosition_, int buttonType_);
-	std::vector<std::weak_ptr<GameObject>> AABB(BoundingBox box);
+	std::weak_ptr<GameObject> AABB(BoundingBox box, std::vector<std::string> tag_);
+	std::vector<std::weak_ptr<GameObject>> AABBAll(BoundingBox box);
 
 private:
 	CollisionHandler();

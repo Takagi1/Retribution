@@ -21,7 +21,7 @@ bool GUIImage::OnCreate(std::string name_, glm::vec2 offset_, glm::vec2 scale_, 
 	switch (CoreEngine::GetInstance()->GetDrawType())
 	{
 	case DrawType::OpenGL:
-		sprite = new OpenGLSpriteSurface(false, ShaderHandler::GetInstance()->GetShader("GUIShader"), name_, scale_, angle_, tint_);
+		sprite = new OpenGLSpriteSurface(false, ShaderHandler::GetInstance()->GetShader("GUIShader"), name_, tint_);
 		break;
 	default:
 		Debug::FatalError("No Draw Type Found", "Image.cpp", __LINE__);

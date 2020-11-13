@@ -4,8 +4,7 @@
 std::vector<Vertex2D> SpriteSurface::vertexList = std::vector<Vertex2D>();
 std::vector<Vertex2D> SpriteSurface::vertexListFlip = std::vector<Vertex2D>();
 
-SpriteSurface::SpriteSurface(bool useView_, std::string name_, 
-	glm::vec2 scale_, float angle_)
+SpriteSurface::SpriteSurface(bool useView_, std::string name_)
 {
 	name = name_;
 

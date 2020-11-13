@@ -1,8 +1,8 @@
 #include "OpenGLSpriteSurface.h"
 
 OpenGLSpriteSurface::OpenGLSpriteSurface(bool useView_, GLuint shaderProgram_, std::string name_, 
-	glm::vec2 scale_, float angle_, glm::vec4 tint_) : 
-	SpriteSurface(useView_, name_, scale_, angle_)
+	glm::vec4 tint_) : 
+	SpriteSurface(useView_, name_)
 {
 	tint = glm::vec4(1.0f, 0.8f, 0.8f, 1.0f);
 	shaderProgram = shaderProgram_;
@@ -17,8 +17,6 @@ OpenGLSpriteSurface::~OpenGLSpriteSurface()
 
 void OpenGLSpriteSurface::Draw(Camera* camera_, glm::mat4 transform)
 {
-	glUniform1f(textureID, 0);
-
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textureID);
 
@@ -79,5 +77,6 @@ void OpenGLSpriteSurface::GenerateBuffers()
 	if (useView) {
 		viewLoc = glGetUniformLocation(shaderProgram, "view");
 	}
+
 	colourLoc = glGetUniformLocation(shaderProgram, "tintColour");
 }

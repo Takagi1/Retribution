@@ -74,11 +74,12 @@ int SceneGraph::AddImage(Image* im, unsigned int shaderProgram_)
 	return sceneImages[shaderProgram_].size() - 1;
 }
 
+//TODO: Fix out of scope issue related to exiting the game 
 void SceneGraph::RemoveImage(int loc_, unsigned int shaderProgram_)
 {
 	sceneImages[shaderProgram_][loc_] = nullptr;
 	sceneImages[shaderProgram_].erase(sceneImages[shaderProgram_].begin() + loc_);
-	for (int i = loc_; i < sceneImages[shaderProgram_].size(); i++) {
+	for (size_t i = loc_; i < sceneImages[shaderProgram_].size(); i++) {
 		sceneImages[shaderProgram_][i]->SetImageLoc(i);
 	}
 }
@@ -155,25 +156,39 @@ void SceneGraph::Update(const float deltaTime_)
 
 			go.second->Update(deltaTime_);
 
-			//Then check the collision
+			//Check if the object should check collision with physics.
 
-			std::vector<std::weak_ptr<GameObject>> obj;
-			obj.reserve(5);
-			obj = CollisionHandler::GetInstance()->AABB(go.second->GetBoundingBox());
+			bool coll = false;
 
-			//First check if the object even has physics 
 			if (go.second->GetComponent<Physics2D>()) {
 				//if the object has rigid body and is not static make it apply collision detection
 				if (go.second->GetComponent<Physics2D>()->GetRigidBody() &&
 					!go.second->GetComponent<Physics2D>()->GetStaticObj()) {
 
-					go.second->GetComponent<Physics2D>()->CollisionResponse(obj, deltaTime_);
+					coll = true;
 				}
 			}
 
-			//At the end do the manually programed collision responses for the game object
-			go.second->CollisionResponse(obj);
+			//Then check the collision
 
+			while (true) {
+
+				std::weak_ptr<GameObject> obj = CollisionHandler::GetInstance()->AABB(go.second->GetBoundingBox(), go.second->GetCollisionTags());
+
+				if (obj.expired()) { break; }
+				//First check if the object even has physics 
+
+				if (coll) {
+					if (obj.lock()->GetComponent<Physics2D>()) {
+						if (obj.lock()->GetComponent<Physics2D>()->GetRigidBody()) {
+							go.second->GetComponent<Physics2D>()->CollisionResponse(obj, deltaTime_);
+						}
+					}
+				}
+
+				//At the end do the manually programed collision responses for the game object
+				go.second->CollisionResponse(obj);
+			}
 		}
 	}
 

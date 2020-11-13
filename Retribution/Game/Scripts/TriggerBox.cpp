@@ -18,7 +18,7 @@ TriggerBox::~TriggerBox() {
 
 void TriggerBox::Update()
 {
-	std::vector<std::weak_ptr<GameObject>> om = CollisionHandler::GetInstance()->AABB(box);
+	std::vector<std::weak_ptr<GameObject>> om = CollisionHandler::GetInstance()->AABBAll(box);
 	for (auto o : om) {
 		if (o.lock()->GetTag() == "Projectile") {
 			Trigger(o);

@@ -21,6 +21,8 @@ bool Character::OnCreate()
 
 	GetComponent<Physics2D>()->SetRigidBody(true);
 
+	AddCollisionTag("Tile");
+
 	if (GetComponent<Physics2D>()) {
 		return true;
 	}
@@ -70,7 +72,7 @@ void Character::Move(int directionX_, int directionY_)
 {
 
 	//TODO: move speed?
-	GetComponent<Physics2D>()->SetVelocity(glm::vec2(100.0f * directionX_, 0));
+	GetComponent<Physics2D>()->SetVelocity(glm::vec2(15.0f * directionX_, 0));
 
 	//flip object to direction it needs to face
 

@@ -4,9 +4,10 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glew.h>
 
+
 class OpenGLSpriteSurface : public SpriteSurface {
 public:
-	OpenGLSpriteSurface(bool useView_, GLuint shaderProgram_, std::string name_, glm::vec2 scale_ = glm::vec2(1.0f), float angle_ = 0.0f, glm::vec4 tint_ = glm::vec4(1));
+	OpenGLSpriteSurface(bool useView_, GLuint shaderProgram_, std::string name_, glm::vec4 tint_ = glm::vec4(1));
 	~OpenGLSpriteSurface();
 
 	void Draw(Camera* camera_, glm::mat4 transform_) override;

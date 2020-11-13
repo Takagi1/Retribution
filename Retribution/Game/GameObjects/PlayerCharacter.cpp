@@ -22,7 +22,7 @@ bool PlayerCharacter::OnCreate()
 	Character::OnCreate();
 	AddComponent<Image>(this);
 
-	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Mario3.png", true, 0.0f);
+	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Mario3.png", 0.0f);
 
 	UpdateBoundingBox(GetComponent<Image>()->GetBoundingBox());
 
@@ -64,7 +64,7 @@ void PlayerCharacter::Dash(int horizontal_, int vertical_)
 */
 
 //This might be realllllly dirty
-void PlayerCharacter::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_)
+void PlayerCharacter::CollisionResponse(std::weak_ptr<GameObject> obj_)
 {
 
 }

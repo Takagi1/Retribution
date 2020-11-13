@@ -15,7 +15,7 @@ struct Vertex2D {
 
 class SpriteSurface {
 public:
-	SpriteSurface(bool useView_, std::string name_, glm::vec2 scale_ = glm::vec2(1.0f), float angle_ = 0.0f);
+	SpriteSurface(bool useView_, std::string name_);
 	~SpriteSurface();
 
 	virtual void Draw(Camera* camera_,  glm::mat4 transform_) = 0;

@@ -25,6 +25,7 @@ public:
 			//If done return the object
 
 			if (!XMLParser::GetInstance()->HasSibling()) {
+				XMLParser::GetInstance()->Return();
 				return obj;
 			}
 

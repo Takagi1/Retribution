@@ -14,7 +14,7 @@ bool Arrow::OnCreate(bool isFliped_)
 	Projectile::OnCreate(isFliped_);
 	AddComponent<Image>(this);
 
-	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Arrow.jpg", true, 0);
+	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Arrow.jpg", 0);
 	UpdateBoundingBox(GetComponent<Image>()->GetBoundingBox());
 
 	SetSpeed(100);

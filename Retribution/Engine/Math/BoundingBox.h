@@ -23,20 +23,22 @@ public:
 	}
 
 	//Is not in collision because Screen partition could not access it
+
+	//General Idea is that boxs intersect if all min corners are smaller then max corners 
 	inline bool Intersects(BoundingBox* box_) {
-		//return (glm::abs((point.x + width / 2) - (box_->point.x + box_->width / 2)) * 2 < (width + box_->width)) &&
-		//	(glm::abs((point.y + height / 2) - (box_->point.y + box_->height / 2)) * 2 < (height + box_->height));
 
 		glm::vec2 minCorner = pos;
-		glm::vec2 maxCorner = GetTransformedPoint(pos, dimentions);
+		glm::vec2 maxCorner = pos + dimentions;
 
 		glm::vec2 otherMinCorner = box_->pos;
-		glm::vec2 otherMaxCorner = GetTransformedPoint(box_->pos, box_->dimentions);
+		glm::vec2 otherMaxCorner = box_->pos + box_->dimentions;
 
-		//Both maxs must be larger the the others mins
 
-		if (minCorner.x <= otherMaxCorner.x && maxCorner.x >= otherMinCorner.x &&
-			minCorner.y <= otherMaxCorner.y && maxCorner.y >= otherMinCorner.y) {
+		//Checks to see if its intersecting with itself (would like a better way to prevent this)
+		if (minCorner == otherMinCorner && maxCorner == otherMaxCorner) { return false; }
+
+		if (minCorner.x <= otherMaxCorner.x && otherMinCorner.x <= maxCorner.x  &&
+			minCorner.y <= otherMaxCorner.y && otherMinCorner.y <= maxCorner.y ) {
 			return true;
 		}
 		
@@ -46,14 +48,18 @@ public:
 	//Use this to find the how far the box's are colliding to push them appart.
 	//the x is negative if the box comes from the right and the y is negative if 
 	//it comes from the top.
+
+	//Explain:
+	//after getting all points, x
+
+
 	inline glm::vec2 CollisionDepth(BoundingBox* box_) {
-		glm::vec2 minCorner = pos;
-		glm::vec2 maxCorner = GetTransformedPoint(pos, dimentions);
+		glm::vec2 maxCorner = pos + dimentions;
 
 		glm::vec2 otherMinCorner = box_->pos;
-		glm::vec2 otherMaxCorner = GetTransformedPoint(box_->pos, box_->dimentions);
+		glm::vec2 otherMaxCorner = box_->pos + box_->dimentions;
 
-		glm::vec2 depth(0);
+		float depthX = 0, depthY = 0;
 
 		//First get which side is colliding
 
@@ -64,30 +70,41 @@ public:
 		float x1 = maxCorner.x - otherMinCorner.x;
 
 		//Coming from the left
-		float x2 = otherMaxCorner.x - minCorner.x;
+		float x2 = otherMaxCorner.x - pos.x;
 
 
 		//Coming from the top
 		float y1 = maxCorner.y - otherMinCorner.y;
 
 		//Coming from the bottom
-		float y2 = otherMaxCorner.y - minCorner.y;
+		float y2 = otherMaxCorner.y - pos.y;
 
+		//if the object is colliding up or from the right make depth return negative to push it down or left respectively
+		bool right = false, up = false;
+
+		//TODO: improve this (push should be based on the direction the object is moving?)
 		if (x1 < x2) {
-			depth.x = -x1;
+			right = true;
+			depthX = x1;
 		}
-		else if (x2 < x1) {
-			depth.x = x2;
+		else {
+			depthX = x2;
 		}
 		
 		if (y1 < y2) {
-			depth.y = -y1;
+			up = true;
+			depthY = y1;
 		}
-		else if (y2 < y1) {
-			depth.y = y2;
+		else {
+			depthY = y2;
 		}
 
-		return depth;
+		if (depthX < depthY) {
+			return glm::vec2((depthX + 0.4f) * (right ? -1 : 1), 0.0f);
+		}
+		else {
+			return glm::vec2(0.0f, (depthY + 0.4f) * (up ? -1 : 1));
+		}
 	}
 
 	inline bool ClickIntersect(glm::vec2 point_) {
@@ -99,11 +116,6 @@ public:
 			return true;
 		}
 		return false;
-	}
-
-private:
-	inline glm::vec2 GetTransformedPoint(glm::vec2 position_, glm::vec2 dimentions_ = glm::vec2(0)) {
-		return glm::vec2(position_.x, position_.y) + dimentions_;
 	}
 };
 

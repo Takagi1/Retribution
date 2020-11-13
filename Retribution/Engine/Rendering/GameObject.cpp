@@ -93,6 +93,11 @@ void GameObject::SetTag(std::string tag_)
 	tag = tag_;
 }
 
+void GameObject::AddCollisionTag(std::string tag_)
+{
+	collisionTags.push_back(tag_);
+}
+
 
 glm::vec2 GameObject::GetPosition() const
 {
@@ -136,6 +141,11 @@ BoundingBox GameObject::GetBoundingBox() const
 std::string GameObject::GetName() const
 {
 	return name;
+}
+
+std::vector<std::string> GameObject::GetCollisionTags() const
+{
+	return collisionTags;
 }
 
 void GameObject::UpdateBoundingBox(BoundingBox box_)

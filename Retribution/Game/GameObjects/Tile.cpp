@@ -19,8 +19,10 @@ bool Tile::OnCreate(glm::vec2 position_)
 
 	AddComponent<Image>(this);
 
-	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Blue.png", true, 0.0f);
+	GetComponent<Image>()->OnCreate(ShaderHandler::GetInstance()->GetShader("BasicShader"), "Blue.png", 0.0f);
 
+	SetTag("Tile");
+	SetPosition(position_);
 	SetScale(glm::vec2(10.0f));
 
 	return true;
@@ -30,6 +32,6 @@ void Tile::Update(const float deltaTime_)
 {
 }
 
-void Tile::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_)
+void Tile::CollisionResponse(std::weak_ptr<GameObject> obj_)
 {
 }
