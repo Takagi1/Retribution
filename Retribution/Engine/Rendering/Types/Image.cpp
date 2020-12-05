@@ -88,6 +88,7 @@ void Image::UpdateTransform(glm::vec2 position_, float angle_, glm::vec2 scale_)
 
 	box.dimentions = trueScale;
 	box.pos = position_;
+	box.maxCorner = position_ + trueScale;
 	transform = transform_;
 }
 
@@ -104,10 +105,10 @@ bool Image::FindContainingPoint()
 			CoreEngine::GetInstance()->GetWindowSize(),
 			CoreEngine::GetInstance()->GetCamera());
 
-		if(mousePos.x >= obbPosition.x &&
-			mousePos.y >= obbPosition.y &&
-			mousePos.x <= obbPosition.x + sprite->GetScale().x &&
-			mousePos.y <= obbPosition.y + sprite->GetScale().y) {
+		if(mousePos.x >= box.pos.x &&
+			mousePos.y >= box.pos.y &&
+			mousePos.x <= box.maxCorner.x &&
+			mousePos.y <= box.maxCorner.y) {
 
 			return true;
 		}

@@ -23,12 +23,7 @@ public:
 private:
 	GameManager gameManager;
 
-	ParticleEmitter* emitter;
-
 	Controller controller;
-
-	
-
 
 };
 #endif // !GAMESCENE_H

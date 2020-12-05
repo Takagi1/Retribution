@@ -9,6 +9,7 @@ EnergyDisplay::EnergyDisplay(glm::vec2 position)
 EnergyDisplay::~EnergyDisplay()
 {
 
+//TODO: Remove GUI Objects
 }
 
 bool EnergyDisplay::OnCreate()
@@ -32,18 +33,14 @@ void EnergyDisplay::Update(const float deltaTime_)
 
 void EnergyDisplay::UpdateEnergy(int value_)
 {
-	float trans = value_;
-	float res = trans / 10.0f;
-	int full = std::floor(res);
-	float remaining = res - full;
-
-	int rounding = std::floor(remaining * 10.0f);
-
-	for (int i = 0; i < full; i++) {
-		bars[i].UpdateEnergy(10);
+	int i = 0;
+	for (; value_ > 0; i++) {
+		bars[i].UpdateEnergy(value_ > 10 ? 10 : value_);
+		value_ -= 10;
 	}
-	if (rounding > 0) {
-		bars[full].UpdateEnergy(rounding);
+
+	for (; i < bars.size(); i++) {
+		bars[i].UpdateEnergy(0);
 	}
 }
 

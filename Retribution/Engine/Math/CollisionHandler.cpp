@@ -2,6 +2,7 @@
 #include "CollisionDetection.h"
 #include "../Core/CoreEngine.h"
 #include <iostream>
+#include "../Rendering/Types/Image.h"
 
 std::unique_ptr<CollisionHandler> CollisionHandler::collisionInstance = nullptr;
 std::vector<GameObject*> CollisionHandler::prevCollisions = std::vector<GameObject*>();
@@ -48,6 +49,13 @@ void CollisionHandler::AddObject(std::weak_ptr<GameObject> go_)
 	scenePartition->AddObject(go_);
 }
 
+void CollisionHandler::RemoveObject(BoundingBox box_, std::string name_)
+{
+	if (scenePartition) {
+		scenePartition->RemoveObject(box_, name_);
+	}
+}
+
 
 //Issue is that mouse Ray origin is said to be in the 10ns of thousands
 void CollisionHandler::MouseUpdate(glm::vec2 mousePosition_, int buttonType_)
@@ -58,6 +66,7 @@ void CollisionHandler::MouseUpdate(glm::vec2 mousePosition_, int buttonType_)
 
 	if (scenePartition) {
 		scenePartition->GetCollision(mousePosition_);
+
 		const char* in = "pos";
 		int x = mousePos.x;
 		int y = mousePos.y;
@@ -74,10 +83,10 @@ std::weak_ptr<GameObject> CollisionHandler::AABB(BoundingBox box, std::vector<st
 	return std::weak_ptr<GameObject>();
 }
 
-std::vector<std::weak_ptr<GameObject>> CollisionHandler::AABBAll(BoundingBox box)
+std::vector<std::weak_ptr<GameObject>> CollisionHandler::AABBAll(BoundingBox box, std::vector<std::string> tags_)
 {
 	if (scenePartition) {
-		return scenePartition->GetCollisionAll(box);
+		return scenePartition->GetCollisionAll(box, tags_);
 	}
 	return std::vector<std::weak_ptr<GameObject>>();
 }

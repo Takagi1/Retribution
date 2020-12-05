@@ -17,7 +17,6 @@ GameScene::~GameScene()
 	SceneGraph::GetInstance()->OnDestroy();
 }
 
-//TODO: Change variable loads to XML
 bool GameScene::OnCreate()
 {
 	Debug::Info("Creating Game Scene", "GameScene.cpp", __LINE__);
@@ -46,18 +45,14 @@ bool GameScene::OnCreate()
 
 	SceneGraph::GetInstance()->AddGameObject(std::move(player), "Player");
 
-	emitter = new ParticleEmitter(7, "ParticleShader");
-	emitter->SetPosition(glm::vec2(60));
-
-
 	//Load Monster's Here
 
-	//for (auto m : MonsterLoader::LoadMonsters()) {
+	for (auto m : MonsterLoader::LoadMonsters()) {
 
-	//	gameManager.AddMonster(m);
+		gameManager.AddMonster(m);
 
-	//	SceneGraph::GetInstance()->AddGameObject(std::move(m));
-	//}
+		SceneGraph::GetInstance()->AddGameObject(std::move(m));
+	}
 
 	XMLParser::GetInstance()->Move("Level");
 
@@ -90,6 +85,4 @@ void GameScene::Update(const float deltaTime_)
 void GameScene::Draw()
 {
 	SceneGraph::GetInstance()->Draw(CoreEngine::GetInstance()->GetCamera());
-
-	emitter->Update(0.03f);
 }

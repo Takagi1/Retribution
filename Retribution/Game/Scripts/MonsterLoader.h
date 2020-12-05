@@ -1,15 +1,10 @@
 #pragma once
 
 #include "../../Engine/Parser/XMLParser.h"
-#include "../GameObjects/Monsters/Monster.h"
 #include "../GameObjects/Monsters/Archer.h"
 
 
-//TODO: I feel a much better way of doing this can exist (mabye doing multiple nodes each representing data then going through it?)
 
-//TODO: If I want to create a XML document that will have the monsters info in it, then it might be a good idea to 
-//allow for an improved version of the loader.  will most likely need the ability to load from a file without loseing 
-//My place in another?
 
 class MonsterLoader {
 public:

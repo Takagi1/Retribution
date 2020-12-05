@@ -5,11 +5,19 @@
 #include "../GameObjects/Projectile.h"
 #include "../../Engine/Rendering/SceneGraph.h"
 
-TriggerBox::TriggerBox(PlayerCharacter* parent_, std::string triggerType_, glm::vec2 dimention_, glm::vec2 position_) {
+std::vector<std::string> TriggerBox::collisionTags = std::vector<std::string>();
+
+TriggerBox::TriggerBox(PlayerCharacter* parent_, TriggerType triggerType_, glm::vec2 dimention_, glm::vec2 position_) {
 	parent = parent_;
 	triggerType = triggerType_;
 
 	box = BoundingBox(dimention_, position_);
+	
+
+	if (collisionTags.empty()) {
+		collisionTags.reserve(1);
+		collisionTags.insert(collisionTags.begin(), "Projectile");
+	}
 }
 
 TriggerBox::~TriggerBox() {
@@ -18,25 +26,30 @@ TriggerBox::~TriggerBox() {
 
 void TriggerBox::Update()
 {
-	std::vector<std::weak_ptr<GameObject>> om = CollisionHandler::GetInstance()->AABBAll(box);
-	for (auto o : om) {
-		if (o.lock()->GetTag() == "Projectile") {
-			Trigger(o);
-			SceneGraph::GetInstance()->RemoveGameObject(o.lock()->GetName());
-			break;
-		}
+	for (auto o : CollisionHandler::GetInstance()->AABBAll(box, collisionTags)) {
+		Trigger(o);
+		SceneGraph::GetInstance()->RemoveGameObject(o.lock()->GetName());
+		break;
 	}
 }
 
 void TriggerBox::Trigger(std::weak_ptr<GameObject> obj_)
 {
-	if (triggerType == "Parry") {
+	switch (triggerType)
+	{
+	case TriggerType::Parry:
 		parent->ChangeEnergy(dynamic_cast<Projectile*>(obj_.lock().get())->GetPower());
-		return;
-	}
-	else if (triggerType == "Counter") {
-		return;
-	}
+		break;
+	case TriggerType::Counter:
+		//Damage Monster
+		(dynamic_cast<Projectile*>(obj_.lock().get())->DamageParent(parent->GetEnergy() * parent->GetEnergyLevel()));
 
+		//Reset Energy
+		parent->ResetEnergy();
+	default:
+		Debug::FatalError("Invalid TriggerType", "TriggerBox.cpp", __LINE__);
+		break;
+	}
+	parent->SetState(State::Neutral);
 }
 

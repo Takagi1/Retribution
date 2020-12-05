@@ -4,8 +4,6 @@
 #include "../GameObjects/Monsters/Monster.h"
 #include "../GUI/HUD.h"
 
-//TODO:Finish this
-
 /// <summary>
 /// Design: be used for running general game functions
 /// like determining when to destroy monsters and the like

@@ -14,11 +14,11 @@ bool HealthBar::OnCreate()
 	AddComponent<GUIImage>(this);
 
 	//GetComponent<Image>()->OnCreate(this);
-	GetComponent<GUIImage>()->OnCreate("Mario2.png");
+	GetComponent<GUIImage>()->OnCreate("Red.png");
 
 
-	SetPosition(glm::vec2(0.0f, 800.0f));
-	SetScale(glm::vec2(0.1f, 0.1f));
+	SetPosition(glm::vec2(200.0f, 200.0f));
+	SetScale(glm::vec2(10.0f, 5.0f));
 
 	return true;
 }
@@ -30,4 +30,5 @@ void HealthBar::Update(const float deltaTime_)
 void HealthBar::UpdateHealth(int health_)
 {
 	health = health_;
+	SetScale(glm::vec2(10.0f, 5.0f * health_));
 }

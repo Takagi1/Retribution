@@ -6,15 +6,23 @@
     <Location> 0.0000 0.0000 0.0000 </Location>
   </Camera>
   <Player>
-    <Location> 200.0000 200.0000 </Location>
+    <Location> 400.0000 100.0000 </Location>
   </Player>
   <Monsters>
     <Spawn> 
       <Name>Archer</Name>
-      <Location> 80.0000 100.0000 </Location> 
+      <Location> 0.0000 100.0000 </Location> 
     </Spawn>
   </Monsters>
   <Level>
+      <Spawn>
+        <Image>Block</Image>
+        <Location> 0.0000 0.0000 </Location>
+      </Spawn>
+      <Spawn>
+        <Image>Block</Image>
+        <Location> 50.0000 0.0000 </Location>
+    </Spawn>
     <Spawn>
         <Image>Block</Image>
         <Location> 100.0000 0.0000 </Location>
@@ -42,6 +50,14 @@
         <Spawn>
         <Image>Block</Image>
         <Location> 400.0000 0.0000 </Location>
+    </Spawn>
+        <Spawn>
+        <Image>Block</Image>
+        <Location> 450.0000 0.0000 </Location>
+    </Spawn>
+        <Spawn>
+        <Image>Block</Image>
+        <Location> 500.0000 0.0000 </Location>
     </Spawn>
   </Level>
 </Scene>

@@ -139,9 +139,6 @@
     <Filter Include="Source Files\Engine\Graphics\OpenGL">
       <UniqueIdentifier>{cefc79f0-bb59-4152-ac42-d612559e5275}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Engine\Rendering\OpenGL">
-      <UniqueIdentifier>{2bac3a46-44e0-490e-9ea5-ce21e2ef58d9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Engine\Parser">
       <UniqueIdentifier>{77bbbd2d-6e5b-430c-b474-7ef286d4bda5}</UniqueIdentifier>
     </Filter>
@@ -153,6 +150,9 @@
     </Filter>
     <Filter Include="Resource Files\XML\Scenes">
       <UniqueIdentifier>{d47e5bf9-f8f7-4bb5-a58d-f8f32dec1f59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Rendering\OpenGL">
+      <UniqueIdentifier>{2bac3a46-44e0-490e-9ea5-ce21e2ef58d9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

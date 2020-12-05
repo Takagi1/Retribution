@@ -3,10 +3,10 @@
 
 
 
-#define Gravity 9.8f
+#define Gravity glm::vec2(0.0f, -35.8f)
 
-Physics2D::Physics2D(GameObject* parent_) : Component(), torque(0),rotationalInertia(0),mass(0),
-gravity(0.0f),angularVel(0),angularAcc(0), staticObj(false), rigidBody(false), drag(1), applyDrag(false)
+Physics2D::Physics2D(GameObject* parent_) : Component(), torque(0), rotationalInertia(0), mass(0),
+gravity(0.0f), angularVel(0), angularAcc(0), staticObj(false), rigidBody(false), drag(1), applyDrag(false)
 {
 
 	parent = parent_;
@@ -19,10 +19,11 @@ Physics2D::~Physics2D() {
 void Physics2D::Update(const float deltaTime_)
 {
 
-	/*
-	First rotate 
-	*/
 	if (!staticObj) {
+		/*
+		First rotate
+		*/
+
 		//Step 4. orientation
 		parent->Rotate(angularVel * deltaTime_ + 0.5f * angularAcc * pow(deltaTime_, 2));
 
@@ -33,15 +34,20 @@ void Physics2D::Update(const float deltaTime_)
 		Move object
 		*/
 
-		
-		parent->Translate(glm::vec2((velocity + glm::vec2(0.0f, -30.0f)) * deltaTime_ + (acceleration / 2.0f * pow(deltaTime_, 2))));
-
+		//Real translation
+		parent->Translate(glm::vec2((velocity + gravity) * deltaTime_ + (acceleration / 2.0f * pow(deltaTime_, 2))));
 
 		//Step 7. Find velocity vector
 		velocity += acceleration * deltaTime_;
 
 		if (applyDrag) { Drag(); }
 
+
+		//Simple mode
+
+		//parent->Translate((velocity + gravity) * deltaTime_);
+
+		//velocity = glm::vec2(0);
 	}
 }
 
@@ -84,8 +90,6 @@ bool Physics2D::GetStaticObj() const
 void Physics2D::SetVelocity(glm::vec2 velocity_)
 {
 	velocity = velocity_;
-
-
 }
 
 void Physics2D::SetAcceleration(glm::vec2 acceleration_)
@@ -102,8 +106,8 @@ void Physics2D::SetTorque(float torque_)
 
 void Physics2D::ApplyForce(glm::vec2 force_)
 {
-	//apply force relative to direction. Is this wrong?
-	acceleration = glm::mat2(cos(parent->GetAngle()), -sin(parent->GetAngle()), sin(parent->GetAngle()), cos(parent->GetAngle())) * force_;
+	acceleration = glm::mat2(glm::cos(glm::radians(parent->GetAngle())), -glm::sin(glm::radians(parent->GetAngle())), 
+							 glm::sin(glm::radians(parent->GetAngle())), glm::cos(glm::radians(parent->GetAngle()))) * force_;
 
 	if (mass != 0) {
 		acceleration /= mass;
@@ -123,12 +127,8 @@ void Physics2D::SetStaticObj(const bool type_)
 
 void Physics2D::ApplyGravity(bool state_)
 {
-	if (state_) {
-		gravity = Gravity;
-	}
-	else {
-		gravity = 0.0f;
-	}
+	if (state_) { gravity = Gravity; }
+	else { gravity = glm::vec2(0); }
 }
 
 void Physics2D::ApplyDrag(bool state_)
@@ -148,6 +148,7 @@ void Physics2D::Drag()
 		else { velocity.x += drag.x; }
 	}
 
+	/*
 	if (velocity.y > 0) {
 		if (velocity.y <= drag.y) { velocity.y = 0; }
 		else { velocity.y -= drag.y; }
@@ -156,12 +157,18 @@ void Physics2D::Drag()
 		if (velocity.y >= -drag.y) { velocity.y = 0; }
 		else { velocity.y += drag.y; }
 	}
+	*/
 }
 
 //This function is designed to push two objects that are colliding appart.
+
+
 void Physics2D::CollisionResponse(std::weak_ptr<GameObject> obj, const float deltaTime_)
 {
 	//TODO: note that the x issue still techniqely happens but is so small that it is nigh unseable
-	glm::vec2 depth = parent->GetBoundingBox().CollisionDepth(&obj.lock()->GetBoundingBox());
-	parent->Translate(depth);
+	if (parent->GetBoundingBox().Intersects(&obj.lock()->GetBoundingBox())) {
+		glm::vec2 depth = parent->GetBoundingBox().CollisionDepth(&obj.lock()->GetBoundingBox());
+		parent->Translate(depth);
+	}
 }
+

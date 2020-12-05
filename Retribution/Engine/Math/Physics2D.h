@@ -43,12 +43,11 @@ public:
 
 	void CollisionResponse(std::weak_ptr<GameObject> obj, const float deltaTime_);
 
-
 private:
 
-	glm::vec2 velocity, acceleration, forward_thrust_space, forward_thrust_world;
+	glm::vec2 velocity, acceleration, gravity;
 
-	float torque, mass, rotationalInertia, angularVel, angularAcc, gravity;
+	float torque, mass, rotationalInertia, angularVel, angularAcc;
 
 	bool rigidBody; //Does the object have collision with other objects of rigidBody?
 

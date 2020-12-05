@@ -16,7 +16,6 @@ public:
 
 	void CollisionResponse(std::weak_ptr<GameObject> obj_) override;
 
-
 private:
 	//Making it a shared pointer for memory safety
 	std::vector<std::weak_ptr<Projectile>> projectiles;

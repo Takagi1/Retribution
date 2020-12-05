@@ -8,9 +8,7 @@ objectList(std::vector<std::weak_ptr<GameObject>>()), children()
 {
 	objectList.reserve(10);
 
-	quadBounds = new BoundingBox();
-	quadBounds->pos = position_;
-	quadBounds->dimentions = glm::vec2(size_);
+	quadBounds = new BoundingBox(glm::vec2(size_), position_);
 
 	size = size_;
 
@@ -105,6 +103,11 @@ void QuadNode::AddCollisionObject(std::weak_ptr<GameObject> obj_)
 	objectList.push_back(obj_);
 }
 
+void QuadNode::RemoveCollisionObject(int loc_)
+{
+	objectList.erase(objectList.begin() + loc_);
+}
+
 int QuadNode::GetObjectCount() const
 {
 	return objectList.size();
@@ -167,25 +170,20 @@ std::weak_ptr<GameObject> QuadSpatialPartition::GetCollision(BoundingBox box_, s
 	PrepareCollisionQuery(root, box_);
 
 	for (auto cell : objIntersectionList) {
-		for (size_t i = 0; i < cell->objectList.size();) {
-			if (cell->objectList[i].expired()) {
-				cell->objectList.erase(cell->objectList.begin() + i);
-				continue;
-			}
-			else if (box_.Intersects(&cell->objectList[i].lock()->GetBoundingBox())) {
+		for (size_t i = 0; i < cell->objectList.size(); i++) {
+			if (box_.Intersects(&cell->objectList[i].lock()->GetBoundingBox())) {
 				for (auto t : tags_) {
 					if (cell->objectList[i].lock()->GetTag() == t) {
 						return cell->objectList[i];
 					}
 				}
 			}
-			i++;
 		}
 	}
 	return std::weak_ptr<GameObject>();
 }
 
-std::vector<std::weak_ptr<GameObject>> QuadSpatialPartition::GetCollisionAll(BoundingBox box_)
+std::vector<std::weak_ptr<GameObject>> QuadSpatialPartition::GetCollisionAll(BoundingBox box_, std::vector<std::string> tags_)
 {
 	objIntersectionList.clear();
 	objIntersectionList.reserve(20);
@@ -195,15 +193,15 @@ std::vector<std::weak_ptr<GameObject>> QuadSpatialPartition::GetCollisionAll(Bou
 	result.reserve(5);
 
 	for (auto cell : objIntersectionList) {
-		for (size_t i = 0; i < cell->objectList.size();) {
-			if (cell->objectList[i].expired()) {
-				cell->objectList.erase(cell->objectList.begin() + i);
-				continue;
+		for (size_t i = 0; i < cell->objectList.size(); i++) {
+			if (box_.Intersects(&cell->objectList[i].lock()->GetBoundingBox())) {
+				for (std::string t : tags_) {
+					if (cell->objectList[i].lock()->GetTag() == t) {
+						//result.insert(std::end(result), cell->objectList[i]);
+						result.push_back(cell->objectList[i]);
+					}
+				}
 			}
-			else if (box_.Intersects(&cell->objectList[i].lock()->GetBoundingBox())) {
-				result.push_back(cell->objectList[i]);
-			}
-			i++;
 		}
 	}
 	return result;
@@ -224,6 +222,25 @@ std::weak_ptr<GameObject> QuadSpatialPartition::GetCollision(glm::vec2 point_)
 	}
 
 	return result;
+}
+
+void QuadSpatialPartition::RemoveObject(BoundingBox box_, std::string name_)
+{
+	objIntersectionList.clear();
+	objIntersectionList.reserve(20);
+	PrepareCollisionQuery(root, box_);
+
+	//The intent of this loop is too force a break upon finding the GameObject in each partition. 
+	//when the object is found remove it add to i and then make j a massive number to force a break.
+	//this should reduce the weight of this function.
+	for (size_t i = 0; i < objIntersectionList.size(); i++) {
+		for (size_t j = 0; j < objIntersectionList[i]->objectList.size(); j++) {
+			if (objIntersectionList[i]->objectList[j].lock()->GetName() == name_) {
+				objIntersectionList[i]->RemoveCollisionObject(j);
+				j = 1000;
+			}
+		}
+	}
 }
 
 //TODO: The multiple check issue is something i would like to adress

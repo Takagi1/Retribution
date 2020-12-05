@@ -57,15 +57,14 @@ bool SceneGraph::RemoveGameObject(std::string name_)
 		Debug::Error("No game object of that name has been found.", "SceneGraph.cpp", __LINE__);
 		return false;
 	}
-	else {
 
-		//TODO: remove obj from collision handler
-		obj->second.reset();
+	CollisionHandler::GetInstance()->RemoveObject(obj->second->GetBoundingBox(), name_);
+
+	obj->second.reset();
 		
-		sceneGameObjects.erase(obj);
-		
-		return true;
-	}
+	sceneGameObjects.erase(obj);
+
+	return true;
 }
 
 int SceneGraph::AddImage(Image* im, unsigned int shaderProgram_)
@@ -120,8 +119,6 @@ std::weak_ptr<GameObject> SceneGraph::GetGameObject(std::string tag_)
 	return std::weak_ptr<GameObject>();
 }
 
-//TODO: Create Seperate GUIObjects class and GUIImage class that has a surface sprite in it.
-
 GUIObject* SceneGraph::GetGUIObject(std::string tag_)
 {
 	if (sceneGUIObjects.find(tag_) != sceneGUIObjects.end()) {
@@ -160,17 +157,41 @@ void SceneGraph::Update(const float deltaTime_)
 
 			bool coll = false;
 
-			if (go.second->GetComponent<Physics2D>()) {
+			//TODO: determine responsiblity / method for how objects get pushed.
+			//you could do a pre/post detection for physics and then get all everything else.
+
+			if (Physics2D* phy = go.second->GetComponent<Physics2D>()) {
 				//if the object has rigid body and is not static make it apply collision detection
-				if (go.second->GetComponent<Physics2D>()->GetRigidBody() &&
-					!go.second->GetComponent<Physics2D>()->GetStaticObj()) {
+				if (phy->GetRigidBody() &&
+					!phy->GetStaticObj()) {
 
 					coll = true;
+					phy = nullptr;
 				}
 			}
 
 			//Then check the collision
 
+			//Experiment for possibly better collision
+
+			//Issue with AABB as it seems that the 
+			if (coll) {
+				for (auto obj : CollisionHandler::GetInstance()->AABBAll(go.second->GetBoundingBox(), go.second->GetCollisionTags())) {
+					if (Physics2D* phy = obj.lock()->GetComponent<Physics2D>()) {
+						if (phy->GetRigidBody()) {
+							go.second->GetComponent<Physics2D>()->CollisionResponse(obj, deltaTime_);
+						}
+						phy = nullptr;
+					}
+				}
+			}
+
+			for (auto obj : CollisionHandler::GetInstance()->AABBAll(go.second->GetBoundingBox(), go.second->GetCollisionTags())) {
+				go.second->CollisionResponse(obj);
+			}
+			
+
+			/*
 			while (true) {
 
 				std::weak_ptr<GameObject> obj = CollisionHandler::GetInstance()->AABB(go.second->GetBoundingBox(), go.second->GetCollisionTags());
@@ -188,10 +209,10 @@ void SceneGraph::Update(const float deltaTime_)
 
 				//At the end do the manually programed collision responses for the game object
 				go.second->CollisionResponse(obj);
-			}
+			}*/
+			
 		}
 	}
-
 	for (auto go : sceneGUIObjects) {
 		go.second->Update(deltaTime_);
 	}
@@ -209,6 +230,8 @@ void SceneGraph::Draw(Camera* camera_)
 	}
 	delayedUpdates.clear();
 
+
+	//TODO: add in frustum culling to not draw anything outside of view.
 	for (auto gl : sceneImages) {
 		glUseProgram(gl.first);
 		for (auto images : gl.second) {
@@ -234,6 +257,7 @@ void SceneGraph::OnDestroy()
 		}
 		sceneGameObjects.clear();
 	}
+
 	//TODO: Delete Images
 }
 

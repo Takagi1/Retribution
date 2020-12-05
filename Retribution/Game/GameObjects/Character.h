@@ -33,8 +33,9 @@ public:
 	void SetHealth(const int health_);
 	void SetMaxHealth(const int health_);
 
-	void Move(int directionX_, int directionY_);
 	void Flip(bool flip_);
+
+	void Damage(int value);
 
 private:
 	int health;

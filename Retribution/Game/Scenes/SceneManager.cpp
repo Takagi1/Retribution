@@ -14,8 +14,6 @@ SceneManager::~SceneManager()
 
 bool SceneManager::OnCreate()
 {
-	//TODO: i assume this is what she means by game class
-
 	ShaderHandler::GetInstance()->CreateProgram("BasicShader",
 		"Engine/Shaders/SpriteVertShader.glsl",
 		"Engine/Shaders/SpriteFragShader.glsl");

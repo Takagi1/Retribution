@@ -18,9 +18,6 @@ public:
 
 	//TODO: finish
 
-	//1. How do the components here get info
-	//2. When player takes damage update health
-	//3. When player gets energy update energy
 	bool OnCreate();
 	void Update(const float deltaTime_);
 

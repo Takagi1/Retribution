@@ -20,6 +20,7 @@ bool Character::OnCreate()
 	AddComponent<Physics2D>(this);
 
 	GetComponent<Physics2D>()->SetRigidBody(true);
+	GetComponent<Physics2D>()->ApplyGravity(true);
 
 	AddCollisionTag("Tile");
 
@@ -66,23 +67,6 @@ void Character::SetMaxHealth(const int health_)
 		health = maxHealth;
 	}
 }
-//TODO: create speed limit or create something that will stop the character from moving to qickly
-
-void Character::Move(int directionX_, int directionY_)
-{
-
-	//TODO: move speed?
-	GetComponent<Physics2D>()->SetVelocity(glm::vec2(15.0f * directionX_, 0));
-
-	//flip object to direction it needs to face
-
-	if (directionX_ == 1.0f) {
-		Flip(false);
-	}
-	else if (directionX_ == -1.0f) {
-		Flip(true);
-	}
-}
 
 void Character::Flip(bool flip_)
 {
@@ -90,4 +74,9 @@ void Character::Flip(bool flip_)
 		GetComponent<Image>()->Flip(flip_);
 		flip = flip_;
 	}
+}
+
+void Character::Damage(int value)
+{
+	health = health - value;
 }

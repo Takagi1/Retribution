@@ -16,9 +16,15 @@ Archer::~Archer()
 {
 	//TODO: make sure the projectiles are deleted
 
-	for (auto p : projectiles) {
-		SceneGraph::GetInstance()->RemoveGameObject(p.lock()->GetName());
+	for (size_t i = 0; i < projectiles.size();) {
+		if (projectiles[i].expired()) { projectiles.erase(projectiles.begin() + i);}
+		else {
+		SceneGraph::GetInstance()->RemoveGameObject(projectiles[i].lock()->GetName());
+		i++;
+		}
+
 	}
+	projectiles.clear();
 }
 
 bool Archer::OnCreate()
@@ -30,6 +36,10 @@ bool Archer::OnCreate()
 	UpdateBoundingBox(GetComponent<Image>()->GetBoundingBox());
 	
 	SetScale(glm::vec2(0.1f, 0.1f));
+
+	SetMaxHealth(10);
+	SetHealth(5);
+
 	SetTag("Man");
 
 
@@ -57,10 +67,20 @@ void Archer::CollisionResponse(std::weak_ptr<GameObject> obj_)
 //I think this is a good first draft here.
 void Archer::CreateArrow()
 { 
-	
+	//TODO: is this arrow clear bad?
+	//Arrow clear
+	for (size_t i = 0; i < projectiles.size();) {
+		if(projectiles[i].expired()){
+			projectiles.erase(projectiles.begin() + i);
+		}
+		else { i++; }
+	}
+
+
 	std::shared_ptr<Arrow> shot = std::make_shared<Arrow>(this,
 		glm::vec2(GetPosition().x + (GetDirFaceing() ? 0.0f : GetBoundingBox().dimentions.x ) , GetPosition().y),
 		0);
+
 	shot->OnCreate(GetDirFaceing());
 	projectiles.push_back(shot);
 	SceneGraph::GetInstance()->AddGameObject(std::move(shot),"Arrow");

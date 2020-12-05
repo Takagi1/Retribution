@@ -1,9 +1,57 @@
 #include "OpenGLSpriteSurface.h"
 
+std::vector<Vertex2D> OpenGLSpriteSurface::vertexList = std::vector<Vertex2D>();
+std::vector<Vertex2D> OpenGLSpriteSurface::vertexListFlip = std::vector<Vertex2D>();
+
 OpenGLSpriteSurface::OpenGLSpriteSurface(bool useView_, GLuint shaderProgram_, std::string name_, 
 	glm::vec4 tint_) : 
 	SpriteSurface(useView_, name_)
+
 {
+
+	if (vertexList.size() == 0) {
+		vertexList.reserve(4);
+		vertexList.push_back(Vertex2D());
+		vertexList.push_back(Vertex2D());
+		vertexList.push_back(Vertex2D());
+		vertexList.push_back(Vertex2D());
+
+
+		vertexList[0].position = glm::vec2(0.0f, 1.0f);
+		vertexList[0].texCoord = glm::vec2(0, 0);
+
+		vertexList[1].position = glm::vec2(1.0f, 1.0f);
+		vertexList[1].texCoord = glm::vec2(1, 0);
+
+		vertexList[2].position = glm::vec2(0.0f, 0.0f);
+		vertexList[2].texCoord = glm::vec2(0, 1);
+
+		vertexList[3].position = glm::vec2(1.0f, 0.0f);
+		vertexList[3].texCoord = glm::vec2(1, 1);
+	}
+
+	if (vertexListFlip.size() == 0) {
+		vertexListFlip.reserve(4);
+		vertexListFlip.push_back(Vertex2D());
+		vertexListFlip.push_back(Vertex2D());
+		vertexListFlip.push_back(Vertex2D());
+		vertexListFlip.push_back(Vertex2D());
+
+
+		vertexListFlip[0].position = glm::vec2(1.0f, 1.0f);
+		vertexListFlip[0].texCoord = glm::vec2(0, 0);
+
+		vertexListFlip[1].position = glm::vec2(0.0f, 1.0f);
+		vertexListFlip[1].texCoord = glm::vec2(1, 0);
+
+		vertexListFlip[2].position = glm::vec2(1.0f, 0.0f);
+		vertexListFlip[2].texCoord = glm::vec2(0, 1);
+
+		vertexListFlip[3].position = glm::vec2(0.0f, 0.0f);
+		vertexListFlip[3].texCoord = glm::vec2(1, 1);
+	}
+
+
 	tint = glm::vec4(1.0f, 0.8f, 0.8f, 1.0f);
 	shaderProgram = shaderProgram_;
 	GenerateBuffers();

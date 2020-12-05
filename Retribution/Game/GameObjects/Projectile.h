@@ -2,6 +2,9 @@
 
 #include "../../Engine/Rendering/GameObject.h"
 
+
+class Character;
+
 /*
 Rules of projectiles 
 
@@ -11,7 +14,7 @@ Rules of projectiles
 class Projectile : public GameObject {
 
 public:
-	Projectile(GameObject* parent_, glm::vec2 position_ = glm::vec2(), const float depth_ = 0.0f);
+	Projectile(Character* parent_, glm::vec2 position_ = glm::vec2(), const float depth_ = 0.0f);
 	virtual ~Projectile();
 
 	virtual bool OnCreate(bool isFliped_);
@@ -28,6 +31,9 @@ public:
 
 	void SetPower(const int power_);
 	void SetSpeed(const float speed_);
+	
+
+	void DamageParent(int damage_);
 
 private:
 	int power;
@@ -36,5 +42,5 @@ private:
 
 	float speed;
 
-	GameObject* parent;
+	Character* parent;
 };

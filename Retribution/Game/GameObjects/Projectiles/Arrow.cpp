@@ -1,7 +1,8 @@
 #include "Arrow.h"
 #include "../../../Engine/Rendering/Types/Image.h"
+#include "../../../Game/GameObjects/Character.h"
 
-Arrow::Arrow(GameObject* parent_, glm::vec2 position_, float depth_) : Projectile(parent_, position_, depth_)
+Arrow::Arrow(Character* parent_, glm::vec2 position_, float depth_) : Projectile(parent_, position_, depth_)
 {
 }
 
@@ -19,7 +20,7 @@ bool Arrow::OnCreate(bool isFliped_)
 
 	SetSpeed(100);
 	SetScale(glm::vec2(0.05f));
-	SetPower(1);
+	SetPower(5);
 	return true;
 }
 
