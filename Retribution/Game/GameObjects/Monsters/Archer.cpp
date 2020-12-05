@@ -60,8 +60,11 @@ void Archer::Update(const float deltaTime_)
 	Character::Update(deltaTime_);
 }
 
-void Archer::CollisionResponse(std::weak_ptr<GameObject> obj_)
+void Archer::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_)
 {
+	std::vector<std::weak_ptr<GameObject>> obj = CollisionHandler::GetInstance()->AABBAll(GetBoundingBox(), GetCollisionTags());
+
+	GameObject::CollisionResponse(obj);
 }
 
 //I think this is a good first draft here.

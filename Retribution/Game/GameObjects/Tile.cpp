@@ -1,6 +1,7 @@
 #include "Tile.h"
 #include "../../Engine/Math/Physics2D.h"
 #include "../../Engine/Rendering/Types/Image.h"
+#include "../../Engine/Math/CollisionHandler.h"
 
 Tile::Tile() : GameObject(glm::vec2(0), 0)
 {
@@ -32,6 +33,8 @@ void Tile::Update(const float deltaTime_)
 {
 }
 
-void Tile::CollisionResponse(std::weak_ptr<GameObject> obj_)
+void Tile::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_)
 {
+	std::vector<std::weak_ptr<GameObject>> obj = CollisionHandler::GetInstance()->AABBAll(GetBoundingBox(), GetCollisionTags());
+	GameObject::CollisionResponse(obj);
 }

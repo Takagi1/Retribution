@@ -1,5 +1,6 @@
 #include "Physics2D.h"
 #include "../Rendering/GameObject.h"
+#include "CollisionHandler.h"
 
 
 
@@ -41,7 +42,6 @@ void Physics2D::Update(const float deltaTime_)
 		velocity += acceleration * deltaTime_;
 
 		if (applyDrag) { Drag(); }
-
 
 		//Simple mode
 
@@ -161,14 +161,18 @@ void Physics2D::Drag()
 }
 
 //This function is designed to push two objects that are colliding appart.
-
-
-void Physics2D::CollisionResponse(std::weak_ptr<GameObject> obj, const float deltaTime_)
+void Physics2D::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj)
 {
-	//TODO: note that the x issue still techniqely happens but is so small that it is nigh unseable
-	if (parent->GetBoundingBox().Intersects(&obj.lock()->GetBoundingBox())) {
-		glm::vec2 depth = parent->GetBoundingBox().CollisionDepth(&obj.lock()->GetBoundingBox());
-		parent->Translate(depth);
+	for (auto o : obj) {
+		//TODO: note that the x issue still techniqely happens but is so small that it is nigh unseable
+		if (Physics2D* phy = o.lock()->GetComponent<Physics2D>()) {
+			if (phy->GetRigidBody()) {
+				if (parent->GetBoundingBox().Intersects(&o.lock()->GetBoundingBox())) {
+					glm::vec2 depth = parent->GetBoundingBox().CollisionDepth(&o.lock()->GetBoundingBox());
+					parent->Translate(depth);
+				}
+			}
+		}
 	}
 }
 

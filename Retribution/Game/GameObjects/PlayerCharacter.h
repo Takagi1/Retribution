@@ -19,7 +19,7 @@ public:
 	virtual bool OnCreate();
 	virtual void Update(const float deltaTime_) override;
 
-	void CollisionResponse(std::weak_ptr<GameObject> obj_) override;
+	void CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_) override;
 
 	//Takes in input?
 	//void Dash(int horizontal_, int vertical_); might not do dash for now

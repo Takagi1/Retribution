@@ -52,6 +52,8 @@ private:
 	static std::map<std::string, GUIObject*> sceneGUIObjects;
 
 	std::vector<Component*> delayedUpdates;
+
+	std::vector<std::string> deletionLoc;
 	float prevDeltaTime;
 
 	bool isPaused;

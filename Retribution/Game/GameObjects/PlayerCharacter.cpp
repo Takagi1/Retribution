@@ -68,9 +68,11 @@ void PlayerCharacter::Dash(int horizontal_, int vertical_)
 */
 
 //This might be realllllly dirty
-void PlayerCharacter::CollisionResponse(std::weak_ptr<GameObject> obj_)
+void PlayerCharacter::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_)
 {
-	GameObject::CollisionResponse(obj_);
+	std::vector<std::weak_ptr<GameObject>> obj = CollisionHandler::GetInstance()->AABBAll(GetBoundingBox(), GetCollisionTags());
+	
+	GameObject::CollisionResponse(obj);
 }
 
 void PlayerCharacter::Parry()

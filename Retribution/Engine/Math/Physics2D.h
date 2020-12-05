@@ -41,7 +41,7 @@ public:
 
 //Section for Collision
 
-	void CollisionResponse(std::weak_ptr<GameObject> obj, const float deltaTime_);
+	void CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj);
 
 private:
 

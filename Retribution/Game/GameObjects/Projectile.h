@@ -20,7 +20,7 @@ public:
 	virtual bool OnCreate(bool isFliped_);
 	virtual void Update(const float deltaTime_) override;
 
-	void CollisionResponse(std::weak_ptr<GameObject> obj_) override;
+	void CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_) override;
 
 	//Getter
 

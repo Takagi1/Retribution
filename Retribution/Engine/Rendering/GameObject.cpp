@@ -18,6 +18,7 @@ GameObject::~GameObject()
 		}
 		components.clear();
 	}
+
 }
 
 bool GameObject::OnCreate()
@@ -34,6 +35,14 @@ void GameObject::Update(const float deltaTime_)
 		else {
 			SceneGraph::GetInstance()->AddDelayedUpdate(c);
 		}
+	}
+
+	//TODO: Kinda dum but might be a good baseline
+	if (!collisionTags.empty())
+	{
+		//Empty on purpose to because the first should have nothing.
+		std::vector<std::weak_ptr<GameObject>> gm;
+		CollisionResponse(gm);
 	}
 }
 
@@ -137,13 +146,13 @@ bool GameObject::MouseDettection()
 	return false;
 }
 
-void GameObject::CollisionResponse(std::weak_ptr<GameObject> obj_)
+void GameObject::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_)
 {
 	if (Physics2D* phy = GetComponent<Physics2D>()) {
 		if (!phy->GetStaticObj() && phy->GetRigidBody()) {
-			phy->CollisionResponse(obj_, 0);
-			phy = nullptr;
+			phy->CollisionResponse(obj_);
 		}
+		phy = nullptr;
 	}
 }
 

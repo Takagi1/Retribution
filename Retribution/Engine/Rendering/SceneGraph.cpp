@@ -53,16 +53,17 @@ void SceneGraph::AddGameObject(std::shared_ptr<GameObject> go_, std::string name
 bool SceneGraph::RemoveGameObject(std::string name_)
 {
 	std::map<std::string,std::shared_ptr<GameObject>>::iterator obj = sceneGameObjects.find(name_);
+
 	if (obj == sceneGameObjects.end()) {
 		Debug::Error("No game object of that name has been found.", "SceneGraph.cpp", __LINE__);
 		return false;
 	}
-
+	
 	CollisionHandler::GetInstance()->RemoveObject(obj->second->GetBoundingBox(), name_);
 
 	obj->second.reset();
 		
-	sceneGameObjects.erase(obj);
+	deletionLoc.push_back(name_);
 
 	return true;
 }
@@ -145,7 +146,7 @@ void SceneGraph::Pause()
 
 void SceneGraph::Update(const float deltaTime_)
 {
-
+	//TODO: the core issue is how to delete the projectile but not break the iterator.
 	if (!isPaused) {
 		for (auto go : sceneGameObjects) {
 
@@ -153,42 +154,10 @@ void SceneGraph::Update(const float deltaTime_)
 
 			go.second->Update(deltaTime_);
 
-			//Check if the object should check collision with physics.
-
-			bool coll = false;
-
 			//TODO: determine responsiblity / method for how objects get pushed.
 			//you could do a pre/post detection for physics and then get all everything else.
 
-			if (Physics2D* phy = go.second->GetComponent<Physics2D>()) {
-				//if the object has rigid body and is not static make it apply collision detection
-				if (phy->GetRigidBody() &&
-					!phy->GetStaticObj()) {
-
-					coll = true;
-					phy = nullptr;
-				}
-			}
-
-			//Then check the collision
-
 			//Experiment for possibly better collision
-
-			//Issue with AABB as it seems that the 
-			if (coll) {
-				for (auto obj : CollisionHandler::GetInstance()->AABBAll(go.second->GetBoundingBox(), go.second->GetCollisionTags())) {
-					if (Physics2D* phy = obj.lock()->GetComponent<Physics2D>()) {
-						if (phy->GetRigidBody()) {
-							go.second->GetComponent<Physics2D>()->CollisionResponse(obj, deltaTime_);
-						}
-						phy = nullptr;
-					}
-				}
-			}
-
-			for (auto obj : CollisionHandler::GetInstance()->AABBAll(go.second->GetBoundingBox(), go.second->GetCollisionTags())) {
-				go.second->CollisionResponse(obj);
-			}
 			
 
 			/*
@@ -213,6 +182,17 @@ void SceneGraph::Update(const float deltaTime_)
 			
 		}
 	}
+
+	if(!deletionLoc.empty()) {
+		for (size_t i = 0; i < deletionLoc.size(); i++) {
+			std::map<std::string, std::shared_ptr<GameObject>>::iterator obj = sceneGameObjects.find(deletionLoc[i]);
+			sceneGameObjects.erase(obj);
+		}
+		deletionLoc.clear();
+
+
+	}
+
 	for (auto go : sceneGUIObjects) {
 		go.second->Update(deltaTime_);
 	}

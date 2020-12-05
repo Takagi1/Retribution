@@ -13,5 +13,5 @@ public:
 	virtual void Update(const float deltaTime_);
 
 	//Used to allow for the direct programing of collision response from objects
-	virtual void CollisionResponse(std::weak_ptr<GameObject> obj_);
+	virtual void CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_);
 };
