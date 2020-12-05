@@ -35,6 +35,5 @@ void Tile::Update(const float deltaTime_)
 
 void Tile::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_)
 {
-	std::vector<std::weak_ptr<GameObject>> obj = CollisionHandler::GetInstance()->AABBAll(GetBoundingBox(), GetCollisionTags());
-	GameObject::CollisionResponse(obj);
+	GameObject::CollisionResponse(obj_);
 }

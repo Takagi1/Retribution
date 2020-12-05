@@ -57,6 +57,7 @@ void Controller::Update(const float deltaTime_)
 		}
 	}
 
+	//TODO: make it only one press that cause's this.
 	if (KeyEventListener::keys[SDLK_p]) {
 		SceneGraph::GetInstance()->Pause();
 	}

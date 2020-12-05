@@ -146,6 +146,7 @@ void SceneGraph::Pause()
 
 void SceneGraph::Update(const float deltaTime_)
 {
+
 	//TODO: the core issue is how to delete the projectile but not break the iterator.
 	if (!isPaused) {
 		for (auto go : sceneGameObjects) {
@@ -153,44 +154,17 @@ void SceneGraph::Update(const float deltaTime_)
 			//First Update the object 
 
 			go.second->Update(deltaTime_);
-
-			//TODO: determine responsiblity / method for how objects get pushed.
-			//you could do a pre/post detection for physics and then get all everything else.
-
-			//Experiment for possibly better collision
-			
-
-			/*
-			while (true) {
-
-				std::weak_ptr<GameObject> obj = CollisionHandler::GetInstance()->AABB(go.second->GetBoundingBox(), go.second->GetCollisionTags());
-
-				if (obj.expired()) { break; }
-				//First check if the object even has physics 
-
-				if (coll) {
-					if (obj.lock()->GetComponent<Physics2D>()) {
-						if (obj.lock()->GetComponent<Physics2D>()->GetRigidBody()) {
-							go.second->GetComponent<Physics2D>()->CollisionResponse(obj, deltaTime_);
-						}
-					}
-				}
-
-				//At the end do the manually programed collision responses for the game object
-				go.second->CollisionResponse(obj);
-			}*/
 			
 		}
 	}
 
+	//Destroy objects here to prevent iterator breaking.
 	if(!deletionLoc.empty()) {
 		for (size_t i = 0; i < deletionLoc.size(); i++) {
 			std::map<std::string, std::shared_ptr<GameObject>>::iterator obj = sceneGameObjects.find(deletionLoc[i]);
 			sceneGameObjects.erase(obj);
 		}
 		deletionLoc.clear();
-
-
 	}
 
 	for (auto go : sceneGUIObjects) {

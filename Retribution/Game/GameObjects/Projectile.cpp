@@ -40,8 +40,7 @@ void Projectile::Update(const float deltaTime_)
 
 void Projectile::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_)
 {
-	std::vector<std::weak_ptr<GameObject>> obj = CollisionHandler::GetInstance()->AABBAll(GetBoundingBox(), GetCollisionTags());
-	for (auto o : obj) {
+	for (auto o : obj_) {
 		if (o.lock()->GetTag() == "Player") {
 			//TODO: Damage Player
 			dynamic_cast<PlayerCharacter*>(o.lock().get())->Damage(power);
@@ -53,7 +52,7 @@ void Projectile::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_)
 			return;
 		}
 	}
-	GameObject::CollisionResponse(obj);
+	GameObject::CollisionResponse(obj_);
 }
 
 int Projectile::GetPower() const

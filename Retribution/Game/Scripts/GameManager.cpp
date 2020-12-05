@@ -26,8 +26,9 @@ bool GameManager::OnCreate(std::weak_ptr<PlayerCharacter> player_)
 
 void GameManager::Update(const float deltaTime_)
 {
-    if (player.lock()->GetHealth() == 0) {
+    if (player.lock()->GetHealth() <= 0) {
         //TODO: put game over here as player
+
     }
 
     //TODO: Camera movement (if player get to far from the center of the screen make it move)
@@ -46,6 +47,11 @@ void GameManager::Update(const float deltaTime_)
     if (player.lock()->GetHealth() != health) {
         health = player.lock()->GetHealth();
         hud.UpdateHealth(health);
+
+        if(health <= 0){
+            SceneGraph::GetInstance()->Pause();
+            printf("GameOver");
+        }
     }
 
     if (player.lock()->GetEnergy() != energy) {
