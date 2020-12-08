@@ -95,9 +95,9 @@ CoreEngine* CoreEngine::GetInstance()
 
 void CoreEngine::OnDestroy()
 {
+	SceneGraph::GetInstance()->OnDestroy();
 	ShaderHandler::GetInstance()->OnDestroy();
 	TextureHandler::GetInstance()->OnDestroy();
-	SceneGraph::GetInstance()->OnDestroy();
 	AudioHandler::GetInstance()->OnDestroy();
 	XMLParser::GetInstance()->OnDestroy();
 

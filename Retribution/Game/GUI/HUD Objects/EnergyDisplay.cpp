@@ -10,6 +10,7 @@ EnergyDisplay::~EnergyDisplay()
 {
 
 //TODO: Remove GUI Objects
+
 }
 
 bool EnergyDisplay::OnCreate()

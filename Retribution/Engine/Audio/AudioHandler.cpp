@@ -11,7 +11,6 @@ AudioHandler::AudioHandler() : systemPtr(nullptr), channelCount(0)
 }
 
 AudioHandler::~AudioHandler() {
-	OnDestroy();
 }
 
 AudioHandler * AudioHandler::GetInstance()
@@ -47,11 +46,13 @@ void AudioHandler::OnDestroy()
 		d.second->release();
 		d.second = nullptr;
 	}
+	soundPtrList.clear();
 
 	for (auto d : channelList) {
 		d.second->stop();
 		d.second = nullptr;
 	}
+	channelList.clear();
 
 	systemPtr->release();
 	systemPtr = nullptr;

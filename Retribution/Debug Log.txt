@@ -27,8 +27,6 @@
 [INFO]: Component created in file: GameObject.h on line: 79
 [INFO]: Component created in file: GameObject.h on line: 79
 [INFO]: Component created in file: GameObject.h on line: 79
-[INFO]: Component created in file: GameObject.h on line: 79
-[INFO]: Component created in file: GameObject.h on line: 79
 [WARNING]: Trying to add a GameObject with a tag GameObject that already exist. in file: SceneGraph.cpp on line: 30
 [WARNING]: Trying to add a GameObject with a tag GameObject that already exist. in file: SceneGraph.cpp on line: 30
 [WARNING]: Trying to add a GameObject with a tag GameObject that already exist. in file: SceneGraph.cpp on line: 30
@@ -39,6 +37,4 @@
 [WARNING]: Trying to add a GameObject with a tag GameObject that already exist. in file: SceneGraph.cpp on line: 30
 [WARNING]: Trying to add a GameObject with a tag GameObject that already exist. in file: SceneGraph.cpp on line: 30
 [WARNING]: Trying to add a GameObject with a tag GameObject that already exist. in file: SceneGraph.cpp on line: 30
-[WARNING]: Trying to add a GameObject with a tag GameObject that already exist. in file: SceneGraph.cpp on line: 30
-[INFO]: Component created in file: GameObject.h on line: 79
-[INFO]: Component created in file: GameObject.h on line: 79
+[INFO]:  448 514 in file:  collision on line: 74

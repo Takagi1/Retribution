@@ -37,7 +37,6 @@ void GameObject::Update(const float deltaTime_)
 		}
 	}
 
-	//TODO: Kinda dum but might be a good baseline
 	if (!collisionTags.empty())
 	{
 		std::vector<std::weak_ptr<GameObject>> obj = CollisionHandler::GetInstance()->AABBAll(GetBoundingBox(), GetCollisionTags());

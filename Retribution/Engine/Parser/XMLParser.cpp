@@ -133,9 +133,13 @@ void XMLParser::Return()
 	root = root->parent();
 }
 
-void XMLParser::ListBegin()
+bool XMLParser::ListBegin()
 {
-	root = root->first_node();
+	if (root->first_node()) {
+		root = root->first_node();
+		return true;
+	}
+	return false;
 }
 
 void XMLParser::NextNode()

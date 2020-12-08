@@ -75,6 +75,8 @@ int SceneGraph::AddImage(Image* im, unsigned int shaderProgram_)
 }
 
 //TODO: Fix out of scope issue related to exiting the game 
+
+//Use's loc_ to find the location it is in the vector.
 void SceneGraph::RemoveImage(int loc_, unsigned int shaderProgram_)
 {
 	sceneImages[shaderProgram_][loc_] = nullptr;
@@ -146,15 +148,12 @@ void SceneGraph::Pause()
 
 void SceneGraph::Update(const float deltaTime_)
 {
-
-	//TODO: the core issue is how to delete the projectile but not break the iterator.
 	if (!isPaused) {
 		for (auto go : sceneGameObjects) {
-
 			//First Update the object 
-
-			go.second->Update(deltaTime_);
-			
+			if (go.second) {
+				go.second->Update(deltaTime_);
+			}
 		}
 	}
 
@@ -195,7 +194,7 @@ void SceneGraph::Draw(Camera* camera_)
 
 	//Update GUI after objects to ignore depth
 	
-	//TODO: abstract the gui shader 
+	//TODO: abstract the gui shader? ( might be done?) 
 	glUseProgram(ShaderHandler::GetInstance()->GetShader("GUIShader"));
 
 	for (auto g : sceneGUIObjects) {
@@ -212,7 +211,18 @@ void SceneGraph::OnDestroy()
 		sceneGameObjects.clear();
 	}
 
-	//TODO: Delete Images
+	//TODO: does this not have a point because the images would be deleted by the GameObjects?  In this case would
+	//it not be better to simply have it be removed in the on destroy like normal or should it do this?
+	/*if (sceneImages.size() > 0) {
+		for (auto go : sceneImages) {
+			for (auto im : go.second) {
+				delete im;
+				im = nullptr;
+			}
+			go.second.clear();
+		}
+		sceneGameObjects.clear();
+	}*/
 }
 
 SceneGraph::SceneGraph() : isPaused(false), prevDeltaTime(0)

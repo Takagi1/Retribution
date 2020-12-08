@@ -164,7 +164,6 @@ void Physics2D::Drag()
 void Physics2D::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj)
 {
 	for (auto o : obj) {
-		//TODO: note that the x issue still techniqely happens but is so small that it is nigh unseable
 		if (Physics2D* phy = o.lock()->GetComponent<Physics2D>()) {
 			if (phy->GetRigidBody()) {
 				if (parent->GetBoundingBox().Intersects(&o.lock()->GetBoundingBox())) {

@@ -109,7 +109,7 @@ public:
 		Debug::Error("Component does not exist", "GameObject.h", __LINE__);
 	}
 
-	AudioSource* sound;
+	//AudioSource* sound;
 
 protected:
 

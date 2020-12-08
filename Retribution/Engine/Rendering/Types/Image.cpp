@@ -16,6 +16,7 @@ transform(glm::mat4(0)), imageLoc(0)
 
 Image::~Image()
 {
+	SceneGraph::GetInstance()->RemoveImage(imageLoc, ShaderHandler::GetInstance()->GetShader("BasicShader"));
 	delete sprite;
 	sprite = nullptr;
 }
@@ -71,9 +72,6 @@ void Image::SetOffset(const glm::vec2 offset_)
 
 void Image::UpdateTransform(glm::vec2 position_, float angle_, glm::vec2 scale_)
 {
-
-	//TODO: this may be less effective then just having it in the draw
-
 	glm::mat4 transform_ = glm::mat4(1.0f);
 
 	glm::vec2 trueScale = scale_ * sprite->GetScale();

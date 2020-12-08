@@ -12,7 +12,6 @@ health(0), maxHealth(0), flip(false)
 
 Character::~Character()
 {
-	SceneGraph::GetInstance()->RemoveImage(GetComponent<Image>()->GetImageLoc(), ShaderHandler::GetInstance()->GetShader("BasicShader"));
 }
 
 bool Character::OnCreate()
@@ -79,4 +78,7 @@ void Character::Flip(bool flip_)
 void Character::Damage(int value)
 {
 	health = health - value;
+
+	//Done here to improve constant check in GameManager health check.
+	if (health < 0) { health = 0; }
 }

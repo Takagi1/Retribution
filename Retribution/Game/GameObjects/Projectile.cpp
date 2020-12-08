@@ -14,7 +14,6 @@ power(0), isFliped(false), speed(0)
 
 Projectile::~Projectile()
 {
-	SceneGraph::GetInstance()->RemoveImage(GetComponent<Image>()->GetImageLoc(), ShaderHandler::GetInstance()->GetShader("BasicShader"));
 	parent = nullptr;
 }
 
@@ -42,12 +41,9 @@ void Projectile::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_)
 {
 	for (auto o : obj_) {
 		if (o.lock()->GetTag() == "Player") {
-			//TODO: Damage Player
 			dynamic_cast<PlayerCharacter*>(o.lock().get())->Damage(power);
 			dynamic_cast<PlayerCharacter*>(o.lock().get())->ResetEnergy();
 
-
-			//TODO: Destroy Projectile
 			SceneGraph::GetInstance()->RemoveGameObject(GetName());
 			return;
 		}

@@ -14,8 +14,6 @@ Archer::Archer(glm::vec2 position_) : Monster(position_, 0), time(2)
 
 Archer::~Archer()
 {
-	//TODO: make sure the projectiles are deleted
-
 	for (size_t i = 0; i < projectiles.size();) {
 		if (projectiles[i].expired()) { projectiles.erase(projectiles.begin() + i);}
 		else {

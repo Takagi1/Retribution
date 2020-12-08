@@ -16,7 +16,10 @@ public:
 
 		std::vector<std::shared_ptr<Monster>> obj;
 		obj.reserve(5);
-		XMLParser::GetInstance()->ListBegin();
+		if (!XMLParser::GetInstance()->ListBegin()) {
+			return obj;
+		}
+
 		while (true) {
 			std::string name = XMLParser::GetInstance()->GetString("Name");
 

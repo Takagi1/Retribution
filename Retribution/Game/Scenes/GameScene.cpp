@@ -39,7 +39,7 @@ bool GameScene::OnCreate()
 	XMLParser::GetInstance()->Move("Player");
 	std::shared_ptr<PlayerCharacter> player = std::make_shared<PlayerCharacter>(XMLParser::GetInstance()->GetVec2("Location"));
 	player->OnCreate();
-
+	player->ChangeEnergy(5);
 	gameManager.OnCreate(player);
 	controller.OnCreate(player);
 

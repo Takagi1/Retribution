@@ -16,8 +16,6 @@ public:
 
 	//Create's and adds all the hud elements to the SceneGraph as well
 
-	//TODO: finish
-
 	bool OnCreate();
 	void Update(const float deltaTime_);
 
