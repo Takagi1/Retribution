@@ -43,8 +43,6 @@ void GUIImage::Draw(Camera* camera_)
 		sprite->Draw(camera_, transform);
 	}
 }
-
-//TODO:check on
 bool GUIImage::FindContainingPoint()
 {
 	if (sprite)

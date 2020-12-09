@@ -3,13 +3,22 @@
 #include "../../Engine/Math/BoundingBox.h"
 #include <string>
 #include <memory>
+#include <vector>
 
 class GameObject;
 class PlayerCharacter;
 
+enum class TriggerType {
+	//Parry
+	Parry = 0,
+
+	//Counter
+	Counter = 1
+};
+
 class TriggerBox {
 public: 
-	TriggerBox(PlayerCharacter* parent_, std::string triggerType_, glm::vec2 dimention_, glm::vec2 position_);
+	TriggerBox(PlayerCharacter* parent_, TriggerType triggerType_, glm::vec2 dimention_, glm::vec2 position_);
 	~TriggerBox();
 
 	void Update();
@@ -22,7 +31,7 @@ private:
 
 	BoundingBox box;
 
-	std::string triggerType;
+	TriggerType triggerType;
 
-
+	static std::vector<std::string> collisionTags;
 };

@@ -48,7 +48,6 @@ ParticleEmitter::~ParticleEmitter()
 {
 }
 
-//TODO: note i could move back the draw stuff too draw but for this assignment i need to add it to this.
 void ParticleEmitter::Update(const float deltaTime_)
 {
 	glUseProgram(ShaderHandler::GetInstance()->GetShader("ParticleShader"));

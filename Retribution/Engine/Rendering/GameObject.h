@@ -48,7 +48,7 @@ public:
 	bool MouseDettection();
 
 	//Used to allow for the direct programing of collision response from objects
-	virtual void CollisionResponse(std::weak_ptr<GameObject> obj_) = 0;
+	virtual void CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_);
 
 
 	template<typename T, typename Args>
@@ -109,7 +109,7 @@ public:
 		Debug::Error("Component does not exist", "GameObject.h", __LINE__);
 	}
 
-	AudioSource* sound;
+	//AudioSource* sound;
 
 protected:
 

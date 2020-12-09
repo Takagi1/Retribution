@@ -2,9 +2,11 @@
 
 #include "../Projectile.h"
 
+class Character;
+
 class Arrow : public Projectile{
 public:
-	Arrow(GameObject* parent_, glm::vec2 position_ = glm::vec2(0), float depth_ = 0.0f);
+	Arrow(Character* parent_, glm::vec2 position_ = glm::vec2(0), float depth_ = 0.0f);
 	~Arrow();
 
 

@@ -37,7 +37,7 @@ public:
 	void Return();
 
 	//First call in getting a list, sets root to first node in a list
-	void ListBegin();
+	bool ListBegin();
 
 	//Last call in getting a list, sets the node to is next sibling
 	void NextNode();

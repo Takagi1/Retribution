@@ -1,6 +1,7 @@
 #include "GameObject.h"
 #include "Types/Image.h"
 #include "SceneGraph.h"
+#include "../Math/Physics2D.h"
 
 GameObject::GameObject(glm::vec2 position_, int depth_) : angle(0)
 {
@@ -17,6 +18,7 @@ GameObject::~GameObject()
 		}
 		components.clear();
 	}
+
 }
 
 bool GameObject::OnCreate()
@@ -33,6 +35,12 @@ void GameObject::Update(const float deltaTime_)
 		else {
 			SceneGraph::GetInstance()->AddDelayedUpdate(c);
 		}
+	}
+
+	if (!collisionTags.empty())
+	{
+		std::vector<std::weak_ptr<GameObject>> obj = CollisionHandler::GetInstance()->AABBAll(GetBoundingBox(), GetCollisionTags());
+		CollisionResponse(obj);
 	}
 }
 
@@ -56,25 +64,28 @@ void GameObject::Rotate(float angle_)
 void GameObject::SetPosition(glm::vec2 position_)
 {
 	position = position_;
-	if (GetComponent<Image>()) {
-		GetComponent<Image>()->UpdateTransform(position, angle, scale);
-		box = GetComponent<Image>()->GetBoundingBox();
+	if (Image* img = GetComponent<Image>()) {
+		img->UpdateTransform(position, angle, scale);
+		box = img->GetBoundingBox();
+		img = nullptr;
 	}
 }
 
 void GameObject::SetAngle(float angle_) {
 	angle = angle_;
-	if (GetComponent<Image>()) {
-		GetComponent<Image>()->UpdateTransform(position, angle, scale);
+	if (Image* img = GetComponent<Image>()) {
+		img->UpdateTransform(position, angle, scale);
+		img = nullptr;
 	}
 }
 
 void GameObject::SetScale(glm::vec2 scale_)
 {
 	scale = scale_;
-	if (GetComponent<Image>()) {
-		GetComponent<Image>()->UpdateTransform(position, angle, scale);
-		box = GetComponent<Image>()->GetBoundingBox();
+	if (Image* img = GetComponent<Image>()) {
+		img->UpdateTransform(position, angle, scale);
+		box = img->GetBoundingBox();
+		img = nullptr;
 	}
 }
 
@@ -131,6 +142,16 @@ bool GameObject::MouseDettection()
 		}
 	}
 	return false;
+}
+
+void GameObject::CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_)
+{
+	if (Physics2D* phy = GetComponent<Physics2D>()) {
+		if (!phy->GetStaticObj() && phy->GetRigidBody()) {
+			phy->CollisionResponse(obj_);
+		}
+		phy = nullptr;
+	}
 }
 
 BoundingBox GameObject::GetBoundingBox() const

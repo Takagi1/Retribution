@@ -25,4 +25,7 @@ private:
 
 	glm::vec4 tint;
 
+	static std::vector<Vertex2D> vertexList;
+	static std::vector<Vertex2D> vertexListFlip;
+
 };

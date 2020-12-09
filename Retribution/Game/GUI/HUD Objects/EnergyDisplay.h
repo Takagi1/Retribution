@@ -1,6 +1,5 @@
 #pragma once
 #include "EnergyBar.h"
-//TODO: Fill this in
 
 //It is a holder for energy bars that will determine how they are displayed.
 class EnergyDisplay {

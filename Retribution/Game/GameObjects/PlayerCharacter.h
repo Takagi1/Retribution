@@ -19,7 +19,7 @@ public:
 	virtual bool OnCreate();
 	virtual void Update(const float deltaTime_) override;
 
-	void CollisionResponse(std::weak_ptr<GameObject> obj_) override;
+	void CollisionResponse(std::vector<std::weak_ptr<GameObject>> obj_) override;
 
 	//Takes in input?
 	//void Dash(int horizontal_, int vertical_); might not do dash for now
@@ -32,31 +32,35 @@ public:
 	//Getters
 
 	int GetEnergy() const;
-	std::string GetParryType() const;
-	std::string GetCounterType() const;
+	TriggerType GetParryType() const;
+	TriggerType GetCounterType() const;
 	State GetState() const;
+	int GetEnergyLevel() const;
 
 	//Setters
 
 	void SetEnergy(const int energy_); //Use to set energy to a specific amount
-	void SetParryType(const std::string parry_);
-	void SetCounterType(const std::string counter_);
+	void SetParryType(const TriggerType);
+	void SetCounterType(const TriggerType);
+	void SetState(State state);
 	
 	void ChangeEnergy(const int energy_);//Use to add or subtract from energy
+	void ResetEnergy(); //Use to reset energy to 0.
+
+	void Move(int directionX_, int directionY_);
 
 private:
 	int energy;
 	int maxEnergy;
+	int energyLevel;
 
 	TriggerBox* triggerBox;
 	float lifeTime;
 
 	//TODO: add in check to prevent invalid strings from being set
 
-	std::string counterType;
-	std::string parryType;
-
-
+	TriggerType counterType;
+	TriggerType parryType;
 
 	State pState;
 

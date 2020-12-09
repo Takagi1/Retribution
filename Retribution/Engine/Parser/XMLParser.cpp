@@ -30,7 +30,6 @@ void XMLParser::FindNode(std::string elementName_)
 }
 
 
-//TODO: Work in progress ask about this when meeting with shaked
 rapidxml::xml_node<>* XMLParser::NodeQuery(rapidxml::xml_node<>* currentNode_, std::string elementName_)
 {
 	rapidxml::xml_node<>* nodea_ = currentNode_->next_sibling();
@@ -134,9 +133,13 @@ void XMLParser::Return()
 	root = root->parent();
 }
 
-void XMLParser::ListBegin()
+bool XMLParser::ListBegin()
 {
-	root = root->first_node();
+	if (root->first_node()) {
+		root = root->first_node();
+		return true;
+	}
+	return false;
 }
 
 void XMLParser::NextNode()

@@ -27,8 +27,6 @@ public:
 	virtual void Flip(bool invert_) = 0;
 
 protected:
-	static std::vector<Vertex2D> vertexList;
-	static std::vector<Vertex2D> vertexListFlip;
 
 	glm::vec2 scale;
 	float width, height;

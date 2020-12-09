@@ -16,9 +16,13 @@ public:
 	void OnDestroy();
 	void OnCreate(float worldSize_);
 	void AddObject(std::weak_ptr<GameObject> go_);
+	void RemoveObject(BoundingBox box_, std::string name_);
+
 	void MouseUpdate(glm::vec2 mousePosition_, int buttonType_);
+
+
 	std::weak_ptr<GameObject> AABB(BoundingBox box, std::vector<std::string> tag_);
-	std::vector<std::weak_ptr<GameObject>> AABBAll(BoundingBox box);
+	std::vector<std::weak_ptr<GameObject>> AABBAll(BoundingBox box, std::vector<std::string> tag_);
 
 private:
 	CollisionHandler();

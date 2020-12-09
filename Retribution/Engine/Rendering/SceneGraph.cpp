@@ -53,19 +53,19 @@ void SceneGraph::AddGameObject(std::shared_ptr<GameObject> go_, std::string name
 bool SceneGraph::RemoveGameObject(std::string name_)
 {
 	std::map<std::string,std::shared_ptr<GameObject>>::iterator obj = sceneGameObjects.find(name_);
+
 	if (obj == sceneGameObjects.end()) {
 		Debug::Error("No game object of that name has been found.", "SceneGraph.cpp", __LINE__);
 		return false;
 	}
-	else {
+	
+	CollisionHandler::GetInstance()->RemoveObject(obj->second->GetBoundingBox(), name_);
 
-		//TODO: remove obj from collision handler
-		obj->second.reset();
+	obj->second.reset();
 		
-		sceneGameObjects.erase(obj);
-		
-		return true;
-	}
+	deletionLoc.push_back(name_);
+
+	return true;
 }
 
 int SceneGraph::AddImage(Image* im, unsigned int shaderProgram_)
@@ -75,6 +75,8 @@ int SceneGraph::AddImage(Image* im, unsigned int shaderProgram_)
 }
 
 //TODO: Fix out of scope issue related to exiting the game 
+
+//Use's loc_ to find the location it is in the vector.
 void SceneGraph::RemoveImage(int loc_, unsigned int shaderProgram_)
 {
 	sceneImages[shaderProgram_][loc_] = nullptr;
@@ -120,8 +122,6 @@ std::weak_ptr<GameObject> SceneGraph::GetGameObject(std::string tag_)
 	return std::weak_ptr<GameObject>();
 }
 
-//TODO: Create Seperate GUIObjects class and GUIImage class that has a surface sprite in it.
-
 GUIObject* SceneGraph::GetGUIObject(std::string tag_)
 {
 	if (sceneGUIObjects.find(tag_) != sceneGUIObjects.end()) {
@@ -148,48 +148,22 @@ void SceneGraph::Pause()
 
 void SceneGraph::Update(const float deltaTime_)
 {
-
 	if (!isPaused) {
 		for (auto go : sceneGameObjects) {
-
 			//First Update the object 
-
-			go.second->Update(deltaTime_);
-
-			//Check if the object should check collision with physics.
-
-			bool coll = false;
-
-			if (go.second->GetComponent<Physics2D>()) {
-				//if the object has rigid body and is not static make it apply collision detection
-				if (go.second->GetComponent<Physics2D>()->GetRigidBody() &&
-					!go.second->GetComponent<Physics2D>()->GetStaticObj()) {
-
-					coll = true;
-				}
-			}
-
-			//Then check the collision
-
-			while (true) {
-
-				std::weak_ptr<GameObject> obj = CollisionHandler::GetInstance()->AABB(go.second->GetBoundingBox(), go.second->GetCollisionTags());
-
-				if (obj.expired()) { break; }
-				//First check if the object even has physics 
-
-				if (coll) {
-					if (obj.lock()->GetComponent<Physics2D>()) {
-						if (obj.lock()->GetComponent<Physics2D>()->GetRigidBody()) {
-							go.second->GetComponent<Physics2D>()->CollisionResponse(obj, deltaTime_);
-						}
-					}
-				}
-
-				//At the end do the manually programed collision responses for the game object
-				go.second->CollisionResponse(obj);
+			if (go.second) {
+				go.second->Update(deltaTime_);
 			}
 		}
+	}
+
+	//Destroy objects here to prevent iterator breaking.
+	if(!deletionLoc.empty()) {
+		for (size_t i = 0; i < deletionLoc.size(); i++) {
+			std::map<std::string, std::shared_ptr<GameObject>>::iterator obj = sceneGameObjects.find(deletionLoc[i]);
+			sceneGameObjects.erase(obj);
+		}
+		deletionLoc.clear();
 	}
 
 	for (auto go : sceneGUIObjects) {
@@ -209,6 +183,8 @@ void SceneGraph::Draw(Camera* camera_)
 	}
 	delayedUpdates.clear();
 
+
+	//TODO: add in frustum culling to not draw anything outside of view.
 	for (auto gl : sceneImages) {
 		glUseProgram(gl.first);
 		for (auto images : gl.second) {
@@ -218,7 +194,7 @@ void SceneGraph::Draw(Camera* camera_)
 
 	//Update GUI after objects to ignore depth
 	
-	//TODO: abstract the gui shader 
+	//TODO: abstract the gui shader? ( might be done?) 
 	glUseProgram(ShaderHandler::GetInstance()->GetShader("GUIShader"));
 
 	for (auto g : sceneGUIObjects) {
@@ -234,7 +210,19 @@ void SceneGraph::OnDestroy()
 		}
 		sceneGameObjects.clear();
 	}
-	//TODO: Delete Images
+
+	//TODO: does this not have a point because the images would be deleted by the GameObjects?  In this case would
+	//it not be better to simply have it be removed in the on destroy like normal or should it do this?
+	/*if (sceneImages.size() > 0) {
+		for (auto go : sceneImages) {
+			for (auto im : go.second) {
+				delete im;
+				im = nullptr;
+			}
+			go.second.clear();
+		}
+		sceneGameObjects.clear();
+	}*/
 }
 
 SceneGraph::SceneGraph() : isPaused(false), prevDeltaTime(0)

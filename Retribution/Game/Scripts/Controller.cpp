@@ -19,10 +19,9 @@ bool Controller::OnCreate(std::weak_ptr<PlayerCharacter> player_)
 
 void Controller::Update(const float deltaTime_)
 {
+	//Manual Camera control
 	if (KeyEventListener::keys[SDLK_a]) {
 		CoreEngine::GetInstance()->GetCamera()->Translate(glm::vec3(-10.0f, 0, 0));
-		//player.SetHealth(1);
-		//hud.UpdateHealth(player.GetHealth());
 	}
 	else if (KeyEventListener::keys[SDLK_d]) {
 		CoreEngine::GetInstance()->GetCamera()->Translate(glm::vec3(10.0f, 0, 0));
@@ -52,6 +51,13 @@ void Controller::Update(const float deltaTime_)
 		}
 	}
 
+	if (KeyEventListener::keys[SDLK_z]) {
+		if (player.lock()->GetState() == State::Neutral) {
+			player.lock()->Counter();
+		}
+	}
+
+	//TODO: make it only one press that cause's this.
 	if (KeyEventListener::keys[SDLK_p]) {
 		SceneGraph::GetInstance()->Pause();
 	}

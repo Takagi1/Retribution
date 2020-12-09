@@ -11,7 +11,9 @@ public:
 	static std::vector<std::shared_ptr<Tile>> LoadTiles() {
 		std::vector<std::shared_ptr<Tile>> obj;
 		obj.reserve(5);
-		XMLParser::GetInstance()->ListBegin();
+		if (!XMLParser::GetInstance()->ListBegin()) {
+			return obj;
+		}
 		while (true) {
 			std::string name = XMLParser::GetInstance()->GetString("Image");
 
@@ -23,13 +25,12 @@ public:
 			obj.push_back(std::move(mon));
 
 			//If done return the object
-
 			if (!XMLParser::GetInstance()->HasSibling()) {
 				XMLParser::GetInstance()->Return();
 				return obj;
 			}
 
-			//Else go to the next sibiling
+			//Go to the next sibiling
 
 			XMLParser::GetInstance()->NextNode();
 		}

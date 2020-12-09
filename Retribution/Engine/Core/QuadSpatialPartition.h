@@ -23,7 +23,7 @@ public:
 	QuadNode* GetParent();
 	QuadNode* GetChild(QuadChildren childPosition_);
 	void AddCollisionObject(std::weak_ptr<GameObject> obj_);
-	void RemoveCollisionObject(std::weak_ptr<GameObject> obj);
+	void RemoveCollisionObject(int loc_);
 	int GetObjectCount() const;
 	bool IsLeaf() const;
 	BoundingBox* GetBoundingBox() const;
@@ -50,9 +50,11 @@ public:
 	void AddObject(std::weak_ptr<GameObject> obj_);
 
 	std::weak_ptr<GameObject> GetCollision(BoundingBox box_, std::vector<std::string> tags_);
-	std::vector<std::weak_ptr<GameObject>> GetCollisionAll(BoundingBox box);
+	std::vector<std::weak_ptr<GameObject>> GetCollisionAll(BoundingBox box, std::vector<std::string> tags_);
 	std::weak_ptr<GameObject> GetCollision(glm::vec2 point_);
 	//GameObject* GetCollision(Ray ray_);
+
+	void RemoveObject(BoundingBox box_, std::string name_);
 
 private:
 
@@ -63,6 +65,5 @@ private:
 	void PrepareCollisionQuery(QuadNode* cell_, BoundingBox box_);
 
 	void PrepareCollisionQuery(QuadNode* cell_, glm::vec2 point_);
-
 };
 #endif // !QUADSPATIALPARTITION_H
